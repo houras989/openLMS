@@ -11,7 +11,6 @@ from opaque_keys.edx.keys import CourseKey
 from pytz import utc
 
 import common.djangoapps.student.api
-from common.djangoapps.student import models_api as student_api
 from lms.djangoapps.certificates.data import CertificateStatuses
 from lms.djangoapps.certificates.models import GeneratedCertificate
 from openedx.core.djangoapps.content.course_overviews.api import get_course_overview_or_none
