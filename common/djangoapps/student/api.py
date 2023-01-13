@@ -1,4 +1,4 @@
-    # pylint: disable=unused-import
+# pylint: disable=unused-import
 """
 Python APIs exposed by the student app to other in-process apps.
 """
