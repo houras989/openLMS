@@ -24,7 +24,6 @@ from opaque_keys.edx.django.models import CourseKeyField
 from simple_history.models import HistoricalRecords
 
 import common.djangoapps.student.api
-from common.djangoapps.student import api as student_api
 from common.djangoapps.student.models import CourseEnrollment
 from common.djangoapps.util.milestones_helpers import fulfill_course_milestone, is_prerequisite_courses_enabled
 from lms.djangoapps.badges.events.course_complete import course_badge_check
