@@ -19,7 +19,7 @@ from xmodule.modulestore.tests.factories import CourseFactory  # lint-amnesty, p
 
 log = logging.getLogger(__name__)
 
-PROFILE_NAME_METHOD = 'common.djangoapps.student.models_api.get_name'
+PROFILE_NAME_METHOD = 'common.djangoapps.student.api.get_name'
 name_affirmation_service = get_name_affirmation_service()
 
 
