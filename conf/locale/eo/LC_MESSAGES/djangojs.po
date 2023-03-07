@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2023-01-04 19:13+0000\n"
-"PO-Revision-Date: 2023-01-04 19:13:57.730586\n"
+"POT-Creation-Date: 2023-03-05 20:35+0000\n"
+"PO-Revision-Date: 2023-03-05 20:35:44.883795\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "Language: eo\n"
@@ -11349,6 +11349,10 @@ msgid "Display Name"
 msgstr "Dïspläý Nämé Ⱡ'σяєм ιρѕυм ∂σłσя ѕ#"
 
 #: cms/templates/js/course-outline.underscore
+msgid "Discussions enabled"
+msgstr "Dïsçüssïöns énäßléd Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
+
+#: cms/templates/js/course-outline.underscore
 msgid "Proctoring Settings"
 msgstr "Pröçtörïng Séttïngs Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
 
@@ -11595,6 +11599,18 @@ msgstr "Pöst Ⱡ'σяєм ι#"
 #: cms/templates/js/discussion-editor.underscore
 msgid "Enable discussion"
 msgstr "Énäßlé dïsçüssïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмє#"
+
+#: cms/templates/js/discussion-editor.underscore
+msgid "Topics for unpublished units would not be created"
+msgstr ""
+"Töpïçs för ünpüßlïshéd ünïts wöüld nöt ßé çréätéd Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт "
+"αмєт, ¢σηѕє¢тєтυя α#"
+
+#: cms/templates/js/discussion-editor.underscore
+msgid "Please enable discussions for graded units from course authoring app"
+msgstr ""
+"Pléäsé énäßlé dïsçüssïöns för grädéd ünïts fröm çöürsé äüthörïng äpp Ⱡ'σяєм "
+"ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
 
 #: cms/templates/js/due-date-editor.underscore
 msgid "Due Date:"

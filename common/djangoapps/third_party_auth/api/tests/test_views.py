@@ -2,12 +2,10 @@
 Tests for the Third Party Auth REST API
 """
 
-
-import unittest
+import urllib
 from unittest.mock import patch
 
 import ddt
-import six
 from django.conf import settings
 from django.http import QueryDict
 from django.test.utils import override_settings
@@ -23,6 +21,7 @@ from common.djangoapps.third_party_auth.api.permissions import (
     JwtRestrictedApplication
 )
 from common.djangoapps.third_party_auth.tests.testutil import ThirdPartyAuthTestMixin
+from openedx.core.djangolib.testing.utils import skip_unless_lms
 
 VALID_API_KEY = "i am a key"
 IDP_SLUG_TESTSHIB = 'testshib'
@@ -191,7 +190,7 @@ class UserViewsMixin:
 
 @override_settings(EDX_API_KEY=VALID_API_KEY)
 @ddt.ddt
-@unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Test only valid in lms')
+@skip_unless_lms
 class UserViewAPITests(UserViewsMixin, TpaAPITestCase):
     """
     Test the Third Party Auth User REST API
@@ -209,7 +208,7 @@ class UserViewAPITests(UserViewsMixin, TpaAPITestCase):
 
 @override_settings(EDX_API_KEY=VALID_API_KEY)
 @ddt.ddt
-@unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Test only valid in lms')
+@skip_unless_lms
 class UserViewV2APITests(UserViewsMixin, TpaAPITestCase):
     """
     Test the Third Party Auth User REST API
@@ -221,13 +220,13 @@ class UserViewV2APITests(UserViewsMixin, TpaAPITestCase):
         """
         return '?'.join([
             reverse('third_party_auth_users_api_v2'),
-            six.moves.urllib.parse.urlencode(identifier)
+            urllib.parse.urlencode(identifier)
         ])
 
 
 @override_settings(EDX_API_KEY=VALID_API_KEY)
 @ddt.ddt
-@unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Test only valid in lms')
+@skip_unless_lms
 class UserMappingViewAPITests(TpaAPITestCase):
     """
     Test the Third Party Auth User Mapping REST API
@@ -361,7 +360,7 @@ class UserMappingViewAPITests(TpaAPITestCase):
             self.assertCountEqual(response.data['results'], expect_result)
 
 
-@unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Test only valid in lms')
+@skip_unless_lms
 class TestThirdPartyAuthUserStatusView(ThirdPartyAuthTestMixin, APITestCase):
     """
     Tests ThirdPartyAuthStatusView.
@@ -379,11 +378,12 @@ class TestThirdPartyAuthUserStatusView(ThirdPartyAuthTestMixin, APITestCase):
         """
         self.client.login(username=self.user.username, password=PASSWORD)
         response = self.client.get(self.url, content_type="application/json")
+        next_url = urllib.parse.quote(settings.ACCOUNT_MICROFRONTEND_URL, safe="")
         assert response.status_code == 200
         assert (response.data ==
                [{
                    'accepts_logins': True, 'name': 'Google',
                    'disconnect_url': '/auth/disconnect/google-oauth2/?',
-                   'connect_url': '/auth/login/google-oauth2/?auth_entry=account_settings&next=%2Faccount%2Fsettings',
+                   'connect_url': f'/auth/login/google-oauth2/?auth_entry=account_settings&next={next_url}',
                    'connected': False, 'id': 'oa2-google-oauth2'
                }])

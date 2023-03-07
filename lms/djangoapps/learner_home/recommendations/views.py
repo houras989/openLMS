@@ -4,6 +4,7 @@ Views for Course Recommendations in Learner Home
 import logging
 
 from django.conf import settings
+from ipware.ip import get_client_ip
 from edx_rest_framework_extensions.auth.jwt.authentication import JwtAuthentication
 from edx_rest_framework_extensions.auth.session.authentication import (
     SessionAuthenticationAllowInactiveUser,
@@ -13,18 +14,20 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from common.djangoapps.student.models import CourseEnrollment
+from common.djangoapps.student.toggles import show_fallback_recommendations
 from common.djangoapps.track import segment
+from openedx.core.djangoapps.geoinfo.api import country_code_from_ip
 from lms.djangoapps.learner_home.recommendations.serializers import (
     CourseRecommendationSerializer,
-)
-from lms.djangoapps.learner_home.recommendations.utils import (
-    get_personalized_course_recommendations,
 )
 from lms.djangoapps.learner_home.recommendations.waffle import (
     should_show_learner_home_amplitude_recommendations,
 )
-from openedx.core.djangoapps.catalog.utils import get_course_data
+from lms.djangoapps.learner_recommendations.utils import (
+    filter_recommended_courses,
+    get_amplitude_course_recommendations,
+    is_user_enrolled_in_ut_austin_masters_program,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -52,81 +55,75 @@ class CourseRecommendationApiView(APIView):
         if not should_show_learner_home_amplitude_recommendations():
             return Response(status=404)
 
-        recommended_courses = []
-        general_recommendations_response = Response(
-            CourseRecommendationSerializer(
-                {
-                    "courses": settings.GENERAL_RECOMMENDATIONS,
-                    "is_personalized_recommendation": False,
-                }
-            ).data,
-            status=200,
-        )
+        user_id = request.user.id
+
+        if is_user_enrolled_in_ut_austin_masters_program(request.user):
+            return self._recommendations_response(user_id, None, [], False)
+
+        fallback_recommendations = settings.GENERAL_RECOMMENDATIONS if show_fallback_recommendations() else []
 
         try:
-            user_id = request.user.id
-            is_control, has_is_control, course_keys = get_personalized_course_recommendations(user_id)
+            is_control, has_is_control, course_keys = get_amplitude_course_recommendations(
+                user_id, settings.DASHBOARD_AMPLITUDE_RECOMMENDATION_ID
+            )
         except Exception as ex:  # pylint: disable=broad-except
             logger.warning(f"Cannot get recommendations from Amplitude: {ex}")
-            return general_recommendations_response
+            return self._recommendations_response(user_id, None, fallback_recommendations, False)
 
-        if is_control or not course_keys:
-            self._emit_recommendations_viewed_event(
-                user_id, is_control, has_is_control, recommended_courses
-            )
-            return general_recommendations_response
+        is_control = is_control if has_is_control else None
+        if is_control or is_control is None or not course_keys:
+            return self._recommendations_response(user_id, is_control, fallback_recommendations, False)
 
-        user_enrolled_course_keys = set()
-        fields = ["title", "owners", "marketing_url"]
-
-        course_enrollments = CourseEnrollment.enrollments_for_user(request.user)
-        for course_enrollment in course_enrollments:
-            course_key = f"{course_enrollment.course_id.org}+{course_enrollment.course_id.course}"
-            user_enrolled_course_keys.add(course_key)
-
-        # Pick 5 course keys, excluding the user's already enrolled course(s).
-        enrollable_course_keys = list(
-            set(course_keys).difference(user_enrolled_course_keys)
-        )[:5]
-        for course_id in enrollable_course_keys:
-            course_data = get_course_data(course_id, fields)
-            if course_data:
-                recommended_courses.append(
-                    {
-                        "course_key": course_id,
-                        "title": course_data["title"],
-                        "logo_image_url": course_data["owners"][0]["logo_image_url"],
-                        "marketing_url": course_data.get("marketing_url"),
-                    }
-                )
-        self._emit_recommendations_viewed_event(
-            user_id, is_control, has_is_control, recommended_courses
+        ip_address = get_client_ip(request)[0]
+        user_country_code = country_code_from_ip(ip_address).upper()
+        filtered_courses = filter_recommended_courses(
+            request.user, course_keys, user_country_code=user_country_code, recommendation_count=5
         )
-
         # If no courses are left after filtering already enrolled courses from
         # the list of amplitude recommendations, show general recommendations
         # to the user.
-        if not recommended_courses:
-            return general_recommendations_response
+        if not filtered_courses:
+            return self._recommendations_response(user_id, is_control, fallback_recommendations, False)
 
-        return Response(
-            CourseRecommendationSerializer(
-                {
-                    "courses": recommended_courses,
-                    "is_personalized_recommendation": not is_control,
-                }
-            ).data,
-            status=200,
-        )
+        recommended_courses = list(map(self._course_data, filtered_courses))
+        return self._recommendations_response(user_id, is_control, recommended_courses, True)
 
-    def _emit_recommendations_viewed_event(self, user_id, is_control, has_is_control, recommended_courses):
+    def _emit_recommendations_viewed_event(
+        self, user_id, is_control, recommended_courses, amplitude_recommendations=True
+    ):
         """Emits an event to track Learner Home page visits."""
         segment.track(
             user_id,
             "edx.bi.user.recommendations.viewed",
             {
-                "is_personalized_recommendation": not is_control,
-                "is_control": is_control if has_is_control else None,
+                "is_control": is_control,
+                "amplitude_recommendations": amplitude_recommendations,
                 "course_key_array": [course["course_key"] for course in recommended_courses],
+                "page": "dashboard",
             },
         )
+
+    def _recommendations_response(self, user_id, is_control, recommended_courses, amplitude_recommendations):
+        """ Helper method for general recommendations response. """
+        self._emit_recommendations_viewed_event(
+            user_id, is_control, recommended_courses, amplitude_recommendations
+        )
+        return Response(
+            CourseRecommendationSerializer(
+                {
+                    "courses": recommended_courses,
+                    "is_control": is_control,
+                }
+            ).data,
+            status=200,
+        )
+
+    def _course_data(self, course):
+        """Helper method for personalized recommendation response"""
+        return {
+            "course_key": course.get("key"),
+            "title": course.get("title"),
+            "logo_image_url": course.get("owners")[0]["logo_image_url"] if course.get(
+                "owners") else "",
+            "marketing_url": course.get("marketing_url"),
+        }

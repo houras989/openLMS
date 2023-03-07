@@ -4,6 +4,7 @@ Views handling read (GET) requests for the Discussion tab and inline discussions
 
 import logging
 from functools import wraps
+from urllib.parse import urljoin
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -421,7 +422,7 @@ def _find_thread(request, course, discussion_id, thread_id):
         )
     except cc.utils.CommentClientRequestError:
         return None
-    # Verify that the student has access to this thread if belongs to a course discussion module
+    # Verify that the student has access to this thread if belongs to a course discussion block
     thread_context = getattr(thread, "context", "course")
     if thread_context == "course" and not utils.discussion_category_id_access(course, request.user, discussion_id):
         return None
@@ -629,7 +630,7 @@ def create_user_profile_context(request, course_key, user_id):
             'page': query_params['page'],
             'num_pages': query_params['num_pages'],
             'sort_preference': user.default_sort_key,
-            'learner_profile_page_url': reverse('learner_profile', kwargs={'username': django_user.username}),
+            'learner_profile_page_url': urljoin(settings.PROFILE_MICROFRONTEND_URL, f'/u/{django_user.username}'),
         })
         return context
 

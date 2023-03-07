@@ -1,11 +1,11 @@
 # #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
 # edX community translations have been downloaded from Turkish (Turkey) (http://www.transifex.com/open-edx/edx-platform/language/tr_TR/).
-# Copyright (C) 2022 EdX
+# Copyright (C) 2023 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 #
 # Translators:
 # Adem Özgür <admozgur@gmail.com>, 2015
-# Ali Işıngör <ali@artistanbul.io>, 2017-2022
+# Ali Işıngör <ali@artistanbul.io>, 2017-2023
 # ali selek <aliselek01@gmail.com>, 2015
 # baris <brscvs@gmail.com>, 2013
 # baris <brscvs@gmail.com>, 2013
@@ -28,11 +28,11 @@
 # ca47f5bf05c27c3888896d9870e257ad_00aad6f <5addf4166015f6e11583e89fe2c53975_164880>, 2014
 # #-#-#-#-#  django-studio.po (edx-platform)  #-#-#-#-#
 # edX community translations have been downloaded from Turkish (Turkey) (http://www.transifex.com/open-edx/edx-platform/language/tr_TR/).
-# Copyright (C) 2022 EdX
+# Copyright (C) 2023 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 #
 # Translators:
-# Ali Işıngör <ali@artistanbul.io>, 2017-2022
+# Ali Işıngör <ali@artistanbul.io>, 2017-2023
 # ali selek <aliselek01@gmail.com>, 2015
 # baris <brscvs@gmail.com>, 2013
 # Burak Özalp <realburq@gmail.com>, 2013
@@ -49,12 +49,12 @@
 # Mustafa Tat, 2015
 # #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
 # edX community translations have been downloaded from Turkish (Turkey) (http://www.transifex.com/open-edx/edx-platform/language/tr_TR/)
-# Copyright (C) 2022 edX
+# Copyright (C) 2023 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 #
 # Translators:
 # Adem Özgür <admozgur@gmail.com>, 2015
-# Ali Işıngör <ali@artistanbul.io>, 2017-2022
+# Ali Işıngör <ali@artistanbul.io>, 2017-2023
 # Ali Özcan <aliozcan@yandex.com>, 2014
 # ali selek <aliselek01@gmail.com>, 2015
 # baris <brscvs@gmail.com>, 2013
@@ -84,13 +84,13 @@
 # ca47f5bf05c27c3888896d9870e257ad_00aad6f <5addf4166015f6e11583e89fe2c53975_164880>, 2014
 # #-#-#-#-#  mako-studio.po (edx-platform)  #-#-#-#-#
 # edX community translations have been downloaded from Turkish (Turkey) (http://www.transifex.com/open-edx/edx-platform/language/tr_TR/)
-# Copyright (C) 2022 edX
+# Copyright (C) 2023 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 #
 # Translators:
 # abc Def <hdogan1974@gmail.com>, 2020
 # Adem Özgür <admozgur@gmail.com>, 2015
-# Ali Işıngör <ali@artistanbul.io>, 2018-2021
+# Ali Işıngör <ali@artistanbul.io>, 2018-2021,2023
 # ali selek <aliselek01@gmail.com>, 2015
 # arif altun <altunar@gmail.com>, 2017
 # Azmi Ozgen <azmican73@gmail.com>, 2014
@@ -110,20 +110,20 @@
 # Yasar Celep <yasar.celep@hotmail.com>, 2017
 # #-#-#-#-#  wiki.po (edx-platform)  #-#-#-#-#
 # edX community translations have been downloaded from Turkish (Turkey) (http://www.transifex.com/open-edx/edx-platform/language/tr_TR/)
-# Copyright (C) 2022 edX
+# Copyright (C) 2023 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 #
 # Translators:
-# Ali Işıngör <ali@artistanbul.io>, 2017-2020
+# Ali Işıngör <ali@artistanbul.io>, 2017-2020,2023
 # Hakan Şenel <hgsenel@gmail.com>, 2014
 # Kubilay <kubilayinceoren10@gmail.com>, 2015
 # Mehmet Kokoç <kokocmehmet@gmail.com>, 2017
 # a56fc07028489bb2b53400de33ba6a83, 2014
 # #-#-#-#-#  edx_proctoring_proctortrack.po (0.1a)  #-#-#-#-#
 # edX community translations have been downloaded from Turkish (Turkey) (https://www.transifex.com/open-edx/teams/6205/tr_TR/)
-# Copyright (C) 2022 edX
+# Copyright (C) 2023 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# EdX Team <info@edx.org>, 2022.
+# EdX Team <info@edx.org>, 2023.
 #
 # Translators:
 # Ali Işıngör <ali@artistanbul.io>, 2021
@@ -132,7 +132,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-18 20:42+0000\n"
+"POT-Creation-Date: 2023-02-12 20:42+0000\n"
 "PO-Revision-Date: 2019-01-20 20:43+0000\n"
 "Last-Translator: Ali Işıngör <ali@artistanbul.io>, 2021\n"
 "Language-Team: Turkish (Turkey) (https://www.transifex.com/open-edx/teams/6205/tr_TR/)\n"
@@ -144,8 +144,8 @@ msgstr ""
 "Generated-By: Babel 2.8.0\n"
 
 #: cms/djangoapps/contentstore/utils.py
-#: cms/djangoapps/contentstore/views/component.py
-#: cms/djangoapps/contentstore/views/item.py xmodule/html_block.py
+#: cms/djangoapps/contentstore/views/block.py
+#: cms/djangoapps/contentstore/views/component.py xmodule/html_block.py
 msgid "Text"
 msgstr "Metin"
 
@@ -351,6 +351,26 @@ msgid ""
 msgstr ""
 "İSTEĞE BAĞLI: Bu, harici e-ticaret servisi içindeki bu modun SKU (stock "
 "keeping unit) kodudur. Eğer bu eğitim e-ticaret servisine henüz "
+"geçirilmemişse boş bırakın."
+
+#: common/djangoapps/course_modes/models.py
+msgid ""
+"OPTIONAL: This is the Android SKU registered on play store for this mode of "
+"the course. Leave this blank if the course has not yet been migrated to the "
+"ecommerce service."
+msgstr ""
+"İSTEĞE BAĞLI: Bu, kursun bu modu için Play Store'da kayıtlı olan Android SKU"
+" (stok tutma birimi) kodudur. Eğer bu eğitim e-ticaret servisine henüz "
+"geçirilmemişse boş bırakın."
+
+#: common/djangoapps/course_modes/models.py
+msgid ""
+"OPTIONAL: This is the iOS SKU registered on app store for this mode of the "
+"course.  Leave this blank if the course has not yet been migrated to the "
+"ecommerce service."
+msgstr ""
+"İSTEĞE BAĞLI: Bu, kursun bu modu için App Store'da kayıtlı olan iOS SKU "
+"(stok tutma birimi) kodudur. Eğer bu eğitim e-ticaret servisine henüz "
 "geçirilmemişse boş bırakın."
 
 #: common/djangoapps/course_modes/models.py
@@ -848,6 +868,10 @@ msgid ""
 "{account_or_email}.{html_end}You will now receive email updates and alerts "
 "from us related to the courses you are enrolled in. Sign In to continue."
 msgstr ""
+"{html_start} Kutlarız! Hesabınız {account_or_email} "
+"{activated_or_confirmed}.{html_end}Bundan sonra kayıt olduğunuz derslerle "
+"ilgili duyuru ve güncellemeler e-posta kutunuza düşmeye başlayacak. Devam "
+"etmek için lütfen giriş yapın."
 
 #: common/djangoapps/student/views/management.py
 msgid "Valid e-mail address required."
@@ -2264,8 +2288,8 @@ msgid "Cookie Policy"
 msgstr "Çerez Politikası"
 
 #: lms/djangoapps/branding/api.py
-msgid "Do Not Sell My Personal Data"
-msgstr "Kişisel Verilerimi Satmayın"
+msgid "Do Not Sell My Personal Information"
+msgstr "Kişisel Bilgilerimi Satmayın"
 
 #: lms/djangoapps/branding/api.py
 msgid "Trademark Policy"
@@ -3854,6 +3878,9 @@ msgid ""
 "Without the email student would not be able to login. Please contact support"
 " for further information."
 msgstr ""
+"Yeni kullanıcıya e-posta gönderirken '{error}' hatası (kullanıcı "
+"e-postası={email}). E-posta olmadan öğrenci oturum açamaz. Daha fazla bilgi "
+"için lütfen desteğe başvurun."
 
 #: lms/djangoapps/instructor/views/api.py
 msgid ""
@@ -4914,17 +4941,15 @@ msgstr ""
 "çelişiyor."
 
 #: lms/djangoapps/lms_xblock/mixin.py
-msgid "Whether to display this module in the table of contents"
-msgstr "İçindekiler kısmında bu modülü gösterilip gösterimeyeceği"
+msgid "Whether to display this block in the table of contents"
+msgstr ""
 
 #. Translators: "TOC" stands for "Table of Contents"
 #: lms/djangoapps/lms_xblock/mixin.py
 msgid ""
-"What format this module is in (used for deciding which grader to apply, and "
+"What format this block is in (used for deciding which grader to apply, and "
 "what to show in the TOC)"
 msgstr ""
-"Bu modülün ne formatında olduğu (hangi notlandırıcıyı uygulamaya ve TOC'de "
-"ne gösterileceğine karar vermek amacıyla kullanılır) "
 
 #: lms/djangoapps/lms_xblock/mixin.py
 msgid "Course Chrome"
@@ -9052,6 +9077,8 @@ msgstr ""
 #: openedx/features/content_type_gating/partitions.py
 msgid "Partition for segmenting users by access to gated content types"
 msgstr ""
+"Geçitli içerik türlerine erişime göre kullanıcıları bölümlere ayırmak için "
+"bölümleme"
 
 #: openedx/features/content_type_gating/partitions.py
 #: openedx/features/content_type_gating/templates/content_type_gating/access_denied_message.html
@@ -9294,6 +9321,10 @@ msgid ""
 "due assignments into the future. Don’t worry—you won’t lose any of the "
 "progress you’ve made when you shift your due dates."
 msgstr ""
+"Kendinizi doğru yolda tutmak için, burayı ziyaret ederek bu programı "
+"güncelleyebilir ve gecikmiş ödevlerinizi ileri tarihlere kaydırabilirsiniz. "
+"Endişelenmeyin, son tarihlerinizi değiştirdiğinizde kaydettiğiniz "
+"ilerlemelerin hiçbirini kaybetmeyeceksiniz. "
 
 #: openedx/features/personalized_learner_schedules/call_to_action.py
 #, python-brace-format
@@ -10244,6 +10275,10 @@ msgid ""
 "Copy the component location ID of a component from its Settings dialog in "
 "Studio."
 msgstr ""
+"Bir öğrenciye bu koşullu block'un içeriğinin gösterilip gösterilmediğini "
+"belirlemek için kullanılan tüm kaynak bileşenlerin bileşen konum kimlikleri."
+" Studio'daki Ayarlar penceresinden bir bileşenin bileşen konumu kimliğini "
+"kopyalayın."
 
 #: xmodule/conditional_block.py
 msgid "Conditional Attribute"
@@ -10254,6 +10289,8 @@ msgid ""
 "The attribute of the source components that determines whether a learner is "
 "shown the content of this conditional block."
 msgstr ""
+"Bir öğrenciye bu koşullu block'un içeriğinin gösterilip gösterilmeyeceğini "
+"belirleyen kaynak bileşenlerin özelliği."
 
 #: xmodule/conditional_block.py
 msgid "Conditional Value"
@@ -10264,6 +10301,8 @@ msgid ""
 "The value that the conditional attribute of the source components must match"
 " before a learner is shown the content of this conditional block."
 msgstr ""
+"Bir öğrenciye bu koşullu block'un içeriği gösterilmeden önce kaynak "
+"bileşenlerin koşullu özniteliğinin eşleşmesi gereken değer. "
 
 #: xmodule/conditional_block.py
 msgid "Blocked Content Message"
@@ -10277,6 +10316,11 @@ msgid ""
 "your message to give learners a direct link to required units. For example, "
 "'You must complete {link} before you can access this unit'."
 msgstr ""
+"Bu koşullu block'un içeriğini göstermek için tüm koşullar karşılanmadığında "
+"öğrencilere gösterilen ileti. Öğrencilere gerekli ünitelere doğrudan bir "
+"bağlantı vermek için iletinizin metnine {link} bağlantısını ekleyin. "
+"Örneğin, 'Bu üniteye erişebilmeniz için önce {link}' bağlantısını "
+"tamamlamalısınız'. "
 
 #: xmodule/conditional_block.py
 #, python-brace-format
@@ -10324,8 +10368,8 @@ msgid "Date that enrollment for this class is closed"
 msgstr "Bu ders için kayıtlanmanın kapanacağı tarih"
 
 #: xmodule/course_block.py
-msgid "Start time when this module is visible"
-msgstr "Bu modül görünür olduğunda süreyi başlat"
+msgid "Start time when this block is visible"
+msgstr "Bu block görünür olduğunda süreyi başlat"
 
 #: xmodule/course_block.py
 msgid "Date that this class ends"
@@ -10717,6 +10761,8 @@ msgid ""
 "This field, together with certificate_available_date will determine when a "
 "user can see their certificate for the course"
 msgstr ""
+"Bu alan, sertifika_kullanılabilir_tarihi ile birlikte, bir kullanıcının ders"
+" için sertifikasını ne zaman görebileceğini belirler"
 
 #: xmodule/course_block.py
 msgid "Course About Page Image"
@@ -11004,8 +11050,8 @@ msgid "Entrance Exam ID"
 msgstr "Giriş Sınavı ID'si"
 
 #: xmodule/course_block.py
-msgid "Content module identifier (location) of entrance exam."
-msgstr "Giriş sınavının içerik modül belirleyicisi (yer)."
+msgid "Content block identifier (location) of entrance exam."
+msgstr "Giriş sınavının içerik block tanımlayıcısı (yer)."
 
 #: xmodule/course_block.py
 msgid "Social Media Sharing URL"
@@ -11360,8 +11406,8 @@ msgstr ""
 "gizlenecek."
 
 #: xmodule/html_block.py
-msgid "Html contents to display for this module"
-msgstr "Bu modülde gösterilecek Html içerikleri"
+msgid "Html contents to display for this block"
+msgstr "Bu block için gösterilecek Html içerikleri"
 
 #: xmodule/html_block.py
 msgid "Source code for LaTeX documents. This feature is not well-supported."
@@ -11439,8 +11485,10 @@ msgid "Count"
 msgstr "Say"
 
 #: xmodule/library_content_block.py
-msgid "Enter the number of components to display to each student."
-msgstr "Her bir öğrenciye gösterilecek bileşen sayısını giriniz."
+msgid ""
+"Enter the number of components to display to each student. Set it to -1 to "
+"display all components."
+msgstr ""
 
 #: xmodule/library_content_block.py
 msgid "Problem Type"
@@ -11459,6 +11507,9 @@ msgid ""
 "Determines whether a 'Reset Problems' button is shown, so users may reset "
 "their answers and reshuffle selected items."
 msgstr ""
+"'Problemleri Sıfırla' düğmesinin gösterilip gösterilmeyeceğini belirler, "
+"böylece kullanıcılar yanıtlarını sıfırlayabilir ve seçilen öğeleri yeniden "
+"düzenleyebilirler."
 
 #: xmodule/library_content_block.py
 msgid "This component is out of date. The library has new content."
@@ -12011,16 +12062,16 @@ msgstr ""
 "öğrenciler ders yazılımında kendi notlarını gösterip gizleyebilir."
 
 #: xmodule/modulestore/inheritance.py
-msgid "Tag this module as part of an Entrance Exam section"
-msgstr "Bu modülü Giriş Sınavı bölümünün bir parçası olarak etiketle"
+msgid "Tag this block as part of an Entrance Exam section"
+msgstr "Bu block'u Giriş Sınavı bölümünün bir parçası olarak etiketle"
 
 #: xmodule/modulestore/inheritance.py
 msgid ""
-"Enter true or false. If true, answer submissions for problem modules will be"
-" considered in the Entrance Exam scoring/gating algorithm."
+"Enter true or false. If true, answer submissions for problem blocks will be "
+"considered in the Entrance Exam scoring/gating algorithm."
 msgstr ""
 "True ya da False değerleriyle işaretleyin. Eğer bu değer true olarak "
-"girilmişse, problem modülleri için olan cevap gönderimleri Giriş Sınavı "
+"girilmişse, problem blockları için olan cevap gönderimleri Giriş Sınavı "
 "scoring/gating algoritmasında kabul edilecektir."
 
 #: xmodule/modulestore/xml_importer.py
@@ -12030,8 +12081,8 @@ msgstr ""
 " "
 
 #: xmodule/modulestore/xml_importer.py
-msgid "Failed to import module: {} at location: {}"
-msgstr "Modül içe aktarımı başarısız: {} konumu: {}"
+msgid "Failed to import block: {} at location: {}"
+msgstr "Block içe aktarımı başarısız: {} konumu: {}"
 
 #: xmodule/partitions/enrollment_track_partition_generator.py
 #: cms/templates/group_configurations.html
@@ -12087,6 +12138,8 @@ msgid ""
 "Tag this course block as an Entrance Exam. Note, you must enable Entrance "
 "Exams for this course setting to take effect."
 msgstr ""
+"Bu ders block'unu Giriş Sınavı olarak etiketleyin. Bu ders ayarının geçerli "
+"olması için Giriş Sınavları'nı etkinleştirmeniz gerektiğine dikkat edin. "
 
 #: xmodule/seq_block.py
 msgid "Is Time Limited"
@@ -12221,9 +12274,8 @@ msgid "Group Configuration"
 msgstr "Grup Yapılandırma"
 
 #: xmodule/split_test_block.py
-msgid "Which child module students in a particular group_id should see"
+msgid "Which child block students in a particular group_id should see"
 msgstr ""
-"Belirli bir grup_no'da olan çocuk modülü öğrencilerinin görmesi gereken "
 
 #: xmodule/split_test_block.py
 #, python-brace-format
@@ -12294,7 +12346,7 @@ msgstr "Üniteye tartışma ekle."
 #: xmodule/video_block/transcripts_utils.py
 #, python-brace-format
 msgid "Can't get transcript link from Youtube for {youtube_id}."
-msgstr ""
+msgstr "{youtube_id} için Youtube'dan transkript bağlantısı alınamıyor."
 
 #: xmodule/video_block/transcripts_utils.py
 #, python-brace-format
@@ -12641,6 +12693,8 @@ msgstr "Genel Erişim"
 #: xmodule/video_block/video_xfields.py
 msgid "Add a specific thumbnail for learners to see before playing the video."
 msgstr ""
+"Öğrencilerin videoyu oynatmadan önce görmeleri için belirli bir küçük görsel"
+" ekleyin."
 
 #: xmodule/video_block/video_xfields.py
 msgid "Thumbnail"
@@ -12725,15 +12779,15 @@ msgstr ""
 
 #: cms/djangoapps/contentstore/admin.py
 msgid "Regenerate selected course outlines"
-msgstr ""
+msgstr "Seçili ders ana hatlarını yeniden oluştur"
 
 #: cms/djangoapps/contentstore/admin.py
 msgid "All course outline regenerations successfully requested."
-msgstr ""
+msgstr "Tüm ders ana hatlarının yenilemeleri başarıyla talep edildi."
 
 #: cms/djangoapps/contentstore/admin.py
 msgid "Regenerate *all* course outlines"
-msgstr ""
+msgstr "*Tüm* ders ana hatlarını yeniden oluştur"
 
 #: cms/djangoapps/contentstore/course_group_config.py
 msgid ""
@@ -12759,7 +12813,7 @@ msgstr "yapılandırma adının girilmesi zorunlu"
 
 #: cms/djangoapps/contentstore/course_group_config.py
 msgid "must have at least one group"
-msgstr "Lütfen en az bir grup ekleyiniz"
+msgstr "en az bir gruba sahip olmalı"
 
 #: cms/djangoapps/contentstore/course_group_config.py
 msgid "unable to load this type of group configuration"
@@ -12948,11 +13002,11 @@ msgstr "Sekme ders için gizliyse True"
 
 #: cms/djangoapps/contentstore/rest_api/v0/serializers/tabs.py
 msgid "True if it's possible to reorder the tab in the list of tabs"
-msgstr ""
+msgstr "Sekmeler listesinde sekmeyi yeniden sıralamak mümkünse True olmalı"
 
 #: cms/djangoapps/contentstore/rest_api/v0/serializers/tabs.py
 msgid "True if this tab should be displayed only for instructors"
-msgstr ""
+msgstr "Bu sekme sadece eğitmenlere gözükecekse True olmalı"
 
 #: cms/djangoapps/contentstore/rest_api/v0/serializers/tabs.py
 msgid "Name of the tab displayed to users. Overrides title."
@@ -13062,6 +13116,91 @@ msgid ""
 msgstr ""
 "{filename} dosyası izin verilen maksimum {maximum_size_in_megabytes} MB "
 "dosya boyutunu aşıyor."
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid "Libraries cannot have more than {limit} components"
+msgstr "Kütüphaneler {limit} bileşenden daha fazlasına sahip olamaz"
+
+#: cms/djangoapps/contentstore/views/block.py
+msgid "Invalid data"
+msgstr "Geçersiz veri"
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid "Invalid data ({details})"
+msgstr "Geçersiz veri ({details})"
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid "You can not move {source_type} into {target_parent_type}."
+msgstr "{source_type} verisini {target_parent_type} üzerine taşıyamazsınız."
+
+#: cms/djangoapps/contentstore/views/block.py
+msgid "Item is already present in target location."
+msgstr "Nesne hedef konumda zaten mevcut."
+
+#: cms/djangoapps/contentstore/views/block.py
+msgid "You can not move an item into itself."
+msgstr "Bir nesneyi zaten bulunduğu konuma taşıyamazsınız."
+
+#: cms/djangoapps/contentstore/views/block.py
+msgid "You can not move an item into it's child."
+msgstr "Bir nesneyi kendi altına taşıyamazsınız."
+
+#: cms/djangoapps/contentstore/views/block.py
+msgid "You can not move an item directly into content experiment."
+msgstr "Bir nesneyi doğrudan içerik denemesine taşıyamazsınız."
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid "{source_usage_key} not found in {parent_usage_key}."
+msgstr "{source_usage_key} anahtarı {parent_usage_key} içinde bulunamadı."
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid ""
+"You can not move {source_usage_key} at an invalid index ({target_index})."
+msgstr ""
+"{source_usage_key} anahtarını geçersiz bir ({target_index}) indeksine "
+"taşıyamazsınız."
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid "You must provide target_index ({target_index}) as an integer."
+msgstr "({target_index}) target_index bir tamsayı olarak girilmeli."
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid "Duplicate of {0}"
+msgstr "{0}'ın kopyası"
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid "Duplicate of '{0}'"
+msgstr "'{0}'ın tekrarı"
+
+#. Translators: The {pct_sign} here represents the percent sign, i.e., '%'
+#. in many languages. This is used to avoid Transifex's misinterpreting of
+#. '% o'. The percent sign is also translatable as a standalone string.
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid ""
+"Students must score {score}{pct_sign} or higher to access course materials."
+msgstr ""
+"Öğrenciler ders materyallerine erişebilmek için {score}{pct_sign} ya da daha"
+" yüksek puan almalıdır."
+
+#. Translators: This is the percent sign. It will be used to represent
+#. a percent value out of 100, e.g. "58%" means "58/100".
+#: cms/djangoapps/contentstore/views/block.py
+msgid "%"
+msgstr "%"
+
+#: cms/djangoapps/contentstore/views/block.py
+#, python-brace-format
+msgid "{section_or_subsection} \"{display_name}\""
+msgstr "{section_or_subsection} \"{display_name}\""
 
 #: cms/djangoapps/contentstore/views/certificates.py
 msgid "must have name of the certificate"
@@ -13207,91 +13346,6 @@ msgstr "Dosya yükleme sırasında bazı parçalar kayboldu. Lütfen tekrar dene
 msgid "File upload failed. Please try again"
 msgstr "Dosya yükleme başarısız. Lütfen tekrar deneyin"
 
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid "Libraries cannot have more than {limit} components"
-msgstr "Kütüphaneler {limit} bileşenden daha fazlasına sahip olamaz"
-
-#: cms/djangoapps/contentstore/views/item.py
-msgid "Invalid data"
-msgstr "Geçersiz veri"
-
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid "Invalid data ({details})"
-msgstr "Geçersiz veri ({details})"
-
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid "You can not move {source_type} into {target_parent_type}."
-msgstr "{source_type} verisini {target_parent_type} üzerine taşıyamazsınız."
-
-#: cms/djangoapps/contentstore/views/item.py
-msgid "Item is already present in target location."
-msgstr "Nesne hedef konumda zaten mevcut."
-
-#: cms/djangoapps/contentstore/views/item.py
-msgid "You can not move an item into itself."
-msgstr "Bir nesneyi zaten bulunduğu konuma taşıyamazsınız."
-
-#: cms/djangoapps/contentstore/views/item.py
-msgid "You can not move an item into it's child."
-msgstr "Bir nesneyi kendi altına taşıyamazsınız."
-
-#: cms/djangoapps/contentstore/views/item.py
-msgid "You can not move an item directly into content experiment."
-msgstr "Bir nesneyi doğrudan içerik denemesine taşıyamazsınız."
-
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid "{source_usage_key} not found in {parent_usage_key}."
-msgstr "{source_usage_key} anahtarı {parent_usage_key} içinde bulunamadı."
-
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid ""
-"You can not move {source_usage_key} at an invalid index ({target_index})."
-msgstr ""
-"{source_usage_key} anahtarını geçersiz bir ({target_index}) indeksine "
-"taşıyamazsınız."
-
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid "You must provide target_index ({target_index}) as an integer."
-msgstr "({target_index}) target_index bir tamsayı olarak girilmeli."
-
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid "Duplicate of {0}"
-msgstr "{0}'ın kopyası"
-
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid "Duplicate of '{0}'"
-msgstr "'{0}'ın tekrarı"
-
-#. Translators: The {pct_sign} here represents the percent sign, i.e., '%'
-#. in many languages. This is used to avoid Transifex's misinterpreting of
-#. '% o'. The percent sign is also translatable as a standalone string.
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid ""
-"Students must score {score}{pct_sign} or higher to access course materials."
-msgstr ""
-"Öğrenciler ders materyallerine erişebilmek için {score}{pct_sign} ya da daha"
-" yüksek puan almalıdır."
-
-#. Translators: This is the percent sign. It will be used to represent
-#. a percent value out of 100, e.g. "58%" means "58/100".
-#: cms/djangoapps/contentstore/views/item.py
-msgid "%"
-msgstr "%"
-
-#: cms/djangoapps/contentstore/views/item.py
-#, python-brace-format
-msgid "{section_or_subsection} \"{display_name}\""
-msgstr "{section_or_subsection} \"{display_name}\""
-
 #: cms/djangoapps/contentstore/views/library.py
 msgid ""
 "User does not have the permission to create library in this organization or "
@@ -13338,8 +13392,8 @@ msgid "The information you entered is incorrect."
 msgstr "Girdiğiniz bilgi yanlış."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
-msgid "Transcripts are supported only for \"video\" modules."
-msgstr "Altyazılar sadece \"video\" modülleri için desteklenmektedir."
+msgid "Transcripts are supported only for \"video\" blocks."
+msgstr "Altyazılar sadece \"video\" blockları için desteklenmektedir."
 
 #: cms/djangoapps/contentstore/views/transcripts_ajax.py
 msgid "Cannot find item by locator."
@@ -13575,7 +13629,7 @@ msgstr ""
 
 #: cms/djangoapps/course_creators/models.py
 msgid "Organizations under which the user is allowed to create courses."
-msgstr ""
+msgstr "Kullanıcının altında ders oluşturmasına izin verilen kurumlar."
 
 #: cms/djangoapps/course_creators/models.py
 msgid "Grant the user the permission to create courses in ALL organizations"
@@ -14483,6 +14537,13 @@ msgstr "E-posta"
 #, python-format
 msgid "Return To %s"
 msgstr "%s Sayfasına Geri Dön"
+
+#: lms/templates/courseware/courseware-chromeless.html
+#: lms/templates/courseware/courseware.html
+#: lms/templates/public_video_share_embed.html
+#: openedx/features/course_bookmarks/templates/course_bookmarks/course-bookmarks.html
+msgid "{course_number} Courseware"
+msgstr "{course_number} Ders yazılımları"
 
 #: lms/templates/resubscribe.html
 msgid "Re-subscribe Successful!"
@@ -15500,6 +15561,20 @@ msgid ""
 "you by {platform_name} under these Terms, {platform_name} may notify you via"
 " the email address associated with your {platform_name} account."
 msgstr ""
+"Şartlar, API'leri ve API İçeriğini kullanımınızla ilgili olarak "
+"{platform_name} ile aranızdaki sözleşmenin tamamını oluşturur ve API'leri ve"
+" API İçeriğini kullanımınızla ilgili olarak {platform_name} ile aranızdaki "
+"önceki tüm sözleşmelerin yerine geçer. {platform_name} platformunun "
+"Şartların herhangi bir hakkını veya hükmünü uygulamaması veya uygulamaması, "
+"söz konusu hak veya hükümden feragat edildiği anlamına gelmez. Şartların "
+"herhangi bir hükmünün yetkili bir mahkeme tarafından geçersiz olduğu tespit "
+"edilirse, taraflar yine de mahkemenin tarafların hükümde yansıtılan "
+"niyetlerini yürürlüğe koymak için çaba sarf etmesi gerektiğini ve Şartların "
+"diğer hükümlerinin aynen yürürlükte kalacağını kabul eder. Şartlar, herhangi"
+" bir üçüncü taraf lehtar hakkı veya herhangi bir temsilcilik, ortaklık veya "
+"ortak girişim oluşturmaz. Bu Şartlar kapsamında {platform_name} tarafından "
+"size sağlanan herhangi bir bildirim için {platform_name}, {platform_name} "
+"hesabınızla ilişkili e-posta adresi aracılığıyla sizi bilgilendirebilir."
 
 #: lms/templates/api_admin/terms_of_service.html
 msgid ""
@@ -16378,6 +16453,8 @@ msgid ""
 "Get {start_bold}access to all course activities{end_bold}, including both "
 "graded and non-graded assignments, while the course is running"
 msgstr ""
+"Ders devam ederken hem not verilen hem de not verilmeyen ödevler dahil olmak"
+" üzere {start_bold}tüm ders etkinliklerine erişim{end_bold} elde edin"
 
 #: lms/templates/course_modes/fbe.html
 msgid "Show more"
@@ -16416,6 +16493,8 @@ msgid ""
 "Get {start_bold}temporary access{end_bold} to the course material, including"
 " videos and readings"
 msgstr ""
+"Videolar ve okumalar dahil olmak üzere ders materyaline {start_bold}geçici "
+"erişim{end_bold} elde edin"
 
 #: lms/templates/course_modes/fbe.html
 msgid "Access expires and all progress will be lost on"
@@ -16442,6 +16521,8 @@ msgid ""
 "Studies show that those who choose this option are  {start_bold}more engaged"
 " and motivated{end_bold} to complete their courses"
 msgstr ""
+"Araştırmalar, bu seçeneği tercih edenlerin derslerini tamamlamak için "
+"{start_bold}daha ilgili ve motive olduklarını{end_bold} gösteriyor"
 
 #: lms/templates/course_modes/track_selection.html
 msgid "Access this course"
@@ -16595,12 +16676,6 @@ msgstr "Derslerin Listesi"
 #: lms/templates/courseware/courses.html
 msgid "Refine Your Search"
 msgstr "Aramanızı Sınırlandırın"
-
-#: lms/templates/courseware/courseware-chromeless.html
-#: lms/templates/courseware/courseware.html
-#: openedx/features/course_bookmarks/templates/course_bookmarks/course-bookmarks.html
-msgid "{course_number} Courseware"
-msgstr "{course_number} Ders yazılımları"
 
 #: lms/templates/courseware/courseware-chromeless.html
 #: lms/templates/courseware/courseware.html
@@ -17228,6 +17303,9 @@ msgid ""
 "{start_bold}Get the most out of your course!{end_bold} Upgrade to earn a "
 "{link_start}verified certificate{link_end} to showcase on your resumé."
 msgstr ""
+"{start_bold}Dersinizden en iyi şekilde yararlanın!{end_bold} Özgeçmişinizde "
+"gösterebileceğiniz {link_start}Onaylanmış bir sertifikaya{link_end} hak "
+"kazanmak için erişiminizi yükseltin."
 
 #: lms/templates/dashboard/_dashboard_course_listing.html
 msgid "Upgrade"
@@ -18281,11 +18359,12 @@ msgstr "Sertifika almamış olan öğrenciler için yeniden oluşturun. ({count}
 
 #: lms/templates/instructor/instructor_dashboard_2/certificates.html
 msgid "Regenerate for learners with audit passing state. ({count})"
-msgstr ""
+msgstr "Geçer not alan gözlemci öğrenciler için yeniden oluştur. ({count})"
 
 #: lms/templates/instructor/instructor_dashboard_2/certificates.html
 msgid "Regenerate for learners with audit not passing state. ({count})"
 msgstr ""
+"Geçer not alamayan gözlemci öğrenciler için yeniden oluştur. ({count})"
 
 #: lms/templates/instructor/instructor_dashboard_2/certificates.html
 msgid "Regenerate for learners in an error state. ({count})"
@@ -18638,6 +18717,12 @@ msgid ""
 "store the files, in accordance with your institution's data security "
 "policies.{li_end}{ul_end}"
 msgstr ""
+"{strong_start}Not{strong_end}: {ul_start}{li_start}Öğrenci verilerini "
+"güvende tutmak için bu bağlantıları kaydedemez veya doğrudan erişim için "
+"e-postayla gönderemezsiniz. Bağlantıların süresi 5 dakika içinde "
+"dolar.{li_end}{li_start}Rapor dosyaları oluşturulduktan 90 gün sonra "
+"silinir. Eski raporlara erişmeniz gerekiyorsa, kurumunuzun veri güvenliği "
+"politikalarına uygun olarak dosyaları indirip saklayın.{li_end}{ul_end}"
 
 #: lms/templates/instructor/instructor_dashboard_2/data_download_2.html
 msgid ""
@@ -18660,6 +18745,13 @@ msgid ""
 "old reports, download and store the files,         in accordance with your "
 "institution's data security policies.{li_end}{ul_end}"
 msgstr ""
+"{strong_start}Not{strong_end}: {ul_start}{li_start}Öğrenci verilerini "
+"güvende tutmak için bu bağlantıları kaydedemez          veya doğrudan erişim"
+" için e-postayla gönderemezsiniz. Bağlantıların süresi 5 dakika içinde "
+"dolar.{li_end}{li_start}Rapor dosyaları          oluşturulduktan 90 gün "
+"sonra silinir. Eski raporlara erişmeniz gerekiyorsa,           kurumunuzun "
+"veri güvenliği politikalarına uygun olarak dosyaları indirip "
+"saklayın.{li_end}{ul_end}"
 
 #: lms/templates/instructor/instructor_dashboard_2/edit_coupon_modal.html
 msgid "Edit Coupon Code"
@@ -19293,6 +19385,8 @@ msgid ""
 "You can include keywords in your messages. For list of available keywords "
 "see the {start_link}documentation{end_link}."
 msgstr ""
+"İletilerinize anahtar kelimeler ekleyebilirsiniz. Kullanılabilir anahtar "
+"kelimelerin listesi için {start_link}belgelendirmeye{end_link} bakın."
 
 #: lms/templates/instructor/instructor_dashboard_2/send_email.html
 msgid "CAUTION!"
@@ -21144,11 +21238,6 @@ msgstr ""
 msgid "Organization"
 msgstr "Kurum"
 
-#. Translators: This is an example for the name of the organization sponsoring
-#. a course, seen when filling out the form to create a new course. The
-#. organization name cannot contain spaces.
-#. Translators: "e.g. UniversityX or OrganizationX" is a placeholder displayed
-#. when user put no data into this field.
 #: cms/templates/course-create-rerun.html cms/templates/index.html
 msgid "e.g. UniversityX or OrganizationX"
 msgstr "örn. ÜniversiteX veya KurumX"
@@ -21283,6 +21372,22 @@ msgstr ""
 " Ders Başlangıç Tarihi dâhil tüm tarihleri gözden geçirin ve sıfırlayın; "
 "ders ekibini kurun; ders güncellemeleri ile diğer zamanlanmış varlıklarınızı"
 "  gözden geçirin; ve forum ile wikinizi hareketlendirin."
+
+#: cms/templates/course_outline.html
+msgid ""
+"This course run is using an upgraded version of edx discussion forum. "
+"Discussion xblocks will no longer work."
+msgstr ""
+"Bu ders, edx tartışma forumunun yükseltilmiş bir sürümünü kullanıyor. "
+"Discussion xblock'ları artık çalışmayacak."
+
+#: cms/templates/course_outline.html
+msgid " Learn more"
+msgstr " Daha fazlasını öğren"
+
+#: cms/templates/course_outline.html
+msgid "Share feedback"
+msgstr "Geri bildirim paylaş"
 
 #: cms/templates/course_outline.html
 #: cms/templates/widgets/deprecated-course-key-warning.html
@@ -23386,6 +23491,9 @@ msgid ""
 "learners as soon as they achieve the passing threshold in the course (which "
 "can occur before a final assignment based on course design)"
 msgstr ""
+"Bu ayarın tüm yapılandırmalarında, öğrenciler derste geçme eşiğine ulaşır "
+"ulaşmaz sertifikalar oluşturulur (bu, ders tasarımına dayalı bir son "
+"atamadan önce gerçekleşebilir)"
 
 #: cms/templates/settings.html
 msgid ""
@@ -23393,22 +23501,29 @@ msgid ""
 "grade above the course grade threshold. Note: learners can achieve a passing"
 " grade before encountering all assignments in some course configurations."
 msgstr ""
+"Öğrenciler, ders notu eşiğinin üzerinde bir geçer not elde ettikleri anda "
+"sertifikalarına erişebilirler. Not: öğrenciler, bazı ders "
+"yapılandırmalarında tüm ödevlerle karşılaşmadan önce geçer not alabilirler."
 
 #: cms/templates/settings.html
 msgid "On course end date"
-msgstr ""
+msgstr "Ders bitiş tarihinde"
 
 #: cms/templates/settings.html
 msgid ""
 "Learners with passing grades can access their certificate once the end date "
 "of the course has elapsed."
 msgstr ""
+"Geçer not alan öğrenciler, dersin bitiş tarihi geçtikten sonra "
+"sertifikalarına erişebilirler."
 
 #: cms/templates/settings.html
 msgid ""
 "Learners with passing grades can access their certificate after the date "
 "that you set has elapsed."
 msgstr ""
+"Geçer not alan öğrenciler, belirlediğiniz tarih geçtikten sonra "
+"sertifikalarına erişebilirler."
 
 #: cms/templates/settings.html
 msgid "Certificates Available Date"
@@ -25016,6 +25131,12 @@ msgid ""
 "for the listed articles where necessary. This way of working is more "
 "efficient...."
 msgstr ""
+"Bir eki değiştirmek, yerine kullanılacak yeni bir dosya eklemek anlamına "
+"gelir. Dosyaya yapılan tüm referanslar yüklediğinizle değiştirilecek ve "
+"dosya <strong>%(filename)s</strong> olarak indirilecektir. Lütfen bu ekin "
+"diğer makalelerde kullanıldığını unutmayın, içerikleri bozabilirsiniz. "
+"Ancak, bundan yararlanmaktan ve gerektiğinde listelenen makaleler için "
+"değişiklik yapmaktan çekinmeyin. Bu çalışma şekli daha verimlidir...."
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 msgid "Articles using"
@@ -25028,6 +25149,9 @@ msgid ""
 "place. All references to the file will be replaced by the one you upload and"
 " the file will be downloaded as <strong>%(filename)s</strong>."
 msgstr ""
+"Bir eki değiştirmek, yerine kullanılacak yeni bir dosya eklemek anlamına "
+"gelir. Dosyaya yapılan tüm referanslar yüklediğinizle değiştirilecek ve "
+"dosya <strong>%(filename)s</strong> olarak indirilecektir."
 
 #: wiki/plugins/attachments/templates/wiki/plugins/attachments/replace.html
 #: wiki/plugins/images/templates/wiki/plugins/images/revision_add.html
