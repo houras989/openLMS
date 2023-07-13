@@ -36,7 +36,7 @@ pymongo==3.13.0
     #   -r requirements/edx/paver.in
     #   edx-opaque-keys
 python-memcached==1.59
-    # via -r requirements/edx/paver.in
+    # via -r requirements/edx/paver.txt
 requests==2.31.0
     # via -r requirements/edx/paver.in
 six==1.16.0
