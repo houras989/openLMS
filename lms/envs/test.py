@@ -646,6 +646,12 @@ COURSE_LIVE_GLOBAL_CREDENTIALS["BIG_BLUE_BUTTON"] = {
     "URL": "***",
 }
 
+COURSE_LIVE_GLOBAL_CREDENTIALS["ZOOM"] = {
+    "KEY": "***",
+    "SECRET": "***",
+    "URL": "***",
+}
+
 ################## MFE API ####################
 ENABLE_MFE_CONFIG_API = True
 MFE_CONFIG = {

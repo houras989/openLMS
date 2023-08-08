@@ -22,7 +22,60 @@ from openedx.core.lib.api.authentication import BearerAuthenticationAllowInactiv
 from .providers import ProviderManager
 from ...lib.api.view_utils import verify_course_exists
 from .models import CourseLiveConfiguration
-from .serializers import CourseLiveConfigurationSerializer
+from .serializers import CourseLiveConfigurationSerializer, LtiSerializer
+
+
+def create_zoom_live_view_configuration(course_id, zoom_keys):
+    pii_sharing_allowed = get_lti_pii_sharing_state_for_course(course_id)
+    provider = ProviderManager().get_enabled_providers().get("zoom")
+    if not pii_sharing_allowed and provider.requires_pii_sharing():
+        return
+    data = {"enabled": True, "free_tier": True, "provider_type": "zoom"}
+    if (
+        provider
+        and not provider.additional_parameters
+        and data.get("lti_configuration", False)
+    ):
+        data["lti_configuration"]["lti_config"] = {"additional_parameters": {}}
+    configuration = CourseLiveConfiguration.get(course_id)
+    serializer = CourseLiveConfigurationSerializer(
+        configuration,
+        data=data,
+        context={
+            "pii_sharing_allowed": pii_sharing_allowed,
+            "course_id": course_id,
+            "provider": provider,
+        },
+    )
+    if not serializer.is_valid():
+        return
+    serializer.save()
+    instance = CourseLiveConfiguration.objects.last()
+    lti_serializer = LtiSerializer(
+        instance.lti_configuration or None,
+        data={
+            "lti_1p1_launch_url": zoom_keys["URL"],
+            "lti_1p1_client_key": zoom_keys["KEY"],
+            "lti_1p1_client_secret": zoom_keys["SECRET"],
+            "lti_config": {
+                "additional_parameters": {
+                    "custom_instructor_email": "faraz.maqsood@arbisoft.com"
+                },
+                "pii_share_email": False,
+                "pii_share_username": False,
+            },
+        },
+        partial=True,
+        context={
+            "pii_sharing_allowed": pii_sharing_allowed,
+            "provider": provider,
+        },
+    )
+    if not lti_serializer.is_valid():
+        return
+    lti_serializer.save()
+    instance.lti_configuration = lti_serializer.instance
+    instance.save()
 
 
 class CourseLiveConfigurationView(APIView):
@@ -32,7 +85,7 @@ class CourseLiveConfigurationView(APIView):
     authentication_classes = (
         JwtAuthentication,
         BearerAuthenticationAllowInactiveUser,
-        SessionAuthenticationAllowInactiveUser
+        SessionAuthenticationAllowInactiveUser,
     )
     permission_classes = (IsStaffOrInstructor,)
 
@@ -139,6 +192,36 @@ class CourseLiveConfigurationView(APIView):
         return Response(serializer.data)
 
 
+class ConfigureZoomCourseLiveView(APIView):
+    """
+    Read only view that lists details of LIVE providers available for a course.
+    """
+
+    authentication_classes = (
+        JwtAuthentication,
+        BearerAuthenticationAllowInactiveUser,
+        SessionAuthenticationAllowInactiveUser,
+    )
+    permission_classes = (IsStaffOrInstructor,)
+
+    @ensure_valid_course_key
+    @verify_course_exists()
+    def post(self, request, course_id: str) -> Response:
+        """
+        Handle HTTP/POST requests
+        """
+        configuration = CourseLiveConfiguration.objects.filter(
+            course_key=course_id, provider_type="zoom"
+        ).first()
+        if not configuration:
+            provider = ProviderManager().get_enabled_providers().get("zoom")
+            if provider.has_valid_global_keys():
+                zoom_keys = provider.get_global_keys()
+                create_zoom_live_view_configuration(course_id, zoom_keys)
+
+        return Response(status=status.HTTP_200_OK)
+
+
 class CourseLiveProvidersView(APIView):
     """
     Read only view that lists details of LIVE providers available for a course.
@@ -146,7 +229,7 @@ class CourseLiveProvidersView(APIView):
     authentication_classes = (
         JwtAuthentication,
         BearerAuthenticationAllowInactiveUser,
-        SessionAuthenticationAllowInactiveUser
+        SessionAuthenticationAllowInactiveUser,
     )
     permission_classes = (IsStaffOrInstructor,)
 
@@ -154,40 +237,40 @@ class CourseLiveProvidersView(APIView):
     @verify_course_exists()
     def get(self, request, course_id: str, **_kwargs) -> Response:
         """
-            A view for retrieving Program live IFrame .
+        A view for retrieving Program live IFrame .
 
-            Path: ``api/course_live/providers/{course_id}/``
+        Path: ``api/course_live/providers/{course_id}/``
 
-            Accepts: [GET]
+        Accepts: [GET]
 
-            ------------------------------------------------------------------------------------
-            GET
-            ------------------------------------------------------------------------------------
+        ------------------------------------------------------------------------------------
+        GET
+        ------------------------------------------------------------------------------------
 
-            **Returns**
-                * 200: Returns list of providers with active provider,
-                * 401: The requester is not authenticated.
-                * 403: The requester cannot access the specified course.
-                * 404: The requested course does not exist.
-            **Response**
+        **Returns**
+            * 200: Returns list of providers with active provider,
+            * 401: The requester is not authenticated.
+            * 403: The requester cannot access the specified course.
+            * 404: The requested course does not exist.
+        **Response**
 
-                In the case of a 200 response code, the response will be available live providers.
+            In the case of a 200 response code, the response will be available live providers.
 
-            **Example**
+        **Example**
 
-                {
-                    "providers": {
-                        "active": "zoom",
-                        "available": {
-                            'zoom': {
-                                'name': 'Zoom LTI PRO',
-                                'features': []
-                            }
+            {
+                "providers": {
+                    "active": "zoom",
+                    "available": {
+                        'zoom': {
+                            'name': 'Zoom LTI PRO',
+                            'features': []
                         }
                     }
                 }
+            }
 
-            """
+        """
         data = self.get_provider_data(course_id)
         return Response(data)
 
@@ -252,7 +335,7 @@ class CourseLiveIframeView(APIView):
     authentication_classes = (
         JwtAuthentication,
         BearerAuthenticationAllowInactiveUser,
-        SessionAuthenticationAllowInactiveUser
+        SessionAuthenticationAllowInactiveUser,
     )
     permission_classes = (permissions.IsAuthenticated, IsEnrolledOrStaff)
 
