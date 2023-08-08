@@ -6,6 +6,7 @@
         'video/095_video_context_menu.js',
         ['video/00_component.js'],
         function(Component) {
+            // eslint-disable-next-line no-var
             var AbstractItem, AbstractMenu, Menu, Overlay, Submenu, MenuItem;
 
             AbstractItem = Component.extend({
@@ -20,6 +21,7 @@
                         initialize: $.noop
                     }, options);
 
+                    // eslint-disable-next-line no-undef
                     this.id = _.uniqueId();
                     this.element = this.createElement();
                     this.element.attr(this.options.attrs).data(this.options.dataAttrs);
@@ -28,6 +30,7 @@
                     this.options.initialize.call(this, this);
                 },
                 destroy: function() {
+                    // eslint-disable-next-line no-undef
                     _.invoke(this.getChildren(), 'destroy');
                     this.undelegateEvents();
                     this.getElement().remove();
@@ -38,6 +41,7 @@
                 },
                 close: function() { },
                 closeSiblings: function() {
+                    // eslint-disable-next-line no-undef
                     _.invoke(this.getSiblings(), 'close');
                     return this;
                 },
@@ -45,6 +49,7 @@
                     return this.element;
                 },
                 addChild: function(child) {
+                    // eslint-disable-next-line no-var
                     var firstChild = null,
                         lastChild = null;
                     if (this.hasChildren()) {
@@ -67,9 +72,11 @@
                     return this.getChildren().length > 0;
                 },
                 getFirstChild: function() {
+                    // eslint-disable-next-line no-undef
                     return _.first(this.children);
                 },
                 getLastChild: function() {
+                    // eslint-disable-next-line no-undef
                     return _.last(this.children);
                 },
                 bindEvent: function(element, events, handler) {
@@ -77,11 +84,13 @@
                     return this;
                 },
                 getNext: function() {
+                    // eslint-disable-next-line no-var
                     var item = this.next;
                     while (item.isHidden() && this.id !== item.id) { item = item.next; }
                     return item;
                 },
                 getPrev: function() {
+                    // eslint-disable-next-line no-var
                     var item = this.prev;
                     while (item.isHidden() && this.id !== item.id) { item = item.prev; }
                     return item;
@@ -90,6 +99,7 @@
                     return null;
                 },
                 getRoot: function() {
+                    // eslint-disable-next-line no-var
                     var item = this;
                     while (item.parent) { item = item.parent; }
                     return item;
@@ -104,6 +114,7 @@
                     return this.getElement().is(':hidden');
                 },
                 getSiblings: function() {
+                    // eslint-disable-next-line no-var
                     var items = [],
                         item = this;
                     while (item.next && item.next.id !== this.id) {
@@ -122,6 +133,7 @@
                     this.getElement().off('.' + this.id);
                 },
                 addNamespace: function(events) {
+                    // eslint-disable-next-line no-undef
                     return _.map(events.split(/\s+/), function(event) {
                         return event + '.' + this.id;
                     }, this).join(' ');
@@ -136,8 +148,10 @@
                 },
 
                 populateElement: function() {
+                    // eslint-disable-next-line no-var
                     var fragment = document.createDocumentFragment();
 
+                    // eslint-disable-next-line no-undef
                     _.each(this.getChildren(), function(child) {
                         fragment.appendChild(child.populateElement()[0]);
                     }, this);
@@ -154,12 +168,14 @@
                 },
 
                 closeChildren: function() {
+                    // eslint-disable-next-line no-undef
                     _.invoke(this.getChildren(), 'close');
                     return this;
                 },
 
                 itemHandler: function(event) {
                     event.preventDefault();
+                    // eslint-disable-next-line no-var
                     var item = $(event.target).data('menu');
                     // eslint-disable-next-line default-case
                     switch (event.type) {
@@ -200,6 +216,7 @@
                 delegateEvents: function() {
                     AbstractMenu.prototype.delegateEvents.call(this);
                     this.bindEvent(this.contextmenuElement, 'contextmenu', this.contextmenuHandler.bind(this))
+                        // eslint-disable-next-line no-undef
                         .bindEvent(window, 'resize', _.debounce(this.close.bind(this), 100));
                     return this;
                 },
@@ -219,6 +236,7 @@
                 },
 
                 appendContent: function(content) {
+                    // eslint-disable-next-line no-var
                     var $content = $(content);
                     this.getElement().append($content);
                     return this;
@@ -232,8 +250,11 @@
                 },
 
                 build: function(container, items) {
+                    // eslint-disable-next-line no-undef
                     _.each(items, function(item) {
+                        // eslint-disable-next-line no-var
                         var child;
+                        // eslint-disable-next-line no-undef
                         if (_.has(item, 'items')) {
                             child = this.build((new Submenu(item, this.contextmenuElement)), item.items);
                         } else {
@@ -250,6 +271,7 @@
                 },
 
                 open: function() {
+                    // eslint-disable-next-line no-var
                     var $menu = (this.isRendered) ? this.getElement() : this.populateElement();
                     this.container.append($menu);
                     AbstractItem.prototype.open.call(this);
@@ -276,6 +298,7 @@
                 },
 
                 pointInContainerBox: function(x, y) {
+                    // eslint-disable-next-line no-var
                     var containerOffset = this.contextmenuElement.offset(),
                         containerBox = {
                             x0: containerOffset.left,
@@ -308,6 +331,7 @@
                 },
 
                 keyDownHandler: function(event, item) {
+                    // eslint-disable-next-line no-var
                     var KEY = $.ui.keyCode,
                         keyCode = event.keyCode;
 
@@ -359,6 +383,7 @@
                 },
 
                 show: function(container) {
+                    // eslint-disable-next-line no-var
                     var $elem = $(this.getElement());
                     $(container).append($elem);
                     this.delegateEvents();
@@ -366,15 +391,18 @@
                 },
 
                 delegateEvents: function() {
+                    // eslint-disable-next-line no-var
                     var self = this;
                     $(document)
                         .on('click' + this.ns, function() {
+                            // eslint-disable-next-line no-undef
                             if (_.isFunction(self.clickHandler)) {
                                 self.clickHandler.apply(this, arguments);
                             }
                             self.hide();
                         })
                         .on('contextmenu' + this.ns, function() {
+                            // eslint-disable-next-line no-undef
                             if (_.isFunction(self.contextmenuHandler)) {
                                 self.contextmenuHandler.apply(this, arguments);
                             }
@@ -395,6 +423,7 @@
                 },
 
                 createElement: function() {
+                    // eslint-disable-next-line no-var
                     var $spanElem,
                         $listElem,
                         $element = $('<li />', {
@@ -423,6 +452,7 @@
                 },
 
                 appendContent: function(content) {
+                    // eslint-disable-next-line no-var
                     var $content = $(content);
                     this.list.append($content);
                     return this;
@@ -442,6 +472,7 @@
                 },
 
                 keyDownHandler: function(event) {
+                    // eslint-disable-next-line no-var
                     var KEY = $.ui.keyCode,
                         keyCode = event.keyCode;
 
@@ -501,6 +532,7 @@
 
             MenuItem = AbstractItem.extend({
                 createElement: function() {
+                    // eslint-disable-next-line no-var
                     var classNames = [
                         'menu-item', this.options.prefix + 'menu-item',
                         this.options.isSelected ? 'is-selected' : ''
@@ -534,6 +566,7 @@
                     this.getElement()
                         .addClass('is-selected')
                         .attr({'aria-selected': 'true'});
+                    // eslint-disable-next-line no-undef
                     _.invoke(this.getSiblings(), 'unselect');
                     // Hide the menu.
                     this.getRoot().close();
@@ -566,6 +599,7 @@
                 },
 
                 keyDownHandler: function(event) {
+                    // eslint-disable-next-line no-var
                     var KEY = $.ui.keyCode,
                         keyCode = event.keyCode;
 
@@ -587,7 +621,9 @@
 
             // VideoContextMenu() function - what this module 'exports'.
             return function(state, i18n) {
+                // eslint-disable-next-line no-var
                 var speedCallback = function(event, menuitem, options) {
+                        // eslint-disable-next-line no-var
                         var speed = parseFloat(options.label);
                         state.videoCommands.execute('speed', speed);
                     },
@@ -641,7 +677,9 @@
                             }
                         }, {
                             label: i18n.Speed,
+                            // eslint-disable-next-line no-undef
                             items: _.map(state.speeds, function(speed) {
+                                // eslint-disable-next-line no-var
                                 var isSelected = parseFloat(speed) === state.speed;
                                 return {
                                     label: speed + 'x', callback: speedCallback, speed: speed, isSelected: isSelected
@@ -650,7 +688,7 @@
                             initialize: function(menuitem) {
                                 state.el.on({
                                     speedchange: function(event, speed) {
-                                        // eslint-disable-next-line no-shadow
+                                        /* eslint-disable-next-line no-shadow, no-var */
                                         var item = menuitem.getChildren().filter(function(item) {
                                             return item.options.speed === speed;
                                         })[0];
@@ -674,6 +712,7 @@
                 if (!state.isYoutubeType()) {
                     state.el.find('video').contextmenu(state.el, options);
                     state.el.on('destroy', function() {
+                        // eslint-disable-next-line no-var
                         var contextmenu = $(this).find('video').data('contextmenu');
                         if (contextmenu) {
                             contextmenu.destroy();

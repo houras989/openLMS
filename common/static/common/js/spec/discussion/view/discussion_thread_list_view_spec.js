@@ -6,9 +6,11 @@
     'use strict';
 
     describe('DiscussionThreadListView', function() {
+        // eslint-disable-next-line no-var
         var checkThreadsOrdering, expectFilter, makeView, renderSingleThreadWithProps, setupAjax;
 
         beforeEach(function() {
+            // eslint-disable-next-line no-var
             var deferred;
             DiscussionSpecHelper.setUpGlobals();
             DiscussionSpecHelper.setUnderscoreFixtures();
@@ -159,6 +161,7 @@
                 })
             ];
             deferred = $.Deferred();
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.returnValue(deferred);
             this.discussion = new Discussion([]);
             this.view = new DiscussionThreadListView({
@@ -235,6 +238,7 @@
         });
 
         it('filter should clear search alert when alternate term was searched', function() {
+            // eslint-disable-next-line no-var
             var filterval = 'unread';
             expectFilter(filterval);
             this.view.$('.forum-nav-filter-main-control').val(filterval);
@@ -252,6 +256,7 @@
                 return expect(this.view.$('.forum-nav-filter-cohort-control:visible')).not.toExist();
             });
             it('should allow moderators to select visibility', function() {
+                // eslint-disable-next-line no-var
                 var expectedGroupId,
                     self = this;
                 DiscussionSpecHelper.makeModerator();
@@ -302,8 +307,10 @@
         };
 
         describe('thread rendering should be correct', function() {
+            // eslint-disable-next-line no-var
             var checkRender;
             checkRender = function(threads, type, sortOrder) {
+                // eslint-disable-next-line no-var
                 var discussion, view,
                     isOrderedByVotes = type === 'votes';
                 discussion = new Discussion(_.map(threads, function(thread) {
@@ -345,8 +352,10 @@
         });
 
         describe('Sort change should be correct', function() {
+            // eslint-disable-next-line no-var
             var changeSorting;
             changeSorting = function(threads, selectedType, newType, sortOrder) {
+                // eslint-disable-next-line no-var
                 var discussion, sortControl, sortedThreads, view;
                 discussion = new Discussion(_.map(threads, function(thread) {
                     return new Thread(thread);
@@ -480,6 +489,7 @@
         });
 
         describe('search alerts', function() {
+            // eslint-disable-next-line no-var
             var testAlertMessages, getAlertMessagesAndClasses;
 
             testAlertMessages = function(expectedMessages) {
@@ -498,6 +508,7 @@
             };
 
             it('renders and removes search alerts', function() {
+                // eslint-disable-next-line no-var
                 var bar, foo;
                 testAlertMessages(['There are no posts in this topic yet.']);
                 this.view.clearSearchAlerts();
@@ -513,6 +524,7 @@
             });
 
             it('renders search alert with custom class', function() {
+                // eslint-disable-next-line no-var
                 var messages;
                 testAlertMessages(['There are no posts in this topic yet.']);
                 this.view.clearSearchAlerts();
@@ -546,13 +558,16 @@
         });
 
         describe('search spell correction', function() {
+            // eslint-disable-next-line no-var
             var testCorrection;
 
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 return spyOn(this.view, 'searchForUser');
             });
 
             testCorrection = function(view, correctedText) {
+                // eslint-disable-next-line no-undef
                 spyOn(view, 'addSearchAlert');
                 $.ajax.and.callFake(function(params) {
                     params.success({
@@ -583,14 +598,18 @@
             });
 
             it('clears search alerts when a new search is performed', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'clearSearchAlerts');
+                // eslint-disable-next-line no-undef
                 spyOn(DiscussionUtil, 'safeAjax');
                 this.view.searchFor('dummy');
                 return expect(this.view.clearSearchAlerts).toHaveBeenCalled();
             });
 
             it('clears search alerts when the underlying collection changes', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'clearSearchAlerts');
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'renderThread');
                 this.view.collection.trigger('change', new Thread({
                     id: 1
@@ -600,6 +619,7 @@
         });
 
         describe('username search', function() {
+            // eslint-disable-next-line no-var
             var setAjaxResults;
 
             it('makes correct ajax calls', function() {
@@ -640,6 +660,7 @@
             };
 
             it('gets called after a thread search succeeds', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'searchForUser').and.callThrough();
                 setAjaxResults(true, []);
                 this.view.searchFor('gizmo');
@@ -648,6 +669,7 @@
             });
 
             it('does not get called after a thread search fails', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'searchForUser').and.callThrough();
                 setAjaxResults(false, []);
                 this.view.searchFor('gizmo');
@@ -655,6 +677,7 @@
             });
 
             it('adds a search alert when an username was matched', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'addSearchAlert');
                 setAjaxResults(true, [
                     {
@@ -669,6 +692,7 @@
             });
 
             it('does not add a search alert when no username was matched', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'addSearchAlert');
                 setAjaxResults(true, []);
                 this.view.searchForUser('dummy');
@@ -702,6 +726,7 @@
             });
 
             it('should not be shown when showThreadPreview is false', function() {
+                // eslint-disable-next-line no-var
                 var view,
                     discussion = new Discussion([]),
                     showThreadPreview = false;
@@ -713,6 +738,7 @@
 
         describe('read/unread state', function() {
             it('adds never-read class to unread threads', function() {
+                // eslint-disable-next-line no-var
                 var unreads = this.threads.filter(function(thread) {
                     return !thread.read && thread.unread_comments_count === thread.comments_count;
                 }).length;
@@ -723,6 +749,7 @@
             });
 
             it('shows a "x new" message for threads that are read, but have unread comments', function() {
+                // eslint-disable-next-line no-var
                 var unreadThread = this.threads.filter(function(thread) {
                         return thread.read && thread.unread_comments_count !== thread.comments_count;
                     })[0],

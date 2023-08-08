@@ -17,6 +17,7 @@
         function($, Backbone, Content, Discussion, DiscussionUtil, DiscussionCourseSettings, DiscussionUser,
             NewPostView, DiscussionRouter, DiscussionBoardView) {
             return function(options) {
+                // eslint-disable-next-line no-var
                 var userInfo = options.userInfo,
                     sortPreference = options.sortPreference,
                     threads = options.threads,
@@ -94,4 +95,5 @@
                 });
             };
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

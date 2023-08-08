@@ -1,14 +1,17 @@
+// eslint-disable-next-line no-undef
 define(['edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/student_account/emailoptin'],
     function(AjaxHelpers, EmailOptInInterface) {
         'use strict';
 
         describe('EmailOptInInterface', function() {
+            // eslint-disable-next-line no-var
             var COURSE_KEY = 'edX/DemoX/Fall',
                 EMAIL_OPT_IN = 'True',
                 EMAIL_OPT_IN_URL = '/api/user/v1/preferences/email_opt_in/';
 
             it('Opts in for organization emails', function() {
                 // Spy on Ajax requests
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this);
 
                 // Attempt to enroll the user

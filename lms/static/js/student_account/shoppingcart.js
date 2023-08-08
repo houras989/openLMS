@@ -5,6 +5,7 @@
     'use strict';
 
     define(['jquery', 'jquery.cookie'], function($) {
+        // eslint-disable-next-line no-var
         var ShoppingCartInterface = {
             urls: {
                 viewCart: '/shoppingcart/',
@@ -42,4 +43,5 @@
 
         return ShoppingCartInterface;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

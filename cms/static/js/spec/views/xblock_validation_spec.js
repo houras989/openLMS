@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', 'common/js/spec_helpers/template_helpers'],
     function($, XBlockValidationModel, XBlockValidationView, TemplateHelpers) {
         beforeEach(function() {
@@ -5,6 +6,7 @@ define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', '
         });
 
         describe('XBlockValidationView helper methods', function() {
+            // eslint-disable-next-line no-var
             var model, view;
 
             beforeEach(function() {
@@ -14,6 +16,7 @@ define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', '
             });
 
             it('has a getIcon method', function() {
+                // eslint-disable-next-line no-var
                 var getIcon = view.getIcon.bind(view);
 
                 expect(getIcon(model.WARNING)).toBe('fa-exclamation-triangle');
@@ -23,6 +26,7 @@ define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', '
             });
 
             it('has a getDisplayName method', function() {
+                // eslint-disable-next-line no-var
                 var getDisplayName = view.getDisplayName.bind(view);
 
                 expect(getDisplayName(model.WARNING)).toBe('Warning');
@@ -32,6 +36,7 @@ define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', '
             });
 
             it('can add additional classes', function() {
+                // eslint-disable-next-line no-var
                 var noContainerContent = 'no-container-content',
                     notConfiguredModel, nonRootView, rootView;
 
@@ -58,6 +63,7 @@ define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', '
         });
 
         describe('XBlockValidationView rendering', function() {
+            // eslint-disable-next-line no-var
             var model, view;
 
             beforeEach(function() {
@@ -85,6 +91,7 @@ define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', '
             });
 
             it('renders summary and detailed messages types', function() {
+                // eslint-disable-next-line no-var
                 var details;
 
                 expect(view.$('.xblock-message')).toHaveClass('has-errors');
@@ -95,6 +102,7 @@ define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', '
             });
 
             it('renders summary and detailed messages text', function() {
+                // eslint-disable-next-line no-var
                 var details;
 
                 expect(view.$('.xblock-message').text()).toContain('Summary message');
@@ -116,6 +124,7 @@ define(['jquery', 'js/models/xblock_validation', 'js/views/xblock_validation', '
             });
 
             it('renders a summary only', function() {
+                // eslint-disable-next-line no-var
                 var summaryOnlyModel = new XBlockValidationModel({
                         empty: false,
                         summary: {text: 'Summary message', type: 'warning'},

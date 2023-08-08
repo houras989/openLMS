@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-undef
 define(['edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/student_account/enrollment'],
     function(AjaxHelpers, EnrollmentInterface) {
         'use strict';
 
         describe('EnrollmentInterface', function() {
+            // eslint-disable-next-line no-var
             var COURSE_KEY = 'edX/DemoX/Fall',
                 ENROLL_URL = '/api/commerce/v0/baskets/',
                 FORWARD_URL = '/course_modes/choose/edX/DemoX/Fall/',
@@ -10,11 +12,13 @@ define(['edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/student_account
 
             beforeEach(function() {
                 // Mock the redirect call
+                // eslint-disable-next-line no-undef
                 spyOn(EnrollmentInterface, 'redirect').and.callFake(function() {});
             });
 
             it('enrolls a user in a course', function() {
                 // Spy on Ajax requests
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this);
 
                 // Attempt to enroll the user
@@ -37,6 +41,7 @@ define(['edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/student_account
 
             it('redirects the user if enrollment fails', function() {
                 // Spy on Ajax requests
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this);
 
                 // Attempt to enroll the user
@@ -51,6 +56,7 @@ define(['edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/student_account
 
             it('redirects the user if blocked by an embargo', function() {
                 // Spy on Ajax requests
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this);
 
                 // Attempt to enroll the user

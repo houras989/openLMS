@@ -13,12 +13,15 @@
  * ~ Chinese Proverb
  */
 
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 window.ImageInput = (function($, undefined) {
+    /* eslint-disable-next-line no-use-before-define, no-var */
     var ImageInput = ImageInputConstructor;
 
     ImageInput.prototype = {
+        // eslint-disable-next-line no-use-before-define
         constructor: ImageInputConstructor,
+        // eslint-disable-next-line no-use-before-define
         clickHandler: clickHandler
     };
 
@@ -33,6 +36,7 @@ window.ImageInput = (function($, undefined) {
     }
 
     function clickHandler(event) {
+        // eslint-disable-next-line no-var
         var offset = this.el.offset(),
             posX = event.offsetX
                 ? event.offsetX : event.pageX - offset.left,

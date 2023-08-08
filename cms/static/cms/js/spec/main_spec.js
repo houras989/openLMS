@@ -14,6 +14,7 @@
             describe('main helper', function() {
                 beforeEach(function() {
                     this.previousAjaxSettings = $.extend(true, {}, $.ajaxSettings);
+                    /* eslint-disable-next-line consistent-return, no-undef */
                     spyOn($, 'cookie').and.callFake(function(param) {
                         if (param === 'csrftoken') {
                             return 'stubCSRFToken';
@@ -33,6 +34,7 @@
                 });
             });
             describe('AJAX Errors', function() {
+                // eslint-disable-next-line no-var
                 var server;
                 server = null;
                 beforeEach(function() {

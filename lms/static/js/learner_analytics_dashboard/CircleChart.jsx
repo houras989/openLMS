@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -15,6 +16,7 @@ class CircleChart extends React.Component {
         this.getSlices = this.getSlices.bind(this);
     }
 
+    // eslint-disable-next-line consistent-return
     getCenter() {
         const {centerHole, sliceBorder} = this.props;
         if (centerHole) {
@@ -51,6 +53,7 @@ class CircleChart extends React.Component {
             }
 
             if (value === 0) {
+                // eslint-disable-next-line consistent-return
                 return;
             }
 

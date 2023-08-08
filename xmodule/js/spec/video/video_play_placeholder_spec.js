@@ -2,14 +2,18 @@
     'use strict';
 
     describe('VideoPlayPlaceholder', function() {
+        // eslint-disable-next-line no-var
         var state, oldOTBD;
 
         beforeEach(function() {
             oldOTBD = window.onTouchBasedDevice;
+            // eslint-disable-next-line no-undef
             window.onTouchBasedDevice = jasmine
                 .createSpy('onTouchBasedDevice').and.returnValue(['iPad']);
 
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer();
+            // eslint-disable-next-line no-undef
             spyOn(state.videoCommands, 'execute');
         });
 
@@ -20,6 +24,7 @@
             window.onTouchBasedDevice = oldOTBD;
         });
 
+        // eslint-disable-next-line no-var
         var cases = [
             {
                 name: 'PC',
@@ -41,13 +46,17 @@
         ];
 
         beforeEach(function() {
+            // eslint-disable-next-line no-undef
             jasmine.stubRequests();
+            // eslint-disable-next-line no-undef
             spyOn(window.YT, 'Player').and.callThrough();
         });
 
         it('works correctly on calling proper methods', function() {
+            // eslint-disable-next-line no-var
             var btnPlay;
 
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer();
             btnPlay = state.el.find('.btn-play');
 
@@ -69,6 +78,7 @@
         });
 
         $.each(cases, function(index, data) {
+            // eslint-disable-next-line no-var
             var message = [
                 (data.isShown) ? 'is' : 'is not',
                 ' shown on',
@@ -76,9 +86,11 @@
             ].join('');
 
             it(message, function() {
+                // eslint-disable-next-line no-var
                 var btnPlay;
 
                 window.onTouchBasedDevice.and.returnValue(data.isTouch);
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer();
                 btnPlay = state.el.find('.btn-play');
 
@@ -95,9 +107,11 @@
                 'is shown on paused video on ' + device
                 + ' in HTML5 player',
                 function() {
+                    // eslint-disable-next-line no-var
                     var btnPlay;
 
                     window.onTouchBasedDevice.and.returnValue([device]);
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer();
                     btnPlay = state.el.find('.btn-play');
 
@@ -110,9 +124,11 @@
                 'is hidden on playing video on ' + device
                 + ' in HTML5 player',
                 function() {
+                    // eslint-disable-next-line no-var
                     var btnPlay;
 
                     window.onTouchBasedDevice.and.returnValue([device]);
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer();
                     btnPlay = state.el.find('.btn-play');
 
@@ -124,9 +140,11 @@
                 'is hidden on paused video on ' + device
                 + ' in YouTube player',
                 function() {
+                    // eslint-disable-next-line no-var
                     var btnPlay;
 
                     window.onTouchBasedDevice.and.returnValue([device]);
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayerYouTube();
                     btnPlay = state.el.find('.btn-play');
 

@@ -8,6 +8,7 @@
     define([
         'logger'
     ], function(Logger) {
+        // eslint-disable-next-line no-var
         var TeamAnalytics = {
             emitPageViewed: function(pageName, topicId, teamId) {
                 Logger.log('edx.team.page_viewed', {
@@ -20,4 +21,5 @@
 
         return TeamAnalytics;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

@@ -2,6 +2,7 @@
     'use strict';
 
     define('video/04_video_full_screen.js', ['edx-ui-toolkit/js/utils/html-utils'], function(HtmlUtils) {
+        // eslint-disable-next-line no-var
         var template = [
             '<button class="control add-fullscreen" aria-disabled="false" title="',
             gettext('Fill browser'),
@@ -22,6 +23,7 @@
         //
         //     For more information about the Fullscreen Web API see MDN:
         //     https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
+        // eslint-disable-next-line no-var
         var prefixedFullscreenProperties = (function() {
             if ('fullscreenEnabled' in document) {
                 return {
@@ -156,6 +158,7 @@
         }
 
         function updateControlsHeight() {
+            // eslint-disable-next-line no-var
             var controls = this.el.find('.video-controls'),
                 slider = this.videoFullScreen.sliderEl;
             this.videoFullScreen.height = getControlsHeight(controls, slider);
@@ -186,7 +189,9 @@
         }
 
         function handleExit() {
+            // eslint-disable-next-line no-var
             var fullScreenClassNameEl = this.el.add(document.documentElement);
+            // eslint-disable-next-line no-var
             var closedCaptionsEl = this.el.find('.closed-captions');
 
             if (this.isFullScreen === false) {
@@ -213,7 +218,9 @@
         }
 
         function handleEnter() {
+            // eslint-disable-next-line no-var
             var fullScreenClassNameEl = this.el.add(document.documentElement);
+            // eslint-disable-next-line no-var
             var closedCaptionsEl = this.el.find('.closed-captions');
 
             if (this.isFullScreen === true) {
@@ -278,6 +285,7 @@
         //     Functions which will be accessible via 'state' object. When called, these functions will
         //     get the 'state' object as a context.
         function makeFunctionsPublic(state) {
+            // eslint-disable-next-line no-var
             var methodsDict = {
                 destroy: destroy,
                 enter: enter,
@@ -297,6 +305,7 @@
 
         // VideoControl() function - what this module "exports".
         return function(state) {
+            // eslint-disable-next-line no-var
             var dfd = $.Deferred();
 
             // eslint-disable-next-line no-param-reassign

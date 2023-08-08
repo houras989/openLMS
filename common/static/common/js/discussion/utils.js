@@ -28,6 +28,7 @@
         };
 
         DiscussionUtil.isStaff = function(userId) {
+            // eslint-disable-next-line no-var
             var staff;
             if (_.isUndefined(userId)) {
                 // eslint-disable-next-line no-void
@@ -37,20 +38,24 @@
                 this.roleIds = {};
             }
             staff = _.union(this.roleIds.Moderator, this.roleIds.Administrator);
+            // eslint-disable-next-line radix
             return _.include(staff, parseInt(userId));
         };
 
         DiscussionUtil.isTA = function(userId) {
+            // eslint-disable-next-line no-var
             var ta;
             if (_.isUndefined(userId)) {
                 // eslint-disable-next-line no-void
                 userId = this.user ? this.user.id : void 0;
             }
             ta = _.union(this.roleIds['Community TA']);
+            // eslint-disable-next-line radix
             return _.include(ta, parseInt(userId));
         };
 
         DiscussionUtil.isGroupTA = function(userId) {
+            // eslint-disable-next-line no-var
             var groupTa,
                 localUserId = userId;
             if (_.isUndefined(userId)) {
@@ -66,9 +71,12 @@
         };
 
         DiscussionUtil.bulkUpdateContentInfo = function(infos) {
+            // eslint-disable-next-line no-var
             var id, info, _results;
             _results = [];
+            // eslint-disable-next-line no-restricted-syntax
             for (id in infos) {
+                // eslint-disable-next-line no-prototype-builtins
                 if (infos.hasOwnProperty(id)) {
                     info = infos[id];
                     _results.push(Content.getContent(id).updateInfo(info));
@@ -85,40 +93,74 @@
                 .click(function() { return handler(this); });
         };
 
+        // eslint-disable-next-line no-unused-vars
         DiscussionUtil.urlFor = function(name, param, param1, param2) {
             return {
+                // eslint-disable-next-line camelcase
                 follow_discussion: '/courses/' + $$course_id + '/discussion/' + param + '/follow',
+                // eslint-disable-next-line camelcase
                 unfollow_discussion: '/courses/' + $$course_id + '/discussion/' + param + '/unfollow',
+                // eslint-disable-next-line camelcase
                 create_thread: '/courses/' + $$course_id + '/discussion/' + param + '/threads/create',
+                // eslint-disable-next-line camelcase
                 update_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/update',
+                // eslint-disable-next-line camelcase
                 create_comment: '/courses/' + $$course_id + '/discussion/threads/' + param + '/reply',
+                // eslint-disable-next-line camelcase
                 delete_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/delete',
+                // eslint-disable-next-line camelcase
                 flagAbuse_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/flagAbuse',
+                // eslint-disable-next-line camelcase
                 unFlagAbuse_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/unFlagAbuse',
+                // eslint-disable-next-line camelcase
                 flagAbuse_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/flagAbuse',
+                // eslint-disable-next-line camelcase
                 unFlagAbuse_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/unFlagAbuse',
+                // eslint-disable-next-line camelcase
                 upvote_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/upvote',
+                // eslint-disable-next-line camelcase
                 downvote_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/downvote',
+                // eslint-disable-next-line camelcase
                 pin_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/pin',
+                // eslint-disable-next-line camelcase
                 un_pin_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/unpin',
+                // eslint-disable-next-line camelcase
                 undo_vote_for_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/unvote',
+                // eslint-disable-next-line camelcase
                 follow_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/follow',
+                // eslint-disable-next-line camelcase
                 unfollow_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/unfollow',
+                // eslint-disable-next-line camelcase
                 update_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/update',
+                // eslint-disable-next-line camelcase
                 endorse_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/endorse',
+                // eslint-disable-next-line camelcase
                 create_sub_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/reply',
+                // eslint-disable-next-line camelcase
                 delete_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/delete',
+                // eslint-disable-next-line camelcase
                 upvote_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/upvote',
+                // eslint-disable-next-line camelcase
                 downvote_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/downvote',
+                // eslint-disable-next-line camelcase
                 undo_vote_for_comment: '/courses/' + $$course_id + '/discussion/comments/' + param + '/unvote',
+                // eslint-disable-next-line camelcase
                 upload: '/courses/' + $$course_id + '/discussion/upload',
+                // eslint-disable-next-line camelcase
                 users: '/courses/' + $$course_id + '/discussion/users',
+                // eslint-disable-next-line camelcase
                 search: '/courses/' + $$course_id + '/discussion/forum/search',
+                // eslint-disable-next-line camelcase
                 retrieve_discussion: '/courses/' + $$course_id + '/discussion/forum/' + param + '/inline',
+                // eslint-disable-next-line camelcase
                 retrieve_single_thread: '/courses/' + $$course_id + '/discussion/forum/' + param + '/threads/' + param1,
+                // eslint-disable-next-line camelcase
                 openclose_thread: '/courses/' + $$course_id + '/discussion/threads/' + param + '/close',
+                // eslint-disable-next-line camelcase
                 user_profile: '/courses/' + $$course_id + '/discussion/forum/users/' + param,
+                // eslint-disable-next-line camelcase
                 followed_threads: '/courses/' + $$course_id + '/discussion/forum/users/' + param + '/followed',
+                // eslint-disable-next-line camelcase
                 threads: '/courses/' + $$course_id + '/discussion/forum',
                 enable_notifications: '/notification_prefs/enable/',
                 disable_notifications: '/notification_prefs/disable/',
@@ -126,12 +168,14 @@
             }[name];
         };
 
+        // eslint-disable-next-line consistent-return
         DiscussionUtil.ignoreEnterKey = function(event) {
             if (event.which === 13) {
                 return event.preventDefault();
             }
         };
 
+        // eslint-disable-next-line consistent-return
         DiscussionUtil.activateOnSpace = function(event, func) {
             if (event.which === 32) {
                 event.preventDefault();
@@ -140,6 +184,7 @@
         };
 
         DiscussionUtil.makeFocusTrap = function(elem) {
+            // eslint-disable-next-line consistent-return
             return elem.keydown(function(event) {
                 if (event.which === 9) {
                     return event.preventDefault();
@@ -148,12 +193,14 @@
         };
 
         DiscussionUtil.showLoadingIndicator = function(element, takeFocus) {
+            // eslint-disable-next-line no-var
             var animElem = edx.HtmlUtils.joinHtml(
                 edx.HtmlUtils.HTML("<div class='loading-animation' tabindex='0'>"),
                 edx.HtmlUtils.HTML("<span class='icon fa fa-spinner' aria-hidden='true'></span><span class='sr'>"),
                 gettext('Loading content'),
                 edx.HtmlUtils.HTML('</span></div>')
             );
+            // eslint-disable-next-line no-var
             var $animElem = $(animElem.toString());
             element.after($animElem);
             this.$_loading = $animElem;
@@ -168,10 +215,12 @@
         };
 
         DiscussionUtil.discussionAlert = function(header, body) {
+            // eslint-disable-next-line no-var
             var $alertDiv, $alertTrigger;
             // Prevents "text" is undefined in underscore.js in tests - looks like some tests use
             // discussions somehow, but never append discussion fixtures or reset them; this causes
             // entire test suite (lms, cms, common) to fail due to unhandled JS exception
+            // eslint-disable-next-line no-var
             var popupTemplate = $('#alert-popup').html() || '';
             if ($('#discussion-alert').length === 0) {
                 $alertDiv = $(
@@ -193,6 +242,7 @@
         };
 
         DiscussionUtil.safeAjax = function(params) {
+            // eslint-disable-next-line no-var
             var $elem, deferred, request,
                 self = this;
             $elem = params.$elem;
@@ -224,6 +274,7 @@
                 }
             }
 
+            // eslint-disable-next-line consistent-return
             request = $.ajax(params).always(function() {
                 if ($elem) {
                     $elem.prop('disabled', false);
@@ -240,6 +291,7 @@
         };
 
         DiscussionUtil.updateWithUndo = function(model, updates, safeAjaxParams, errorMsg, beforeSend) {
+            // eslint-disable-next-line no-var
             var undo,
                 self = this;
             if (errorMsg) {
@@ -258,9 +310,12 @@
         };
 
         DiscussionUtil.bindLocalEvents = function($local, eventsHandler) {
+            // eslint-disable-next-line no-var
             var event, eventSelector, handler, selector, _ref, _results;
             _results = [];
+            // eslint-disable-next-line no-restricted-syntax
             for (eventSelector in eventsHandler) {
+                // eslint-disable-next-line no-prototype-builtins
                 if (eventsHandler.hasOwnProperty(eventSelector)) {
                     handler = eventsHandler[eventSelector];
                     _ref = eventSelector.split(' ');
@@ -274,6 +329,7 @@
 
         DiscussionUtil.formErrorHandler = function(errorsField) {
             return function(xhr) {
+                // eslint-disable-next-line no-var
                 var makeErrorElem, response, i, $errorItem;
                 makeErrorElem = function(message, alertId) {
                     return edx.HtmlUtils.joinHtml(
@@ -311,8 +367,11 @@
         };
 
         DiscussionUtil.postMathJaxProcessor = function(htmlSnippet) {
+            // eslint-disable-next-line no-var
             var RE_DISPLAYMATH, RE_INLINEMATH;
+            // eslint-disable-next-line no-useless-escape
             RE_INLINEMATH = /^\$([^\$]*)\$/g;
+            // eslint-disable-next-line no-useless-escape
             RE_DISPLAYMATH = /^\$\$([^\$]*)\$\$/g;
             return this.processEachMathAndCode(htmlSnippet, function(s, type) {
                 if (type === 'display') {
@@ -329,11 +388,15 @@
             });
         };
 
+        // eslint-disable-next-line camelcase
         DiscussionUtil.makeWmdEditor = function($content, $local, cls_identifier) {
+            /* eslint-disable-next-line camelcase, no-var */
             var appended_id, editor, elem, id, imageUploadUrl, placeholder, _processor;
+            // eslint-disable-next-line camelcase
             elem = $local('.' + cls_identifier);
             placeholder = elem.data('placeholder');
             id = elem.data('id');
+            // eslint-disable-next-line camelcase
             appended_id = '-' + cls_identifier + '-' + id;
             imageUploadUrl = this.urlFor('upload');
             _processor = function(self) {
@@ -343,40 +406,55 @@
                 };
             };
             editor = Markdown.makeWmdEditor(elem, appended_id, imageUploadUrl, _processor(this));
+            // eslint-disable-next-line camelcase
             this.wmdEditors['' + cls_identifier + '-' + id] = editor;
             if (placeholder) {
+                // eslint-disable-next-line camelcase
                 elem.find('#wmd-input' + appended_id).attr('placeholder', placeholder);
             }
             return editor;
         };
 
+        // eslint-disable-next-line camelcase
         DiscussionUtil.getWmdEditor = function($content, $local, cls_identifier) {
+            // eslint-disable-next-line no-var
             var elem, id;
+            // eslint-disable-next-line camelcase
             elem = $local('.' + cls_identifier);
             id = elem.attr('data-id');
+            // eslint-disable-next-line camelcase
             return this.wmdEditors['' + cls_identifier + '-' + id];
         };
 
+        // eslint-disable-next-line camelcase
         DiscussionUtil.getWmdInput = function($content, $local, cls_identifier) {
+            // eslint-disable-next-line no-var
             var elem, id;
+            // eslint-disable-next-line camelcase
             elem = $local('.' + cls_identifier);
             id = elem.attr('data-id');
+            // eslint-disable-next-line camelcase
             return $local('#wmd-input-' + cls_identifier + '-' + id);
         };
 
+        // eslint-disable-next-line camelcase
         DiscussionUtil.getWmdContent = function($content, $local, cls_identifier) {
             return this.getWmdInput($content, $local, cls_identifier).val();
         };
 
+        // eslint-disable-next-line camelcase
         DiscussionUtil.setWmdContent = function($content, $local, cls_identifier, text) {
             this.getWmdInput($content, $local, cls_identifier).val(text);
             return this.getWmdEditor($content, $local, cls_identifier).refreshPreview();
         };
 
+        /* eslint-disable-next-line no-useless-escape, no-var */
         var RE_DISPLAYMATH = /^([^\$]*?)\$\$([^\$]*?)\$\$(.*)$/m,
+            // eslint-disable-next-line no-useless-escape
             RE_INLINEMATH = /^([^\$]*?)\$([^\$]+?)\$(.*)$/m,
             ESCAPED_DOLLAR = '@@ESCAPED_D@@',
             ESCAPED_BACKSLASH = '@@ESCAPED_B@@',
+            // eslint-disable-next-line no-useless-escape
             LATEX_SCRIPT = '\{javascript\:(.+?)\}';
 
         /**
@@ -386,6 +464,7 @@
          * @returns {*}
          */
         DiscussionUtil.processEachMathAndCode = function(htmlSnippet, processor) {
+            // eslint-disable-next-line no-var
             var $div, codeArchive, processedHtmlString, htmlString;
             codeArchive = {};
             processedHtmlString = '';
@@ -439,7 +518,9 @@
         DiscussionUtil.unescapeHighlightTag = function(htmlSnippet) {
             return edx.HtmlUtils.HTML(
                 htmlSnippet.toString().replace(
+                    // eslint-disable-next-line no-useless-escape
                     /\&lt\;highlight\&gt\;/g,
+                    // eslint-disable-next-line no-useless-escape
                     "<span class='search-highlight'>").replace(/\&lt\;\/highlight\&gt\;/g, '</span>'
                 )
             );
@@ -447,7 +528,9 @@
 
         DiscussionUtil.stripHighlight = function(htmlString) {
             return htmlString
+                // eslint-disable-next-line no-useless-escape
                 .replace(/\&(amp\;)?lt\;highlight\&(amp\;)?gt\;/g, '')
+                // eslint-disable-next-line no-useless-escape
                 .replace(/\&(amp\;)?lt\;\/highlight\&(amp\;)?gt\;/g, '');
         };
 
@@ -461,7 +544,9 @@
          * @returns HtmlSnippet
          */
         DiscussionUtil.markdownWithHighlight = function(unsafeText) {
+            // eslint-disable-next-line no-var
             var converter;
+            // eslint-disable-next-line no-useless-escape
             unsafeText = unsafeText.replace(/^\&gt\;/gm, '>');
             converter = Markdown.getMathCompatibleConverter();
             /*
@@ -470,6 +555,7 @@
             * - converter.makeHtml strips html tags in post body and escapes in code blocks by design.
             *    HTML tags are not supported.  Only markdown is supported.
             */
+            // eslint-disable-next-line no-var
             var htmlSnippet = edx.HtmlUtils.HTML(converter.makeHtml(unsafeText));
             return this.unescapeHighlightTag(this.stripLatexHighlight(htmlSnippet));
         };
@@ -499,7 +585,9 @@
         };
 
         DiscussionUtil.abbreviateHTML = function(htmlSnippet, maxLength) {
+            /* eslint-disable-next-line camelcase, no-var */
             var $result, imagesToReplace, truncated_text;
+            /* eslint-disable-next-line camelcase, no-undef */
             truncated_text = edx.HtmlUtils.HTML(jQuery.truncate(htmlSnippet.toString(), {
                 length: maxLength,
                 noBreaks: true,
@@ -521,6 +609,7 @@
                 );
             }
             // See TNL-4983 for an explanation of why the linter requires ensureHtml()
+            // eslint-disable-next-line no-var
             var afterMessage = edx.HtmlUtils.interpolateHtml(
                 edx.HtmlUtils.HTML('<em>{text}</em>'), {text: gettext('image omitted')}
             );
@@ -529,6 +618,7 @@
         };
 
         DiscussionUtil.getPaginationParams = function(curPage, numPages, pageUrlFunc) {
+            // eslint-disable-next-line no-var
             var delta, maxPage, minPage, pageInfo;
             delta = 2;
             minPage = Math.max(curPage - delta, 1);
@@ -553,6 +643,7 @@
         };
 
         DiscussionUtil.handleKeypressInToolbar = function(event) {
+            // eslint-disable-next-line no-var
             var $currentButton, $nextButton, $toolbar, $allButtons,
                 keyPressed, nextIndex, currentButtonIndex,
                 validKeyPress, toolbarHasButtons;

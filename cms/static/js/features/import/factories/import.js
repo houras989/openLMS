@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'domReady',
     '../views/import',
@@ -11,6 +12,7 @@ define([
 
     return {
         Import: function(feedbackUrl, library) {
+            // eslint-disable-next-line no-var
             var dbError,
                 $bar = $('.progress-bar'),
                 $fill = $('.progress-fill'),
@@ -32,6 +34,7 @@ define([
                         .show();
                 },
                 showImportSubmit = function() {
+                    // eslint-disable-next-line no-var
                     var filepath = $(this).val(),
                         msg;
 
@@ -95,6 +98,7 @@ define([
 
                             $submitBtn.hide();
                             data.submit().complete(function(result, textStatus, xhr) {
+                                // eslint-disable-next-line no-var
                                 var serverMsg, errMsg, stage;
                                 if (xhr.status !== 200) {
                                     try {
@@ -103,8 +107,10 @@ define([
                                         return;
                                     }
 
+                                    // eslint-disable-next-line no-prototype-builtins
                                     errMsg = serverMsg.hasOwnProperty('ErrMsg') ? serverMsg.ErrMsg : '';
 
+                                    // eslint-disable-next-line no-prototype-builtins
                                     if (serverMsg.hasOwnProperty('Stage')) {
                                         stage = Math.abs(serverMsg.Stage);
                                         Import.cancel(defaults[stage] + errMsg, stage);
@@ -129,7 +135,7 @@ define([
                 },
 
                 progressall: function(e, data) {
-                    // eslint-disable-next-line no-mixed-operators
+                    /* eslint-disable-next-line no-mixed-operators, no-var */
                     var percentInt = data.loaded / data.total * 100,
                         percentVal = parseInt(percentInt, 10) + '%',
                         doneAt;

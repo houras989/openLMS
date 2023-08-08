@@ -9,7 +9,9 @@
             return this.autoenrollment;
         });
         it('binds the ajax call and the result will be success', function() {
+            // eslint-disable-next-line no-var
             var submitCallback;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 params.success({
                     row_errors: [],
@@ -20,10 +22,12 @@
                     always: function() {}
                 };
             });
+            // eslint-disable-next-line no-undef
             this.autoenrollment.render_notification_view = jasmine.createSpy(
                 'render_notification_view(type, title, message, details) spy').and.callFake(function() {
                 return '<div><div class="message message-confirmation"><h3 class="message-title">Success</h3><div class="message-copy"><p>All accounts were created successfully.</p></div></div><div>'; //  eslint-disable-line max-len
             });
+            // eslint-disable-next-line no-undef
             submitCallback = jasmine.createSpy().and.returnValue();
             this.autoenrollment.$student_enrollment_form.submit(submitCallback);
             this.autoenrollment.$enrollment_signup_button.click();
@@ -31,7 +35,9 @@
             return expect(submitCallback).toHaveBeenCalled();
         });
         it('binds the ajax call and the result will be error', function() {
+            // eslint-disable-next-line no-var
             var submitCallback;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 params.success({
                     row_errors: [
@@ -52,10 +58,12 @@
                     always: function() {}
                 };
             });
+            // eslint-disable-next-line no-undef
             this.autoenrollment.render_notification_view = jasmine.createSpy(
                 'render_notification_view(type, title, message, details) spy').and.callFake(function() {
                 return '<div><div class="message message-error"><h3 class="message-title">Errors</h3><div class="message-copy"><p>The following errors were generated:</p><ul class="list-summary summary-items"><li class="summary-item">cannot read the line 2</li><li class="summary-item">testuser1  (testemail1@email.com):     (Username already exists)</li></ul></div></div></div>'; //  eslint-disable-line max-len
             });
+            // eslint-disable-next-line no-undef
             submitCallback = jasmine.createSpy().and.returnValue();
             this.autoenrollment.$student_enrollment_form.submit(submitCallback);
             this.autoenrollment.$enrollment_signup_button.click();
@@ -63,7 +71,9 @@
             return expect(submitCallback).toHaveBeenCalled();
         });
         return it('binds the ajax call and the result will be warnings', function() {
+            // eslint-disable-next-line no-var
             var submitCallback;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 params.success({
                     row_errors: [],
@@ -80,10 +90,12 @@
                     always: function() {}
                 };
             });
+            // eslint-disable-next-line no-undef
             this.autoenrollment.render_notification_view = jasmine.createSpy(
                 'render_notification_view(type, title, message, details) spy').and.callFake(function() {
                 return '<div><div class="message message-warning"><h3 class="message-title">Warnings</h3><div class="message-copy"><p>The following warnings were generated:</p><ul class="list-summary summary-items"><li class="summary-item">user1  (user1email):     (email is in valid)</li></ul></div></div></div>'; // eslint-disable-line max-len
             });
+            // eslint-disable-next-line no-undef
             submitCallback = jasmine.createSpy().and.returnValue();
             this.autoenrollment.$student_enrollment_form.submit(submitCallback);
             this.autoenrollment.$enrollment_signup_button.click();

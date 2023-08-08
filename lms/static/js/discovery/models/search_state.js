@@ -4,6 +4,7 @@
         'backbone',
         'js/discovery/models/course_discovery',
         'js/discovery/collections/filters'
+    // eslint-disable-next-line no-unused-vars
     ], function(_, Backbone, CourseDiscovery, Filters) {
         'use strict';
 
@@ -45,6 +46,7 @@
             // private
 
             hasNextPage: function() {
+                // eslint-disable-next-line no-var
                 var total = this.discovery.get('totalCount');
                 return total - ((this.page + 1) * this.pageSize) > 0;
             },
@@ -60,6 +62,7 @@
             },
 
             buildQuery: function(pageIndex) {
+                // eslint-disable-next-line no-var
                 var data = {
                     search_string: this.searchTerm,
                     page_size: this.pageSize,
@@ -75,6 +78,7 @@
                 this.errorMessage = '';
             },
 
+            // eslint-disable-next-line no-unused-vars
             onError: function(collection, response, options) {
                 if (response.statusText !== 'abort') {
                     this.errorMessage = response.responseJSON.error;
@@ -83,7 +87,9 @@
             },
 
             onSync: function(collection, response, options) {
+                // eslint-disable-next-line no-var
                 var total = this.discovery.get('totalCount');
+                // eslint-disable-next-line no-var
                 var originalSearchTerm = this.searchTerm;
                 if (options.data.page_index === 0) {
                     if (total === 0) {
@@ -99,6 +105,7 @@
                     } else {
                         _.each(this.terms, function(term, facet) {
                             if (facet !== 'search_query') {
+                                // eslint-disable-next-line no-var
                                 var option = this.discovery.facetOptions.findWhere({
                                     facet: facet,
                                     term: term
@@ -118,7 +125,9 @@
 
             // lazy load
             cachedDiscovery: function() {
+                // eslint-disable-next-line no-var
                 var deferred = $.Deferred();
+                // eslint-disable-next-line no-var
                 var self = this;
 
                 if (this.cached) {
@@ -132,6 +141,7 @@
                             page_size: this.pageSize,
                             page_index: 0
                         },
+                        // eslint-disable-next-line no-unused-vars
                         success: function(model, response, options) {
                             deferred.resolveWith(self, [model]);
                         }
@@ -142,4 +152,5 @@
 
         });
     });
+// eslint-disable-next-line no-undef
 }(define || RequireJS.define));

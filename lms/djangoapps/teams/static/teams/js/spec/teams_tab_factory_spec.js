@@ -1,10 +1,13 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'backbone', 'teams/js/teams_tab_factory', 'teams/js/views/teams_tab',
     'common/js/spec_helpers/page_helpers', 'teams/js/spec_helpers/team_spec_helpers'],
 function($, Backbone, TeamsTabFactory, TeamsTabView, PageHelpers, TeamSpecHelpers) {
     'use strict';
 
     describe('Teams Tab Factory', function() {
+        // eslint-disable-next-line no-var
         var initializeTeamsTabFactory = function(hasOpenTopic, hasPublicManagedTopic) {
+            // eslint-disable-next-line no-var
             var context = TeamSpecHelpers.createMockContext();
             context.hasOpenTopic = hasOpenTopic;
             context.hasPublicManagedTopic = hasPublicManagedTopic;

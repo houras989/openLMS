@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone', 'underscore', 'teams/js/collections/topic', 'teams/js/views/topics',
     'teams/js/spec_helpers/team_spec_helpers', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
@@ -5,6 +6,7 @@ define([
     'use strict';
 
     describe('TopicsView', function() {
+        // eslint-disable-next-line no-var
         var initialTopics, topicCollection, createTopicsView, triggerUpdateEvent;
 
         createTopicsView = function() {
@@ -31,11 +33,13 @@ define([
         });
 
         it('can render the first of many pages', function() {
+            // eslint-disable-next-line no-var
             var topicsView = createTopicsView(),
                 footerEl = topicsView.$('.topics-paging-footer'),
                 topicCards = topicsView.$('.topic-card');
             expect(topicsView.$('.topics-paging-header').text()).toMatch('Showing 1-5 out of 6 total');
             _.each(initialTopics, function(topic, index) {
+                // eslint-disable-next-line no-var
                 var currentCard = topicCards.eq(index);
                 expect(currentCard.text()).toMatch(topic.name);
                 expect(currentCard.text()).toMatch(topic.description);
@@ -46,6 +50,7 @@ define([
         });
 
         it('refreshes the topics when a team is created', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 topicsView = createTopicsView();
 
@@ -64,6 +69,7 @@ define([
         });
 
         it('refreshes the topics staff creates a team and then joins it', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 topicsView = createTopicsView();
 

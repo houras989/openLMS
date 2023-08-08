@@ -8,11 +8,13 @@
  * See "pay_and_verify.html" for the exact attribute names.
  *
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
 (function($, _) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var errorView,
         $el = $('#pay-and-verify-container');
 
@@ -92,4 +94,5 @@ var edx = edx || {};
             }
         }
     }).render();
+// eslint-disable-next-line no-undef
 }(jQuery, _));

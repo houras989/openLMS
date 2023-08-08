@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'js/discovery/views/search_form'], function($, SearchForm) {
     'use strict';
 
@@ -5,11 +6,13 @@ define(['jquery', 'js/discovery/views/search_form'], function($, SearchForm) {
         beforeEach(function() {
             loadFixtures('js/fixtures/discovery.html');
             this.form = new SearchForm();
+            // eslint-disable-next-line no-undef
             this.onSearch = jasmine.createSpy('onSearch');
             this.form.on('search', this.onSearch);
         });
 
         it('trims input string', function() {
+            // eslint-disable-next-line no-var
             var term = '  search string  ';
             $('.discovery-input').val(term);
             $('form').trigger('submit');
@@ -17,6 +20,7 @@ define(['jquery', 'js/discovery/views/search_form'], function($, SearchForm) {
         });
 
         it('handles calls to doSearch', function() {
+            // eslint-disable-next-line no-var
             var term = '  search string  ';
             $('.discovery-input').val(term);
             this.form.doSearch(term);

@@ -19,10 +19,13 @@
      * @param values the templatized dictionary values
      * @returns the text with placeholder values filled in
      */
+    /* eslint-disable-next-line camelcase, no-var */
     var interpolate_ntext = function(singular, plural, count, values) {
+        // eslint-disable-next-line no-var
         var text = count === 1 ? singular : plural;
         return _.template(text, {interpolate: /\{(.+?)\}/g})(values);
     };
+    // eslint-disable-next-line camelcase
     this.interpolate_ntext = interpolate_ntext;
 
     /**
@@ -41,8 +44,11 @@
      * @param values the templatized dictionary values
      * @returns the text with placeholder values filled in
      */
+    /* eslint-disable-next-line camelcase, no-var */
     var interpolate_text = function(text, values) {
         return _.template(text, {interpolate: /\{(.+?)\}/g})(values);
     };
+    // eslint-disable-next-line camelcase
     this.interpolate_text = interpolate_text;
+// eslint-disable-next-line no-undef
 }).call(this, _);

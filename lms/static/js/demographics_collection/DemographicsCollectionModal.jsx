@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-redeclare
 /* global gettext */
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -86,7 +87,7 @@ class DemographicsCollectionModal extends React.Component {
         document.body.classList.remove('modal-open');
     }
 
-    // eslint-disable-next-line react/sort-comp
+    /* eslint-disable-next-line react/sort-comp, consistent-return */
     loadOptions(field) {
         const {choices} = get(this.state.options, field, {choices: []});
         if (choices.length) {
@@ -95,6 +96,7 @@ class DemographicsCollectionModal extends React.Component {
         }
     }
 
+    // eslint-disable-next-line consistent-return
     async handleSelectChange(e) {
         const url = `${this.props.demographicsBaseUrl}/demographics/api/v1/demographics/${this.props.user}/`;
         const name = e.target.name;
@@ -178,6 +180,7 @@ class DemographicsCollectionModal extends React.Component {
     }
 
     // We gather the possible answers to any demographics questions from the OPTIONS of the api
+    // eslint-disable-next-line consistent-return
     async getDemographicsQuestionOptions() {
         try {
             const optionsResponse = await fetch(`${this.props.demographicsBaseUrl}/demographics/api/v1/demographics/`, {method: 'OPTIONS'});
@@ -222,6 +225,7 @@ class DemographicsCollectionModal extends React.Component {
         return data;
     }
 
+    // eslint-disable-next-line consistent-return
     async createDemographicsEntry() {
         const postUrl = `${this.props.demographicsBaseUrl}/demographics/api/v1/demographics/`;
         const postOptions = {
@@ -304,6 +308,7 @@ class DemographicsCollectionModal extends React.Component {
                                             <option value="default" key="default">{gettext('Select gender')}</option>,
                                             this.loadOptions(FIELD_NAMES.GENDER)
                                         ]}
+                                        // eslint-disable-next-line eqeqeq
                                         showInput={wizardConsumer[FIELD_NAMES.GENDER] == 'self-describe'}
                                         inputName={FIELD_NAMES.GENDER_DESCRIPTION}
                                         inputId={FIELD_NAMES.GENDER_DESCRIPTION}
@@ -443,6 +448,7 @@ class DemographicsCollectionModal extends React.Component {
                                             <option value="default" key="default">{gettext('Select employment status')}</option>,
                                             this.loadOptions(FIELD_NAMES.WORK_STATUS)
                                         ]}
+                                        // eslint-disable-next-line eqeqeq
                                         showInput={wizardConsumer[FIELD_NAMES.WORK_STATUS] == 'other'}
                                         inputName={FIELD_NAMES.WORK_STATUS_DESCRIPTION}
                                         inputId={FIELD_NAMES.WORK_STATUS_DESCRIPTION}

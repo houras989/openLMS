@@ -1,8 +1,10 @@
 /**
  * Provides helper methods for invoking Studio modal windows in Jasmine tests.
  */
+// eslint-disable-next-line no-undef
 define(['jquery', 'common/js/spec_helpers/template_helpers', 'common/js/spec_helpers/view_helpers'],
     function($, TemplateHelpers, ViewHelpers) {
+        // eslint-disable-next-line no-var
         var installModalTemplates, getModalElement, getModalWindow, getModalTitle, isShowingModal,
             hideModalIfShowing, pressModalButton, cancelModal, cancelModalIfShowing;
 
@@ -13,6 +15,7 @@ define(['jquery', 'common/js/spec_helpers/template_helpers', 'common/js/spec_hel
         };
 
         getModalElement = function(modal) {
+            // eslint-disable-next-line no-var
             var $modalElement;
             if (modal) {
                 $modalElement = modal.$('.wrapper-modal-window');
@@ -23,16 +26,19 @@ define(['jquery', 'common/js/spec_helpers/template_helpers', 'common/js/spec_hel
         };
 
         getModalWindow = function(modal) {
+            // eslint-disable-next-line no-var
             var modalElement = getModalElement(modal);
             return modalElement.find('.modal-window');
         };
 
         getModalTitle = function(modal) {
+            // eslint-disable-next-line no-var
             var modalElement = getModalElement(modal);
             return modalElement.find('.modal-window-title').text();
         };
 
         isShowingModal = function(modal) {
+            // eslint-disable-next-line no-var
             var modalElement = getModalElement(modal);
             return modalElement.length > 0;
         };
@@ -44,6 +50,7 @@ define(['jquery', 'common/js/spec_helpers/template_helpers', 'common/js/spec_hel
         };
 
         pressModalButton = function(selector, modal) {
+            // eslint-disable-next-line no-var
             var modalElement, button;
             modalElement = getModalElement(modal);
             button = modalElement.find(selector + ':visible');

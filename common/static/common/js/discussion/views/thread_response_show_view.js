@@ -1,9 +1,12 @@
+// eslint-disable-next-line no-unused-vars
 /* globals DiscussionContentShowView, DiscussionUtil, MathJax */
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -19,8 +22,10 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.ThreadResponseShowView = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(ThreadResponseShowView, _super);
 
             function ThreadResponseShowView() {
@@ -33,7 +38,9 @@
             };
 
             ThreadResponseShowView.prototype.renderTemplate = function() {
+                // eslint-disable-next-line no-var
                 var template = edx.HtmlUtils.template($('#thread-response-show-template').html()),
+                    // eslint-disable-next-line no-undef
                     context = _.extend({
                         cid: this.model.cid,
                         author_display: this.getAuthorDisplay(),

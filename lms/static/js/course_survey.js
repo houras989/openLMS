@@ -11,18 +11,23 @@ $(function() {
 
     $('.status.message.submission-error').addClass('is-hidden');
 
+    // eslint-disable-next-line no-use-before-define
     toggleSubmitButton(true);
 
+    // eslint-disable-next-line consistent-return
     $('#survey-form').on('submit', function() {
         /* validate required fields */
 
+        // eslint-disable-next-line no-var
         var $inputs = $('#survey-form :input');
 
         $('.status.message.submission-error .message-copy').empty();
 
+        /* eslint-disable-next-line camelcase, no-var */
         var cancel_submit = false;
 
         $inputs.each(function() {
+            // eslint-disable-next-line no-var
             var val, fieldLabel;
             /* see if it is a required field and - if so - make sure user presented all information */
             if (typeof $(this).attr('required') !== typeof undefined) {
@@ -33,6 +38,7 @@ $(function() {
                         $(this).parent().addClass('field-error');
                         // eslint-disable-next-line max-len
                         $('.status.message.submission-error .message-copy').append(edx.HtmlUtils.joinHtml(edx.HtmlUtils.HTML("<li class='error-item'>"), fieldLabel.text(), edx.HtmlUtils.HTML('</li>')).toString());
+                        // eslint-disable-next-line camelcase
                         cancel_submit = true;
                     }
                 } else if (typeof val === 'object') {
@@ -42,12 +48,14 @@ $(function() {
                         $(this).parent().addClass('field-error');
                         // eslint-disable-next-line max-len
                         $('.status.message.submission-error .message-copy').append(edx.HtmlUtils.joinHtml(edx.HtmlUtils.HTML("<li class='error-item'>"), fieldLabel.text(), edx.HtmlUtils.HTML('</li>')).toString());
+                        // eslint-disable-next-line camelcase
                         cancel_submit = true;
                     }
                 }
             }
         });
 
+        // eslint-disable-next-line camelcase
         if (cancel_submit) {
             $('.status.message.submission-error')
                 .removeClass('is-hidden')
@@ -56,20 +64,28 @@ $(function() {
             return false;
         }
 
+        // eslint-disable-next-line no-use-before-define
         toggleSubmitButton(false);
     });
 
     $('#survey-form').on('ajax:error', function() {
+        // eslint-disable-next-line no-use-before-define
         toggleSubmitButton(true);
     });
 
+    // eslint-disable-next-line no-unused-vars
     $('#survey-form').on('ajax:success', function(event, json, xhr) {
+        // eslint-disable-next-line no-var
         var url = json.redirect_url;
+        // eslint-disable-next-line no-restricted-globals
         location.href = url;
     });
 
+    // eslint-disable-next-line no-unused-vars
     $('#survey-form').on('ajax:error', function(event, jqXHR, textStatus) {
+        // eslint-disable-next-line no-use-before-define
         toggleSubmitButton(true);
+        // eslint-disable-next-line no-undef
         json = $.parseJSON(jqXHR.responseText);
         $('.status.message.submission-error').addClass('is-shown').focus();
         $('.status.message.submission-error .message-copy')
@@ -80,6 +96,7 @@ $(function() {
 });
 
 function toggleSubmitButton(enable) {
+    // eslint-disable-next-line no-var
     var $submitButton = $('form .form-actions #submit');
 
     if (enable) {

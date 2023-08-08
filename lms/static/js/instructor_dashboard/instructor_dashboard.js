@@ -29,6 +29,7 @@ such that the value can be defined later than this assignment (file load order).
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var $activeSection,
         CSS_ACTIVE_SECTION, CSS_IDASH_SECTION, CSS_INSTRUCTOR_CONTENT, CSS_INSTRUCTOR_NAV, HASH_LINK_PREFIX,
         SafeWaiter, plantTimeout, sectionsHaveLoaded, setupInstructorDashboard,
@@ -66,6 +67,7 @@ such that the value can be defined later than this assignment (file load order).
         };
 
         safeWaiter.prototype.waitFor = function(f) {
+            // eslint-disable-next-line no-var
             var safeWait = this;
             if (!this.fired) {
                 this.waitFor_handlers.push(f);
@@ -93,6 +95,7 @@ such that the value can be defined later than this assignment (file load order).
     sectionsHaveLoaded = new SafeWaiter;
 
     $(function() {
+        // eslint-disable-next-line no-var
         var $instructorDashboardContent;
         $instructorDashboardContent = $('.' + CSS_INSTRUCTOR_CONTENT);
         if ($instructorDashboardContent.length > 0) {
@@ -103,10 +106,12 @@ such that the value can be defined later than this assignment (file load order).
     });
 
     setupInstructorDashboard = function(idashContent) {
+        // eslint-disable-next-line no-var
         var $links, clickFirstLink, link, rmatch, sectionName;
         $links = idashContent.find('.' + CSS_INSTRUCTOR_NAV).find('.btn-link');
         $links.each(function(i, linkItem) {
             return $(linkItem).click(function(e) {
+                // eslint-disable-next-line no-var
                 var $section, itemSectionName, ref;
                 e.preventDefault();
                 idashContent.find('.' + CSS_INSTRUCTOR_NAV + ' li').children().removeClass(CSS_ACTIVE_SECTION);
@@ -118,6 +123,7 @@ such that the value can be defined later than this assignment (file load order).
                 $(this).attr('aria-pressed', 'true');
                 $section.addClass(CSS_ACTIVE_SECTION);
                 window.analytics.pageview('instructor_section:' + itemSectionName);
+                // eslint-disable-next-line no-restricted-globals
                 location.hash = '' + HASH_LINK_PREFIX + itemSectionName;
                 sectionsHaveLoaded.afterFor(function() {
                     return $section.data('wrapper').onClickTitle();
@@ -137,11 +143,14 @@ such that the value can be defined later than this assignment (file load order).
             });
         });
         clickFirstLink = function() {
+            // eslint-disable-next-line no-var
             var firstLink;
             firstLink = $links.eq(0);
             return firstLink.click();
         };
+        // eslint-disable-next-line no-restricted-globals
         if ((new RegExp('^' + HASH_LINK_PREFIX)).test(location.hash)) {
+            // eslint-disable-next-line no-restricted-globals
             rmatch = (new RegExp('^' + HASH_LINK_PREFIX + '(.*)')).exec(location.hash);
             sectionName = rmatch[1];
             link = $links.filter("[data-section='" + sectionName + "']");
@@ -156,6 +165,7 @@ such that the value can be defined later than this assignment (file load order).
     };
 
     setupInstructorDashboardSections = function(idashContent) {
+        // eslint-disable-next-line no-var
         var sectionsToInitialize;
         sectionsToInitialize = [
             {
@@ -218,6 +228,7 @@ such that the value can be defined later than this assignment (file load order).
             ]);
         }
         return sectionsToInitialize.map(function(_arg) {
+            // eslint-disable-next-line no-var
             var $element, constructor;
             constructor = _arg.constructor;
             $element = _arg.$element;

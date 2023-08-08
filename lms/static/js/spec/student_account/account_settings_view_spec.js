@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['backbone',
     'jquery',
     'underscore',
@@ -13,10 +14,13 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, Helpers, FieldViews, User
     'use strict';
 
     describe('edx.user.AccountSettingsView', function() {
+        // eslint-disable-next-line no-var
         var createAccountSettingsView = function() {
+            // eslint-disable-next-line no-var
             var model = new UserAccountModel();
             model.set(Helpers.createAccountSettingsData());
 
+            // eslint-disable-next-line no-var
             var aboutSectionsData = [
                 {
                     title: 'Basic Account Information',
@@ -55,6 +59,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, Helpers, FieldViews, User
                 }
             ];
 
+            // eslint-disable-next-line no-var
             var accountSettingsView = new AccountSettingsView({
                 el: $('.wrapper-account-settings'),
                 model: model,
@@ -71,6 +76,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, Helpers, FieldViews, User
         });
 
         it('shows loading error correctly', function() {
+            // eslint-disable-next-line no-var
             var accountSettingsView = createAccountSettingsView();
 
             accountSettingsView.render();
@@ -81,6 +87,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, Helpers, FieldViews, User
         });
 
         it('renders all fields as expected', function() {
+            // eslint-disable-next-line no-var
             var accountSettingsView = createAccountSettingsView();
 
             accountSettingsView.render();

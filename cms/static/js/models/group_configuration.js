@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone', 'underscore', 'gettext', 'js/models/group', 'js/collections/group',
     'backbone.associations', 'cms/js/main'
@@ -5,6 +6,7 @@ define([
 function(Backbone, _, gettext, GroupModel, GroupCollection) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var GroupConfiguration = Backbone.AssociatedModel.extend({
         defaults: function() {
             return {
@@ -64,6 +66,7 @@ function(Backbone, _, gettext, GroupModel, GroupCollection) {
         },
 
         parse: function(response) {
+            // eslint-disable-next-line no-var
             var attrs = $.extend(true, {}, response);
 
             _.each(attrs.groups, function(group, index) {
@@ -85,6 +88,7 @@ function(Backbone, _, gettext, GroupModel, GroupCollection) {
             };
         },
 
+        // eslint-disable-next-line consistent-return
         validate: function(attrs) {
             if (!attrs.name.trim()) {
                 return {
@@ -100,6 +104,7 @@ function(Backbone, _, gettext, GroupModel, GroupCollection) {
                 };
             } else {
                 // validate all groups
+                // eslint-disable-next-line no-var
                 var validGroups = new Backbone.Collection(),
                     invalidGroups = new Backbone.Collection();
                 attrs.groups.each(function(group) {
@@ -117,6 +122,7 @@ function(Backbone, _, gettext, GroupModel, GroupCollection) {
                     };
                 }
 
+                // eslint-disable-next-line no-var
                 var groupNames = validGroups.map(function(group) { return group.get('name'); });
                 if (groupNames.length !== _.uniq(groupNames).length) {
                     return {

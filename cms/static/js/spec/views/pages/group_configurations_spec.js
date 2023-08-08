@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'js/views/pages/group_configurations',
     'js/models/group_configuration', 'js/collections/group_configuration',
@@ -6,12 +7,15 @@ define([
     'use strict';
 
     describe('GroupConfigurationsPage', function() {
+        // eslint-disable-next-line no-var
         var mockGroupConfigurationsPage = readFixtures(
                 'mock/mock-group-configuration-page.underscore'
             ),
             groupConfigItemClassName = '.group-configurations-list-item';
 
+        // eslint-disable-next-line no-var
         var initializePage = function(disableSpy) {
+            // eslint-disable-next-line no-var
             var view = new GroupConfigurationsPage({
                 el: $('#content'),
                 experimentsEnabled: true,
@@ -23,12 +27,14 @@ define([
                 allGroupConfigurations: [new GroupConfigurationModel({groups: []})]
             });
             if (!disableSpy) {
+                // eslint-disable-next-line no-undef
                 spyOn(view, 'addWindowActions');
             }
 
             return view;
         };
 
+        // eslint-disable-next-line no-var
         var renderPage = function() {
             return initializePage().render();
         };
@@ -40,6 +46,7 @@ define([
                 'content-group-editor', 'group-edit', 'list'
             ]);
 
+            // eslint-disable-next-line no-undef
             jasmine.addMatchers({
                 toBeExpanded: function() {
                     return {
@@ -56,6 +63,7 @@ define([
         describe('Initial display', function() {
             // TODO fix this, see TNL-1475
             xit('can render itself', function() {
+                // eslint-disable-next-line no-var
                 var view = initializePage();
                 expect(view.$('.ui-loading')).toBeVisible();
                 view.render();
@@ -67,12 +75,14 @@ define([
 
         describe('Experiment group configurations', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 spyOn($.fn, 'focus');
                 TemplateHelpers.installTemplate('group-configuration-details');
                 this.view = initializePage(true);
             });
 
             it('should focus and expand if its id is part of url hash', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'getLocationHash').and.returnValue('#0');
                 this.view.render();
                 // We cannot use .toBeFocused due to flakiness.
@@ -81,6 +91,7 @@ define([
             });
 
             it('should not focus on any experiment configuration if url hash is empty', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'getLocationHash').and.returnValue('');
                 this.view.render();
                 expect($.fn.focus).not.toHaveBeenCalled();
@@ -88,6 +99,7 @@ define([
             });
 
             it('should not focus on any experiment configuration if url hash contains wrong id', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'getLocationHash').and.returnValue('#1');
                 this.view.render();
                 expect($.fn.focus).not.toHaveBeenCalled();

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     ['underscore', 'gettext', 'js/views/baseview', 'common/js/components/views/feedback_prompt',
         'edx-ui-toolkit/js/utils/html-utils', 'edx-ui-toolkit/js/utils/string-utils',
@@ -7,6 +8,7 @@ define(
         videoTranscriptUploadStatusTemplate) {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var VideoTranscriptsView = BaseView.extend({
             tagName: 'div',
 
@@ -68,6 +70,7 @@ define(
             Returns transcript title.
             */
             getTranscriptClientTitle: function() {
+                // eslint-disable-next-line no-var
                 var clientTitle = this.clientVideoID;
                 // Remove video file extension for transcript title.
                 _.each(this.videoSupportedFileFormats, function(videoFormat) {
@@ -108,6 +111,7 @@ define(
             Toggles Show/Hide transcript button and transcripts container.
             */
             toggleShowTranscripts: function() {
+                // eslint-disable-next-line no-var
                 var $transcriptsWrapperEl = this.$el.find('.video-transcripts-wrapper');
 
                 if ($transcriptsWrapperEl.hasClass('hidden')) {
@@ -158,6 +162,7 @@ define(
             },
 
             validateTranscriptUpload: function(file) {
+                // eslint-disable-next-line no-var
                 var errorMessage = '',
                     fileName = file.name,
                     fileType = fileName.substr(fileName.lastIndexOf('.') + 1);
@@ -173,6 +178,7 @@ define(
             },
 
             chooseFile: function(event) {
+                // eslint-disable-next-line no-var
                 var $transcriptContainer = $(event.target).parents('.video-transcript-content'),
                     $transcriptUploadEl = $transcriptContainer.find('.upload-transcript-input');
 
@@ -192,6 +198,7 @@ define(
             },
 
             transcriptSelected: function(event, data) {
+                // eslint-disable-next-line no-var
                 var errorMessage,
                     $transcriptContainer = $(event.target).parents('.video-transcript-content');
 
@@ -209,6 +216,7 @@ define(
             },
 
             transcriptUploadSucceeded: function(event, data) {
+                // eslint-disable-next-line no-var
                 var languageCode = data.formData.language_code,
                     newLanguageCode = data.formData.new_language_code,
                     $transcriptContainer = this.$el.find('.video-transcript-content[data-language-code="' + languageCode + '"]'); // eslint-disable-line max-len
@@ -238,6 +246,7 @@ define(
             },
 
             transcriptUploadFailed: function(event, data) {
+                // eslint-disable-next-line no-var
                 var errorMessage,
                     languageCode = data.formData.language_code,
                     $transcriptContainer = this.$el.find('.video-transcript-content[data-language-code="' + languageCode + '"]'); // eslint-disable-line max-len
@@ -255,6 +264,7 @@ define(
             },
 
             deleteTranscript: function(event) {
+                // eslint-disable-next-line no-var
                 var self = this,
                     $transcriptEl = $(event.target).parents('.video-transcript-content'),
                     languageCode = $transcriptEl.attr('data-language-code'),
@@ -288,6 +298,7 @@ define(
             },
 
             clearMessage: function() {
+                // eslint-disable-next-line no-var
                 var $transcriptStatusesEl = this.$el.find('.transcript-upload-status-container');
                 // Clear all message containers
                 HtmlUtils.setHtml($transcriptStatusesEl, '');
@@ -295,6 +306,7 @@ define(
             },
 
             renderMessage: function($transcriptContainer, status, errorMessage) {
+                // eslint-disable-next-line no-var
                 var statusData = this.transcriptUploadStatuses[status],
                     $transcriptStatusEl = $transcriptContainer.find('.transcript-upload-status-container');
 
@@ -316,6 +328,7 @@ define(
             },
 
             showUploadFailureMessage: function(event) {
+                // eslint-disable-next-line no-var
                 var errorMessage = $(event.target).data('error-message');
                 return new PromptView.Warning({
                     title: this.defaultFailureTitle,

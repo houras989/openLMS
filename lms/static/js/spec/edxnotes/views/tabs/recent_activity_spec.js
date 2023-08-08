@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'common/js/spec_helpers/template_helpers', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
     'js/edxnotes/collections/notes', 'js/edxnotes/collections/tabs', 'js/edxnotes/views/tabs/recent_activity',
@@ -8,6 +9,7 @@ define([
     'use strict';
 
     describe('EdxNotes RecentActivityView', function() {
+        // eslint-disable-next-line no-var
         var notes = {
                 count: 3,
                 current_page: 1,
@@ -39,8 +41,10 @@ define([
             getView, tabInfo, recentActivityTabId;
 
         getView = function(collection, tabsCollection, options) {
+            // eslint-disable-next-line no-var
             var view;
 
+            // eslint-disable-next-line no-undef
             options = _.defaults(options || {}, {
                 el: $('.wrapper-student-notes'),
                 collection: collection,
@@ -77,13 +81,14 @@ define([
         });
 
         it('displays a tab and content with proper data and order', function() {
+            // eslint-disable-next-line no-var
             var view = getView(this.collection, this.tabsCollection);
             Helpers.verifyPaginationInfo(view, 'Showing 1-3 out of 3 total', true, 1, 1);
             Helpers.verifyPageData(view, this.tabsCollection, tabInfo, recentActivityTabId, notes);
         });
 
         it('will not render header and footer if there are no notes', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var notes = {
                 count: 0,
                 current_page: 1,
@@ -93,15 +98,18 @@ define([
                 previous: null,
                 results: []
             };
+            // eslint-disable-next-line no-var
             var collection = new NotesCollection(notes, {perPage: 10, parse: true});
+            // eslint-disable-next-line no-var
             var view = getView(collection, this.tabsCollection);
             expect(view.$('.search-tools.listing-tools')).toHaveLength(0);
             expect(view.$('.pagination.pagination-full.bottom')).toHaveLength(0);
         });
 
         it('can go to a page number', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var notes = Helpers.createNotesData(
                 {
                     numNotesToCreate: 10,
@@ -112,8 +120,10 @@ define([
                 }
             );
 
+            // eslint-disable-next-line no-var
             var collection = new NotesCollection(notes, {perPage: 10, parse: true});
             collection.url = '/test/notes/';
+            // eslint-disable-next-line no-var
             var view = getView(collection, this.tabsCollection);
 
             Helpers.verifyPaginationInfo(view, 'Showing 1-10 out of 12 total', false, 1, 2);
@@ -141,7 +151,9 @@ define([
         });
 
         it('can navigate forward and backward', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var page1Notes = Helpers.createNotesData(
                 {
                     numNotesToCreate: 10,
@@ -151,8 +163,10 @@ define([
                     start: 0
                 }
             );
+            // eslint-disable-next-line no-var
             var collection = new NotesCollection(page1Notes, {perPage: 10, parse: true});
             collection.url = '/test/notes/';
+            // eslint-disable-next-line no-var
             var view = getView(collection, this.tabsCollection);
 
             Helpers.verifyPaginationInfo(view, 'Showing 1-10 out of 15 total', false, 1, 2);
@@ -163,6 +177,7 @@ define([
                 requests[requests.length - 1].url,
                 {page: '2', page_size: '10'}
             );
+            // eslint-disable-next-line no-var
             var page2Notes = Helpers.createNotesData(
                 {
                     numNotesToCreate: 5,
@@ -188,8 +203,9 @@ define([
         });
 
         it('sends correct page size value', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var notes = Helpers.createNotesData(
                 {
                     numNotesToCreate: 5,
@@ -199,8 +215,10 @@ define([
                     start: 0
                 }
             );
+            // eslint-disable-next-line no-var
             var collection = new NotesCollection(notes, {perPage: 5, parse: true});
             collection.url = '/test/notes/';
+            // eslint-disable-next-line no-var
             var view = getView(collection, this.tabsCollection);
 
             view.$('.pagination .next-page-link').click();

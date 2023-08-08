@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -9,6 +9,7 @@
         'edx-ui-toolkit/js/utils/html-utils',
         'js/edxnotes/models/tab'
     ], function($, _, Backbone, HtmlUtils, TabModel) {
+        // eslint-disable-next-line no-var
         var TabView = Backbone.View.extend({
             PanelConstructor: null,
 
@@ -70,6 +71,7 @@
             },
 
             getSubView: function() {
+                // eslint-disable-next-line no-var
                 var collection = this.getCollection();
                 return new this.PanelConstructor(
                     {
@@ -127,6 +129,7 @@
          * Shows error message.
          */
             showErrorMessageHtml: function(htmlMessage) {
+                // eslint-disable-next-line no-var
                 var $wrapper = this.$('.wrapper-msg');
                 $wrapper.removeClass('is-hidden');
 
@@ -148,4 +151,5 @@
 
         return TabView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

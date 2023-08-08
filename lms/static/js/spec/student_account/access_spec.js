@@ -16,6 +16,7 @@
     function($, _, Backbone, TemplateHelpers, AjaxHelpers, AccessView, FormView, EnrollmentInterface,
         ShoppingCartInterface) {
         describe('edx.student.account.AccessView', function() {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var requests = null,
                 view = null,
                 FORM_DESCRIPTION = {
@@ -54,7 +55,9 @@
                 ),
                 THIRD_PARTY_COMPLETE_URL = '/auth/complete/provider/';
 
+            // eslint-disable-next-line no-var
             var ajaxSpyAndInitialize = function(that, mode, nextUrl, finishAuthUrl, createAccountOption) {
+                // eslint-disable-next-line no-var
                 var options = {
                         initial_mode: mode,
                         third_party_auth: {
@@ -79,21 +82,27 @@
                 view = new AccessView(_.extend(options, {el: $logistrationElement}));
 
                 // Mock the redirect call
+                // eslint-disable-next-line no-undef
                 spyOn(view, 'redirect').and.callFake(function() {});
 
                 // Mock the enrollment and shopping cart interfaces
+                // eslint-disable-next-line no-undef
                 spyOn(EnrollmentInterface, 'enroll').and.callFake(function() {});
+                // eslint-disable-next-line no-undef
                 spyOn(ShoppingCartInterface, 'addCourseToCart').and.callFake(function() {});
             };
 
+            // eslint-disable-next-line no-var
             var assertForms = function(visibleType, hiddenType) {
                 expect($(visibleType)).not.toHaveClass('hidden');
                 expect($(hiddenType)).toHaveClass('hidden');
                 expect($('#password-reset-form')).toHaveClass('hidden');
             };
 
+            // eslint-disable-next-line no-var
             var selectForm = function(type) {
                 // Create a fake change event to control form toggling
+                // eslint-disable-next-line no-var
                 var changeEvent = $.Event('change');
                 changeEvent.currentTarget = $('.form-toggle[data-type="' + type + '"]');
 
@@ -102,6 +111,7 @@
             };
 
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 spyOn(window.history, 'pushState');
                 setFixtures('<div id="login-and-registration-container" class="login-register" />');
                 TemplateHelpers.installTemplate('templates/student_account/access');
@@ -113,6 +123,7 @@
                 TemplateHelpers.installTemplate('templates/student_account/institution_register');
 
                 // Stub analytics tracking
+                // eslint-disable-next-line no-undef
                 window.analytics = jasmine.createSpyObj('analytics', ['track', 'page', 'pageview', 'trackLink']);
             });
 
@@ -233,4 +244,5 @@
             });
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

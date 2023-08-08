@@ -30,6 +30,7 @@
             },
 
             toggleResetHelp: function(event) {
+                // eslint-disable-next-line no-var
                 var $help;
                 event.preventDefault();
                 $help = $('#reset-help');
@@ -45,4 +46,5 @@
             }
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

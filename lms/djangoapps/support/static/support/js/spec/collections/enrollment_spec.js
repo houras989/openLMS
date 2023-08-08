@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
     'support/js/spec_helpers/enrollment_helpers',
@@ -6,6 +7,7 @@ define([
     'use strict';
 
     describe('EnrollmentCollection', function() {
+        // eslint-disable-next-line no-var
         var enrollmentCollection;
 
         beforeEach(function() {

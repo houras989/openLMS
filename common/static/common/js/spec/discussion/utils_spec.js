@@ -9,10 +9,14 @@
 
         describe('updateWithUndo', function() {
             it('calls through to safeAjax with correct params, and reverts the model in case of failure', function() {
+                // eslint-disable-next-line no-var
                 var deferred, model, res, updates;
                 deferred = $.Deferred();
+                // eslint-disable-next-line no-undef
                 spyOn($, 'ajax').and.returnValue(deferred);
+                // eslint-disable-next-line no-undef
                 spyOn(DiscussionUtil, 'safeAjax').and.callThrough();
+                // eslint-disable-next-line no-undef
                 model = new Backbone.Model({
                     hello: false,
                     number: 42
@@ -20,6 +24,7 @@
                 updates = {
                     hello: 'world'
                 };
+                // eslint-disable-next-line no-unused-vars
                 res = DiscussionUtil.updateWithUndo(model, updates, {
                     foo: 'bar'
                 }, 'error message');
@@ -28,6 +33,7 @@
                     hello: 'world',
                     number: 42
                 });
+                // eslint-disable-next-line no-undef
                 spyOn(DiscussionUtil, 'discussionAlert');
                 DiscussionUtil.safeAjax.calls.mostRecent().args[0].error();
                 expect(DiscussionUtil.discussionAlert).toHaveBeenCalledWith('Error', 'error message');
@@ -38,8 +44,11 @@
                 });
             });
             return it('rolls back the changes if the associated element is disabled', function() {
+                // eslint-disable-next-line no-var
                 var $elem, failed, model, res, updates;
+                // eslint-disable-next-line no-undef
                 spyOn(DiscussionUtil, 'safeAjax').and.callThrough();
+                // eslint-disable-next-line no-undef
                 model = new Backbone.Model({
                     hello: false,
                     number: 42
@@ -47,6 +56,7 @@
                 updates = {
                     hello: 'world'
                 };
+                // eslint-disable-next-line no-undef
                 $elem = jasmine.createSpyObj('$elem', ['prop']);
                 $elem.prop.and.returnValue(true);
                 res = DiscussionUtil.updateWithUndo(model, updates, {
@@ -73,9 +83,11 @@
             }
 
             it('respects global beforeSend', function() {
+                /* eslint-disable-next-line no-undef, no-var */
                 var beforeSendSpy = jasmine.createSpy();
                 $.ajaxSetup({beforeSend: beforeSendSpy});
 
+                /* eslint-disable-next-line no-undef, no-var */
                 var $elem = jasmine.createSpyObj('$elem', ['prop']);
 
                 DiscussionUtil.safeAjax({

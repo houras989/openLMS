@@ -1,6 +1,7 @@
 /**
  * XBlockListView shows list of XBlocks in a particular category(section, subsection, vertical etc).
  */
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'backbone', 'underscore', 'gettext',
     'edx-ui-toolkit/js/utils/html-utils',
@@ -11,6 +12,7 @@ define([
 function($, Backbone, _, gettext, HtmlUtils, StringUtils, XBlockUtils, MoveXBlockListViewTemplate) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var XBlockListView = Backbone.View.extend({
         el: '.xblock-list-container',
 
@@ -126,6 +128,7 @@ function($, Backbone, _, gettext, HtmlUtils, StringUtils, XBlockUtils, MoveXBloc
          * Set parent and child XBlock categories.
          */
         setDisplayedXBlocksCategories: function() {
+            // eslint-disable-next-line no-var
             var childCategory = 'component';
             this.parentInfo.category = XBlockUtils.getXBlockType(this.parentInfo.parent.get('category'));
             if (!_.contains(_.keys(this.categoryRelationMap), this.parentInfo.category)) {
@@ -143,6 +146,7 @@ function($, Backbone, _, gettext, HtmlUtils, StringUtils, XBlockUtils, MoveXBloc
          * @returns {any} Integer or undefined
          */
         getCurrentLocationIndex: function() {
+            // eslint-disable-next-line no-var
             var self = this,
                 currentLocationIndex;
             _.each(self.childrenInfo.children, function(xblock, index) {

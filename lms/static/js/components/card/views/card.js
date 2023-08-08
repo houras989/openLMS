@@ -25,6 +25,7 @@
         'edx-ui-toolkit/js/utils/html-utils'
     ],
     function($, _, Backbone, cardTemplate, HtmlUtils) {
+        // eslint-disable-next-line no-var
         var CardView = Backbone.View.extend({
             tagName: 'li',
 
@@ -51,8 +52,10 @@
 
             template: HtmlUtils.template(cardTemplate),
 
+            // eslint-disable-next-line camelcase
             switchOnConfiguration: function(square_result, list_result) {
                 return this.callIfFunction(this.configuration) === 'square_card'
+                    // eslint-disable-next-line camelcase
                     ? square_result : list_result;
             },
 
@@ -65,6 +68,7 @@
             },
 
             className: function() {
+                // eslint-disable-next-line no-var
                 var result = 'card '
                                  + this.switchOnConfiguration('square-card', 'list-card') + ' '
                                  + this.callIfFunction(this.cardClass);
@@ -75,6 +79,7 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var maxLength = 72,
                     description = this.callIfFunction(this.description);
                 if (description.length > maxLength) {
@@ -93,6 +98,7 @@
                         srInfo: this.srInfo
                     })
                 );
+                // eslint-disable-next-line no-var
                 var detailsEl = this.$el.find('.card-meta');
                 _.each(this.callIfFunction(this.details), function(detail) {
                     // Call setElement to rebind event handlers
@@ -116,4 +122,5 @@
 
         return CardView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

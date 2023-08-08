@@ -4,6 +4,7 @@
 (function(requirejs, requireSerial) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var i, specHelpers, testFiles;
 
     requirejs.config({
@@ -187,6 +188,7 @@
         }
     });
 
+    // eslint-disable-next-line no-undef
     jasmine.getFixtures().fixturesPath = '/base/templates';
 
     testFiles = [

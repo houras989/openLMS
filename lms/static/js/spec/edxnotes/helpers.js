@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-undef
 define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'], function(_, URI, AjaxHelpers) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
         LONG_TEXT, PRUNED_TEXT, TRUNCATED_TEXT, SHORT_TEXT,
         base64Encode, makeToken, getChapter, getSection, getUnit, getDefaultNotes,
@@ -36,6 +38,7 @@ define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
     SHORT_TEXT = 'Adipisicing elit, sed do eiusmod tempor incididunt';
 
     base64Encode = function(data) {
+        /* eslint-disable-next-line camelcase, no-var */
         var ac, bits, enc, h1, h2, h3, h4, i, o1, o2, o3, r, tmp_arr;
         if (btoa) {
             // Gecko and Webkit provide native code for this
@@ -46,6 +49,7 @@ define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
             i = 0;
             ac = 0;
             enc = '';
+            // eslint-disable-next-line camelcase
             tmp_arr = [];
             if (!data) {
                 return data;
@@ -65,8 +69,10 @@ define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
                 h3 = bits >> 6 & 0x3f;
                 // eslint-disable-next-line no-bitwise
                 h4 = bits & 0x3f;
+                // eslint-disable-next-line camelcase
                 tmp_arr[ac++] = B64.charAt(h1) + B64.charAt(h2) + B64.charAt(h3) + B64.charAt(h4);
             }
+            // eslint-disable-next-line camelcase
             enc = tmp_arr.join('');
             r = data.length % 3;
             return (r ? enc.slice(0, r - 3) : enc) + '==='.slice(r || 3);
@@ -74,6 +80,7 @@ define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
     };
 
     makeToken = function() {
+        // eslint-disable-next-line no-var
         var now = (new Date()).getTime() / 1000,
             rawToken = {
                 sub: 'sub',
@@ -181,6 +188,7 @@ define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
     };
 
     verifyRequestParams = function(requestUrl, expectedParams) {
+        // eslint-disable-next-line no-var
         var urlParams = (new URI(requestUrl)).query(true);
         _.each(expectedParams, function(value, key) {
             expect(urlParams[key]).toBe(value);
@@ -188,6 +196,7 @@ define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
     };
 
     createNotesData = function(options) {
+        // eslint-disable-next-line no-var
         var data = {
             count: options.count || 0,
             num_pages: options.num_pages || 1,
@@ -196,7 +205,9 @@ define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
             results: []
         };
 
+        // eslint-disable-next-line no-var
         for (var i = 0; i < options.numNotesToCreate; i++) {
+            // eslint-disable-next-line no-var
             var notesInfo = {
                 chapter: getChapter('First Chapter__' + i, 1, 0, [2]),
                 section: getSection('First Section__' + i, 2, [3]),
@@ -227,7 +238,9 @@ define(['underscore', 'URI', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'
         expect(view.$('.search-count.listing-count').text().trim()).toBe(headerMessage);
         expect(view.$('.pagination.bottom').parent().hasClass('hidden')).toBe(footerHidden);
         if (!footerHidden) {
+            // eslint-disable-next-line radix
             expect(parseInt(view.$('.pagination span.current-page').text().trim())).toBe(currentPage);
+            // eslint-disable-next-line radix
             expect(parseInt(view.$('.pagination span.total-pages').text().trim())).toBe(totalPages);
         }
     };

@@ -1,4 +1,5 @@
 // Backbone.js Application Collection: CertificateAllowlist
+// eslint-disable-next-line no-redeclare
 /* global define, RequireJS */
 
 (function(define) {
@@ -11,6 +12,7 @@
     ],
 
     function(Backbone, gettext, CertificateExceptionModel) {
+        // eslint-disable-next-line no-var
         var CertificateAllowlist = Backbone.Collection.extend({
             model: CertificateExceptionModel,
 
@@ -20,6 +22,7 @@
             },
 
             getModel: function(attrs) {
+                // eslint-disable-next-line no-var
                 var model = this.findWhere({user_name: attrs.user_name});
                 if (attrs.user_name && model) {
                     return model;
@@ -33,13 +36,17 @@
                 return undefined;
             },
 
+            // eslint-disable-next-line camelcase
             sync: function(options, appended_url) {
+                // eslint-disable-next-line no-var
                 var filtered = [];
+                // eslint-disable-next-line camelcase
                 if (appended_url === 'new') {
                     filtered = this.filter(function(model) {
                         return model.get('new');
                     });
                 }
+                /* eslint-disable-next-line camelcase, no-var */
                 var url = this.generate_certificates_url + appended_url;
                 Backbone.sync(
                     'create',
@@ -49,8 +56,11 @@
             },
 
             update: function(data) {
+                // eslint-disable-next-line no-undef
                 _.each(data, function(item) {
+                    /* eslint-disable-next-line camelcase, no-var */
                     var certificate_exception_model = this.getModel({user_name: item.user_name, user_email: item.user_email});
+                    // eslint-disable-next-line camelcase
                     certificate_exception_model.set(item);
                 }, this);
             }

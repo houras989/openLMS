@@ -11,6 +11,7 @@
      * @constructor
      * @param {array} list Array to be iterated.
      */
+            // eslint-disable-next-line no-var
             var Iterator = function(list) {
                 this.list = list;
                 this.index = 0;
@@ -27,6 +28,7 @@
          * @return {boolean}
          */
                 _isValid: function(index) {
+                    // eslint-disable-next-line no-undef
                     return _.isNumber(index) && index < this.size && index >= 0;
                 },
 

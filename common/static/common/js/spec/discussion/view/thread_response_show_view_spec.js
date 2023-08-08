@@ -30,6 +30,7 @@
                 model: this.comment,
                 $el: $('#fixture-element')
             });
+            // eslint-disable-next-line no-undef
             spyOn(ThreadResponseShowView.prototype, 'convertMath');
             return this.view.render();
         });
@@ -58,6 +59,7 @@
             });
         });
         it('renders endorsement correctly for a marked answer in a question thread', function() {
+            // eslint-disable-next-line no-var
             var endorsement;
             endorsement = {
                 username: 'test_endorser',
@@ -76,6 +78,7 @@
                 .toEqual('/courses/edX/999/test/discussion/forum/users/test_id');
         });
         it('renders anonymous endorsement correctly for a marked answer in a question thread', function() {
+            // eslint-disable-next-line no-var
             var endorsement;
             endorsement = {
                 username: null,
@@ -88,9 +91,11 @@
             });
             this.view.render();
             expect(this.view.$('.posted-details').text()).toMatch('marked as answer less than a minute ago');
+            // eslint-disable-next-line no-useless-escape
             return expect(this.view.$('.posted-details').text()).not.toMatch('\sby\s');
         });
         it('renders endorsement correctly for an endorsed response in a discussion thread', function() {
+            // eslint-disable-next-line no-var
             var endorsement;
             endorsement = {
                 username: 'test_endorser',
@@ -109,6 +114,7 @@
                 .toEqual('/courses/edX/999/test/discussion/forum/users/test_id');
         });
         it('renders anonymous endorsement correctly for an endorsed response in a discussion thread', function() {
+            // eslint-disable-next-line no-var
             var endorsement;
             endorsement = {
                 username: null,
@@ -121,11 +127,14 @@
             });
             this.view.render();
             expect(this.view.$('.posted-details').text()).toMatch('endorsed less than a minute ago');
+            // eslint-disable-next-line no-useless-escape
             return expect(this.view.$('.posted-details').text()).not.toMatch('\sby\s');
         });
         it('re-renders correctly when endorsement changes', function() {
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.returnValue($.Deferred());
             DiscussionUtil.loadRoles({
+                // eslint-disable-next-line radix
                 Moderator: [parseInt(window.user.id)]
             });
             this.thread.set('thread_type', 'question');
@@ -141,13 +150,17 @@
             expect(this.view.$('.posted-details').text()).not.toMatch('marked as answer');
         });
         it('allows a moderator to mark an answer in a question thread', function() {
+            // eslint-disable-next-line no-var
             var endorseButton;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.returnValue($.Deferred());
             DiscussionUtil.loadRoles({
+                // eslint-disable-next-line radix
                 Moderator: [parseInt(window.user.id)]
             });
             this.thread.set({
                 thread_type: 'question',
+                // eslint-disable-next-line radix
                 user_id: (parseInt(window.user.id) + 1).toString()
             });
             this.view.render();
@@ -158,7 +171,9 @@
             return expect(endorseButton).toHaveClass('is-checked');
         });
         it('allows the author of a question thread to mark an answer', function() {
+            // eslint-disable-next-line no-var
             var endorseButton;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.returnValue($.Deferred());
             this.thread.set({
                 thread_type: 'question',
@@ -172,6 +187,7 @@
             return expect(endorseButton).toHaveClass('is-checked');
         });
         it('does not allow the author of a discussion thread to endorse', function() {
+            // eslint-disable-next-line no-var
             var endorseButton;
             this.thread.set({
                 thread_type: 'discussion',
@@ -183,9 +199,11 @@
             return expect(endorseButton.closest('.actions-item')).toHaveClass('is-hidden');
         });
         it('does not allow a student who is not the author of a question thread to mark an answer', function() {
+            // eslint-disable-next-line no-var
             var endorseButton;
             this.thread.set({
                 thread_type: 'question',
+                // eslint-disable-next-line radix
                 user_id: (parseInt(window.user.id) + 1).toString()
             });
             this.view.render();
@@ -194,8 +212,10 @@
             return expect(endorseButton.closest('.actions-item')).toHaveClass('is-hidden');
         });
         describe('labels', function() {
+            // eslint-disable-next-line no-var
             var expectOneElement;
             expectOneElement = function(view, selector, visible) {
+                // eslint-disable-next-line no-var
                 var elements;
                 if (typeof visible === 'undefined' || visible === null) {
                     visible = true;
@@ -226,19 +246,24 @@
             });
         });
         describe('endorser display', function() {
+            // eslint-disable-next-line no-var
             var checkUserLink;
             beforeEach(function() {
                 this.comment.set('endorsement', {
                     username: 'test_endorser',
                     time: new Date().toISOString()
                 });
+                // eslint-disable-next-line no-undef
                 return spyOn(DiscussionUtil, 'urlFor').and.returnValue('test_endorser_url');
             });
+            // eslint-disable-next-line camelcase
             checkUserLink = function(element, is_ta, is_staff) {
                 expect(element.find('.username').length).toEqual(1);
                 expect(element.find('.username').text()).toEqual('test_endorser');
                 expect(element.find('.username').attr('href')).toEqual('test_endorser_url');
+                // eslint-disable-next-line camelcase
                 expect(element.find('.user-label-community-ta').length).toEqual(is_ta ? 1 : 0);
+                // eslint-disable-next-line camelcase
                 return expect(element.find('.user-label-staff').length).toEqual(is_staff ? 1 : 0);
             };
             it('renders nothing when the response has not been endorsed', function() {
@@ -246,18 +271,23 @@
                 return expect(this.view.getEndorserDisplay()).toBeNull();
             });
             it('renders correctly for a student-endorsed response', function() {
+                // eslint-disable-next-line no-var
                 var $el;
                 $el = $('#fixture-element').html(this.view.getEndorserDisplay());
                 return checkUserLink($el, false, false);
             });
             it('renders correctly for a community TA-endorsed response', function() {
+                // eslint-disable-next-line no-var
                 var $el;
+                // eslint-disable-next-line no-undef
                 spyOn(DiscussionUtil, 'isTA').and.returnValue(true);
                 $el = $('#fixture-element').html(this.view.getEndorserDisplay());
                 return checkUserLink($el, true, false);
             });
             it('renders correctly for a staff-endorsed response', function() {
+                // eslint-disable-next-line no-var
                 var $el;
+                // eslint-disable-next-line no-undef
                 spyOn(DiscussionUtil, 'isStaff').and.returnValue(true);
                 $el = $('#fixture-element').html(this.view.getEndorserDisplay());
                 return checkUserLink($el, false, true);

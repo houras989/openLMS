@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'annotator_1.2.9', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
     'js/edxnotes/views/notes_visibility_factory', 'js/edxnotes/utils/notes_collector', 'js/spec/edxnotes/helpers'
@@ -7,6 +8,7 @@ define([
     'use strict';
 
     describe('EdxNotes ToggleNotesFactory', function() {
+        // eslint-disable-next-line no-var
         var params = {
             endpoint: '/test_endpoint/',
             user: 'user12345',
@@ -31,6 +33,7 @@ define([
             this.toggleVisibilityButton = $('.action-toggle-notes');
             this.label = this.toggleVisibilityButton.find('.utility-control-label');
             this.toggleMessage = $('.action-toggle-message');
+            // eslint-disable-next-line no-undef
             spyOn(this.toggleNotes, 'toggleHandler').and.callThrough();
             NotesCollector.cleanup();
         });
@@ -45,6 +48,7 @@ define([
         });
 
         it('can toggle notes', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
 
             expect(this.toggleVisibilityButton).not.toHaveClass('is-disabled');
@@ -85,6 +89,7 @@ define([
         });
 
         it('can handle errors', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 $errorContainer = $('.annotator-notice');
 

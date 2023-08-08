@@ -5,11 +5,13 @@
             $('source').remove();
             window.VideoState = {};
             window.VideoState.id = {};
+            // eslint-disable-next-line no-undef
             window.YT = jasmine.YT;
         });
 
         describe('constructor', function() {
             describe('YT', function() {
+                // eslint-disable-next-line no-var
                 var state;
 
                 beforeEach(function() {
@@ -19,6 +21,7 @@
 
                 describe('by default', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayerYouTube('video_html5.html');
                     });
 
@@ -54,10 +57,12 @@
             });
 
             describe('HTML5', function() {
+                // eslint-disable-next-line no-var
                 var state;
 
                 beforeEach(function() {
                     $.cookie.and.returnValue('0.75');
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer('video_html5.html');
                 });
 
@@ -80,6 +85,7 @@
                     });
 
                     it('parse available video speeds', function() {
+                        /* eslint-disable-next-line no-undef, no-var */
                         var speeds = jasmine.stubbedHtml5Speeds;
 
                         expect(state.speeds).toEqual(speeds);
@@ -103,9 +109,11 @@
         });
 
         describe('YouTube API is not loaded', function() {
+            // eslint-disable-next-line no-var
             var state;
             beforeEach(function() {
                 window.YT = undefined;
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayerYouTube();
             });
 
@@ -115,10 +123,12 @@
             });
 
             it('callback, to be called after YouTube API loads, exists and is called', function(done) {
+                // eslint-disable-next-line no-undef
                 window.YT = jasmine.YT;
                 // Call the callback that must be called when YouTube API is
                 // loaded. By specification.
                 window.onYouTubeIframeAPIReady();
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return state.youtubeApiAvailable === true;
                 }).done(function() {
@@ -130,7 +140,9 @@
         });
 
         describe('checking start and end times', function() {
+            // eslint-disable-next-line no-var
             var state;
+            // eslint-disable-next-line no-var
             var miniTestSuite = [
                 {
                     itDescription: 'both times are proper',
@@ -165,6 +177,7 @@
             });
 
             $.each(miniTestSuite, function(index, test) {
+                // eslint-disable-next-line no-use-before-define
                 itFabrique(test.itDescription, test.data, test.expectData);
             });
 
@@ -173,6 +186,7 @@
 
             function itFabrique(itDescription, data, expectData) {
                 it(itDescription, function() {
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer('video.html', {
                         start: data.start,
                         end: data.end
@@ -186,11 +200,13 @@
 
         // Disabled 11/25/13 due to flakiness in master
         xdescribe('multiple YT on page', function() {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var state1, state2, state3;
 
             beforeEach(function() {
                 loadFixtures('video_yt_multiple.html');
 
+                // eslint-disable-next-line no-undef
                 spyOn($, 'ajaxWithPrefix');
 
                 $.ajax.calls.length = 0;
@@ -200,16 +216,21 @@
                 // that stores the value of the first ajax request must be
                 // cleared so that we test a pristine state of the video
                 // module.
+                // eslint-disable-next-line no-undef
                 Video.clearYoutubeXhr();
 
+                // eslint-disable-next-line no-undef
                 state1 = new Video('#example1');
+                // eslint-disable-next-line no-undef
                 state2 = new Video('#example2');
+                // eslint-disable-next-line no-undef
                 state3 = new Video('#example3');
             });
 
             it(
                 'check for YT availability is performed only once',
                 function() {
+                    // eslint-disable-next-line no-var
                     var numAjaxCalls = 0;
 
                     // Total ajax calls made.

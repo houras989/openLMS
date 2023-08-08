@@ -1,25 +1,31 @@
 describe('Tests for accessibility_tools.js', function() {
     describe('Tests for accessible modals', function() {
+        /* eslint-disable-next-line no-unused-vars, no-var */
         var pressTabOnLastElt = function(firstElt, lastElt) {
             firstElt.focus();
         };
 
+        // eslint-disable-next-line no-var
         var pressShiftTabOnFirstElt = function(firstElt, lastElt) {
             lastElt.focus();
         };
 
+        // eslint-disable-next-line no-var
         var pressEsc = function(closeModal) {
             closeModal.click();
         };
 
         beforeEach(function() {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var $focusedElementBeforeModal;
             loadFixtures('js/fixtures/dashboard-fixture.html');
+            // eslint-disable-next-line no-undef
             accessible_modal('#trigger', '#close-modal', '#modalId', '#mainPageId');
             $('#trigger').click();
         });
 
         it('sets focusedElementBeforeModal to trigger', function() {
+            // eslint-disable-next-line no-undef
             expect($focusedElementBeforeModal).toHaveAttr('id', 'trigger');
         });
 
@@ -63,7 +69,9 @@ describe('Tests for accessibility_tools.js', function() {
         });
 
         it("pressing ESC calls 'click' on close-modal element", function() {
+            // eslint-disable-next-line no-var
             var clicked = false;
+            // eslint-disable-next-line no-unused-vars
             $('#close-modal').click(function(theEvent) {
                 clicked = true;
             });
@@ -87,12 +95,14 @@ describe('Tests for accessibility_tools.js', function() {
             // for some reason, toBeFocused tests don't pass with js-test-tool
             // (they do when run locally on browsers), so we're skipping them temporarily
             xit('returns focus to focusedElementBeforeModal', function() {
+                // eslint-disable-next-line no-undef
                 expect(focusedElementBeforeModal).toBeFocused();
             });
         });
     });
 
     describe('Tests for SR region', function() {
+        // eslint-disable-next-line no-var
         var getSRText = function() {
             return $('#reader-feedback').html();
         };
@@ -102,6 +112,7 @@ describe('Tests for accessibility_tools.js', function() {
         });
 
         it('has the sr class and is aria-live', function() {
+            // eslint-disable-next-line no-var
             var $reader = $('#reader-feedback');
             expect($reader.hasClass('sr')).toBe(true);
             expect($reader.attr('aria-live')).toBe('polite');

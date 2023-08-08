@@ -4,6 +4,7 @@
         'underscore',
         'backbone',
         'gettext'
+    // eslint-disable-next-line no-unused-vars
     ], function($, _, Backbone, gettext) {
         'use strict';
 
@@ -40,4 +41,5 @@
 
         });
     });
+// eslint-disable-next-line no-undef
 }(define || RequireJS.define));

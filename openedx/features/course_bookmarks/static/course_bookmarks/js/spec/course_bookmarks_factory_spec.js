@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery',
     'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
@@ -13,6 +14,7 @@ function($, AjaxHelpers, BookmarkHelpers, CourseBookmarksFactory) {
         });
 
         it('can render the initial bookmarks', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedData = BookmarkHelpers.createBookmarksData(
                     {

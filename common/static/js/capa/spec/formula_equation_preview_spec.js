@@ -1,6 +1,8 @@
+/* eslint-disable no-useless-escape */
 describe('escapeSelector', function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var escapeSelector = window.escapeSelector;
 
     it('correctly escapes css', function() {
@@ -31,10 +33,11 @@ describe('escapeSelector', function() {
 describe('Formula Equation Preview', function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var formulaEquationPreview = window.formulaEquationPreview;
     beforeEach(function() {
         // Simulate an environment conducive to a FormulaEquationInput
-        // eslint-disable-next-line no-multi-assign, no-multi-str
+        /* eslint-disable-next-line no-multi-assign, no-multi-str, no-var */
         var $fixture = this.$fixture = $('\
 <section class="problems-wrapper" data-url="THE_URL">\
   <section class="formulaequationinput">\
@@ -51,10 +54,11 @@ describe('Formula Equation Preview', function() {
 </section>');
 
         // Modify $ for the test to search the fixture.
-        // eslint-disable-next-line no-multi-assign
+        /* eslint-disable-next-line no-multi-assign, no-var */
         var old$find = this.old$find = $.find;
         $.find = function() {
             // Given the default context, swap it out for the fixture.
+            // eslint-disable-next-line eqeqeq
             if (arguments[1] == document) {
                 arguments[1] = $fixture[0];
             }
@@ -70,11 +74,12 @@ describe('Formula Equation Preview', function() {
         };
 
         // Catch the AJAX requests
-        // eslint-disable-next-line no-multi-assign
+        /* eslint-disable-next-line no-multi-assign, no-var */
         var ajaxTimes = this.ajaxTimes = [];
         this.oldProblem = window.Problem;
 
         window.Problem = {};
+        // eslint-disable-next-line no-undef
         window.Problem.inputAjax = jasmine.createSpy('Problem.inputAjax')
             .and.callFake(function() {
                 ajaxTimes.push(Date.now());
@@ -85,6 +90,7 @@ describe('Formula Equation Preview', function() {
         this.oldMathJax = window.MathJax;
 
         window.MathJax = {Hub: {}};
+        // eslint-disable-next-line no-undef
         window.MathJax.Hub.getAllJax = jasmine.createSpy('MathJax.Hub.getAllJax')
             .and.returnValue([this.jax]);
         window.MathJax.Hub.Queue = function(callback) {
@@ -92,8 +98,11 @@ describe('Formula Equation Preview', function() {
                 callback();
             }
         };
+        // eslint-disable-next-line no-undef
         spyOn(window.MathJax.Hub, 'Queue').and.callThrough();
+        // eslint-disable-next-line no-undef
         window.MathJax.Hub.Startup = jasmine.createSpy('MathJax.Hub.Startup');
+        // eslint-disable-next-line no-undef
         window.MathJax.Hub.Startup.signal = jasmine.createSpy('MathJax.Hub.Startup.signal');
         window.MathJax.Hub.Startup.signal.Interest = function(callback) {
             callback('End');
@@ -104,10 +113,13 @@ describe('Formula Equation Preview', function() {
         // This was a pain to write, make sure it doesn't get screwed up.
 
         // Find the element using DOM methods.
+        // eslint-disable-next-line no-var
         var legitInput = this.$fixture[0].getElementsByTagName('input')[0];
 
         // Use the (modified) jQuery.
+        // eslint-disable-next-line no-var
         var $jqueryInput = $('.formulaequationinput input');
+        // eslint-disable-next-line no-var
         var $byIdInput = $('#input_THE_ID');
 
         expect($jqueryInput[0]).toEqual(legitInput);
@@ -120,6 +132,7 @@ describe('Formula Equation Preview', function() {
             formulaEquationPreview.enable();
 
             // This part may be asynchronous, so wait.
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return window.Problem.inputAjax.calls.count() > 0;
             }).then(done);
@@ -136,8 +149,10 @@ describe('Formula Equation Preview', function() {
                 'preview_formcalc',
                 {
                     formula: 'PREFILLED_VALUE',
+                    // eslint-disable-next-line no-undef
                     request_start: jasmine.any(Number)
                 },
+                // eslint-disable-next-line no-undef
                 jasmine.any(Function)
             ]);
         });
@@ -153,6 +168,7 @@ describe('Formula Equation Preview', function() {
             formulaEquationPreview.enable();
 
             // This part may be asynchronous, so wait.
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return window.Problem.inputAjax.calls.count() === 0;
             }).then(function() {
@@ -167,6 +183,7 @@ describe('Formula Equation Preview', function() {
             $('#input_THE_ID').val('user_input').trigger('input');
 
             // This part is probably asynchronous
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return window.Problem.inputAjax.calls.count() > 0;
             }).then(function() {
@@ -181,6 +198,7 @@ describe('Formula Equation Preview', function() {
             $('#input_THE_ID').val('').trigger('input');
 
             // Either it makes a request or jumps straight into displaying ''.
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 // (Short circuit if `inputAjax` is indeed called)
                 return window.Problem.inputAjax.calls.count() > 0
@@ -192,31 +210,42 @@ describe('Formula Equation Preview', function() {
         });
 
         it('limits the number of requests per second', function(done) {
+            // eslint-disable-next-line no-var
             var minDelay = formulaEquationPreview.minDelay;
+            // eslint-disable-next-line no-var
             var end = Date.now() + minDelay * 1.1;
 
+            // eslint-disable-next-line no-var
             var $input = $('#input_THE_ID');
+            // eslint-disable-next-line no-var
             var value;
             function inputAnother(iter) {
                 value = 'math input ' + iter;
                 $input.val(value).trigger('input');
             }
 
+            // eslint-disable-next-line no-var
             var self = this;
+            // eslint-disable-next-line no-var
             var iter = 0;
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 inputAnother(iter++);
                 return Date.now() > end; // Stop when we get to `end`.
             }).then(function() {
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return window.Problem.inputAjax.calls.count() > 0
                         && window.Problem.inputAjax.calls.mostRecent().args[3].formula === value;
+                // eslint-disable-next-line no-undef
                 }).then(_.bind(function() {
                     // There should be 2 or 3 calls (depending on leading edge).
                     expect(window.Problem.inputAjax.calls.count()).not.toBeGreaterThan(3);
 
                     // The calls should happen approximately `minDelay` apart.
+                    // eslint-disable-next-line no-var
                     for (var i = 1; i < this.ajaxTimes.length; i++) {
+                        // eslint-disable-next-line no-var
                         var diff = this.ajaxTimes[i] - this.ajaxTimes[i - 1];
                         expect(diff).toBeGreaterThan(minDelay - 10);
                     }
@@ -229,12 +258,14 @@ describe('Formula Equation Preview', function() {
 
     describe('Visible results (icon and mathjax)', function() {
         it('displays a loading icon when requests are open', function(done) {
+            // eslint-disable-next-line no-var
             var $img = $('img.loading');
             expect($img.css('visibility')).toEqual('hidden');
             formulaEquationPreview.enable();
             expect($img.css('visibility')).toEqual('visible');
 
             // This part could be asynchronous
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return window.Problem.inputAjax.calls.count() > 0;
             }).then(function() {
@@ -246,7 +277,9 @@ describe('Formula Equation Preview', function() {
 
                 expect($img.css('visibility')).toEqual('visible');
             }).then(function() {
+                // eslint-disable-next-line no-undef
                 return jasmine.waitUntil(function() {
+                    // eslint-disable-next-line no-var
                     var args = window.Problem.inputAjax.calls.mostRecent().args;
                     return args[3].formula === 'different';
                 }).then(done);
@@ -256,12 +289,16 @@ describe('Formula Equation Preview', function() {
         it('updates MathJax and loading icon on callback', function(done) {
             formulaEquationPreview.enable();
 
+            // eslint-disable-next-line no-var
             var jax = this.jax;
 
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return window.Problem.inputAjax.calls.count() > 0;
             }).then(function() {
+                // eslint-disable-next-line no-var
                 var args = window.Problem.inputAjax.calls.mostRecent().args;
+                // eslint-disable-next-line no-var
                 var callback = args[4];
                 callback({
                     preview: 'THE_FORMULA',
@@ -272,6 +309,7 @@ describe('Formula Equation Preview', function() {
                 expect($('img.loading').css('visibility')).toEqual('hidden');
 
                 // We should look in the preview div for the MathJax.
+                // eslint-disable-next-line no-var
                 var previewDiv = $('#input_THE_ID_preview')[0];
                 expect(window.MathJax.Hub.getAllJax).toHaveBeenCalledWith(previewDiv);
 
@@ -286,14 +324,18 @@ describe('Formula Equation Preview', function() {
             formulaEquationPreview.enable();
             $('#input_THE_ID').val('user_input').trigger('input');
 
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return window.Problem.inputAjax.calls.count() > 0;
             }).then(function() {
+                // eslint-disable-next-line no-var
                 var args = window.Problem.inputAjax.calls.mostRecent().args;
+                // eslint-disable-next-line no-var
                 var callback = args[4];
 
                 // Cannot find MathJax.
                 window.MathJax.Hub.getAllJax.and.returnValue([]);
+                // eslint-disable-next-line no-undef
                 spyOn(console, 'log');
 
                 callback({
@@ -302,28 +344,36 @@ describe('Formula Equation Preview', function() {
                 });
 
                 // Tests.
+                // eslint-disable-next-line no-console
                 expect(console.log).toHaveBeenCalled();
 
                 // We should look in the preview div for the MathJax.
+                // eslint-disable-next-line no-var
                 var previewElement = $('#input_THE_ID_preview')[0];
                 expect(previewElement.firstChild.data).toEqual('\\(THE_FORMULA\\)');
 
                 // Refresh the MathJax.
                 expect(window.MathJax.Hub.Queue).toHaveBeenCalledWith(
+                    // eslint-disable-next-line no-undef
                     ['Typeset', jasmine.any(Object), jasmine.any(Element)]
                 );
             }).always(done);
         });
 
         it('displays errors from the server well', function(done) {
+            // eslint-disable-next-line no-var
             var $img = $('img.loading');
+            // eslint-disable-next-line no-var
             var jax = this.jax;
 
             formulaEquationPreview.enable();
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return window.Problem.inputAjax.calls.count() > 0;
             }).then(function() {
+                // eslint-disable-next-line no-var
                 var args = window.Problem.inputAjax.calls.mostRecent().args;
+                // eslint-disable-next-line no-var
                 var callback = args[4];
                 callback({
                     error: 'OOPSIE',
@@ -332,6 +382,7 @@ describe('Formula Equation Preview', function() {
                 expect(window.MathJax.Hub.Queue).not.toHaveBeenCalled();
                 expect($img.css('visibility')).toEqual('visible');
             }).then(function() {
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return window.MathJax.Hub.Queue.calls.count() > 0;
                 }).then(function() {
@@ -349,20 +400,28 @@ describe('Formula Equation Preview', function() {
         beforeEach(function(done) {
             formulaEquationPreview.enable();
 
+            // eslint-disable-next-line no-var
             var self = this;
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return window.Problem.inputAjax.calls.count() > 0;
             }).then(function() {
                 $('#input_THE_ID').val('different').trigger('input');
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return window.Problem.inputAjax.calls.count() > 1;
+                // eslint-disable-next-line no-undef
                 }).then(_.bind(function() {
+                    // eslint-disable-next-line no-var
                     var args0 = window.Problem.inputAjax.calls.argsFor(0);
+                    // eslint-disable-next-line no-var
                     var args1 = window.Problem.inputAjax.calls.argsFor(1);
+                    // eslint-disable-next-line no-var
                     var response0 = {
                         preview: 'THE_FORMULA_0',
                         request_start: args0[3].request_start
                     };
+                    // eslint-disable-next-line no-var
                     var response1 = {
                         preview: 'THE_FORMULA_1',
                         request_start: args1[3].request_start
@@ -375,6 +434,7 @@ describe('Formula Equation Preview', function() {
         });
 
         it('updates requests sequentially', function() {
+            // eslint-disable-next-line no-var
             var $img = $('img.loading');
 
             expect($img.css('visibility')).toEqual('visible');
@@ -393,6 +453,7 @@ describe('Formula Equation Preview', function() {
         });
 
         it("doesn't display outdated information", function() {
+            // eslint-disable-next-line no-var
             var $img = $('img.loading');
 
             expect($img.css('visibility')).toEqual('visible');
@@ -425,6 +486,7 @@ describe('Formula Equation Preview', function() {
 
             // Make sure that it doesn't indeed show up later
             window.MathJax.Hub.Queue.calls.reset();
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return formulaEquationPreview.errorDelay * 1.1;
             }).then(function() {

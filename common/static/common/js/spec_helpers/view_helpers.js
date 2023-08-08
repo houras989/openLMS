@@ -1,11 +1,13 @@
 /**
  * Provides helper methods for invoking Studio modal windows in Jasmine tests.
  */
+// eslint-disable-next-line no-undef
 define(['underscore', 'jquery', 'common/js/components/views/feedback_notification', 'common/js/components/views/feedback_prompt',
     'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'],
 function(_, $, NotificationView, Prompt, AjaxHelpers) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var installViewTemplates, createFeedbackSpy, verifyFeedbackShowing,
         verifyFeedbackHidden, createNotificationSpy, verifyNotificationShowing,
         verifyNotificationHidden, createPromptSpy, confirmPrompt, inlineEdit, verifyInlineEditChange,
@@ -17,15 +19,18 @@ function(_, $, NotificationView, Prompt, AjaxHelpers) {
     };
 
     createFeedbackSpy = function(type, intent) {
+        /* eslint-disable-next-line no-undef, no-var */
         var feedbackSpy = jasmine.stealth.spyOnConstructor(type, intent, ['show', 'hide']);
         feedbackSpy.show.and.returnValue(feedbackSpy);
         if (afterEach) {
+            // eslint-disable-next-line no-undef
             afterEach(jasmine.stealth.clearSpies);
         }
         return feedbackSpy;
     };
 
     verifyFeedbackShowing = function(feedbackSpy, text) {
+        // eslint-disable-next-line no-var
         var options;
         expect(feedbackSpy.constructor).toHaveBeenCalled();
         expect(feedbackSpy.show).toHaveBeenCalled();
@@ -72,7 +77,9 @@ function(_, $, NotificationView, Prompt, AjaxHelpers) {
     };
 
     installMockAnalytics = function() {
+        // eslint-disable-next-line no-undef
         window.analytics = jasmine.createSpyObj('analytics', ['track']);
+        // eslint-disable-next-line no-undef
         window.course_location_analytics = jasmine.createSpy();
     };
 
@@ -82,6 +89,7 @@ function(_, $, NotificationView, Prompt, AjaxHelpers) {
     };
 
     inlineEdit = function(editorWrapper, newValue) {
+        // eslint-disable-next-line no-var
         var inputField = editorWrapper.find('.xblock-field-input'),
             editButton = editorWrapper.find('.xblock-field-value-edit');
         editButton.click();
@@ -91,6 +99,7 @@ function(_, $, NotificationView, Prompt, AjaxHelpers) {
     };
 
     verifyInlineEditChange = function(editorWrapper, expectedValue, failedValue) {
+        // eslint-disable-next-line no-var
         var displayName = editorWrapper.find('.xblock-field-value');
         expect(displayName.text()).toBe(expectedValue);
         if (failedValue) {

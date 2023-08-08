@@ -1,10 +1,11 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
     define(['gettext', 'underscore',
         'jquery', 'backbone', 'js/edxnotes/utils/template', 'edx-ui-toolkit/js/utils/html-utils'],
     function(gettext, _, $, Backbone, templateUtils, HtmlUtils) {
+        // eslint-disable-next-line no-var
         var TabItemView = Backbone.View.extend({
             tagName: 'li',
             className: 'tab',
@@ -16,6 +17,7 @@
                 'click .action-close': 'closeHandler'
             },
 
+            // eslint-disable-next-line no-unused-vars
             initialize: function(options) {
                 this.template = templateUtils.loadTemplate('tab-item');
                 this.$el.attr('id', this.model.get('identifier'));
@@ -36,6 +38,7 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var html = this.template(this.model.toJSON());
                 this.$el.html(HtmlUtils.HTML(html).toString());
                 return this;
@@ -57,4 +60,5 @@
 
         return TabItemView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

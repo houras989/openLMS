@@ -3,25 +3,31 @@
     'use strict';
 
     describe('NewPostView', function() {
+        // eslint-disable-next-line no-var
         var checkVisibility;
         beforeEach(function() {
             DiscussionSpecHelper.setUpGlobals();
             DiscussionSpecHelper.setUnderscoreFixtures();
             window.$$course_id = 'edX/999/test';
+            /* eslint-disable-next-line camelcase, no-undef */
             spyOn(DiscussionUtil, 'makeWmdEditor').and.callFake(function($content, $local, cls_identifier) {
+                // eslint-disable-next-line camelcase
                 return $local('.' + cls_identifier).html('<textarea></textarea>');
             });
             this.discussion = new Discussion([], {
                 pages: 1
             });
         });
+        // eslint-disable-next-line consistent-return
         checkVisibility = function(view, expectedVisible, expectedDisabled, render) {
+            /* eslint-disable-next-line camelcase, no-var */
             var disabled, group_disabled;
             if (render) {
                 view.render();
             }
             expect(view.$('.group-selector-wrapper').is(':visible') || false).toEqual(expectedVisible);
             disabled = view.$('.js-group-select').prop('disabled') || false;
+            // eslint-disable-next-line camelcase
             group_disabled = view.$('.group-selector-wrapper').hasClass('disabled');
             if (expectedVisible && !expectedDisabled) {
                 expect(disabled).toEqual(false);
@@ -115,6 +121,7 @@
                 return checkVisibility(this.view, true, false, false);
             });
             it('allows the user to make a group selection', function() {
+                // eslint-disable-next-line no-var
                 var expectedGroupId,
                     self = this;
                 DiscussionSpecHelper.makeModerator();
@@ -123,6 +130,7 @@
                 DiscussionSpecHelper.makeAjaxSpy(function(params) {
                     expect(params.data.group_id).toEqual(expectedGroupId);
                 });
+                // eslint-disable-next-line no-undef
                 return _.each(['1', '2', ''], function(groupIdStr) {
                     expectedGroupId = groupIdStr;
                     self.view.$('.js-group-select').val(groupIdStr);
@@ -182,6 +190,7 @@
             });
         });
         describe('cancel post resets form ', function() {
+            // eslint-disable-next-line no-var
             var checkPostCancelReset;
             beforeEach(function() {
                 this.course_settings = new DiscussionCourseSettings({
@@ -217,15 +226,19 @@
                     }
                 });
             });
+            /* eslint-disable-next-line camelcase, consistent-return */
             checkPostCancelReset = function(mode, discussion, course_settings) {
+                // eslint-disable-next-line no-var
                 var eventSpy, view;
                 view = new NewPostView({
                     el: $('#fixture-element'),
                     collection: discussion,
+                    // eslint-disable-next-line camelcase
                     course_settings: course_settings,
                     mode: mode
                 });
                 view.render();
+                // eslint-disable-next-line no-undef
                 eventSpy = jasmine.createSpy('eventSpy');
                 view.listenTo(view, 'newPost:cancel', eventSpy);
                 view.$('.post-errors').html("<li class='post-error'>Title can't be empty</li>");
@@ -253,6 +266,7 @@
                     return expect(view.$('.post-topic option:selected').text()).toEqual('General');
                 }
             };
+            // eslint-disable-next-line no-undef
             return _.each(['tab', 'inline'], function(mode) {
                 it('resets the form in ' + mode + ' mode', function() {
                     return checkPostCancelReset(mode, this.discussion, this.course_settings);
@@ -296,6 +310,7 @@
             });
 
             it('should be the first topic if General is not found', function() {
+                // eslint-disable-next-line no-var
                 var eventSpy, view;
                 view = new NewPostView({
                     el: $('#fixture-element'),
@@ -304,6 +319,7 @@
                     mode: 'tab'
                 });
                 view.render();
+                // eslint-disable-next-line no-undef
                 eventSpy = jasmine.createSpy('eventSpy');
                 view.listenTo(view, 'newPost:cancel', eventSpy);
                 view.$('.post-errors').html("<li class='post-error'>Title can't be empty</li>");
@@ -320,8 +336,10 @@
             });
         });
         it('posts to the correct URL', function() {
+            // eslint-disable-next-line no-var
             var topicId, view;
             topicId = 'test_topic';
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 expect(params.url.path()).toEqual(DiscussionUtil.urlFor('create_thread', topicId));
                 return {

@@ -2,6 +2,7 @@
 // User can preview the certificate web layout/styles. 'Preview Certificate' button will open a new tab in LMS for
 // the selected course mode from the drop down.
 
+// eslint-disable-next-line no-undef
 define([
     'underscore',
     'gettext',
@@ -14,6 +15,7 @@ define([
 function(_, gettext, BaseView, ViewUtils, NotificationView, certificateWebPreviewTemplate, HtmlUtils) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var CertificateWebPreview = BaseView.extend({
         el: $('.preview-certificate'),
         events: {
@@ -38,6 +40,7 @@ function(_, gettext, BaseView, ViewUtils, NotificationView, certificateWebPrevie
         },
 
         toggleCertificateActivation: function() {
+            // eslint-disable-next-line no-var
             var notification = new NotificationView.Mini({
                 title: gettext(this.is_active ? 'Deactivating' : 'Activating')
             });
@@ -55,6 +58,7 @@ function(_, gettext, BaseView, ViewUtils, NotificationView, certificateWebPrevie
                 },
                 success: function() {
                     notification.hide();
+                    // eslint-disable-next-line no-restricted-globals
                     location.reload();
                 }
             });

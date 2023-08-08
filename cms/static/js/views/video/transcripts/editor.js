@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery', 'backbone', 'underscore',
@@ -6,12 +7,14 @@ define(
         'js/views/video/transcripts/metadata_videolist'
     ],
     function($, Backbone, _, Utils, MetadataView, MetadataCollection) {
+        // eslint-disable-next-line no-var
         var Editor = Backbone.View.extend({
 
             tagName: 'div',
 
             initialize: function() {
             // prepare data for MetadataView.Editor
+                // eslint-disable-next-line no-var
                 var metadata = this.$el.data('metadata'),
                     models = this.toModels(metadata);
 
@@ -61,10 +64,13 @@ define(
         *
         */
             toModels: function(data) {
+                // eslint-disable-next-line no-var
                 var metadata = (_.isString(data)) ? JSON.parse(data) : data,
                     models = [];
 
+                /* eslint-disable-next-line no-var, no-restricted-syntax */
                 for (var model in metadata) {
+                    // eslint-disable-next-line no-prototype-builtins
                     if (metadata.hasOwnProperty(model)) {
                         models.push(metadata[model]);
                     }
@@ -84,11 +90,15 @@ define(
         *                                    setting editors in `Advanced` tab.
         *
         */
+            // eslint-disable-next-line consistent-return
             syncBasicTab: function(metadataCollection, metadataView) {
+                // eslint-disable-next-line no-var
                 var result = [],
                     getField = Utils.getField,
+                    /* eslint-disable-next-line camelcase, no-unused-vars */
                     component_locator = this.$el.closest('[data-locator]').data('locator'),
                     values = {},
+                    // eslint-disable-next-line no-unused-vars
                     videoUrl, metadata, modifiedValues;
 
                 // If metadataCollection is not passed, just exit.
@@ -99,15 +109,18 @@ define(
                 // Get field that should be synchronized with `Advanced` tab fields.
                 videoUrl = getField(this.collection, 'video_url');
 
+                // eslint-disable-next-line no-unused-vars
                 modifiedValues = metadataView.getModifiedMetadataValues();
 
                 // Get values from `Advanced` tab fields (`html5_sources`,
                 // `youtube_id_1_0`) that should be synchronized.
+                // eslint-disable-next-line no-var
                 var html5Sources = getField(metadataCollection, 'html5_sources').getDisplayValue();
 
                 values.youtube = getField(metadataCollection, 'youtube_id_1_0').getDisplayValue();
 
                 values.html5Sources = _.filter(html5Sources, function(value) {
+                    // eslint-disable-next-line no-var
                     var link = Utils.parseLink(value),
                         mode = link && link.mode;
 
@@ -144,7 +157,9 @@ define(
         *                                    setting editors in `Advanced` tab.
         *
         */
+            /* eslint-disable-next-line consistent-return, no-unused-vars */
             syncAdvancedTab: function(metadataCollection, metadataView) {
+                // eslint-disable-next-line no-var
                 var getField = Utils.getField,
                     html5Sources, youtube, videoUrlValue, result;
 
@@ -206,6 +221,7 @@ define(
             },
 
             handleUpdateEdxVideoId: function(edxVideoId) {
+                // eslint-disable-next-line no-var
                 var edxVideoIdField = Utils.getField(this.collection, 'edx_video_id');
                 edxVideoIdField.setValue(edxVideoId);
             },
@@ -218,6 +234,7 @@ define(
          * Event handler for `transcripts:basicTabFieldChanged` event.
          */
             handleFieldChanged: function() {
+                // eslint-disable-next-line no-var
                 var views = this.settingsView.views,
                     videoURLSView = views.video_url,
                     edxVideoIdView = views.edx_video_id,

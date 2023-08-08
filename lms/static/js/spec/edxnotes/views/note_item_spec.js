@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
     'common/js/spec_helpers/template_helpers', 'js/spec/edxnotes/helpers', 'logger',
@@ -8,6 +9,7 @@ define([
     'use strict';
 
     describe('EdxNotes NoteItemView', function() {
+        // eslint-disable-next-line no-var
         var getView = function(model, scrollToTag, formattedText) {
             model = new NoteModel(_.defaults(model || {}, {
                 id: 'id-123',
@@ -27,10 +29,12 @@ define([
 
         beforeEach(function() {
             TemplateHelpers.installTemplate('templates/edxnotes/note-item');
+            // eslint-disable-next-line no-undef
             spyOn(Logger, 'log').and.callThrough();
         });
 
         it('can be rendered properly', function() {
+            // eslint-disable-next-line no-var
             var view = getView(),
                 unitLink = view.$('.reference-unit-link').get(0);
 
@@ -50,18 +54,21 @@ define([
         });
 
         it('should display update value and accompanying text', function() {
+            // eslint-disable-next-line no-var
             var view = getView();
             expect(view.$('.reference-title')[1]).toContainText('Last Edited:');
             expect(view.$('.reference-updated-date').last()).toContainText('December 11, 2014 at 11:12AM');
         });
 
         it('should not display tags if there are none', function() {
+            // eslint-disable-next-line no-var
             var view = getView();
             expect(view.$el).not.toContain('.reference-tags');
             expect(view.$('.reference-title').length).toBe(2);
         });
 
         it('should display tags if they exist', function() {
+            // eslint-disable-next-line no-var
             var view = getView({tags: ['First', 'Second']});
             expect(view.$('.reference-title').length).toBe(3);
             expect(view.$('.reference-title')[2]).toContainText('Tags:');
@@ -71,6 +78,7 @@ define([
         });
 
         it('should highlight tags & text if they have elasticsearch formatter', function() {
+            // eslint-disable-next-line no-var
             var view = getView({
                 tags: ['First', '{elasticsearch_highlight_start}Second{elasticsearch_highlight_end}']
             }, {}, '{elasticsearch_highlight_start}Sample{elasticsearch_highlight_end}');
@@ -86,6 +94,7 @@ define([
         });
 
         it('should escape html for tags & comments', function() {
+            // eslint-disable-next-line no-var
             var view = getView({
                 tags: ['First', '<b>Second</b>', 'ȗnicode']
             }, {}, '<b>Sample</b>');
@@ -101,18 +110,24 @@ define([
         });
 
         xit('should handle a click event on the tag', function() {
+            // eslint-disable-next-line no-var
             var scrollToTagSpy = {
+                // eslint-disable-next-line no-unused-vars
                 scrollToTag: function(tagName) {}
             };
+            // eslint-disable-next-line no-undef
             spyOn(scrollToTagSpy, 'scrollToTag');
+            // eslint-disable-next-line no-var
             var view = getView({tags: ['only']}, scrollToTagSpy.scrollToTag);
             view.$('a.reference-tags').click();
             expect(scrollToTagSpy.scrollToTag).toHaveBeenCalledWith('only');
         });
 
         it('should log the edx.course.student_notes.used_unit_link event properly', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 view = getView();
+            // eslint-disable-next-line no-undef
             spyOn(view, 'redirectTo');
             view.$('.reference-unit-link').click();
             expect(Logger.log).toHaveBeenCalledWith(

@@ -10,11 +10,13 @@
      * @param {Object} state The object containing the state of the video
      * @return {jquery Promise}
      */
+        /* eslint-disable-next-line consistent-return, no-var */
         var VideoBumper = function(player, state) {
             if (!(this instanceof VideoBumper)) {
                 return new VideoBumper(player, state);
             }
 
+            // eslint-disable-next-line no-undef
             _.bindAll(
                 this, 'showMainVideoHandler', 'destroy', 'skipByDuration', 'destroyAndResolve'
             );
@@ -77,14 +79,17 @@
             },
 
             bindHandlers: function() {
+                // eslint-disable-next-line no-var
                 var events = ['ended', 'error'].join(' ');
                 this.element.on(events, this.showMainVideoHandler);
                 this.element.on('timeupdate', this.skipByDuration);
             },
 
             saveState: function() {
+                // eslint-disable-next-line no-var
                 var info = {bumper_last_view_date: true};
                 if (this.doNotShowAgain) {
+                    // eslint-disable-next-line no-undef
                     _.extend(info, {bumper_do_not_show_again: true});
                 }
                 if (this.state.videoSaveStatePlugin) {
@@ -93,6 +98,7 @@
             },
 
             destroy: function() {
+                // eslint-disable-next-line no-var
                 var events = ['ended', 'error'].join(' ');
                 this.element.off(events, this.showMainVideoHandler);
                 this.element.off({
@@ -100,6 +106,7 @@
                     initialize: this.destroyAndResolve
                 });
                 this.element.removeClass('is-bumper');
+                // eslint-disable-next-line no-undef
                 if (_.isFunction(this.state.videoPlayer.destroy)) {
                     this.state.videoPlayer.destroy();
                 }

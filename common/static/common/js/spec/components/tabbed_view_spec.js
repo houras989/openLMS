@@ -8,8 +8,10 @@
         'jquery.simulate'
     ],
     function($, _, Backbone, TabbedView) {
+        // eslint-disable-next-line no-var
         var keys = $.simulate.keyCode;
 
+        // eslint-disable-next-line no-var
         var view,
             TestSubview = Backbone.View.extend({
                 initialize: function(options) {
@@ -161,4 +163,5 @@
             });
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

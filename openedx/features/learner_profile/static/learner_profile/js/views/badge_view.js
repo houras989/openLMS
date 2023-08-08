@@ -9,6 +9,7 @@
             'edx-ui-toolkit/js/utils/html-utils'
         ],
         function(gettext, $, _, Backbone, Moment, badgeTemplate, ShareModalView, HtmlUtils) {
+            // eslint-disable-next-line no-var
             var BadgeView = Backbone.View.extend({
                 initialize: function(options) {
                     this.options = _.extend({}, options);
@@ -26,6 +27,7 @@
                     'click .share-button': 'createModal'
                 },
                 createModal: function() {
+                    // eslint-disable-next-line no-var
                     var modal = new ShareModalView({
                         model: new Backbone.Model(this.context),
                         shareButton: this.shareButton
@@ -44,4 +46,5 @@
 
             return BadgeView;
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

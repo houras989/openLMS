@@ -1,7 +1,9 @@
+// eslint-disable-next-line no-undef
 define(['Markdown.Editor'], function(MarkdownEditor) {
     'use strict';
 
     describe('Markdown.Editor', function() {
+        // eslint-disable-next-line no-var
         var editor = new MarkdownEditor();
 
         describe('util.isValidUrl', function() {

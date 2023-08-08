@@ -1,6 +1,7 @@
 /**
  * Credit-related utilities
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
 (function($, _) {
@@ -24,6 +25,7 @@ var edx = edx || {};
             }),
             context: this,
             success: function(requestData) {
+                // eslint-disable-next-line no-var
                 var $form = $('<form>', {
                     class: 'hidden',
                     action: requestData.url,
@@ -42,4 +44,5 @@ var edx = edx || {};
             }
         });
     };
+// eslint-disable-next-line no-undef
 }(jQuery, _));

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery',
@@ -12,7 +13,9 @@ define(
 
         // TODO: re-enable when this doesn't interact badly with other history tests
         describe('DiscussionBoardFactory', function() {
+            // eslint-disable-next-line no-var
             var createDiscussionBoardView = function() {
+                // eslint-disable-next-line no-var
                 var discussionBoardView,
                     discussion = DiscussionSpecHelper.createTestDiscussion({}),
                     courseSettings = DiscussionSpecHelper.createTestCourseSettings();
@@ -29,6 +32,7 @@ define(
                 return discussionBoardView;
             };
 
+            // eslint-disable-next-line no-var
             var initializeDiscussionBoardFactory = function() {
                 DiscussionBoardFactory({
                     el: $('#discussion-container'),
@@ -64,6 +68,7 @@ define(
             });
 
             xit('can render itself', function() { // this failed Search: navigates to search, and TeamsTab
+                // eslint-disable-next-line no-var
                 var discussionView = createDiscussionBoardView();
                 discussionView.render();
                 initializeDiscussionBoardFactory();

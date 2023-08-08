@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'domReady',
     'jquery',
@@ -28,6 +29,7 @@ function(
 ) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var $body;
 
     function smoothScrollLink(e) {
@@ -57,6 +59,7 @@ function(
     }
 
     domReady(function() {
+        // eslint-disable-next-line no-var
         var dropdownMenuView;
 
         $body = $('body');
@@ -78,6 +81,7 @@ function(
         });
 
         $('.nav-dd .nav-item, .filterable-column .nav-item').click(function(e) {
+            // eslint-disable-next-line no-var
             var $subnav = $(this).find('.wrapper-nav-sub'),
                 $title = $(this).find('.title');
 

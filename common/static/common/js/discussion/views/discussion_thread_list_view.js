@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 /* globals _, Backbone, Content, Discussion, DiscussionUtil, DiscussionThreadView, DiscussionThreadListView */
 (function() {
     'use strict';
@@ -23,9 +24,11 @@
 
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.DiscussionThreadListView = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(DiscussionThreadListView, _super);
 
             function DiscussionThreadListView() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.updateEmailNotifications = function() {
                     return DiscussionThreadListView.prototype.updateEmailNotifications.apply(self, arguments);
@@ -90,6 +93,7 @@
             };
 
             DiscussionThreadListView.prototype.initialize = function(options) {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.courseSettings = options.courseSettings;
                 this.supportsActiveThread = options.supportsActiveThread;
@@ -115,6 +119,7 @@
                     model: Backbone.Model
                 });
                 this.searchAlertCollection.on('add', function(searchAlert) {
+                    // eslint-disable-next-line no-var
                     var content;
                     content = edx.HtmlUtils.template($('#search-alert-template').html())({
                         messageHtml: searchAlert.attributes.message,
@@ -145,6 +150,7 @@
              * @returns {Backbone.Model}
              */
             DiscussionThreadListView.prototype.addSearchAlert = function(message, cssClass) {
+                // eslint-disable-next-line no-var
                 var searchAlertModel = new Backbone.Model({message: message, css_class: cssClass || ''});
                 this.searchAlertCollection.add(searchAlertModel);
                 return searchAlertModel;
@@ -159,6 +165,7 @@
             };
 
             DiscussionThreadListView.prototype.reloadDisplayedCollection = function(thread) {
+                // eslint-disable-next-line no-var
                 var active, $content, $currentElement, threadId;
                 this.clearSearchAlerts();
                 threadId = thread.get('id');
@@ -177,6 +184,7 @@
              */
 
             DiscussionThreadListView.prototype.addAndSelectThread = function(thread) {
+                // eslint-disable-next-line no-var
                 var commentableId = thread.get('commentable_id'),
                     self = this;
                 return this.retrieveDiscussion(commentableId, function() {
@@ -189,6 +197,7 @@
             };
 
             DiscussionThreadListView.prototype.render = function() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.timer = 0;
                 this.$el.empty();
@@ -217,6 +226,7 @@
             };
 
             DiscussionThreadListView.prototype.renderThreads = function() {
+                // eslint-disable-next-line no-var
                 var $content, thread, i, len;
                 this.$('.forum-nav-thread-list').empty();
                 for (i = 0, len = this.displayedCollection.models.length; i < len; i++) {
@@ -234,6 +244,7 @@
             };
 
             DiscussionThreadListView.prototype.showMetadataAccordingToSort = function() {
+                // eslint-disable-next-line no-var
                 var voteCounts = this.$('.forum-nav-thread-votes-count'),
                     unreadCommentCounts = this.$('.forum-nav-thread-unread-comments-count'),
                     commentCounts = this.$('.forum-nav-thread-comments-count');
@@ -264,6 +275,7 @@
             };
 
             DiscussionThreadListView.prototype.loadMorePages = function(event) {
+                // eslint-disable-next-line no-var
                 var error, lastThread, loadMoreElem, loadingElem, options, ref,
                     self = this;
                 if (event) {
@@ -309,12 +321,14 @@
                 lastThread = ref ? ref.get('id') : void 0;
                 if (lastThread) {
                     this.once('threads:rendered', function() {
+                        // eslint-disable-next-line no-var
                         var classSelector = ".forum-nav-thread[data-id='" + lastThread + "'] + .forum-nav-thread "
                             + '.forum-nav-thread-link';
                         return $(classSelector).focus();
                     });
                 } else {
                     this.once('threads:rendered', function() {
+                        // eslint-disable-next-line no-var
                         var ref1 = $('.forum-nav-thread-link').first();
                         // eslint-disable-next-line no-void
                         return ref1 ? ref1.focus() : void 0;
@@ -338,6 +352,7 @@
             };
 
             DiscussionThreadListView.prototype.containsMarkup = function(threadBody) {
+                // eslint-disable-next-line no-var
                 var imagePostSearchString = '![',
                     mathJaxSearchString = /\$/g,
                     containsImages = threadBody.indexOf(imagePostSearchString) !== -1,
@@ -347,6 +362,7 @@
             };
 
             DiscussionThreadListView.prototype.renderThread = function(thread) {
+                // eslint-disable-next-line no-var
                 var threadCommentCount = thread.get('comments_count'),
                     threadUnreadCommentCount = thread.get('unread_comments_count'),
                     neverRead = !thread.get('read') && threadUnreadCommentCount === threadCommentCount,
@@ -361,7 +377,9 @@
                         },
                         thread.toJSON()
                     );
+                // eslint-disable-next-line no-var
                 var $threadHTML = $(this.threadListItemTemplate(context).toString());
+                // eslint-disable-next-line no-var
                 var previewBody = $threadHTML.find('.thread-preview-body').text();
                 previewBody = new DOMParser().parseFromString(previewBody, 'text/html').documentElement.textContent;
                 $threadHTML.find('.thread-preview-body').text(previewBody);
@@ -369,6 +387,7 @@
             };
 
             DiscussionThreadListView.prototype.threadSelected = function(e) {
+                // eslint-disable-next-line no-var
                 var threadId;
                 threadId = $(e.target).closest('.forum-nav-thread').attr('data-id');
                 if (this.supportsActiveThread) {
@@ -383,6 +402,7 @@
             };
 
             DiscussionThreadListView.prototype.setActiveThread = function(threadId) {
+                // eslint-disable-next-line no-var
                 var $srElem;
                 this.$('.forum-nav-thread-link').find('.sr').remove();
                 this.$(".forum-nav-thread[data-id!='" + threadId + "'] .forum-nav-thread-link")
@@ -398,6 +418,7 @@
             };
 
             DiscussionThreadListView.prototype.selectTopic = function($target) {
+                // eslint-disable-next-line no-var
                 var allItems, discussionIds, $item;
                 $item = $target.closest('.forum-nav-browse-menu-item');
 
@@ -430,6 +451,7 @@
             };
 
             DiscussionThreadListView.prototype.retrieveDiscussion = function(discussionId, callback) {
+                // eslint-disable-next-line no-var
                 var url = DiscussionUtil.urlFor('retrieve_discussion', discussionId),
                     self = this;
                 return DiscussionUtil.safeAjax({
@@ -478,6 +500,7 @@
             };
 
             DiscussionThreadListView.prototype.searchFor = function(text, $searchInput) {
+                // eslint-disable-next-line no-var
                 var url = DiscussionUtil.urlFor('search'),
                     self = this;
                 this.clearSearchAlerts();
@@ -501,6 +524,7 @@
                     dataType: 'json',
                     $loading: $,
                     loadingCallback: function() {
+                        // eslint-disable-next-line no-var
                         var element = self.$('.forum-nav-thread-list');
                         element.empty();
                         edx.HtmlUtils.append(
@@ -516,6 +540,7 @@
                         return self.$('.forum-nav-thread-list .forum-nav-load-more').remove();
                     },
                     success: function(response, textStatus) {
+                        // eslint-disable-next-line no-var
                         var message, noResponseMsg;
                         if (textStatus === 'success') {
                             self.collection.reset(response.discussion_data);
@@ -561,6 +586,7 @@
             };
 
             DiscussionThreadListView.prototype.searchForUser = function(text) {
+                // eslint-disable-next-line no-var
                 var self = this;
                 return DiscussionUtil.safeAjax({
                     data: {
@@ -571,6 +597,7 @@
                     dataType: 'json',
                     error: function() {},
                     success: function(response) {
+                        // eslint-disable-next-line no-var
                         var message, username;
                         if (response.users.length > 0) {
                             username = edx.HtmlUtils.joinHtml(
@@ -602,6 +629,7 @@
             };
 
             DiscussionThreadListView.prototype.updateEmailNotifications = function() {
+                // eslint-disable-next-line no-var
                 var $checkbox, checked, urlName;
                 $checkbox = $('input.email-setting');
                 checked = $checkbox.prop('checked');

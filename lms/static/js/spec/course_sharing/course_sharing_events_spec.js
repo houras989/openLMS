@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
 
     ['jquery', 'logger', 'js/course_sharing/course_sharing_events'],
@@ -5,6 +6,7 @@ define(
         'use strict';
 
         describe('Course sharing click eventing', function() {
+            // eslint-disable-next-line no-var
             var courseKey1 = 'course-v1:edX+DemoX+Demo_Course',
                 courseKey2 = 'course-v1:uog+cs181+2017_LT';
 
@@ -13,6 +15,7 @@ define(
                 // Register course sharing eventing callbacks for both courses.
                 CourseSharingEvents(courseKey1);
                 CourseSharingEvents(courseKey2);
+                // eslint-disable-next-line no-undef
                 spyOn(Logger, 'log');
             });
 

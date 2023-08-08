@@ -12,6 +12,7 @@
     ],
     function($, _, TemplateHelpers, AjaxHelpers, RegisterModel, RegisterView) {
         describe('edx.student.account.RegisterView', function() {
+            // eslint-disable-next-line no-var
             var model = null,
                 view = null,
                 requests = null,
@@ -225,7 +226,9 @@
                         },
                     ]
                 };
+            // eslint-disable-next-line no-var
             var createRegisterView = function(that, formFields) {
+                // eslint-disable-next-line no-var
                 var fields = formFields;
                 if (typeof fields === 'undefined') {
                     fields = FORM_DESCRIPTION.fields;
@@ -268,6 +271,7 @@
                 $honorCode = $('#register-honor_code');
             };
 
+            // eslint-disable-next-line no-var
             var fillData = function() {
                 $email.val(USER_DATA.email);
                 $confirmEmail.val(USER_DATA.email);
@@ -283,6 +287,7 @@
                 $honorCode.prop('checked', USER_DATA.honor_code);
             };
 
+            // eslint-disable-next-line no-var
             var liveValidate = function($el, validationSuccess) {
                 $el.focus();
                 if (!_.isUndefined(validationSuccess) && !validationSuccess) {
@@ -292,8 +297,10 @@
                 }
             };
 
+            // eslint-disable-next-line no-var
             var submitForm = function(validationSuccess) {
                 // Create a fake click event
+                // eslint-disable-next-line no-var
                 var clickEvent = $.Event('click');
 
                 $('#toggle_optional_fields').click();
@@ -305,12 +312,14 @@
                 // spying on `view.validate` twice
                 if (!_.isUndefined(validationSuccess)) {
                     // Force validation to return as expected
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'validate').and.returnValue({
                         isValid: validationSuccess,
                         message: 'Submission was validated.'
                     });
                     // Successful validation means there's no need to use AJAX calls from liveValidate,
                     if (validationSuccess) {
+                        // eslint-disable-next-line no-undef
                         spyOn(view, 'liveValidate').and.callFake(function() {});
                     }
                 }
@@ -349,12 +358,14 @@
             });
 
             it('sends analytics info containing the enrolled course ID', function() {
+                // eslint-disable-next-line no-var
                 var expectedData;
 
                 createRegisterView(this);
 
                 // Simulate that the user is attempting to enroll in a course
                 // by setting the course_id query string param.
+                // eslint-disable-next-line no-undef
                 spyOn($, 'url').and.callFake(function(param) {
                     if (param === '?course_id') {
                         return encodeURIComponent(COURSE_ID);
@@ -385,6 +396,7 @@
             });
 
             it('does not display the registration form', function() {
+                // eslint-disable-next-line no-var
                 var thirdPartyAuthView = new RegisterView({
                     fields: FORM_DESCRIPTION.fields,
                     model: model,
@@ -417,6 +429,7 @@
             });
 
             it('live validates registration form fields', function() {
+                // eslint-disable-next-line no-var
                 var requiredValidationFields = [$email, $confirmEmail, $username, $password],
                     i,
                     $el;
@@ -460,6 +473,7 @@
             });
 
             it('displays live registration form validation errors', function() {
+                // eslint-disable-next-line no-var
                 var requiredValidationFields = [$email, $confirmEmail, $username, $password],
                     i,
                     $el;
@@ -514,6 +528,7 @@
             });
 
             it('shows optional exposed fields', function() {
+                // eslint-disable-next-line no-var
                 var formFields = FORM_DESCRIPTION.fields;
                 formFields.push({
                     placeholder: '',
@@ -528,7 +543,9 @@
                 });
 
                 createRegisterView(this, formFields);
+                // eslint-disable-next-line no-var
                 var elementClasses = view.$('.exposed-optional-fields').attr('class');
+                // eslint-disable-next-line no-var
                 var elementChildren = view.$('.exposed-optional-fields .form-field');
                 // Expect the exposed optional fields container does not have other
                 // classes assigned, like .hidden
@@ -548,6 +565,7 @@
             });
 
             it('displays a modal with the terms of service', function() {
+                // eslint-disable-next-line no-var
                 var $modal,
                     $content;
 
@@ -613,4 +631,5 @@
             });
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

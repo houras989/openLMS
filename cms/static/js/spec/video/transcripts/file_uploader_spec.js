@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery', 'underscore', 'backbone',
@@ -8,6 +9,7 @@ define(
         'use strict';
 
         describe('Transcripts.FileUploader', function() {
+            // eslint-disable-next-line no-var
             var videoListEntryTemplate = readFixtures(
                     'video/transcripts/metadata-videolist-entry.underscore'
                 ),
@@ -30,6 +32,7 @@ define(
                     ).text(fileUploadTemplate)
                 );
 
+                /* eslint-disable-next-line no-undef, no-var */
                 var messenger = jasmine.createSpyObj(
                         'MessageManager',
                         ['render', 'showError', 'hideError']
@@ -40,6 +43,7 @@ define(
                     .append('<div class="transcripts-file-uploader" />')
                     .append('<a class="setting-upload" href="#">Upload</a>');
 
+                // eslint-disable-next-line no-undef
                 spyOn(FileUploader.prototype, 'render').and.callThrough();
 
                 view = new FileUploader({
@@ -56,14 +60,17 @@ define(
 
             describe('Render', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     spyOn(_, 'template').and.callThrough();
                 });
 
                 it('Template doesn\'t exist', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn(console, 'error');
                     view.uploadTpl = '';
 
                     expect(view.render).not.toThrow();
+                    // eslint-disable-next-line no-console
                     expect(console.error).toHaveBeenCalled();
                     expect(_.template).not.toHaveBeenCalled();
                 });
@@ -78,8 +85,10 @@ define(
                 );
 
                 it('All works okay if all data is okay', function() {
+                    // eslint-disable-next-line no-var
                     var elList = ['$form', '$input', '$progress'],
                         validFileExtensions = ['srt', 'sjson'],
+                        // eslint-disable-next-line no-unused-vars
                         result = $.map(validFileExtensions, function(item, index) {
                             return '.' + item;
                         }).join(', ');
@@ -95,6 +104,7 @@ define(
             });
 
             describe('Upload', function() {
+                // eslint-disable-next-line no-var
                 var videoId = '123-456-789-0';
 
                 beforeEach(function() {
@@ -102,6 +112,7 @@ define(
                 });
 
                 it('File is not chosen', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn($.fn, 'ajaxSubmit');
                     view.upload();
 
@@ -109,12 +120,14 @@ define(
                 });
 
                 it('File is chosen', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn($.fn, 'ajaxSubmit');
 
                     view.file = {};
                     view.upload();
 
                     expect(view.$form.ajaxSubmit).toHaveBeenCalled();
+                    // eslint-disable-next-line no-undef
                     expect(view.$form.ajaxSubmit).toHaveBeenCalledWith(jasmine.objectContaining({
                         data: {edx_video_id: videoId}
                     }));
@@ -122,6 +135,7 @@ define(
             });
 
             it('clickHandler', function() {
+                // eslint-disable-next-line no-undef
                 spyOn($.fn, 'trigger');
 
                 $('.setting-upload').click();
@@ -132,10 +146,12 @@ define(
 
             describe('changeHadler', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'upload');
                 });
 
                 it('Valid File Type - error should be hided', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'checkExtValidity').and.returnValue(true);
 
                     view.$input.change();
@@ -146,6 +162,7 @@ define(
                 });
 
                 it('Invalid File Type - error should be shown', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'checkExtValidity').and.returnValue(false);
 
                     view.$input.change();
@@ -157,6 +174,7 @@ define(
             });
 
             describe('checkExtValidity', function() {
+                // eslint-disable-next-line no-var
                 var data = {
                     Correct: {
                         name: 'file_name.srt',
@@ -170,6 +188,7 @@ define(
 
                 $.each(data, function(fileType, fileInfo) {
                     it(fileType + ' file type', function() {
+                        // eslint-disable-next-line no-var
                         var result = view.checkExtValidity(fileInfo);
 
                         expect(result).toBe(fileInfo.isValid);
@@ -185,8 +204,10 @@ define(
             });
 
             it('xhrProgressHandler', function() {
+                // eslint-disable-next-line no-var
                 var percent = 26;
 
+                // eslint-disable-next-line no-undef
                 spyOn($.fn, 'width').and.callThrough();
 
                 view.xhrProgressHandler(null, null, null, percent);
@@ -196,6 +217,7 @@ define(
 
             describe('xhrCompleteHandler', function() {
                 it('Ajax Success', function() {
+                    // eslint-disable-next-line no-var
                     var xhr = {
                         status: 200,
                         responseText: JSON.stringify({
@@ -203,6 +225,7 @@ define(
                             edx_video_id: 'test_video_id'
                         })
                     };
+                    // eslint-disable-next-line no-undef
                     spyOn(Backbone, 'trigger');
                     view.xhrCompleteHandler(xhr);
 
@@ -213,6 +236,7 @@ define(
                         .toHaveBeenCalledWith('transcripts:basicTabUpdateEdxVideoId', 'test_video_id');
                 });
 
+                // eslint-disable-next-line no-var
                 var assertAjaxError = function(xhr) {
                     view.xhrCompleteHandler(xhr);
 
@@ -222,6 +246,7 @@ define(
                 };
 
                 it('Ajax transport Error', function() {
+                    // eslint-disable-next-line no-var
                     var xhr = {
                         status: 400,
                         responseText: JSON.stringify({})

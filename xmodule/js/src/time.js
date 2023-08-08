@@ -1,7 +1,9 @@
 // eslint-disable-next-line no-shadow
 function format(time, formatFull) {
+    // eslint-disable-next-line no-var
     var hours, minutes, seconds;
 
+    // eslint-disable-next-line no-undef
     if (!_.isFinite(time) || time < 0) {
         time = 0;
     }
@@ -13,10 +15,13 @@ function format(time, formatFull) {
     minutes %= 60;
 
     if (formatFull) {
+        // eslint-disable-next-line no-use-before-define
         return '' + _pad(hours) + ':' + _pad(minutes) + ':' + _pad(seconds % 60);
     } else if (hours) {
+        // eslint-disable-next-line no-use-before-define
         return '' + hours + ':' + _pad(minutes) + ':' + _pad(seconds % 60);
     } else {
+        // eslint-disable-next-line no-use-before-define
         return '' + minutes + ':' + _pad(seconds % 60);
     }
 }

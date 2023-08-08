@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery', 'backbone', 'underscore',
@@ -7,6 +8,7 @@ define(
     function($, Backbone, _, TranscriptUtils, HtmlUtils) {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var FileUploader = Backbone.View.extend({
             invisibleClass: 'is-invisible',
 
@@ -31,11 +33,13 @@ define(
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var tpl = $(this.uploadTpl).text(),
                     tplContainer = this.$el.find('.transcripts-file-uploader');
 
                 if (tplContainer.length) {
                     if (!tpl) {
+                        // eslint-disable-next-line no-console
                         console.error('Couldn\'t load Transcripts File Upload template');
 
                         return;
@@ -59,6 +63,7 @@ define(
         *
         */
             upload: function() {
+                // eslint-disable-next-line no-var
                 var data = {
                     edx_video_id: TranscriptUtils.Storage.get('edx_video_id') || ''
                 };
@@ -128,6 +133,7 @@ define(
         *
         */
             checkExtValidity: function(file) {
+                // eslint-disable-next-line no-var
                 var fileExtension;
                 if (!file.name) {
                     // eslint-disable-next-line no-void
@@ -153,6 +159,7 @@ define(
         *
         */
             xhrResetProgressBar: function() {
+                // eslint-disable-next-line no-var
                 var percentVal = '0%';
 
                 this.$progress
@@ -177,6 +184,7 @@ define(
         *
         */
             xhrProgressHandler: function(event, position, total, percentComplete) {
+                // eslint-disable-next-line no-var
                 var percentVal = percentComplete + '%';
 
                 this.$progress
@@ -191,6 +199,7 @@ define(
         *
         */
             xhrCompleteHandler: function(xhr) {
+                // eslint-disable-next-line no-var
                 var resp = JSON.parse(xhr.responseText),
                     err = resp.status || gettext('Error: Uploading failed.'),
                     edxVideoId = resp.edx_video_id;

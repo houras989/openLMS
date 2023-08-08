@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['jquery',
     'underscore',
     'common/js/components/utils/view_utils',
@@ -7,6 +8,7 @@ define(['jquery',
 function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var XBlockView = BaseView.extend({
         // takes XBlockInfo as a model
 
@@ -20,6 +22,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
         },
 
         render: function(options) {
+            // eslint-disable-next-line no-var
             var self = this,
                 view = this.view,
                 xblockInfo = this.model,
@@ -44,6 +47,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
         },
 
         handleXBlockFragment: function(fragment, options) {
+            // eslint-disable-next-line no-var
             var self = this,
                 wrapper = this.$el,
                 xblockElement,
@@ -70,6 +74,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
                         successCallback(xblock);
                     }
                 } catch (e) {
+                    // eslint-disable-next-line no-console
                     console.error(e, e.stack);
                     // Add 'xblock-initialization-failed' class to every xblock
                     self.$('.xblock').addClass('xblock-initialization-failed');
@@ -93,6 +98,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
              * @param data The data to be passed to any listener's of the event.
              */
         notifyRuntime: function(eventName, data) {
+            // eslint-disable-next-line no-var
             var runtime = this.xblock && this.xblock.runtime,
                 xblockChildren;
 
@@ -130,6 +136,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
              * @returns {Promise} A promise representing the rendering process
              */
         renderXBlockFragment: function(fragment, element) {
+            // eslint-disable-next-line no-var
             var html = fragment.html,
                 resources = fragment.resources,
                 blockView = this;
@@ -143,14 +150,17 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
             // that at least the rendered HTML will be in place.
             try {
                 return this.addXBlockFragmentResources(resources).done(function() {
+                    // eslint-disable-next-line no-console
                     console.log('Updating HTML');
                     try {
                         blockView.updateHtml(element, html);
                     } catch (e) {
+                        // eslint-disable-next-line no-console
                         console.error(e, e.stack);
                     }
                 });
             } catch (e) {
+                // eslint-disable-next-line no-console
                 console.error(e, e.stack);
                 return $.Deferred().resolve();
             }
@@ -173,6 +183,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
              * @returns {Promise} A promise representing the rendering process
              */
         addXBlockFragmentResources: function(resources) {
+            // eslint-disable-next-line no-var
             var self = this,
                 applyResource,
                 numResources,
@@ -180,6 +191,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
             numResources = resources.length;
             deferred = $.Deferred();
             applyResource = function(index) {
+                // eslint-disable-next-line no-var
                 var hash, resource, value, promise;
                 if (index >= numResources) {
                     deferred.resolve();
@@ -213,6 +225,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
              * @returns {Promise} A promise representing the loading of the resource.
              */
         loadResource: function(resource) {
+            // eslint-disable-next-line no-var
             var $head = $('head'),
                 mimetype = resource.mimetype,
                 kind = resource.kind,
@@ -243,6 +256,7 @@ function($, _, ViewUtils, BaseView, XBlock, HtmlUtils) {
         },
 
         fireNotificationActionEvent: function(event) {
+            // eslint-disable-next-line no-var
             var eventName = $(event.currentTarget).data('notification-action');
             if (eventName) {
                 event.preventDefault();

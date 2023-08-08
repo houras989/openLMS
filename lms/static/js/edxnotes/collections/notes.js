@@ -29,13 +29,16 @@
          * @return {Object}
          */
             getCourseStructure: (function() {
+                // eslint-disable-next-line no-var
                 var courseStructure = null;
                 return function() {
+                    // eslint-disable-next-line no-var
                     var chapters = {},
                         sections = {},
                         units = {};
 
                     this.each(function(note) {
+                        // eslint-disable-next-line no-var
                         var chapter = note.get('chapter'),
                             section = note.get('section'),
                             unit = note.get('unit');
@@ -57,4 +60,5 @@
             }())
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

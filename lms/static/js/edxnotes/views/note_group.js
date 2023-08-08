@@ -1,10 +1,11 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
     define([
         'gettext', 'underscore', 'backbone', 'edx-ui-toolkit/js/utils/html-utils'
     ], function(gettext, _, Backbone, HtmlUtils) {
+        // eslint-disable-next-line no-var
         var GroupView, ChapterView;
 
         GroupView = Backbone.View.extend({
@@ -46,6 +47,7 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var container = document.createDocumentFragment();
                 HtmlUtils.setHtml(this.$el, this.template({chapterName: this.options.chapter.display_name || ''}));
                 _.each(this.children, function(section) {
@@ -57,6 +59,7 @@
             },
 
             addChild: function(sectionInfo) {
+                // eslint-disable-next-line no-var
                 var section = new GroupView(
                     {
                         displayName: sectionInfo.display_name,
@@ -78,4 +81,5 @@
 
         return {GroupView: GroupView, ChapterView: ChapterView};
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

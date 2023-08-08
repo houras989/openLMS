@@ -2,24 +2,30 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-undef
     define(['jquery', 'common/js/components/views/feedback', 'common/js/components/views/feedback_notification',
         'common/js/components/views/feedback_alert', 'common/js/components/views/feedback_prompt',
         'common/js/spec_helpers/view_helpers', 'sinon', 'jquery.simulate'],
     function($, SystemFeedback, NotificationView, AlertView, PromptView, ViewHelpers, sinon) {
+        // eslint-disable-next-line no-var
         var tpl;
         tpl = readFixtures('common/templates/components/system-feedback.underscore');
 
+        // eslint-disable-next-line no-var
         var isFocused = function(actual) {
             return $(actual)[0] === $(actual)[0].ownerDocument.activeElement;
         };
 
         beforeEach(function() {
+            // eslint-disable-next-line no-undef
             setFixtures(sandbox({
                 id: 'page-alert'
             }));
+            // eslint-disable-next-line no-undef
             appendSetFixtures(sandbox({
                 id: 'page-notification'
             }));
+            // eslint-disable-next-line no-undef
             appendSetFixtures(sandbox({
                 id: 'page-prompt'
             }));
@@ -27,6 +33,7 @@
                 id: 'system-feedback-tpl',
                 type: 'text/template'
             }).text(tpl));
+            // eslint-disable-next-line no-undef
             return jasmine.addMatchers({
                 toBeShown: function() {
                     return {
@@ -54,8 +61,11 @@
                     title: 'Portal',
                     message: 'Welcome to the Aperture Science Computer-Aided Enrichment Center'
                 };
+                // eslint-disable-next-line no-undef
                 this.renderSpy = spyOn(AlertView.Confirmation.prototype, 'render').and.callThrough();
+                // eslint-disable-next-line no-undef
                 this.showSpy = spyOn(AlertView.Confirmation.prototype, 'show').and.callThrough();
+                // eslint-disable-next-line no-undef
                 this.hideSpy = spyOn(AlertView.Confirmation.prototype, 'hide').and.callThrough();
                 // eslint-disable-next-line no-return-assign
                 return this.clock = sinon.useFakeTimers();
@@ -64,24 +74,28 @@
                 return this.clock.restore();
             });
             it('requires a type and an intent', function() {
+                // eslint-disable-next-line no-var
                 var both, neither, noIntent, noType,
                     _this = this;
                 neither = function() {
                     return new SystemFeedback(_this.options);
                 };
                 noType = function() {
+                    // eslint-disable-next-line no-var
                     var options;
                     options = $.extend({}, _this.options);
                     options.intent = 'confirmation';
                     return new SystemFeedback(options);
                 };
                 noIntent = function() {
+                    // eslint-disable-next-line no-var
                     var options;
                     options = $.extend({}, _this.options);
                     options.type = 'alert';
                     return new SystemFeedback(options);
                 };
                 both = function() {
+                    // eslint-disable-next-line no-var
                     var options;
                     options = $.extend({}, _this.options);
                     options.type = 'alert';
@@ -94,12 +108,15 @@
                 return expect(both).not.toThrow();
             });
             it('does not show on initalize', function() {
+                // eslint-disable-next-line no-var
                 var view;
+                // eslint-disable-next-line no-unused-vars
                 view = new AlertView.Confirmation(this.options);
                 expect(this.renderSpy).not.toHaveBeenCalled();
                 return expect(this.showSpy).not.toHaveBeenCalled();
             });
             xit('renders the template', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new AlertView.Confirmation(this.options);
                 view.show();
@@ -109,6 +126,7 @@
                 return expect(view.$el).toContainText(this.options.message);
             });
             return xit('close button sends a .hide() message', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new AlertView.Confirmation(this.options).show();
                 view.$('.action-close').click();
@@ -133,27 +151,34 @@
                         }
                     }
                 };
+                // eslint-disable-next-line no-undef
                 this.inFocusSpy = spyOn(PromptView.Confirmation.prototype, 'inFocus').and.callThrough();
+                // eslint-disable-next-line no-undef
                 this.outFocusSpy = spyOn(PromptView.Confirmation.prototype, 'outFocus').and.callThrough();
             });
             it('is focused on show', function(done) {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new PromptView.Confirmation(this.options).show();
                 expect(this.inFocusSpy).toHaveBeenCalled();
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return isFocused(view.$('.wrapper-prompt'));
                 }).always(done);
             });
             it('is not focused on hide', function(done) {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new PromptView.Confirmation(this.options).hide();
                 expect(this.outFocusSpy).toHaveBeenCalled();
 
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return !isFocused(view.$('.wrapper-prompt'));
                 }).always(done);
             });
             it('traps keyboard focus when moving forward', function(done) {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new PromptView.Confirmation(this.options).show();
                 expect(this.inFocusSpy).toHaveBeenCalled();
@@ -162,11 +187,13 @@
                     {keyCode: $.simulate.keyCode.TAB}
                 );
 
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return isFocused(view.$('.action-primary'));
                 }).always(done);
             });
             it('traps keyboard focus when moving backward', function(done) {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new PromptView.Confirmation(this.options).show();
                 expect(this.inFocusSpy).toHaveBeenCalled();
@@ -174,11 +201,13 @@
                     'keydown',
                     {keyCode: $.simulate.keyCode.TAB, shiftKey: true}
                 );
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return isFocused(view.$('.action-secondary'));
                 }).always(done);
             });
             return it('changes class on body', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new PromptView.Confirmation({
                     title: 'Portal',
@@ -188,6 +217,7 @@
             });
         });
         xdescribe('NotificationView.Mini', function() {
+            // eslint-disable-next-line no-var
             var view;
             beforeEach(function() {
                 view = new NotificationView.Mini();
@@ -201,7 +231,9 @@
         });
         xdescribe('SystemFeedback click events', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 this.primaryClickSpy = jasmine.createSpy('primaryClick');
+                // eslint-disable-next-line no-undef
                 this.secondaryClickSpy = jasmine.createSpy('secondaryClick');
                 this.view = new NotificationView.Warning({
                     title: 'Unsaved',
@@ -250,6 +282,7 @@
         });
         xdescribe('SystemFeedback not preventing events', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 this.clickSpy = jasmine.createSpy('clickSpy');
                 this.view = new AlertView.Confirmation({
                     title: "It's all good",
@@ -273,7 +306,9 @@
         });
         xdescribe('SystemFeedback multiple secondary actions', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 this.secondarySpyOne = jasmine.createSpy('secondarySpyOne');
+                // eslint-disable-next-line no-undef
                 this.secondarySpyTwo = jasmine.createSpy('secondarySpyTwo');
                 this.view = new NotificationView.Warning({
                     title: 'No Primary',
@@ -314,8 +349,10 @@
         });
         return describe('NotificationView minShown and maxShown', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 this.showSpy = spyOn(NotificationView.Confirmation.prototype, 'show');
                 this.showSpy.and.callThrough();
+                // eslint-disable-next-line no-undef
                 this.hideSpy = spyOn(NotificationView.Confirmation.prototype, 'hide');
                 this.hideSpy.and.callThrough();
                 // eslint-disable-next-line no-return-assign
@@ -325,12 +362,14 @@
                 return this.clock.restore();
             });
             xit('should not have minShown or maxShown by default', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new NotificationView.Confirmation();
                 expect(view.options.minShown).toEqual(0);
                 return expect(view.options.maxShown).toEqual(Infinity);
             });
             xit('a minShown view should not hide too quickly', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new NotificationView.Confirmation({
                     minShown: 1000
@@ -343,6 +382,7 @@
                 return expect(view.$('.wrapper')).toBeHiding();
             });
             xit('a maxShown view should hide by itself', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new NotificationView.Confirmation({
                     maxShown: 1000
@@ -353,6 +393,7 @@
                 return expect(view.$('.wrapper')).toBeHiding();
             });
             xit('a minShown view can stay visible longer', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new NotificationView.Confirmation({
                     minShown: 1000
@@ -366,6 +407,7 @@
                 return expect(view.$('.wrapper')).toBeHiding();
             });
             xit('a maxShown view can hide early', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new NotificationView.Confirmation({
                     maxShown: 1000
@@ -379,6 +421,7 @@
                 return expect(view.$('.wrapper')).toBeHiding();
             });
             return it('a view can have both maxShown and minShown', function() {
+                // eslint-disable-next-line no-var
                 var view;
                 view = new NotificationView.Confirmation({
                     minShown: 1000,

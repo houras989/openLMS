@@ -11,6 +11,7 @@
     ],
     function($, _, TemplateHelpers, AjaxHelpers, PasswordResetModel, PasswordResetView) {
         describe('edx.student.account.PasswordResetView', function() {
+            // eslint-disable-next-line no-var
             var model = null,
                 view = null,
                 requests = null,
@@ -30,6 +31,7 @@
                     }]
                 };
 
+            // eslint-disable-next-line no-var
             var createPasswordResetView = function(that) {
                 // Initialize the password reset model
                 model = new PasswordResetModel({}, {
@@ -47,8 +49,10 @@
                 requests = AjaxHelpers.requests(that);
             };
 
+            // eslint-disable-next-line no-var
             var submitEmail = function(validationSuccess) {
                 // Create a fake click event
+                // eslint-disable-next-line no-var
                 var clickEvent = $.Event('click');
 
                 // Simulate manual entry of an email address
@@ -58,6 +62,7 @@
                 // spying on `view.validate` twice
                 if (!_.isUndefined(validationSuccess)) {
                     // Force validation to return as expected
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'validate').and.returnValue({
                         isValid: validationSuccess,
                         message: 'Submission was validated.'
@@ -75,12 +80,15 @@
             });
 
             it('allows the user to request a new password', function() {
+                // eslint-disable-next-line no-var
                 var syncSpy, passwordEmailSentSpy;
 
                 createPasswordResetView(this);
 
                 // We expect these events to be triggered upon a successful password reset
+                // eslint-disable-next-line no-undef
                 syncSpy = jasmine.createSpy('syncEvent');
+                // eslint-disable-next-line no-undef
                 passwordEmailSentSpy = jasmine.createSpy('passwordEmailSentEvent');
                 view.listenTo(view.model, 'sync', syncSpy);
                 view.listenTo(view, 'password-email-sent', passwordEmailSentSpy);
@@ -157,4 +165,5 @@
             });
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

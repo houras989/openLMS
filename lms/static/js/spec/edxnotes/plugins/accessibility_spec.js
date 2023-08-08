@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'annotator_1.2.9', 'logger', 'js/edxnotes/views/notes_factory'
 ], function($, _, Annotator, Logger, NotesFactory) {
@@ -33,6 +34,7 @@ define([
                 }
             );
             this.plugin = this.annotator.plugins.Accessibility;
+            // eslint-disable-next-line no-undef
             spyOn(Logger, 'log');
         });
 
@@ -44,7 +46,9 @@ define([
 
         describe('destroy', function() {
             it('should unbind all events', function() {
+                // eslint-disable-next-line no-undef
                 spyOn($.fn, 'off');
+                // eslint-disable-next-line no-undef
                 spyOn(this.annotator, 'unsubscribe').and.callThrough();
                 this.plugin.destroy();
                 expect(this.annotator.unsubscribe).toHaveBeenCalledWith(
@@ -67,6 +71,7 @@ define([
         });
 
         describe('a11y attributes', function() {
+            // eslint-disable-next-line no-var
             var highlight, annotation, $note;
 
             beforeEach(function() {
@@ -106,6 +111,7 @@ define([
         });
 
         describe('keydown events on highlighted text', function() {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var highlight, annotation, note;
 
             beforeEach(function() {
@@ -116,8 +122,11 @@ define([
                     highlights: [highlight.get(0)]
                 };
                 highlight.data('annotation', annotation);
+                // eslint-disable-next-line no-undef
                 spyOn(this.annotator, 'showViewer').and.callThrough();
+                // eslint-disable-next-line no-undef
                 spyOn(this.annotator.viewer, 'hide').and.callThrough();
+                // eslint-disable-next-line no-undef
                 spyOn(this.plugin, 'focusOnGrabber').and.callThrough();
             });
 
@@ -139,7 +148,7 @@ define([
             });
 
             it('should focus highlighted text after closing', function() {
-                // eslint-disable-next-line no-shadow
+                /* eslint-disable-next-line no-shadow, no-var */
                 var note;
                 highlight.trigger(keyDownEvent(this.KEY.ENTER));
                 note = this.annotator.element.find('.annotator-edit');
@@ -160,6 +169,7 @@ define([
         });
 
         describe('keydown events on viewer', function() {
+            // eslint-disable-next-line no-var
             var highlight, annotation, listing, note, edit, del, close;
 
             beforeEach(function() {
@@ -176,6 +186,7 @@ define([
                 edit = this.annotator.element.find('.annotator-edit').first();
                 del = this.annotator.element.find('.annotator-delete').first();
                 close = this.annotator.element.find('.annotator-close').first();
+                // eslint-disable-next-line no-undef
                 spyOn(this.annotator.viewer, 'hide').and.callThrough();
             });
 
@@ -216,6 +227,7 @@ define([
             });
 
             it('should hide on ESCAPE keydown', function() {
+                // eslint-disable-next-line no-var
                 var tabControls = [listing, note, edit, del, close];
 
                 _.each(tabControls, function(control) {
@@ -227,6 +239,7 @@ define([
         });
 
         describe('keydown events on editor', function() {
+            // eslint-disable-next-line no-var
             var highlight, annotation, form, annotatorItems, textArea, tags, save, cancel;
 
             beforeEach(function() {
@@ -244,7 +257,9 @@ define([
                 tags = annotatorItems.first().next().children('input');
                 save = this.annotator.element.find('.annotator-save');
                 cancel = this.annotator.element.find('.annotator-cancel');
+                // eslint-disable-next-line no-undef
                 spyOn(this.annotator.editor, 'submit').and.callThrough();
+                // eslint-disable-next-line no-undef
                 spyOn(this.annotator.editor, 'hide').and.callThrough();
             });
 
@@ -315,6 +330,7 @@ define([
             });
 
             it('should hide on ESCAPE keydown', function() {
+                // eslint-disable-next-line no-var
                 var tabControls = [textArea, save, cancel];
 
                 _.each(tabControls, function(control) {

@@ -9,11 +9,13 @@
         describe('edx.dashboard.trackEvents', function() {
             beforeEach(function() {
                 // Stub the analytics event tracker
+                // eslint-disable-next-line no-undef
                 window.analytics = jasmine.createSpyObj('analytics', ['track', 'page', 'trackLink']);
                 loadFixtures('js/fixtures/dashboard/dashboard.html');
             });
 
             it('sends an analytics event when the user clicks course title link', function() {
+                // eslint-disable-next-line no-var
                 var $courseTitle = $('.course-title > a');
                 window.edx.dashboard.trackCourseTitleClicked(
                     $courseTitle,
@@ -27,6 +29,7 @@
             });
 
             it('sends an analytics event when the user clicks course image link', function() {
+                // eslint-disable-next-line no-var
                 var $courseImage = $('.cover');
                 window.edx.dashboard.trackCourseImageLinkClicked(
                     $courseImage,
@@ -40,6 +43,7 @@
             });
 
             it('sends an analytics event when the user clicks enter course link', function() {
+                // eslint-disable-next-line no-var
                 var $enterCourse = $('.enter-course');
                 window.edx.dashboard.trackEnterCourseLinkClicked(
                     $enterCourse,
@@ -53,6 +57,7 @@
             });
 
             it('sends an analytics event when the user clicks enter course link', function() {
+                // eslint-disable-next-line no-var
                 var $dropDown = $('.wrapper-action-more');
                 window.edx.dashboard.trackCourseOptionDropdownClicked(
                     $dropDown,
@@ -66,6 +71,7 @@
             });
 
             it('sends an analytics event when the user clicks the learned about verified track link', function() {
+                // eslint-disable-next-line no-var
                 var $learnVerified = $('.verified-info');
                 window.edx.dashboard.trackLearnVerifiedLinkClicked(
                     $learnVerified,
@@ -79,6 +85,7 @@
             });
 
             it('sends an analytics event when the user clicks find courses button', function() {
+                // eslint-disable-next-line no-var
                 var $findCourse = $('.btn-find-courses'),
                     property = {
                         category: 'dashboard',

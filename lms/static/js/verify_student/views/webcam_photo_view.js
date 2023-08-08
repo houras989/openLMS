@@ -2,6 +2,7 @@
  * Interface for retrieving webcam photos.
  * Supports HTML5 and Flash.
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {},
     key = {
         enter: 13
@@ -28,6 +29,7 @@ var edx = edx || {},
                     this.stream = null;
 
                     // Start the capture
+                    // eslint-disable-next-line no-var
                     var getUserMedia = this.getUserMediaFunc();
                     if (getUserMedia) {
                         getUserMedia(
@@ -50,6 +52,7 @@ var edx = edx || {},
                 },
 
                 snapshot: function() {
+                    // eslint-disable-next-line no-var
                     var video, canvas, aspectRatio;
 
                     if (this.stream) {
@@ -75,7 +78,9 @@ var edx = edx || {},
                     this.getVideo().play();
                 },
 
+                // eslint-disable-next-line consistent-return
                 getUserMediaFunc: function() {
+                    // eslint-disable-next-line no-var
                     var userMedia = (
                         navigator.getUserMedia || navigator.webkitGetUserMedia
                         || navigator.mozGetUserMedia || navigator.msGetUserMedia
@@ -87,6 +92,7 @@ var edx = edx || {},
                 },
 
                 getUserMediaCallback: function(stream) {
+                    // eslint-disable-next-line no-var
                     var video = this.getVideo();
                     this.stream = stream;
                     video.srcObject = stream;
@@ -126,6 +132,7 @@ var edx = edx || {},
 
                 isSupported: function() {
                     try {
+                        /* eslint-disable-next-line no-undef, no-var */
                         var flashObj = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
                         if (flashObj) {
                             return true;
@@ -140,6 +147,7 @@ var edx = edx || {},
                 },
 
                 snapshot: function() {
+                    // eslint-disable-next-line no-var
                     var flashObj = this.getFlashObject();
                     if (flashObj.cameraAuthorized()) {
                         this.imageData = flashObj.snap();
@@ -161,12 +169,14 @@ var edx = edx || {},
                 },
 
                 checkCameraSupported: function() {
+                    // eslint-disable-next-line no-var
                     var flashObj = this.getFlashObject(),
                         isLoaded = false,
                         hasCamera = false;
 
                     isLoaded = (
                         flashObj
+                        // eslint-disable-next-line no-prototype-builtins
                         && flashObj.hasOwnProperty('percentLoaded')
                         && flashObj.percentLoaded() === 100
                     );
@@ -175,6 +185,7 @@ var edx = edx || {},
                     // even "percentLoaded" isn't defined.
                     hasCamera = (
                         flashObj
+                        // eslint-disable-next-line no-prototype-builtins
                         && flashObj.hasOwnProperty('hasCamera')
                         && flashObj.hasCamera()
                     );
@@ -226,6 +237,7 @@ var edx = edx || {},
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var renderedHtml,
                 $resetBtn,
                 $captureBtn;
@@ -273,12 +285,14 @@ var edx = edx || {},
         },
 
         resetByEnter: function(event) {
+            // eslint-disable-next-line eqeqeq
             if (event.keyCode == key.enter) {
                 this.reset();
             }
         },
         capture: function() {
             // Take a snapshot of the video
+            // eslint-disable-next-line no-var
             var success = this.backend.snapshot();
 
             if (success) {
@@ -300,6 +314,7 @@ var edx = edx || {},
             }
         },
 
+        // eslint-disable-next-line no-unused-vars
         handleWebcamLoaded: function(errorTitle, errorMsg) {
             // Hide the text behind camera
             $('#camera .placeholder-art', this.el).hide();
@@ -355,6 +370,7 @@ var edx = edx || {},
      * @return {Object}     A Backbone view.
      */
     edx.verify_student.getSupportedWebcamView = function(obj) {
+        // eslint-disable-next-line no-var
         var view = null;
 
         // First choice is HTML5, supported by most web browsers
@@ -386,4 +402,5 @@ var edx = edx || {},
         // allow users to take a photo with the camera.
         return new edx.verify_student.ImageInputView(obj);
     };
+// eslint-disable-next-line no-undef
 }(jQuery, _, Backbone, gettext));

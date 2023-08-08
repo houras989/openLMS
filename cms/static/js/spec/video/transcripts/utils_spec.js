@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery', 'underscore',
@@ -8,8 +9,10 @@ define(
         'use strict';
 
         describe('Transcripts.Utils', function() {
+            // eslint-disable-next-line no-var
             var videoId = 'OEoXaMPEzfM',
                 ytLinksList = (function(id) {
+                    // eslint-disable-next-line no-var
                     var links = [
                         'http://www.youtube.com/watch?v=%s&feature=feedrec_grec_index',
                         'http://www.youtube.com/user/IngridMichaelsonVEVO#p/a/u/1/%s',
@@ -26,6 +29,7 @@ define(
                 }(videoId)),
                 html5FileName = 'file_name',
                 html5LinksList = (function(videoName) {
+                    // eslint-disable-next-line no-var
                     var videoTypes = ['mp4', 'webm', 'm4v', 'ogv'],
                         links = [
                             'http://somelink.com/%s.%s?param=1&param=2#hash',
@@ -51,6 +55,7 @@ define(
                 }(html5FileName)),
                 otherLinkId = 'other_link_id',
                 otherLinksList = (function(linkId) {
+                    // eslint-disable-next-line no-var
                     var links = [
                         'http://goo.gl/%s?param=1&param=2#hash',
                         'http://goo.gl/%s?param=1&param=2',
@@ -68,10 +73,12 @@ define(
                 }(otherLinkId));
 
             describe('Method: getField', function() {
+                // eslint-disable-next-line no-var
                 var collection,
                     testFieldName = 'test_field';
 
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     collection = jasmine.createSpyObj(
                         'Collection',
                         [
@@ -88,6 +95,7 @@ define(
                     });
                 });
 
+                // eslint-disable-next-line no-var
                 var wrongArgumentLists = [
                     {
                         argName: 'collection',
@@ -105,6 +113,7 @@ define(
 
                 $.each(wrongArgumentLists, function(index, element) {
                     it(element.argName + ' argument(s) is/are absent', function() {
+                        // eslint-disable-next-line no-var
                         var result = Utils.getField.apply(this, element.list);
 
                         expect(result).toBeUndefined();
@@ -116,6 +125,7 @@ define(
                 describe('Supported urls', function() {
                     $.each(ytLinksList, function(index, link) {
                         it(link, function() {
+                            // eslint-disable-next-line no-var
                             var result = Utils.parseYoutubeLink(link);
 
                             expect(result).toBe(videoId);
@@ -125,21 +135,25 @@ define(
 
                 describe('Wrong arguments ', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         spyOn(console, 'log');
                     });
 
                     it('no arguments', function() {
+                        // eslint-disable-next-line no-var
                         var result = Utils.parseYoutubeLink();
 
                         expect(result).toBeUndefined();
                     });
 
                     it('wrong data type', function() {
+                        // eslint-disable-next-line no-var
                         var result = Utils.parseYoutubeLink(1);
 
                         expect(result).toBeUndefined();
                     });
 
+                    // eslint-disable-next-line no-var
                     var wrongUrls = [
                         'http://youtu.be/',
                         '/static/example',
@@ -148,6 +162,7 @@ define(
 
                     $.each(wrongUrls, function(index, link) {
                         it(link, function() {
+                            // eslint-disable-next-line no-var
                             var result = Utils.parseYoutubeLink(link);
 
                             expect(result).toBeUndefined();
@@ -161,6 +176,7 @@ define(
                     $.each(html5LinksList, function(format, linksList) {
                         $.each(linksList, function(index, link) {
                             it(link, function() {
+                                // eslint-disable-next-line no-var
                                 var result = Utils.parseHTML5Link(link);
 
                                 expect(result).toEqual({
@@ -173,6 +189,7 @@ define(
 
                     $.each(otherLinksList, function(index, link) {
                         it(link, function() {
+                            // eslint-disable-next-line no-var
                             var result = Utils.parseHTML5Link(link);
 
                             expect(result).toEqual({
@@ -185,21 +202,25 @@ define(
 
                 describe('Wrong arguments ', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         spyOn(console, 'log');
                     });
 
                     it('no arguments', function() {
+                        // eslint-disable-next-line no-var
                         var result = Utils.parseHTML5Link();
 
                         expect(result).toBeUndefined();
                     });
 
                     it('wrong data type', function() {
+                        // eslint-disable-next-line no-var
                         var result = Utils.parseHTML5Link(1);
 
                         expect(result).toBeUndefined();
                     });
 
+                    // eslint-disable-next-line no-var
                     var html5WrongUrls = [
                         'http://youtu.be/',
                         'http://example.com/.mp4',
@@ -210,6 +231,7 @@ define(
 
                     $.each(html5WrongUrls, function(index, link) {
                         it(link, function() {
+                            // eslint-disable-next-line no-var
                             var result = Utils.parseHTML5Link(link);
 
                             expect(result).toBeUndefined();
@@ -219,7 +241,7 @@ define(
             });
 
             it('Method: getYoutubeLink', function() {
-                // eslint-disable-next-line no-shadow
+                /* eslint-disable-next-line no-shadow, no-var */
                 var videoId = 'video_id',
                     result = Utils.getYoutubeLink(videoId),
                     expectedResult = 'http://youtu.be/' + videoId;
@@ -228,6 +250,7 @@ define(
             });
 
             describe('Method: parseLink', function() {
+                // eslint-disable-next-line no-var
                 var resultDataDict = {
                     html5: {
                         link: html5LinksList.mp4[0],
@@ -255,6 +278,7 @@ define(
 
                 $.each(resultDataDict, function(mode, data) {
                     it(mode, function() {
+                        // eslint-disable-next-line no-var
                         var result = Utils.parseLink(data.link);
 
                         expect(result).toEqual(data.resp);
@@ -263,7 +287,7 @@ define(
 
                 describe('Wrong arguments ', function() {
                     it('youtube videoId is wrong', function() {
-                        // eslint-disable-next-line no-shadow
+                        /* eslint-disable-next-line no-shadow, no-var */
                         var videoId = 'wrong_id',
                             link = 'http://youtu.be/' + videoId,
                             result = Utils.parseLink(link);
@@ -272,12 +296,14 @@ define(
                     });
 
                     it('no arguments', function() {
+                        // eslint-disable-next-line no-var
                         var result = Utils.parseLink();
 
                         expect(result).toBeUndefined();
                     });
 
                     it('wrong data type', function() {
+                        // eslint-disable-next-line no-var
                         var result = Utils.parseLink(1);
 
                         expect(result).toBeUndefined();

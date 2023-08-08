@@ -16,6 +16,7 @@
         'video/01_initialize.js',
         ['video/03_video_player.js', 'video/00_i18n.js', 'moment', 'underscore'],
         function(VideoPlayer, i18n, moment, _) {
+            /* eslint-disable-next-line no-var, no-redeclare */
             var moment = moment || window.moment;
             /**
      * @function
@@ -27,22 +28,27 @@
      *     available via this object.
      * @param {DOM element} element Container of the entire Video DOM element.
      */
+            // eslint-disable-next-line no-var
             var Initialize = function(state, element) {
+                    // eslint-disable-next-line no-use-before-define
                     _makeFunctionsPublic(state);
 
                     state.initialize(element)
+                        // eslint-disable-next-line consistent-return
                         .done(function() {
                             if (state.isYoutubeType()) {
                                 state.parseSpeed();
                             }
                             // On iPhones and iPods native controls are used.
                             if (/iP(hone|od)/i.test(state.isTouch[0])) {
+                                // eslint-disable-next-line no-use-before-define
                                 _hideWaitPlaceholder(state);
                                 state.el.trigger('initialize', arguments);
 
                                 return false;
                             }
 
+                            // eslint-disable-next-line no-use-before-define
                             _initializeModules(state, i18n)
                                 .done(function() {
                                     // On iPad ready state occurs just after start playing.
@@ -56,6 +62,7 @@
                                         state.trigger('videoControl.show', null);
                                     }
 
+                                    // eslint-disable-next-line no-use-before-define
                                     _hideWaitPlaceholder(state);
                                     state.el.trigger('initialize', arguments);
                                 });
@@ -110,6 +117,7 @@
      *     methods, modules) of the Video player.
      */
             function _makeFunctionsPublic(state) {
+                // eslint-disable-next-line no-use-before-define
                 bindTo(methodsDict, state, state);
             }
 
@@ -128,6 +136,7 @@
                 // Require JS. At the time when we reach this code, the stand alone
                 // HTML5 player is already loaded, so no further testing in that case
                 // is required.
+                // eslint-disable-next-line no-var
                 var video, onYTApiReady, setupOnYouTubeIframeAPIReady;
 
                 if (state.videoType === 'youtube') {
@@ -228,6 +237,7 @@
             }
 
             function loadYouTubeIFrameAPI(scriptTag) {
+                // eslint-disable-next-line no-var
                 var firstScriptTag = document.getElementsByTagName('script')[0];
                 firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
             }
@@ -273,6 +283,7 @@
                 // If none of the supported video formats can be played and there is no
                 // short-hand video links, than hide the spinner and show error message.
                 if (!state.config.sources.length) {
+                    // eslint-disable-next-line no-use-before-define
                     _hideWaitPlaceholder(state);
                     state.el
                         .find('.video-player div')
@@ -316,8 +327,11 @@
 
             // eslint-disable-next-line no-shadow
             function _initializeModules(state, i18n) {
+                // eslint-disable-next-line no-var
                 var dfd = $.Deferred(),
+                    // eslint-disable-next-line consistent-return
                     modulesList = $.map(state.modules, function(module) {
+                        // eslint-disable-next-line no-var
                         var options = state.options[module.moduleName] || {};
                         if (_.isFunction(module)) {
                             return module(state, i18n, options);
@@ -333,7 +347,9 @@
             }
 
             function _getConfiguration(data, storage) {
+                // eslint-disable-next-line no-var
                 var isBoolean = function(value) {
+                        // eslint-disable-next-line no-var
                         var regExp = /^true$/i;
                         return regExp.test(value.toString());
                     },
@@ -351,6 +367,7 @@
                         autoplay: isBoolean,
                         autohideHtml5: isBoolean,
                         autoAdvance: function(value) {
+                            // eslint-disable-next-line no-var
                             var shouldAutoAdvance = storage.getItem('auto_advance');
                             if (_.isUndefined(shouldAutoAdvance)) {
                                 return isBoolean(value) || false;
@@ -379,6 +396,7 @@
                         ytTestTimeout: function(value) {
                             value = parseInt(value, 10);
 
+                            // eslint-disable-next-line no-restricted-globals
                             if (!isFinite(value)) {
                                 value = 1500;
                             }
@@ -387,6 +405,7 @@
                         },
                         startTime: function(value) {
                             value = parseInt(value, 10);
+                            // eslint-disable-next-line no-restricted-globals
                             if (!isFinite(value) || value < 0) {
                                 return 0;
                             }
@@ -396,6 +415,7 @@
                         endTime: function(value) {
                             value = parseInt(value, 10);
 
+                            // eslint-disable-next-line no-restricted-globals
                             if (!isFinite(value) || value === 0) {
                                 return null;
                             }
@@ -509,11 +529,13 @@
             // The function set initial configuration and preparation.
 
             function initialize(element) {
+                // eslint-disable-next-line no-var
                 var self = this,
                     el = this.el,
                     id = this.id,
                     container = el.find('.video-wrapper'),
                     __dfd__ = $.Deferred(),
+                    // eslint-disable-next-line no-undef
                     isTouch = onTouchBasedDevice() || '';
 
                 if (isTouch) {
@@ -573,6 +595,7 @@
 
                     _waitForYoutubeApi(this);
 
+                    // eslint-disable-next-line no-var
                     var scriptTag = document.createElement('script');
 
                     scriptTag.src = this.config.ytApiUrl;
@@ -618,6 +641,7 @@
                 this.videos = {};
 
                 _.each(youtubeStreams.split(/,/), function(video) {
+                    // eslint-disable-next-line no-var
                     var speed;
                     video = video.split(/:/);
                     speed = this.speedToString(video[0]);
@@ -634,14 +658,17 @@
             //     example the length of the video can be determined from the meta
             //     data.
             function fetchMetadata() {
+                // eslint-disable-next-line no-var
                 var self = this,
                     metadataXHRs = [];
 
                 this.metadata = {};
 
+                // eslint-disable-next-line no-unused-vars
                 metadataXHRs = _.map(this.videos, function(url, speed) {
                     return self.getVideoMetadata(url, function(data) {
                         if (data.items.length > 0) {
+                            // eslint-disable-next-line no-var
                             var metaDataItem = data.items[0];
                             self.metadata[metaDataItem.id] = metaDataItem.contentDetails;
                         }
@@ -673,6 +700,7 @@
                 // HTML5 =          [0.75, 1, 1.25, 1.5, 2]
                 // Youtube Flash =  [0.75, 1, 1.25, 1.5]
                 // Youtube HTML5 =  [0.25, 0.5, 1, 1.5, 2]
+                // eslint-disable-next-line no-var
                 var map = {
                     0.25: '0.75', // Youtube HTML5 -> HTML5 or Youtube Flash
                     '0.50': '0.75', // Youtube HTML5 -> HTML5 or Youtube Flash
@@ -695,6 +723,7 @@
             }
 
             function getVideoMetadata(url, callback) {
+                // eslint-disable-next-line no-var
                 var youTubeEndpoint;
                 if (!(_.isString(url))) {
                     url = this.videos['1.0'] || '';
@@ -720,6 +749,7 @@
             }
 
             function youtubeId(speed) {
+                // eslint-disable-next-line no-var
                 var currentSpeed = this.isFlashMode() ? this.speed : '1.0';
 
                 return this.videos[speed]
@@ -742,6 +772,7 @@
      *                      Otherwise, `html5` is used by default.
      */
             function setPlayerMode(mode) {
+                // eslint-disable-next-line no-var
                 var supportedModes = ['html5', 'flash'];
 
                 mode = _.contains(supportedModes, mode) ? mode : 'html5';
@@ -786,6 +817,7 @@
             }
 
             function getCurrentLanguage() {
+                // eslint-disable-next-line no-var
                 var keys = _.keys(this.config.transcriptLanguages);
 
                 if (keys.length) {
@@ -815,6 +847,7 @@
      *     state.videoPlayer.pause({'param1': 10});
      */
             function trigger(objChain) {
+                // eslint-disable-next-line no-var
                 var extraParameters = Array.prototype.slice.call(arguments, 1),
                     i, tmpObj, chain;
 
@@ -829,6 +862,7 @@
                 while (chain.length) {
                     i = chain.shift();
 
+                    // eslint-disable-next-line no-prototype-builtins
                     if (tmpObj.hasOwnProperty(i)) {
                         tmpObj = tmpObj[i];
                     } else {

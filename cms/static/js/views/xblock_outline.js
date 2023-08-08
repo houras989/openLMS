@@ -13,12 +13,14 @@
  *  - scroll_offset - the scroll offset to use for the locator being shown
  *  - edit_display_name - true if the shown xblock's display name should be in inline edit mode
  */
+// eslint-disable-next-line no-undef
 define(['jquery', 'underscore', 'gettext', 'js/views/baseview', 'common/js/components/utils/view_utils',
     'js/views/utils/xblock_utils', 'js/views/xblock_string_field_editor',
     'edx-ui-toolkit/js/utils/string-utils', 'edx-ui-toolkit/js/utils/html-utils'],
 function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldEditor, StringUtils, HtmlUtils) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var XBlockOutlineView = BaseView.extend({
         // takes XBlockInfo as a model
 
@@ -50,6 +52,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
             // For cases in which we need to suppress the header controls during rendering, we'll
             // need to add the current model's id/locator to the set of expanded locators
             if (this.model.get('is_header_visible') !== null && !this.model.get('is_header_visible')) {
+                // eslint-disable-next-line no-var
                 var locator = this.model.get('id');
                 if (!_.isUndefined(this.expandedLocators) && !this.expandedLocators.contains(locator)) {
                     this.expandedLocators.add(locator);
@@ -66,6 +69,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         renderTemplate: function() {
+            // eslint-disable-next-line no-var
             var html = this.template(this.getTemplateContext());
             if (this.parentInfo) {
                 this.setElement($(html));
@@ -78,6 +82,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         getTemplateContext: function() {
+            // eslint-disable-next-line no-var
             var xblockInfo = this.model,
                 childInfo = xblockInfo.get('child_info'),
                 parentInfo = this.parentInfo,
@@ -115,10 +120,12 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         renderChildren: function() {
+            // eslint-disable-next-line no-var
             var self = this,
                 parentInfo = this.model;
             if (parentInfo.get('child_info')) {
                 _.each(this.model.get('child_info').children, function(childInfo) {
+                    // eslint-disable-next-line no-var
                     var childOutlineView = self.createChildView(childInfo, parentInfo);
                     childOutlineView.render();
                     self.addChildView(childOutlineView);
@@ -140,6 +147,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         addNameEditor: function() {
+            // eslint-disable-next-line no-var
             var self = this,
                 xblockField = this.$('.wrapper-xblock-field'),
                 XBlockOutlineFieldEditor, nameEditor;
@@ -163,7 +171,9 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         toggleExpandCollapse: function(event) {
             // The course outline page tracks expanded locators. The unit location sidebar does not.
             if (this.expandedLocators) {
+                // eslint-disable-next-line no-var
                 var locator = this.model.get('id');
+                // eslint-disable-next-line no-var
                 var wasExpanded = this.expandedLocators.contains(locator);
                 if (wasExpanded) {
                     this.expandedLocators.remove(locator);
@@ -192,6 +202,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
              * @param element The root element of this view.
              */
         addButtonActions: function(element) {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var self = this;
             element.find('.delete-button').click(_.bind(this.handleDeleteEvent, this));
             element.find('.duplicate-button').click(_.bind(this.handleDuplicateEvent, this));
@@ -211,6 +222,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         createChildView: function(childInfo, parentInfo, options) {
+            // eslint-disable-next-line no-var
             var viewClass = this.getChildViewClass();
             return new viewClass(_.extend({
                 model: childInfo,
@@ -222,7 +234,9 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
             }, options));
         },
 
+        // eslint-disable-next-line no-unused-vars
         onSync: function(event) {
+            // eslint-disable-next-line no-var
             var hasChangedAttributes = ViewUtils.hasChangedAttributes(
                 this.model,
                 ['visibility_state', 'child_info', 'display_name', 'highlights']
@@ -233,6 +247,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         onXBlockChange: function() {
+            // eslint-disable-next-line no-var
             var oldElement = this.$el,
                 viewState = this.initialState;
             this.render();
@@ -245,6 +260,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         setViewState: function(viewState) {
+            // eslint-disable-next-line no-var
             var locatorToShow = viewState.locator_to_show,
                 scrollOffset = viewState.scroll_offset || 0,
                 editDisplayName = viewState.edit_display_name,
@@ -258,6 +274,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
                 if (locatorElement.length > 0) {
                     ViewUtils.setScrollOffset(locatorElement, scrollOffset);
                 } else {
+                    // eslint-disable-next-line no-console
                     console.error('Failed to show item with locator ' + locatorToShow + '');
                 }
                 if (editDisplayName) {
@@ -293,6 +310,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         handleDeleteEvent: function(event) {
+            // eslint-disable-next-line no-var
             var self = this,
                 parentView = this.parentView,
                 xblockType = XBlockViewUtils.getXBlockType(this.model.get('category'), parentView.model, true);
@@ -311,6 +329,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
              * @returns {jquery Element} Appropriate parent element of xblock element.
              */
         getParentElement: function(xblockElement, xblockType) {
+            // eslint-disable-next-line no-var
             var xblockMap = {
                     unit: 'subsection',
                     subsection: 'section',
@@ -324,6 +343,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
              * Duplicate event handler.
              */
         handleDuplicateEvent: function(event) {
+            // eslint-disable-next-line no-var
             var self = this,
                 xblockType = XBlockViewUtils.getXBlockType(self.model.get('category'), self.parentView.model),
                 xblockElement = $(event.currentTarget).closest('.outline-item'),
@@ -343,6 +363,7 @@ function($, _, gettext, BaseView, ViewUtils, XBlockViewUtils, XBlockStringFieldE
         },
 
         handleAddEvent: function(event) {
+            // eslint-disable-next-line no-var
             var self = this,
                 $target = $(event.currentTarget),
                 category = $target.data('category');

@@ -9,6 +9,7 @@
         'common/js/components/views/paging_header',
         'common/js/components/views/paginated_view'
     ], function(_, gettext, TopicCardView, TeamUtils, PagingHeader, PaginatedView) {
+        // eslint-disable-next-line no-var
         var TopicsView = PaginatedView.extend({
             type: 'topics',
 
@@ -35,6 +36,7 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.collection.refresh()
                     .done(function() {
@@ -46,4 +48,5 @@
         });
         return TopicsView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

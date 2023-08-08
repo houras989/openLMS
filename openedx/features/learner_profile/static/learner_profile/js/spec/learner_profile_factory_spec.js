@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'backbone', 'jquery', 'underscore', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
@@ -17,6 +18,7 @@ define(
         'use strict';
 
         describe('edx.user.LearnerProfileFactory', function() {
+            // eslint-disable-next-line no-var
             var createProfilePage;
 
             beforeEach(function() {
@@ -50,6 +52,7 @@ define(
             };
 
             it('renders the full profile for a user', function() {
+                // eslint-disable-next-line no-var
                 var context,
                     learnerProfileView;
                 AjaxHelpers.requests(this);
@@ -62,6 +65,7 @@ define(
             });
 
             it("renders the limited profile for undefined 'year_of_birth'", function() {
+                // eslint-disable-next-line no-var
                 var context = createProfilePage(true, {year_of_birth: '', requires_parental_consent: true}),
                     learnerProfileView = context.learnerProfileView;
 
@@ -69,6 +73,7 @@ define(
             });
 
             it("doesn't show the mode toggle if badges are disabled", function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: false}),
                     tabbedView = context.learnerProfileView.tabbedView,
@@ -79,6 +84,7 @@ define(
             });
 
             it("doesn't show the mode toggle if badges fail to fetch", function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: false}),
                     tabbedView = context.learnerProfileView.tabbedView,
@@ -89,6 +95,7 @@ define(
             });
 
             it('renders the mode toggle if there are badges', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: true}),
                     tabbedView = context.learnerProfileView.tabbedView;
@@ -101,6 +108,7 @@ define(
             });
 
             it('renders the mode toggle if badges enabled but none exist', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: true}),
                     tabbedView = context.learnerProfileView.tabbedView;
@@ -113,6 +121,7 @@ define(
             });
 
             it('displays the badges when the accomplishments toggle is selected', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: true}),
                     learnerProfileView = context.learnerProfileView,
@@ -130,6 +139,7 @@ define(
             });
 
             it('displays a placeholder on the last page of badges', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: true}),
                     learnerProfileView = context.learnerProfileView,
@@ -147,6 +157,7 @@ define(
             });
 
             it('displays a placeholder when the accomplishments toggle is selected and no badges exist', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: true}),
                     learnerProfileView = context.learnerProfileView,
@@ -164,6 +175,7 @@ define(
             });
 
             it('shows a paginated list of badges', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: true}),
                     learnerProfileView = context.learnerProfileView,
@@ -179,6 +191,7 @@ define(
             });
 
             it('allows forward and backward navigation of badges', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     context = createProfilePage(true, {accomplishments_shared: true}),
                     learnerProfileView = context.learnerProfileView,
@@ -211,10 +224,12 @@ define(
             });
 
             it('renders the limited profile for under 13 users', function() {
+                // eslint-disable-next-line no-var
                 var context = createProfilePage(
                     true,
                     {year_of_birth: new Date().getFullYear() - 10, requires_parental_consent: true}
                 );
+                // eslint-disable-next-line no-var
                 var learnerProfileView = context.learnerProfileView;
                 LearnerProfileHelpers.expectLimitedProfileSectionsAndFieldsToBeRendered(learnerProfileView);
             });

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    /* eslint-disable-next-line no-undef, no-var */
     var editor = CodeMirror.fromTextArea(document.getElementById('id_content'), {
         mode: 'edx_markdown',
         matchBrackets: true,
@@ -8,6 +9,7 @@ $(document).ready(function() {
     });
 
     // Store the inital contents so we can compare for unsaved changes
+    // eslint-disable-next-line no-var
     var initialContents = editor.getValue();
 
     // The Wiki associates a label with the text area that has ID "id_content". However, when we swap in
@@ -16,7 +18,9 @@ $(document).ready(function() {
     // to leave that alone).
     editor.getInputField().setAttribute('id', 'id_codemirror_content');
     $(".control-label[for='id_content']")[0].setAttribute('for', 'id_codemirror_content');
+    // eslint-disable-next-line consistent-return
     window.onbeforeunload = function askConfirm() { // Warn the user before they navigate away
+        // eslint-disable-next-line eqeqeq
         if (editor.getValue() != initialContents) {
             return 'You have made changes to the article that have not been saved yet.';
         }

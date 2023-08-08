@@ -1,5 +1,6 @@
 // Backbone.js Application Model: Certificate
 
+// eslint-disable-next-line no-undef
 define([
     'underscore',
     'backbone',
@@ -14,6 +15,7 @@ function(_, Backbone, BackboneRelational, BackboneAssociations, gettext, CoffeeS
     SignatoryModel, SignatoryCollection) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var Certificate = Backbone.RelationalModel.extend({
         idAttribute: 'id',
         defaults: {
@@ -71,6 +73,7 @@ function(_, Backbone, BackboneRelational, BackboneAssociations, gettext, CoffeeS
             }
         },
 
+        // eslint-disable-next-line consistent-return
         validate: function(attrs) {
             // Ensure the provided attributes set meets our expectations for format, type, etc.
             if (!attrs.name.trim()) {
@@ -79,6 +82,7 @@ function(_, Backbone, BackboneRelational, BackboneAssociations, gettext, CoffeeS
                     attributes: {name: true}
                 };
             }
+            // eslint-disable-next-line no-var
             var allSignatoriesValid = _.every(attrs.signatories.models, function(signatory) {
                 return signatory.isValid();
             });

@@ -18,6 +18,7 @@
             this.view = new ResponseCommentShowView({
                 model: this.comment
             });
+            // eslint-disable-next-line no-undef
             return spyOn(this.view, 'convertMath');
         });
         it('defines the tag', function() {
@@ -30,6 +31,7 @@
         });
         describe('rendering', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 return spyOn(this.view, 'renderAttrs');
             });
             it('can be flagged for abuse', function() {
@@ -37,8 +39,11 @@
                 return expect(this.comment.get('abuse_flaggers')).toEqual(['123', '567']);
             });
             it('can be unflagged for abuse', function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var temp_array;
+                // eslint-disable-next-line camelcase
                 temp_array = [];
+                // eslint-disable-next-line camelcase
                 temp_array.push(window.user.get('id'));
                 this.comment.set('abuse_flaggers', temp_array);
                 this.comment.unflagAbuse();
@@ -57,7 +62,9 @@
                 return DiscussionViewSpecHelper.checkButtonEvents(this.view, '_delete', '.action-delete');
             });
             it('triggers the delete event', function() {
+                // eslint-disable-next-line no-var
                 var triggerTarget;
+                // eslint-disable-next-line no-undef
                 triggerTarget = jasmine.createSpy();
                 this.view.bind('comment:_delete', triggerTarget);
                 this.view._delete();
@@ -76,7 +83,9 @@
                 return DiscussionViewSpecHelper.checkButtonEvents(this.view, 'edit', '.action-edit');
             });
             it('triggers comment:edit when the edit button is clicked', function() {
+                // eslint-disable-next-line no-var
                 var triggerTarget;
+                // eslint-disable-next-line no-undef
                 triggerTarget = jasmine.createSpy();
                 this.view.bind('comment:edit', triggerTarget);
                 this.view.edit();
@@ -84,8 +93,10 @@
             });
         });
         describe('labels', function() {
+            // eslint-disable-next-line no-var
             var expectOneElement;
             expectOneElement = function(view, selector, visible) {
+                // eslint-disable-next-line no-var
                 var elements;
                 if (typeof visible === 'undefined' || visible === null) {
                     visible = true;

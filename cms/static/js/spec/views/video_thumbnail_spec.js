@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     ['jquery', 'underscore', 'backbone', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
         'js/views/video_thumbnail', 'js/views/previous_video_upload_list', 'common/js/spec_helpers/template_helpers'],
@@ -5,6 +6,7 @@ define(
         'use strict';
 
         describe('VideoThumbnailView', function() {
+            // eslint-disable-next-line no-var
             var IMAGE_UPLOAD_URL = '/videos/upload/image',
                 UPLOADED_IMAGE_URL = 'images/upload_success.jpg',
                 VIDEO_IMAGE_MAX_BYTES = 2 * 1024 * 1024,
@@ -36,6 +38,7 @@ define(
              * @param {Integer} videoViewIndex  Index of video on which videoThumbnailView would be based.
              */
             createVideoListView = function(videoImageUploadEnabled, modelData, numVideos, videoViewIndex) {
+                // eslint-disable-next-line no-var
                 var modelData = modelData || {}, // eslint-disable-line no-redeclare
                     numVideos = numVideos || 1, // eslint-disable-line no-redeclare
                     videoViewIndex = videoViewIndex || 0, // eslint-disable-line no-redeclare,
@@ -79,12 +82,14 @@ define(
             };
 
             createFakeImageFile = function(size, type) {
+                // eslint-disable-next-line no-var
                 var size = size || VIDEO_IMAGE_MIN_BYTES, // eslint-disable-line no-redeclare
                     type = type || 'image/jpeg'; // eslint-disable-line no-redeclare
                 return new Blob([Array(size + 1).join('i')], {type: type});
             };
 
             verifyStateInfo = function($thumbnail, state, onHover, additionalSRText) {
+                // eslint-disable-next-line no-var
                 var beforeIcon,
                     beforeText;
 
@@ -142,6 +147,7 @@ define(
             });
 
             it('shows the duration if available', function() {
+                // eslint-disable-next-line no-var
                 var $duration = $videoThumbnailEl.find('.thumbnail-wrapper .video-duration');
                 expect($duration).toExist();
                 expect($duration.find('.duration-text-machine').text().trim()).toEqual('0:42');
@@ -149,6 +155,7 @@ define(
             });
 
             it('calculates duration correctly', function() {
+                // eslint-disable-next-line no-var
                 var durations = [
                         {duration: -1},
                         {duration: 0},
@@ -173,6 +180,7 @@ define(
             });
 
             it('can upload image', function() {
+                // eslint-disable-next-line no-var
                 var videoViewIndex = 0,
                     $thumbnail = $videoThumbnailEl.find('.thumbnail-wrapper'),
                     requests = AjaxHelpers.requests(this),
@@ -206,6 +214,7 @@ define(
             });
 
             it('shows error state correctly', function() {
+                // eslint-disable-next-line no-var
                 var $thumbnail = $videoThumbnailEl.find('.thumbnail-wrapper'),
                     requests = AjaxHelpers.requests(this);
 
@@ -220,6 +229,7 @@ define(
             });
 
             it('calls readMessage with correct message', function() {
+                // eslint-disable-next-line no-var
                 var errorMessage = 'Image upload failed. This image file type is not supported. Supported file '
                     + 'types are ' + videoThumbnailView.getVideoImageSupportedFileFormats().humanize + '.',
                     successData = {
@@ -234,6 +244,7 @@ define(
                         }
                     };
 
+                // eslint-disable-next-line no-undef
                 spyOn(videoThumbnailView, 'readMessages');
 
                 videoThumbnailView.imageSelected({}, successData);
@@ -247,6 +258,7 @@ define(
             });
 
             it('should show error message in case of server error', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this);
 
                 videoThumbnailView.chooseFile();

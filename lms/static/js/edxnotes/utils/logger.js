@@ -2,6 +2,7 @@
     'use strict';
 
     define(['underscore', 'logger'], function(_, Logger) {
+        // eslint-disable-next-line no-var
         var loggers = [],
             NotesLogger, now, destroyLogger;
 
@@ -20,6 +21,7 @@
      * @param  {Object} logger An instance of Logger.
      */
         destroyLogger = function(logger) {
+            // eslint-disable-next-line no-var
             var index = loggers.length,
                 removedLogger;
 
@@ -54,6 +56,7 @@
      * @param  {String} logType The type of the log message.
      * @param  {Arguments} args Information that will be stored.
      */
+        // eslint-disable-next-line consistent-return
         NotesLogger.prototype._log = function(logType, args) {
             if (!this.logLevel) {
                 return false;
@@ -62,11 +65,14 @@
             this.updateHistory.apply(this, arguments);
             // Adds ID at the first place
             Array.prototype.unshift.call(args, this.id);
+            // eslint-disable-next-line no-console
             if (console && console[logType]) {
+                // eslint-disable-next-line no-console
                 if (console[logType].apply) {
-                    // eslint-disable-next-line prefer-spread
+                    /* eslint-disable-next-line prefer-spread, no-console */
                     console[logType].apply(console, args);
                 } else { // Do this for IE
+                    // eslint-disable-next-line no-console
                     console[logType](args.join(' '));
                 }
             }
@@ -113,6 +119,7 @@
      * Stops a timer that was previously started by calling NotesLogger.prototype.time().
      * @param {String} label Timer name.
      */
+        // eslint-disable-next-line consistent-return
         NotesLogger.prototype.timeEnd = function(label) {
             if (!this.timeStorage[label]) {
                 return null;
@@ -133,6 +140,7 @@
      * @param  {Number}  timeout   Optional timeout for the ajax request in ms.
      */
         NotesLogger.prototype.emit = function(eventName, data, timeout) {
+            // eslint-disable-next-line no-var
             var args = [eventName, data];
             this.log(eventName, data);
             if (timeout) {
@@ -144,6 +152,7 @@
 
         return {
             getLogger: function(id, mode) {
+                // eslint-disable-next-line no-var
                 var logger = new NotesLogger(id, mode);
                 loggers.push(logger);
                 return logger;
@@ -151,4 +160,5 @@
             destroyLogger: destroyLogger
         };
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

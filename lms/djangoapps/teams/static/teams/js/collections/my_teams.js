@@ -2,6 +2,7 @@
     'use strict';
 
     define(['teams/js/collections/team'], function(TeamCollection) {
+        // eslint-disable-next-line no-var
         var MyTeamsCollection = TeamCollection.extend({
             queryParams: {
                 username: function() {
@@ -19,4 +20,5 @@
         });
         return MyTeamsCollection;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

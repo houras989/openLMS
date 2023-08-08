@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery',
     'backbone',
@@ -12,6 +13,7 @@ define([
     'use strict';
 
     describe('Instructor Tools', function() {
+        // eslint-disable-next-line no-var
         var view,
             createInstructorTools = function() {
                 return new InstructorToolsView({
@@ -38,9 +40,12 @@ define([
         beforeEach(function() {
             setFixtures('<div id="page-prompt"></div>');
             PageHelpers.preventBackboneChangingUrl();
+            // eslint-disable-next-line no-undef
             spyOn(Backbone.history, 'navigate');
+            // eslint-disable-next-line no-undef
             spyOn(TeamUtils, 'showMessage');
             view = createInstructorTools().render();
+            // eslint-disable-next-line no-undef
             spyOn(view.teamEvents, 'trigger');
         });
 
@@ -51,6 +56,7 @@ define([
         });
 
         it('can delete a team and shows a success message', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             deleteTeam(view, true);
             AjaxHelpers.expectJsonRequest(requests, 'DELETE', view.team.url, null);
@@ -69,6 +75,7 @@ define([
         });
 
         it('can cancel team deletion', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             deleteTeam(view, false);
             AjaxHelpers.expectNoRequests(requests);
@@ -76,6 +83,7 @@ define([
         });
 
         it('shows a success message after receiving a 404', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             deleteTeam(view, true);
             AjaxHelpers.respondWithError(requests, 404);

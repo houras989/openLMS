@@ -1,7 +1,9 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'js/utils/navigation'], function($) {
     'use strict';
 
     describe('Course Navigation Accordion', function() {
+        // eslint-disable-next-line no-var
         var $accordion, chapterMenu;
 
         function keyPressEvent(key) {
@@ -15,6 +17,7 @@ define(['jquery', 'js/utils/navigation'], function($) {
             chapterMenu = $accordion.children('.chapter-content-container').children('.chapter-menu');
 
             this.KEY = $.ui.keyCode;
+            // eslint-disable-next-line no-undef
             spyOn($.fn, 'focus').and.callThrough();
             edx.util.navigation.init();
         });

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'backbone', 'js/views/utils/xblock_utils', 'js/utils/templates',
     'js/views/modals/course_outline_modals', 'edx-ui-toolkit/js/utils/html-utils'],
@@ -6,6 +7,7 @@ function(
 ) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var CourseHighlightsEnableView = Backbone.View.extend({
         events: {
             'click button.status-highlights-enabled-value': 'handleEnableButtonPress',
@@ -24,6 +26,7 @@ function(
         },
 
         highlightsEnableXBlock: function() {
+            // eslint-disable-next-line no-var
             var modal = CourseOutlineModalsFactory.getModal('highlights_enable', this.model, {
                 onSave: this.refresh.bind(this),
                 xblockType: XBlockViewUtils.getXBlockType(
@@ -44,6 +47,7 @@ function(
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var html = this.template(this.model.attributes);
             HtmlUtils.setHtml(this.$el, HtmlUtils.HTML(html));
             return this;

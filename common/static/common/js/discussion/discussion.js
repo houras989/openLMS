@@ -2,8 +2,10 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -19,8 +21,10 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.Discussion = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(Discussion, _super);
 
             function Discussion() {
@@ -30,6 +34,7 @@
             Discussion.prototype.model = Thread;
 
             Discussion.prototype.initialize = function(models, options) {
+                // eslint-disable-next-line no-var
                 var self = this;
                 if (!options) {
                     options = {};
@@ -48,6 +53,7 @@
             };
 
             Discussion.prototype.find = function(id) {
+                // eslint-disable-next-line no-undef
                 return _.first(this.where({
                     id: id
                 }));
@@ -72,7 +78,9 @@
                 }
             };
 
+            // eslint-disable-next-line consistent-return
             Discussion.prototype.addThread = function(thread) {
+                // eslint-disable-next-line no-var
                 var model;
                 if (!this.find(thread.id)) {
                     model = new Thread(thread);
@@ -81,18 +89,23 @@
                 }
             };
 
+            // eslint-disable-next-line camelcase
             Discussion.prototype.retrieveAnotherPage = function(mode, options, sort_options, error) {
+                // eslint-disable-next-line no-var
                 var data, url,
                     self = this;
                 if (!options) {
                     options = {};
                 }
+                // eslint-disable-next-line camelcase
                 if (!sort_options) {
+                    // eslint-disable-next-line camelcase
                     sort_options = {};
                 }
                 data = {
                     page: this.current_page + 1
                 };
+                // eslint-disable-next-line no-undef
                 if (_.contains(['unread', 'unanswered', 'flagged'], options.filter)) {
                     data[options.filter] = true;
                 }
@@ -119,7 +132,9 @@
                 if (options.group_id) {
                     data.group_id = options.group_id;
                 }
+                // eslint-disable-next-line camelcase
                 data.sort_key = sort_options.sort_key || 'activity';
+                // eslint-disable-next-line camelcase
                 data.sort_order = sort_options.sort_order || 'desc';
                 return DiscussionUtil.safeAjax({
                     $elem: this.$el,
@@ -127,10 +142,13 @@
                     data: data,
                     dataType: 'json',
                     success: function(response) {
+                        /* eslint-disable-next-line camelcase, no-var */
                         var models, new_collection, new_threads;
                         models = self.models;
+                        // eslint-disable-next-line camelcase
                         new_threads = [
                             (function() {
+                                // eslint-disable-next-line no-var
                                 var _i, _len, _ref, _results;
                                 _ref = response.discussion_data;
                                 _results = [];
@@ -141,6 +159,7 @@
                                 return _results;
                             }())
                         ][0];
+                        /* eslint-disable-next-line camelcase, no-undef */
                         new_collection = _.union(models, new_threads);
                         Content.loadContentInfos(response.annotated_content_info);
                         self.pages = response.num_pages;
@@ -171,20 +190,27 @@
             };
 
             Discussion.prototype.sortByVotes = function(thread1, thread2) {
+                /* eslint-disable-next-line camelcase, no-var */
                 var thread1_count, thread2_count;
+                /* eslint-disable-next-line camelcase, radix */
                 thread1_count = parseInt(thread1.get('votes').up_count);
+                /* eslint-disable-next-line camelcase, radix */
                 thread2_count = parseInt(thread2.get('votes').up_count);
                 return this.pinnedThreadsSortComparatorWithCount(thread1, thread2, thread1_count, thread2_count);
             };
 
             Discussion.prototype.sortByComments = function(thread1, thread2) {
+                /* eslint-disable-next-line camelcase, no-var */
                 var thread1_count, thread2_count;
+                /* eslint-disable-next-line camelcase, radix */
                 thread1_count = parseInt(thread1.get('comments_count'));
+                /* eslint-disable-next-line camelcase, radix */
                 thread2_count = parseInt(thread2.get('comments_count'));
                 return this.pinnedThreadsSortComparatorWithCount(thread1, thread2, thread1_count, thread2_count);
             };
 
             Discussion.prototype.pinnedThreadsSortComparatorWithCount = function(
+                // eslint-disable-next-line camelcase
                 thread1, thread2, thread1_count, thread2_count
             ) {
                 if (thread1.get('pinned') && !thread2.get('pinned')) {
@@ -192,8 +218,10 @@
                 } else if (thread2.get('pinned') && !thread1.get('pinned')) {
                     return 1;
                 } else {
+                    // eslint-disable-next-line camelcase
                     if (thread1_count > thread2_count) {
                         return -1;
+                    // eslint-disable-next-line camelcase
                     } else if (thread2_count > thread1_count) {
                         return 1;
                     } else {
@@ -207,6 +235,7 @@
             };
 
             Discussion.prototype.pinnedThreadsSortComparatorWithDate = function(thread, ascending) {
+                // eslint-disable-next-line no-var
                 var preferredDate, threadLastActivityAtTime, today;
                 threadLastActivityAtTime = new Date(thread.get('last_activity_at')).getTime();
                 if (thread.get('pinned')) {
@@ -223,6 +252,7 @@
             };
 
             return Discussion;
+        // eslint-disable-next-line no-undef
         }(Backbone.Collection));
     }
 }).call(window);

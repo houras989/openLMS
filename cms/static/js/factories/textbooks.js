@@ -1,4 +1,5 @@
 import * as gettext from 'gettext';
+// eslint-disable-next-line no-unused-vars
 import * as Section from 'js/models/section';
 import * as TextbookCollection from 'js/collections/textbook';
 import * as ListTextbooksView from 'js/views/list_textbooks';
@@ -7,6 +8,7 @@ import './base';
 // eslint-disable-next-line no-unused-expressions
 'use strict';
 export default function TextbooksFactory(textbooksJson) {
+    // eslint-disable-next-line no-var
     var textbooks = new TextbookCollection(textbooksJson, {parse: true}),
         tbView = new ListTextbooksView({collection: textbooks});
 
@@ -14,7 +16,9 @@ export default function TextbooksFactory(textbooksJson) {
     $('.nav-actions .new-button').click(function(event) {
         tbView.addOne(event);
     });
+    // eslint-disable-next-line consistent-return
     $(window).on('beforeunload', function() {
+        // eslint-disable-next-line no-var
         var dirty = textbooks.find(function(textbook) { return textbook.isDirty(); });
         if (dirty) {
             return gettext('You have unsaved changes. Do you really want to leave this page?');

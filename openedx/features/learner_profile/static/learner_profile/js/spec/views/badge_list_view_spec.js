@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone',
     'jquery',
@@ -10,11 +11,16 @@ function(Backbone, $, _, PagingCollection, LearnerProfileHelpers, BadgeListView)
     'use strict';
 
     describe('edx.user.BadgeListView', function() {
+        // eslint-disable-next-line no-var
         var view;
 
+        // eslint-disable-next-line no-var
         var createView = function(badges, pages, page, hasNextPage) {
+            // eslint-disable-next-line no-var
             var badgeCollection = new PagingCollection();
+            // eslint-disable-next-line no-var
             var models = [];
+            // eslint-disable-next-line no-var
             var badgeList;
             badgeCollection.url = '/api/badges/v1/assertions/user/staff/';
             _.each(badges, function(element) {
@@ -39,6 +45,7 @@ function(Backbone, $, _, PagingCollection, LearnerProfileHelpers, BadgeListView)
         });
 
         it('there is a single row if there is only one badge', function() {
+            // eslint-disable-next-line no-var
             var rows;
             view = createView([LearnerProfileHelpers.makeBadge(1)], 1, 1, false);
             view.render();
@@ -47,6 +54,7 @@ function(Backbone, $, _, PagingCollection, LearnerProfileHelpers, BadgeListView)
         });
 
         it('accomplishments placeholder is visible on a last page', function() {
+            // eslint-disable-next-line no-var
             var placeholder;
             view = createView([LearnerProfileHelpers.makeBadge(1)], 2, 2, false);
             view.render();
@@ -55,6 +63,7 @@ function(Backbone, $, _, PagingCollection, LearnerProfileHelpers, BadgeListView)
         });
 
         it('accomplishments placeholder to be not visible on a first page', function() {
+            // eslint-disable-next-line no-var
             var placeholder;
             view = createView([LearnerProfileHelpers.makeBadge(1)], 1, 2, true);
             view.render();
@@ -63,8 +72,11 @@ function(Backbone, $, _, PagingCollection, LearnerProfileHelpers, BadgeListView)
         });
 
         it('badges are in two columns (checked by counting rows for a known number of badges)', function() {
+            // eslint-disable-next-line no-var
             var badges = [];
+            // eslint-disable-next-line no-var
             var placeholder;
+            // eslint-disable-next-line no-var
             var rows;
             _.each(_.range(4), function(item) {
                 badges.push(LearnerProfileHelpers.makeBadge(item));

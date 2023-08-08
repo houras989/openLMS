@@ -2,6 +2,7 @@
  * This class defines a details view for content experiment group configurations.
  * It is expected to be instantiated with a GroupConfiguration model.
  */
+// eslint-disable-next-line no-undef
 define([
     'js/views/baseview', 'underscore', 'gettext', 'underscore.string',
     'edx-ui-toolkit/js/utils/string-utils', 'edx-ui-toolkit/js/utils/html-utils'
@@ -9,6 +10,7 @@ define([
 function(BaseView, _, gettext, str, StringUtils, HtmlUtils) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var GroupConfigurationDetailsView = BaseView.extend({
         tagName: 'div',
         events: {
@@ -18,6 +20,7 @@ function(BaseView, _, gettext, str, StringUtils, HtmlUtils) {
         },
 
         className: function() {
+            // eslint-disable-next-line no-var
             var index = this.model.collection.indexOf(this.model);
 
             return [
@@ -35,6 +38,7 @@ function(BaseView, _, gettext, str, StringUtils, HtmlUtils) {
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var attrs = $.extend({}, this.model.attributes, {
                 groupsCountMessage: this.getGroupsCountTitle(),
                 usageCountMessage: this.getUsageCountTitle(),
@@ -61,7 +65,9 @@ function(BaseView, _, gettext, str, StringUtils, HtmlUtils) {
         },
 
         getGroupsCountTitle: function() {
+            // eslint-disable-next-line no-var
             var count = this.model.get('groups').length,
+                // eslint-disable-next-line no-redeclare
                 /* globals ngettext */
                 message = ngettext(
                     /*
@@ -76,6 +82,7 @@ function(BaseView, _, gettext, str, StringUtils, HtmlUtils) {
         },
 
         getUsageCountTitle: function() {
+            // eslint-disable-next-line no-var
             var count = this.model.get('usage').length;
 
             if (count === 0) {

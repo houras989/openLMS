@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -19,26 +19,37 @@
     ], function(
         gettext, $, _, Backbone,
         FieldViews,
+        // eslint-disable-next-line camelcase
         field_text_account_template,
+        // eslint-disable-next-line camelcase
         field_readonly_account_template,
+        // eslint-disable-next-line camelcase
         field_link_account_template,
+        // eslint-disable-next-line camelcase
         field_dropdown_account_template,
+        // eslint-disable-next-line camelcase
         field_social_link_template,
+        // eslint-disable-next-line camelcase
         field_order_history_template,
         StringUtils,
         HtmlUtils
     ) {
+        // eslint-disable-next-line no-var
         var AccountSettingsFieldViews = {
             ReadonlyFieldView: FieldViews.ReadonlyFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_readonly_account_template
             }),
             TextFieldView: FieldViews.TextFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_text_account_template
             }),
             DropdownFieldView: FieldViews.DropdownFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_dropdown_account_template
             }),
             EmailFieldView: FieldViews.TextFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_text_account_template,
                 successMessage: function() {
                     return HtmlUtils.joinHtml(
@@ -51,6 +62,7 @@
                 }
             }),
             LanguagePreferenceFieldView: FieldViews.DropdownFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_dropdown_account_template,
 
                 initialize: function(options) {
@@ -59,6 +71,7 @@
                 },
 
                 revertValue: function(event) {
+                    // eslint-disable-next-line no-var
                     var attributes = {},
                         oldPrefLang = $(event.target).data('old-lang-code');
 
@@ -69,11 +82,13 @@
                 },
 
                 saveSucceeded: function() {
+                    // eslint-disable-next-line no-var
                     var data = {
                         language: this.modelValue(),
                         next: window.location.href
                     };
 
+                    // eslint-disable-next-line no-var
                     var view = this;
                     $.ajax({
                         type: 'POST',
@@ -96,6 +111,7 @@
 
             }),
             TimeZoneFieldView: FieldViews.DropdownFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_dropdown_account_template,
 
                 initialize: function(options) {
@@ -109,12 +125,14 @@
                 },
 
                 updateCountrySubheader: function(user) {
+                    // eslint-disable-next-line no-var
                     var view = this;
                     $.ajax({
                         type: 'GET',
                         url: '/api/user/v1/preferences/time_zones/',
                         data: {country_code: user.attributes.country},
                         success: function(data) {
+                            // eslint-disable-next-line no-var
                             var countryTimeZones = $.map(data, function(timeZoneInfo) {
                                 return [[timeZoneInfo.time_zone, timeZoneInfo.description]];
                             });
@@ -128,6 +146,7 @@
                 },
 
                 updateValueInField: function() {
+                    // eslint-disable-next-line no-var
                     var options;
                     if (this.modelValue()) {
                         options = [[this.modelValue(), this.displayValue(this.modelValue())]];
@@ -140,11 +159,13 @@
                 },
 
                 replaceOrAddGroupOption: function(title, options) {
+                    // eslint-disable-next-line no-var
                     var groupOption = {
                         groupTitle: gettext(title),
                         selectOptions: options
                     };
 
+                    // eslint-disable-next-line no-var
                     var index = _.findIndex(this.options.groupOptions, function(group) {
                         return group.groupTitle === gettext(title);
                     });
@@ -158,6 +179,7 @@
             }),
             PasswordFieldView: FieldViews.LinkFieldView.extend({
                 fieldType: 'button',
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_link_account_template,
                 events: {
                     'click button': 'linkClicked'
@@ -173,9 +195,11 @@
                     this.resetPassword(event);
                 },
                 resetPassword: function() {
+                    // eslint-disable-next-line no-var
                     var data = {};
                     data[this.options.emailAttribute] = this.model.get(this.options.emailAttribute);
 
+                    // eslint-disable-next-line no-var
                     var view = this;
                     $.ajax({
                         type: 'POST',
@@ -193,12 +217,14 @@
                     });
                 },
                 toggleDisableButton: function(disabled) {
+                    // eslint-disable-next-line no-var
                     var button = this.$('#u-field-link-' + this.options.valueAttribute);
                     if (button) {
                         button.prop('disabled', disabled);
                     }
                 },
                 setMessageTimeout: function() {
+                    // eslint-disable-next-line no-var
                     var view = this;
                     setTimeout(function() {
                         view.showHelpMessage();
@@ -225,8 +251,10 @@
                 }
             }),
             LanguageProficienciesFieldView: FieldViews.DropdownFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_dropdown_account_template,
                 modelValue: function() {
+                    // eslint-disable-next-line no-var
                     var modelValue = this.model.get(this.options.valueAttribute);
                     if (_.isArray(modelValue) && modelValue.length > 0) {
                         return modelValue[0].code;
@@ -235,6 +263,7 @@
                     }
                 },
                 saveValue: function() {
+                    // eslint-disable-next-line no-var
                     var attributes = {},
                         value = '';
                     if (this.persistChanges === true) {
@@ -258,7 +287,9 @@
                 },
 
                 modelValue: function() {
+                    // eslint-disable-next-line no-var
                     var socialLinks = this.model.get(this.options.valueAttribute);
+                    // eslint-disable-next-line no-var
                     for (var i = 0; i < socialLinks.length; i++) { // eslint-disable-line vars-on-top
                         if (socialLinks[i].platform === this.options.platform) {
                             return socialLinks[i].social_link;
@@ -267,6 +298,7 @@
                     return null;
                 },
                 saveValue: function() {
+                    // eslint-disable-next-line no-var
                     var attributes, value;
                     if (this.persistChanges === true) {
                         attributes = {};
@@ -293,7 +325,9 @@
                 },
 
                 modelValue: function() {
+                    // eslint-disable-next-line no-var
                     var extendedProfileFields = this.model.get(this.options.valueAttribute);
+                    // eslint-disable-next-line no-var
                     for (var i = 0; i < extendedProfileFields.length; i++) { // eslint-disable-line vars-on-top
                         if (extendedProfileFields[i].field_name === this.options.fieldName) {
                             return extendedProfileFields[i].field_value;
@@ -302,6 +336,7 @@
                     return null;
                 },
                 saveValue: function() {
+                    // eslint-disable-next-line no-var
                     var attributes, value;
                     if (this.persistChanges === true) {
                         attributes = {};
@@ -315,9 +350,12 @@
                 }
             }),
             ExtendedFieldListFieldView: FieldViews.DropdownFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_dropdown_account_template,
                 modelValue: function() {
+                    // eslint-disable-next-line no-var
                     var extendedProfileFields = this.model.get(this.options.valueAttribute);
+                    // eslint-disable-next-line no-var
                     for (var i = 0; i < extendedProfileFields.length; i++) { // eslint-disable-line vars-on-top
                         if (extendedProfileFields[i].field_name === this.options.fieldName) {
                             return extendedProfileFields[i].field_value;
@@ -326,6 +364,7 @@
                     return null;
                 },
                 saveValue: function() {
+                    // eslint-disable-next-line no-var
                     var attributes = {},
                         value;
                     if (this.persistChanges === true) {
@@ -339,6 +378,7 @@
                 }
             }),
             AuthFieldView: FieldViews.LinkFieldView.extend({
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_social_link_template,
                 className: function() {
                     return 'u-field u-field-social u-field-' + this.options.valueAttribute;
@@ -349,6 +389,7 @@
                     _.bindAll(this, 'redirect_to', 'disconnect', 'successMessage', 'inProgressMessage');
                 },
                 render: function() {
+                    // eslint-disable-next-line no-var
                     var linkTitle = '',
                         linkClass = '',
                         subTitle = '',
@@ -406,10 +447,12 @@
                     window.location.href = url;
                 },
                 disconnect: function() {
+                    // eslint-disable-next-line no-var
                     var data = {};
 
                     // Disconnects the provider from the user's edX account.
                     // See python-social-auth docs for more information.
+                    // eslint-disable-next-line no-var
                     var view = this;
                     $.ajax({
                         type: 'POST',
@@ -438,6 +481,7 @@
 
             OrderHistoryFieldView: FieldViews.ReadonlyFieldView.extend({
                 fieldType: 'orderHistory',
+                // eslint-disable-next-line camelcase
                 fieldTemplate: field_order_history_template,
 
                 initialize: function(options) {
@@ -463,4 +507,5 @@
 
         return AccountSettingsFieldViews;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

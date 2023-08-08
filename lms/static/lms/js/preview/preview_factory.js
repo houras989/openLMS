@@ -4,6 +4,7 @@
     define(['jquery', 'common/js/components/utils/view_utils'],
         function($, ViewUtils) {
             return function(options) {
+                // eslint-disable-next-line no-var
                 var $selectElement = $('.action-preview-select'),
                     $userNameElement = $('.action-preview-username'),
                     $userNameContainer = $('.action-preview-username-container');
@@ -18,7 +19,9 @@
                     $userNameElement.val(options.masqueradeUsername);
                 }
 
+                // eslint-disable-next-line consistent-return
                 $selectElement.change(function() {
+                    // eslint-disable-next-line no-var
                     var selectedOption;
                     if ($selectElement.attr('disabled')) {
                         return alert(gettext('You cannot view the course as a student or beta tester before the course release date.')); // eslint-disable-line max-len, no-alert
@@ -28,6 +31,7 @@
                         $userNameContainer.css('display', 'inline-block');
                     } else {
                         $userNameContainer.hide();
+                        // eslint-disable-next-line no-use-before-define
                         masquerade(selectedOption);
                     }
                 });
@@ -44,10 +48,12 @@
                 });
 
                 $userNameElement.change(function() {
+                    // eslint-disable-next-line no-use-before-define
                     masquerade($selectElement.find('option:selected'));
                 });
 
                 function masquerade(selectedOption) {
+                    // eslint-disable-next-line no-var
                     var data = {
                         role: selectedOption.val() === 'staff' ? 'staff' : 'student',
                         user_partition_id: selectedOption.data('partition-id'),
@@ -76,4 +82,5 @@
                 }
             };
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

@@ -1,9 +1,11 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'annotator_1.2.9', 'js/edxnotes/views/notes_factory'
 ], function($, _, Annotator, NotesFactory) {
     'use strict';
 
     describe('EdxNotes Shim', function() {
+        // eslint-disable-next-line no-var
         var annotators, highlights;
 
         function checkAnnotatorIsFrozen(annotator) {
@@ -19,6 +21,7 @@ define([
         }
 
         function checkClickEventsNotBound(namespace) {
+            // eslint-disable-next-line no-var
             var events = $._data(document, 'events').click;
 
             _.each(events, function(event) {
@@ -39,10 +42,14 @@ define([
             ];
             _.each(annotators, function(annotator) {
                 highlights.push($('<span class="annotator-hl" />').appendTo(annotator.element));
+                // eslint-disable-next-line no-undef
                 spyOn(annotator, 'onHighlightClick').and.callThrough();
+                // eslint-disable-next-line no-undef
                 spyOn(annotator, 'onHighlightMouseover').and.callThrough();
+                // eslint-disable-next-line no-undef
                 spyOn(annotator, 'startViewerHideTimer').and.callThrough();
             });
+            // eslint-disable-next-line no-undef
             spyOn($.fn, 'off').and.callThrough();
         });
 
@@ -60,6 +67,7 @@ define([
         });
 
         it('clicking on highlights does not open the viewer when the editor is opened', function() {
+            // eslint-disable-next-line no-undef
             spyOn(annotators[1].editor, 'isShown').and.returnValue(false);
             highlights[0].click();
             annotators[1].editor.isShown.and.returnValue(true);
@@ -141,6 +149,7 @@ define([
         });
 
         it('should hide viewer when close button is clicked', function() {
+            // eslint-disable-next-line no-var
             var close,
                 annotation = {
                     id: '01',
@@ -155,25 +164,34 @@ define([
         });
 
         describe('_setupViewer', function() {
+            // eslint-disable-next-line no-var
             var mockViewer = null;
 
             beforeEach(function() {
+                // eslint-disable-next-line no-var
                 var $element = $('<div />');
                 mockViewer = {
                     fields: [],
                     element: $element
                 };
 
+                // eslint-disable-next-line no-undef
                 mockViewer.on = jasmine.createSpy().and.returnValue(mockViewer);
+                // eslint-disable-next-line no-undef
                 mockViewer.hide = jasmine.createSpy().and.returnValue(mockViewer);
+                // eslint-disable-next-line no-undef
                 mockViewer.destroy = jasmine.createSpy().and.returnValue(mockViewer);
+                // eslint-disable-next-line no-undef
                 mockViewer.addField = jasmine.createSpy().and.callFake(function(options) {
                     mockViewer.fields.push(options);
                     return mockViewer;
                 });
 
+                // eslint-disable-next-line no-undef
                 spyOn($element, 'bind').and.returnValue($element);
+                // eslint-disable-next-line no-undef
                 spyOn($element, 'appendTo').and.returnValue($element);
+                // eslint-disable-next-line no-undef
                 spyOn(Annotator, 'Viewer').and.returnValue(mockViewer);
 
                 annotators[0]._setupViewer();
@@ -188,6 +206,7 @@ define([
             });
 
             it('should setup the default text field', function() {
+                // eslint-disable-next-line no-var
                 var args = mockViewer.addField.calls.mostRecent().args[0];
 
                 expect(mockViewer.addField.calls.count()).toBe(1);
@@ -195,6 +214,7 @@ define([
             });
 
             it('should set the contents of the field on load', function() {
+                // eslint-disable-next-line no-var
                 var field = document.createElement('div'),
                     annotation = {text: 'text \nwith\r\nline\n\rbreaks \r'};
 
@@ -203,6 +223,7 @@ define([
             });
 
             it('should set the contents of the field to placeholder text when empty', function() {
+                // eslint-disable-next-line no-var
                 var field = document.createElement('div'),
                     annotation = {text: ''};
 
@@ -211,8 +232,10 @@ define([
             });
 
             it('should setup the default text field to publish an event on load', function() {
+                // eslint-disable-next-line no-var
                 var field = document.createElement('div'),
                     annotation = {text: ''},
+                    // eslint-disable-next-line no-undef
                     callback = jasmine.createSpy();
 
                 annotators[0].on('annotationViewerTextField', callback);
@@ -239,6 +262,7 @@ define([
 
         describe('TagsPlugin', function() {
             it('should add ARIA label information to the viewer', function() {
+                // eslint-disable-next-line no-var
                 var tagDiv,
                     annotation = {
                         id: '01',
@@ -257,6 +281,7 @@ define([
             });
 
             it('should add screen reader label to the editor', function() {
+                // eslint-disable-next-line no-var
                 var srLabel, editor, inputId;
 
                 // We don't know exactly what the input ID will be (depends on number of annotatable components shown),

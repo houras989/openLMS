@@ -2,14 +2,18 @@
     'use strict';
 
     describe('VideoPlaySkipControl', function() {
+        // eslint-disable-next-line no-var
         var state, oldOTBD;
 
         beforeEach(function() {
             oldOTBD = window.onTouchBasedDevice;
+            // eslint-disable-next-line no-undef
             window.onTouchBasedDevice = jasmine
                 .createSpy('onTouchBasedDevice').and.returnValue(null);
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer('video_with_bumper.html');
             $('.poster .btn-play').click();
+            // eslint-disable-next-line no-undef
             spyOn(state.bumperState.videoCommands, 'execute');
         });
 
@@ -21,6 +25,7 @@
             }
             window.onTouchBasedDevice = oldOTBD;
             if (state.videoPlayer) {
+                // eslint-disable-next-line no-undef
                 _.result(state.videoPlayer, 'destroy');
             }
         });
@@ -42,14 +47,17 @@
 
         it('can skip the video on click', function() {
             state.el.trigger('play');
+            // eslint-disable-next-line no-undef
             spyOn(state.bumperState.videoPlayer, 'isPlaying').and.returnValue(true);
             $('.video_control.skip').first().click();
             expect(state.bumperState.videoCommands.execute).toHaveBeenCalledWith('skip');
         });
 
         it('can destroy itself', function() {
+            // eslint-disable-next-line no-var
             var plugin = state.bumperState.videoPlaySkipControl,
                 el = plugin.el;
+            // eslint-disable-next-line no-undef
             spyOn($.fn, 'off').and.callThrough();
             plugin.destroy();
             expect(state.bumperState.videoPlaySkipControl).toBeUndefined();

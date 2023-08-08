@@ -32,6 +32,7 @@
             },
 
             refreshState: function() {
+                // eslint-disable-next-line no-var
                 var searchField = this.$('.search-field'),
                     clearButton = this.$('.action-clear'),
                     searchString = $.trim(searchField.val());
@@ -56,10 +57,12 @@
                 return this;
             },
 
+            // eslint-disable-next-line no-unused-vars
             setMouseOverState: function(event) {
                 this.mouseOverClear = true;
             },
 
+            // eslint-disable-next-line no-unused-vars
             setMouseOutState: function(event) {
                 this.mouseOverClear = false;
             },
@@ -73,6 +76,7 @@
             },
 
             performSearch: function(event) {
+                // eslint-disable-next-line no-var
                 var searchField = this.$('.search-field'),
                     searchString = $.trim(searchField.val());
                 event.preventDefault();
@@ -89,4 +93,5 @@
             }
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

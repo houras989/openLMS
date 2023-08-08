@@ -10,7 +10,9 @@
     ],
     function($, _, TemplateHelpers, AjaxHelpers, HintedLoginView) {
         describe('edx.student.account.HintedLoginView', function() {
+            // eslint-disable-next-line no-var
             var view = null,
+                // eslint-disable-next-line no-unused-vars
                 requests = null,
                 PLATFORM_NAME = 'edX',
                 THIRD_PARTY_AUTH = {
@@ -42,6 +44,7 @@
                     ]
                 };
 
+            // eslint-disable-next-line no-var
             var createHintedLoginView = function(hintedProvider) {
                 // Initialize the login view
                 view = new HintedLoginView({
@@ -51,6 +54,7 @@
                 });
 
                 // Mock the redirect call
+                // eslint-disable-next-line no-undef
                 spyOn(view, 'redirect').and.callFake(function() {});
 
                 view.render();
@@ -87,4 +91,5 @@
             });
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

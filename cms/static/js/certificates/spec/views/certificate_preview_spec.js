@@ -1,5 +1,6 @@
 // Jasmine Test Suite: Certificate Web Preview
 
+// eslint-disable-next-line no-undef
 define([
     'underscore',
     'jquery',
@@ -12,6 +13,7 @@ define([
 function(_, $, Course, CertificatePreview, TemplateHelpers, ViewHelpers, AjaxHelpers) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var SELECTORS = {
         course_modes: '#course-modes',
         activate_certificate: '.activate-cert',
@@ -19,6 +21,7 @@ function(_, $, Course, CertificatePreview, TemplateHelpers, ViewHelpers, AjaxHel
     };
 
     describe('Certificate Web Preview Spec:', function() {
+        // eslint-disable-next-line no-var
         var selectDropDownByText = function(element, value) {
             if (value) {
                 element.val(value);
@@ -56,6 +59,7 @@ function(_, $, Course, CertificatePreview, TemplateHelpers, ViewHelpers, AjaxHel
 
         describe('Certificate preview', function() {
             it('course mode event should call when user choose a new mode', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'courseModeChanged');
                 this.view.delegateEvents();
                 selectDropDownByText(this.view.$(SELECTORS.course_modes), 'test3');
@@ -77,6 +81,7 @@ function(_, $, Course, CertificatePreview, TemplateHelpers, ViewHelpers, AjaxHel
             });
 
             it('toggle certificate activation event works fine', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'toggleCertificateActivation');
                 this.view.delegateEvents();
                 this.view.$(SELECTORS.activate_certificate).click();
@@ -84,6 +89,7 @@ function(_, $, Course, CertificatePreview, TemplateHelpers, ViewHelpers, AjaxHel
             });
 
             it('certificate deactivation works fine', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     notificationSpy = ViewHelpers.createNotificationSpy();
                 this.view.$(SELECTORS.activate_certificate).click();
@@ -94,6 +100,7 @@ function(_, $, Course, CertificatePreview, TemplateHelpers, ViewHelpers, AjaxHel
             });
 
             it('certificate activation works fine', function() {
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this),
                     notificationSpy = ViewHelpers.createNotificationSpy();
                 this.view.is_active = false;
@@ -115,6 +122,7 @@ function(_, $, Course, CertificatePreview, TemplateHelpers, ViewHelpers, AjaxHel
             });
 
             it('method "show" should call the render function', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'render');
                 this.view.show();
                 expect(this.view.render).toHaveBeenCalled();

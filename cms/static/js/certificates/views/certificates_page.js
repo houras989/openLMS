@@ -1,5 +1,6 @@
 // Backbone Application View: Certificates Page
 
+// eslint-disable-next-line no-undef
 define([
     'jquery',
     'underscore',
@@ -10,6 +11,7 @@ define([
 function($, _, gettext, BasePage, CertificatesListView) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var CertificatesPage = BasePage.extend({
 
         initialize: function(options) {

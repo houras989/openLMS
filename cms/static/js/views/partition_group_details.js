@@ -2,12 +2,14 @@
  * This class defines a simple display view for a partition group.
  * It is expected to be backed by a Group model.
  */
+// eslint-disable-next-line no-undef
 define([
     'js/views/baseview', 'underscore', 'gettext', 'underscore.string',
     'edx-ui-toolkit/js/utils/string-utils', 'edx-ui-toolkit/js/utils/html-utils'
 ], function(BaseView, _, gettext, str, StringUtils, HtmlUtils) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var PartitionGroupDetailsView = BaseView.extend({
         tagName: 'div',
         events: {
@@ -17,6 +19,7 @@ define([
         },
 
         className: function() {
+            // eslint-disable-next-line no-var
             var index = this.model.collection.indexOf(this.model);
 
             return [
@@ -37,6 +40,7 @@ define([
         },
 
         render: function(showContentGroupUsages) {
+            // eslint-disable-next-line no-var
             var attrs = $.extend({}, this.model.attributes, {
                 usageCountMessage: this.getUsageCountTitle(),
                 courseOutlineUrl: this.model.collection.parents[0].outlineUrl,
@@ -60,11 +64,13 @@ define([
         },
 
         getUsageCountTitle: function() {
+            // eslint-disable-next-line no-var
             var count = this.model.get('usage').length;
 
             if (count === 0) {
                 return gettext('Not in Use');
             } else {
+                // eslint-disable-next-line no-redeclare
                 /* globals ngettext */
                 return StringUtils.interpolate(ngettext(
                     /*

@@ -6,6 +6,7 @@
     define(
         'video/036_video_social_sharing.js', ['underscore'],
         function(_) {
+            // eslint-disable-next-line no-var
             var VideoSocialSharingHandler;
 
             /**
@@ -55,21 +56,26 @@
 
                 // Fire an analytics event on share button click.
                 clickHandler: function(event) {
+                    // eslint-disable-next-line no-var
                     var self = this;
+                    // eslint-disable-next-line no-var
                     var source = $(event.currentTarget).data('source');
                     self.sendAnalyticsEvent(source);
                 },
 
+                // eslint-disable-next-line no-unused-vars
                 hideHandler: function(event) {
                     this.shareContainer.hide();
                     this.toggleBtn.show();
                 },
 
+                // eslint-disable-next-line no-unused-vars
                 showHandler: function(event) {
                     this.shareContainer.show();
                     this.toggleBtn.hide();
                 },
 
+                // eslint-disable-next-line no-unused-vars
                 copyHandler: function(event) {
                     navigator.clipboard.writeText(this.copyBtn.data('url'));
                 },

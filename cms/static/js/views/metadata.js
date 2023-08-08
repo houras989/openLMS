@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'backbone',
@@ -13,6 +14,7 @@ define(
         LicenseModel, LicenseView, TranscriptUtils, VideoList, VideoTranslations, HtmlUtils) {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var Metadata = {};
 
         Metadata.Editor = BaseView.extend({
@@ -21,6 +23,7 @@ define(
 
             // Model is CMS.Models.MetadataCollection,
             initialize: function() {
+                // eslint-disable-next-line no-var
                 var self = this,
                     counter = 0,
                     locator = self.$el.closest('[data-locator]').data('locator'),
@@ -32,6 +35,7 @@ define(
 
                 this.collection.each(
                     function(model) {
+                        // eslint-disable-next-line no-var
                         var data = {
                                 el: self.$el.find('.metadata_entry')[counter++],
                                 courseKey: courseKey,
@@ -62,14 +66,17 @@ define(
          * Returns just the modified metadata values, in the format used to persist to the server.
          */
             getModifiedMetadataValues: function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var modified_values = {};
                 this.collection.each(
                     function(model) {
                         if (model.isModified()) {
+                            // eslint-disable-next-line camelcase
                             modified_values[model.getFieldName()] = model.getValue();
                         }
                     }
                 );
+                // eslint-disable-next-line camelcase
                 return modified_values;
             },
 
@@ -79,10 +86,12 @@ define(
          * is no such entry, or if display_name does not have a value set, it returns an empty string.
          */
             getDisplayName: function() {
+                // eslint-disable-next-line no-var
                 var displayName = '';
                 this.collection.each(
                     function(model) {
                         if (model.get('field_name') === 'display_name') {
+                            // eslint-disable-next-line no-var
                             var displayNameValue = model.get('value');
                             // It is possible that there is no display name value set. In that case, return empty string.
                             displayName = displayNameValue || '';
@@ -174,23 +183,31 @@ define(
             render: function() {
                 AbstractEditor.prototype.render.apply(this);
                 if (!this.initialized) {
+                    // eslint-disable-next-line no-var
                     var numToString = function(val) {
                         return val.toFixed(4);
                     };
+                    // eslint-disable-next-line no-var
                     var min = 'min';
+                    // eslint-disable-next-line no-var
                     var max = 'max';
+                    // eslint-disable-next-line no-var
                     var step = 'step';
+                    // eslint-disable-next-line no-var
                     var options = this.model.getOptions();
+                    // eslint-disable-next-line no-prototype-builtins
                     if (options.hasOwnProperty(min)) {
                         this.min = Number(options[min]);
                         this.$el.find('input').attr(min, numToString(this.min));
                     }
+                    // eslint-disable-next-line no-prototype-builtins
                     if (options.hasOwnProperty(max)) {
                         this.max = Number(options[max]);
                         this.$el.find('input').attr(max, numToString(this.max));
                     }
-                    // eslint-disable-next-line no-undef-init
+                    /* eslint-disable-next-line no-undef-init, no-var */
                     var stepValue = undefined;
+                    // eslint-disable-next-line no-prototype-builtins
                     if (options.hasOwnProperty(step)) {
                     // Parse step and convert to String. Polyfill doesn't like float values like ".1" (expects "0.1").
                         stepValue = numToString(Number(options[step]));
@@ -234,6 +251,7 @@ define(
                 this.showClearButton();
                 // This first filtering if statement is take from polyfill to prevent
                 // non-numeric input (for browsers that don't use polyfill because they DO have a number input type).
+                // eslint-disable-next-line no-var
                 var _ref, _ref1;
                 // eslint-disable-next-line no-cond-assign
                 if (((_ref = e.keyCode) !== 8 && _ref !== 9 && _ref !== 35 && _ref !== 36 && _ref !== 37 && _ref !== 39)
@@ -251,10 +269,12 @@ define(
             changed: function() {
             // Limit value to the range specified by min and max (necessary for browsers that aren't using polyfill).
             // Prevent integer/float fields value to be empty (set them to their defaults)
+                // eslint-disable-next-line no-var
                 var value = this.getValueFromEditor();
                 if (value) {
                     if ((this.max !== undefined) && value > this.max) {
                         value = this.max;
+                    // eslint-disable-next-line eqeqeq
                     } else if ((this.min != undefined) && value < this.min) {
                         value = this.min;
                     }
@@ -277,7 +297,9 @@ define(
             templateName: 'metadata-option-entry',
 
             getValueFromEditor: function() {
+                // eslint-disable-next-line no-var
                 var selectedText = this.$el.find('#' + this.uniqueId).find(':selected').text();
+                // eslint-disable-next-line no-var
                 var selectedValue;
                 _.each(this.model.getOptions(), function(modelValue) {
                     if (modelValue === selectedText) {
@@ -345,10 +367,12 @@ define(
             },
 
             setValueInEditor: function(value) {
+                // eslint-disable-next-line no-var
                 var list = this.$el.find('ol');
 
                 list.empty();
                 _.each(value, function(ele, index) {
+                    // eslint-disable-next-line no-var
                     var template = _.template(
                         HtmlUtils.joinHtml(
                             HtmlUtils.HTML('<li class="list-settings-item">'),
@@ -367,6 +391,7 @@ define(
                 event.preventDefault();
                 // We don't call updateModel here since it's bound to the
                 // change event
+                // eslint-disable-next-line no-var
                 var list = this.model.get('value') || [];
                 this.setValueInEditor(list.concat(['']));
                 this.$el.find('.create-setting').addClass('is-disabled').attr('aria-disabled', true);
@@ -374,6 +399,7 @@ define(
 
             removeEntry: function(event) {
                 event.preventDefault();
+                // eslint-disable-next-line no-var
                 var entry = $(event.currentTarget).siblings().val();
                 this.setValueInEditor(_.without(this.model.get('value'), entry));
                 this.updateModel();
@@ -410,12 +436,14 @@ define(
             templateName: 'metadata-string-entry',
 
             getValueFromEditor: function() {
+                // eslint-disable-next-line no-var
                 var $input = this.$el.find('#' + this.uniqueId);
 
                 return $input.val();
             },
 
             updateModel: function() {
+                // eslint-disable-next-line no-var
                 var value = this.getValueFromEditor(),
                     time = this.parseRelativeTime(value);
 
@@ -435,6 +463,7 @@ define(
 
             parseRelativeTime: function(value) {
             // This function ensure you have two-digits
+                // eslint-disable-next-line no-var
                 var pad = function(number) {
                         return (number < 10) ? '0' + number : number;
                     },
@@ -494,9 +523,12 @@ define(
             templateName: 'metadata-dict-entry',
 
             getValueFromEditor: function() {
+                // eslint-disable-next-line no-var
                 var dict = {};
 
+                /* eslint-disable-next-line consistent-return, no-unused-vars */
                 _.each(this.$el.find('li'), function(li, index) {
+                    // eslint-disable-next-line no-var
                     var key = $(li).find('.input-key').val().trim(),
                         value = $(li).find('.input-value').val().trim();
 
@@ -516,11 +548,13 @@ define(
             },
 
             setValueInEditor: function(value) {
+                // eslint-disable-next-line no-var
                 var list = this.$el.find('ol'),
                     frag = document.createDocumentFragment();
 
                 // eslint-disable-next-line no-shadow
                 _.each(value, function(value, key) {
+                    // eslint-disable-next-line no-var
                     var template = _.template(
                         HtmlUtils.joinHtml(
                             HtmlUtils.HTML('<li class="list-settings-item">'),
@@ -542,6 +576,7 @@ define(
                 event.preventDefault();
                 // We don't call updateModel here since it's bound to the
                 // change event
+                // eslint-disable-next-line no-var
                 var dict = $.extend(true, {}, this.model.get('value')) || {};
                 dict[''] = '';
                 this.setValueInEditor(dict);
@@ -550,6 +585,7 @@ define(
 
             removeEntry: function(event) {
                 event.preventDefault();
+                // eslint-disable-next-line no-var
                 var entry = $(event.currentTarget).siblings('.input-key').val();
                 this.setValueInEditor(_.omit(this.model.get('value'), entry));
                 this.updateModel();
@@ -593,6 +629,7 @@ define(
             },
 
             setValueInEditor: function(value) {
+                // eslint-disable-next-line no-var
                 var html = this.buttonTemplate({
                     model: this.model,
                     uniqueId: this.uniqueId
@@ -603,12 +640,14 @@ define(
             },
 
             upload: function(event) {
+                // eslint-disable-next-line no-var
                 var self = this,
                     $target = $(event.currentTarget),
                     url = '/assets/' + this.options.courseKey + '/',
                     model = new FileUpload({
                         title: gettext('Upload File')
                     }),
+                    // eslint-disable-next-line no-unused-vars
                     view = new UploadDialog({
                         model: model,
                         url: url,
@@ -626,6 +665,7 @@ define(
 
         Metadata.License = AbstractEditor.extend({
 
+            // eslint-disable-next-line no-unused-vars
             initialize: function(options) {
                 this.licenseModel = new LicenseModel({asString: this.model.getValue()});
                 this.licenseView = new LicenseView({model: this.licenseModel});

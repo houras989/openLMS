@@ -11,9 +11,13 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
     'use strict';
 
     describe('Field validation of invalidation model.', function() {
+        /* eslint-disable-next-line camelcase, no-var */
         var certificate_invalidation = null;
+        // eslint-disable-next-line no-var
         var assertValid = function(fields, isValid, expectedErrors) {
+            // eslint-disable-next-line camelcase
             certificate_invalidation.set(fields);
+            /* eslint-disable-next-line camelcase, no-var */
             var errors = certificate_invalidation.validate(certificate_invalidation.attributes);
 
             if (isValid) {
@@ -23,13 +27,16 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
             }
         };
 
+        // eslint-disable-next-line no-var
         var EXPECTED_ERRORS = {
             user_name_or_email_required: 'Student username/email field is required and can not be empty. '
                 + 'Kindly fill in username/email and then press "Invalidate Certificate" button.'
         };
 
         beforeEach(function() {
+            // eslint-disable-next-line camelcase
             certificate_invalidation = new CertificateInvalidationModel({user: 'test_user'}, {url: 'test/url/'});
+            // eslint-disable-next-line camelcase
             certificate_invalidation.set({
                 notes: 'Test notes'
             });
@@ -51,8 +58,11 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
 
     describe('Certificate invalidation collection initialization and updates.',
         function() {
+            /* eslint-disable-next-line camelcase, no-var */
             var certificate_invalidations = null,
+                // eslint-disable-next-line camelcase
                 certificate_invalidation_url = 'test/url/';
+            /* eslint-disable-next-line camelcase, no-var */
             var certificate_invalidations_json = [
                 {
                     id: 1,
@@ -71,52 +81,69 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
             ];
 
             beforeEach(function() {
+                // eslint-disable-next-line camelcase
                 certificate_invalidations = new CertificateInvalidationCollection(certificate_invalidations_json, {
                     parse: true,
                     canBeEmpty: true,
+                    // eslint-disable-next-line camelcase
                     url: certificate_invalidation_url
                 });
             });
 
             it('has 2 models in the collection after initialization', function() {
+                // eslint-disable-next-line camelcase
                 expect(certificate_invalidations.models.length).toEqual(2);
             });
 
             it('model is removed from collection on destroy', function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var model = certificate_invalidations.get({id: 2});
                 model.destroy();
+                // eslint-disable-next-line camelcase
                 expect(certificate_invalidations.models.length).toEqual(1);
+                // eslint-disable-next-line camelcase
                 expect(certificate_invalidations.get({id: 2})).toBe(undefined);
             });
         }
     );
 
     describe('Certificate invalidation success/error messages on add/remove invalidations.', function() {
+        // eslint-disable-next-line no-var
         var view = null,
+            // eslint-disable-next-line camelcase
             certificate_invalidation_url = 'test/url/',
+            // eslint-disable-next-line camelcase
             user_name_field = null,
+            // eslint-disable-next-line camelcase
             notes_field = null,
+            // eslint-disable-next-line camelcase
             invalidate_button = null,
+            // eslint-disable-next-line camelcase
             duplicate_user = 'test2',
+            // eslint-disable-next-line camelcase
             new_user = 'test4@test.com',
             requests = null;
 
+        // eslint-disable-next-line no-var
         var messages = {
             error: {
                 empty_user_name_email: 'Student username/email field is required and can not be empty. '
                         + 'Kindly fill in username/email and then press "Invalidate Certificate" button.',
+                // eslint-disable-next-line camelcase
                 duplicate_user: 'Certificate of ' + (duplicate_user) + ' has already been invalidated. '
                         + 'Please check your spelling and retry.',
                 server_error: 'Server Error, Please refresh the page and try again.',
                 from_server: 'Test Message from server'
             },
             success: {
+                // eslint-disable-next-line camelcase
                 saved: 'Certificate has been successfully invalidated for ' + new_user + '.',
                 re_validated: 'The certificate for this learner has been re-validated and '
                         + 'the system is re-running the grade for this learner.'
             }
         };
 
+        /* eslint-disable-next-line camelcase, no-var */
         var certificate_invalidations_json = [
             {
                 id: 1,
@@ -136,6 +163,7 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
 
         beforeEach(function() {
             setFixtures();
+            // eslint-disable-next-line no-var
             var fixture = readFixtures(
                 'templates/instructor/instructor_dashboard_2/certificate-invalidation.underscore'
             );
@@ -148,19 +176,26 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
                     + "<script type='text/template' id='certificate-invalidation-tpl'>" + fixture + '</script>'
             );
 
+            /* eslint-disable-next-line camelcase, no-var */
             var certificate_invalidations = new CertificateInvalidationCollection(certificate_invalidations_json, {
                 parse: true,
                 canBeEmpty: true,
+                // eslint-disable-next-line camelcase
                 url: certificate_invalidation_url,
+                // eslint-disable-next-line camelcase
                 generate_certificates_url: certificate_invalidation_url
 
             });
 
+            // eslint-disable-next-line camelcase
             view = new CertificateInvalidationView({collection: certificate_invalidations});
             view.render();
 
+            // eslint-disable-next-line camelcase
             user_name_field = $('#certificate-invalidation-user');
+            // eslint-disable-next-line camelcase
             notes_field = $('#certificate-invalidation-notes');
+            // eslint-disable-next-line camelcase
             invalidate_button = $('#invalidate-certificate');
 
             requests = AjaxHelpers.requests(this);
@@ -172,9 +207,11 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
         });
 
         it('verifies view is rendered on add/remove to collection', function() {
+            // eslint-disable-next-line no-var
             var user = 'test3',
                 notes = 'test3 notes',
                 model = new CertificateInvalidationModel(
+                    // eslint-disable-next-line camelcase
                     {user: user, notes: notes}, {url: certificate_invalidation_url}
                 );
 
@@ -188,7 +225,9 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
                 .toMatch(user);
 
             // Remove a model from collection
+            /* eslint-disable-next-line camelcase, no-var */
             var collection_model = view.collection.get({id: 2});
+            // eslint-disable-next-line camelcase
             collection_model.destroy();
 
             // Verify view is updated
@@ -239,7 +278,9 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
         });
 
         it('verifies certificate re-validation request and success message.', function() {
+            // eslint-disable-next-line no-var
             var user = 'test1',
+                // eslint-disable-next-line camelcase
                 re_validate_certificate = "div.certificate-invalidation-container table tr:contains('"
                         + user + "') td .re-validate-certificate";
 
@@ -250,7 +291,9 @@ function($, AjaxHelpers, CertificateInvalidationModel, CertificateInvalidationVi
         });
 
         it('verifies error message from server is displayed.', function() {
+            // eslint-disable-next-line no-var
             var user = 'test1',
+                // eslint-disable-next-line camelcase
                 re_validate_certificate = "div.certificate-invalidation-container table tr:contains('"
                         + user + "') td .re-validate-certificate";
 

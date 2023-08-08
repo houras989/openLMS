@@ -12,10 +12,12 @@
         CohortEditorView, CohortFormView,
         CourseCohortSettingsNotificationView,
         HtmlUtils, BaseDashboardView) {
+        // eslint-disable-next-line no-var
         var hiddenClass = 'hidden',
             disabledClass = 'is-disabled',
             enableCohortsSelector = '.cohorts-state';
 
+        // eslint-disable-next-line no-var
         var CohortsView = BaseDashboardView.extend({
             events: {
                 'change .cohort-select': 'onCohortSelected',
@@ -28,6 +30,7 @@
             },
 
             initialize: function(options) {
+                // eslint-disable-next-line no-var
                 var model = this.model;
                 this.template = HtmlUtils.template($('#cohorts-tpl').text());
                 this.selectorTemplate = HtmlUtils.template($('#cohort-selector-tpl').text());
@@ -61,6 +64,7 @@
             },
 
             renderCourseCohortSettingsNotificationView: function() {
+                // eslint-disable-next-line no-var
                 var cohortStateMessageNotificationView = new CourseCohortSettingsNotificationView({
                     el: $('.cohort-state-message'),
                     cohortEnabled: this.getCohortsEnabled()
@@ -69,6 +73,7 @@
             },
 
             onSync: function(model, response, options) {
+                // eslint-disable-next-line no-var
                 var selectedCohort = this.lastSelectedCohortId && this.model.get(this.lastSelectedCohortId),
                     hasCohorts = this.model.length > 0,
                     cohortNavElement = this.$('.cohort-management-nav'),
@@ -77,6 +82,7 @@
                 isModelUpdate = function() {
                     // Distinguish whether this is a sync event for just one model, or if it is for
                     // an entire collection.
+                    // eslint-disable-next-line no-prototype-builtins
                     return options && options.patch && response.hasOwnProperty('user_partition_id');
                 };
                 this.hideAddCohortForm();
@@ -104,12 +110,15 @@
             },
 
             getSelectedCohort: function() {
+                // eslint-disable-next-line no-var
                 var id = this.$('.cohort-select').val();
+                // eslint-disable-next-line radix
                 return id && this.model.get(parseInt(id));
             },
 
             onCohortSelected: function(event) {
                 event.preventDefault();
+                // eslint-disable-next-line no-var
                 var selectedCohort = this.getSelectedCohort();
                 this.lastSelectedCohortId = selectedCohort.get('id');
                 this.showCohortEditor(selectedCohort);
@@ -121,6 +130,7 @@
             },
 
             saveCohortSettings: function() {
+                // eslint-disable-next-line no-var
                 var self = this,
                     cohortSettings,
                     fieldData = {is_cohorted: this.getCohortsEnabled()};
@@ -131,6 +141,7 @@
                     self.render();
                     self.renderCourseCohortSettingsNotificationView();
                     self.pubSub.trigger('cohorts:state', fieldData);
+                // eslint-disable-next-line no-unused-vars
                 }).fail(function(result) {
                     self.showNotification({
                         type: 'error',
@@ -164,8 +175,10 @@
             },
 
             showNotification: function(options, beforeElement) {
+                /* eslint-disable-next-line no-undef, no-var */
                 var model = new NotificationModel(options);
                 this.removeNotification();
+                // eslint-disable-next-line no-undef
                 this.notification = new NotificationView({
                     model: model
                 });
@@ -188,6 +201,7 @@
             },
 
             showAddCohortForm: function(event) {
+                // eslint-disable-next-line no-var
                 var newCohort;
                 event.preventDefault();
                 this.removeNotification();
@@ -225,6 +239,7 @@
             },
 
             saveAddCohortForm: function(event) {
+                // eslint-disable-next-line no-var
                 var self = this,
                     newCohort = this.cohortFormView.model;
                 event.preventDefault();
@@ -235,6 +250,7 @@
                         self.model.fetch().done(function() {
                             self.showNotification({
                                 type: 'confirmation',
+                                // eslint-disable-next-line no-undef
                                 title: interpolate_text(
                                     gettext('The {cohortGroupName} cohort has been created. You can manually add students to this cohort below.'),
                                     {cohortGroupName: newCohort.get('name')}
@@ -252,6 +268,7 @@
 
             showSection: function(event) {
                 event.preventDefault();
+                // eslint-disable-next-line no-var
                 var section = $(event.currentTarget).data('section');
                 $(this.getSectionCss(section)).click();
                 $(window).scrollTop(0);
@@ -261,9 +278,11 @@
                 event.preventDefault();
 
                 $(event.currentTarget).addClass(hiddenClass);
+                // eslint-disable-next-line no-var
                 var uploadElement = this.$('.csv-upload').removeClass(hiddenClass);
 
                 if (!this.fileUploaderView) {
+                    // eslint-disable-next-line no-undef
                     this.fileUploaderView = new FileUploaderView({
                         el: uploadElement,
                         title: gettext('Assign students to cohorts by uploading a CSV file.'),
@@ -272,11 +291,13 @@
                         submitButtonText: gettext('Upload File and Assign Students'),
                         extensions: '.csv',
                         url: this.context.uploadCohortsCsvUrl,
-                        // eslint-disable-next-line no-shadow
+                        /* eslint-disable-next-line no-shadow, no-unused-vars */
                         successNotification: function(file, event, data) {
+                            /* eslint-disable-next-line no-undef, no-var */
                             var message = interpolate_text(gettext(
                                 "Your file '{file}' has been uploaded. Allow a few minutes for processing."
                             ), {file: file});
+                            // eslint-disable-next-line no-undef
                             return new NotificationModel({
                                 type: 'confirmation',
                                 title: message
@@ -292,4 +313,5 @@
         });
         return CohortsView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

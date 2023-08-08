@@ -1,6 +1,7 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var XModule = {};
 
     XModule.Descriptor = (function() {
@@ -11,8 +12,10 @@
          * @method: constructor
          * @param {html element} the .xmodule_edit section containing all of the descriptor content
          */
+        // eslint-disable-next-line no-var
         var Descriptor = function(element) {
             this.element = element;
+            // eslint-disable-next-line no-undef
             this.update = _.bind(this.update, this);
         };
 
@@ -33,10 +36,12 @@
          * Notify registered callbacks that the state of this descriptor has changed
          */
         Descriptor.prototype.update = function() {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var data, callbacks, i, length;
 
             data = this.save();
             callbacks = this.callbacks;
+            // eslint-disable-next-line no-unused-vars
             length = callbacks.length;
 
             $.each(callbacks, function(index, callback) {
@@ -64,6 +69,7 @@
          * from the supplied element, which should have a data-type attribute
          * specifying the class to load
          */
+        // eslint-disable-next-line no-var
         var moduleType, module;
 
         if (initArgs) {
@@ -88,8 +94,10 @@
                 $(document).trigger('XModule.loaded.display', [element, module]);
             }
 
+            // eslint-disable-next-line consistent-return
             return module;
         } catch (error) {
+            // eslint-disable-next-line no-console
             console.error('Unable to load ' + moduleType + ': ' + error.message);
         }
     };

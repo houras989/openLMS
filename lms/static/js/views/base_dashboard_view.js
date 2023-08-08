@@ -6,9 +6,11 @@
             // This Base view is useful when eventing or other features are shared between two or more
             // views. Included with this view in the pubSub object allowing for events to be triggered
             // and shared with other views.
+            // eslint-disable-next-line no-var
             var BaseDashboardView = Backbone.View.extend({
                 pubSub: $.extend({}, Backbone.Events)
             });
             return BaseDashboardView;
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

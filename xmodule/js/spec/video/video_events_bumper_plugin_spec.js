@@ -1,21 +1,28 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(undefined) {
     'use strict';
 
     describe('VideoPlayer Events Bumper plugin', function() {
+        // eslint-disable-next-line no-var
         var Logger = window.Logger;
+        // eslint-disable-next-line no-var
         var state, oldOTBD;
 
         beforeEach(function() {
             oldOTBD = window.onTouchBasedDevice;
+            // eslint-disable-next-line no-undef
             window.onTouchBasedDevice = jasmine
                 .createSpy('onTouchBasedDevice')
                 .and.returnValue(null);
 
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer('video_with_bumper.html');
+            // eslint-disable-next-line no-undef
             spyOn(Logger, 'log');
             $('.poster .btn-play').click();
+            // eslint-disable-next-line no-undef
             spyOn(state.bumperState.videoEventsBumperPlugin, 'getCurrentTime').and.returnValue(10);
+            // eslint-disable-next-line no-undef
             spyOn(state.bumperState.videoEventsBumperPlugin, 'getDuration').and.returnValue(20);
         });
 
@@ -138,7 +145,9 @@
         });
 
         it('can destroy itself', function() {
+            // eslint-disable-next-line no-var
             var plugin = state.bumperState.videoEventsBumperPlugin;
+            // eslint-disable-next-line no-undef
             spyOn($.fn, 'off').and.callThrough();
             plugin.destroy();
             expect(state.bumperState.videoEventsBumperPlugin).toBeUndefined();

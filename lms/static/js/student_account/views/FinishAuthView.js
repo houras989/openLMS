@@ -23,7 +23,7 @@
  * - The specified 'nextUrl' if safe, or
  * - The dashboard
  */
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -36,6 +36,7 @@
         'js/student_account/enrollment',
         'js/student_account/shoppingcart'
     ], function($, _, Backbone, gettext, emailOptInInterface, enrollmentInterface, shoppingCartInterface) {
+        // eslint-disable-next-line no-var
         var FinishAuthView = Backbone.View.extend({
             el: '#finish-auth-status',
 
@@ -46,7 +47,9 @@
                 trackSelection: '/course_modes/choose/'
             },
 
+            // eslint-disable-next-line no-unused-vars
             initialize: function(obj) {
+                // eslint-disable-next-line no-var
                 var queryParams = {
                     next: $.url('?next'),
                     enrollmentAction: $.url('?enrollment_action'),
@@ -55,6 +58,7 @@
                     emailOptIn: $.url('?email_opt_in'),
                     purchaseWorkflow: $.url('?purchase_workflow')
                 };
+                /* eslint-disable-next-line no-var, no-restricted-syntax */
                 for (var key in queryParams) {
                     if (queryParams[key]) {
                         queryParams[key] = decodeURIComponent(queryParams[key]);
@@ -76,6 +80,7 @@
 
             render: function() {
                 try {
+                    // eslint-disable-next-line no-var
                     var next = _.bind(this.enrollment, this);
                     this.checkEmailOptIn(next);
                 } catch (err) {
@@ -87,6 +92,7 @@
             updateTaskDescription: function(desc) {
                 // We don't display any detailed status updates to the user
                 // but we do log them to the console to help with debugging.
+                // eslint-disable-next-line no-console
                 console.log(desc);
             },
 
@@ -121,10 +127,12 @@
              * - Be redirected to the dashboard / track selection page / shopping cart.
              */
             enrollment: function() {
+                // eslint-disable-next-line no-var
                 var redirectUrl = this.nextUrl;
 
                 if (this.enrollmentAction === 'enroll' && this.courseId) {
                     this.updateTaskDescription(gettext('Enrolling you in the selected course'));
+                    // eslint-disable-next-line no-var
                     var courseId = decodeURIComponent(this.courseId);
 
                     // Determine where to redirect the user after auto-enrollment.
@@ -175,4 +183,5 @@
         });
         return FinishAuthView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

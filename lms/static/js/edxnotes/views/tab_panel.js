@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -6,6 +6,7 @@
         'common/js/components/views/paging_header', 'common/js/components/views/paging_footer',
         'edx-ui-toolkit/js/utils/html-utils'],
     function(gettext, _, Backbone, NoteItemView, PagingHeaderView, PagingFooterView, HtmlUtils) {
+        // eslint-disable-next-line no-var
         var TabPanelView = Backbone.View.extend({
             tagName: 'section',
             className: 'tab-panel',
@@ -22,6 +23,7 @@
                     this.pagingHeaderView = new PagingHeaderView({collection: this.collection});
                     this.pagingFooterView = new PagingFooterView({collection: this.collection, hideWhenOnePage: true});
                 }
+                // eslint-disable-next-line no-prototype-builtins
                 if (this.hasOwnProperty('collection')) {
                     this.listenTo(this.collection, 'page_changed', this.render);
                 }
@@ -50,10 +52,12 @@
             },
 
             getNotes: function(collection) {
+                // eslint-disable-next-line no-var
                 var container = document.createDocumentFragment(),
                     scrollToTag = this.options.scrollToTag,
                     view = this.title,
                     notes = _.map(collection, function(model) {
+                        // eslint-disable-next-line no-var
                         var note = new NoteItemView({model: model, scrollToTag: scrollToTag, view: view});
                         container.appendChild(note.render().el);
                         return note;
@@ -77,4 +81,5 @@
 
         return TabPanelView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

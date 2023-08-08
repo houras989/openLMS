@@ -1,6 +1,7 @@
 /**
  * MoveXBlockBreadcrumb show breadcrumbs to move back to parent.
  */
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'backbone', 'underscore', 'gettext',
     'edx-ui-toolkit/js/utils/html-utils',
@@ -10,6 +11,7 @@ define([
 function($, Backbone, _, gettext, HtmlUtils, StringUtils, MoveXBlockBreadcrumbViewTemplate) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var MoveXBlockBreadcrumb = Backbone.View.extend({
         el: '.breadcrumb-container',
 

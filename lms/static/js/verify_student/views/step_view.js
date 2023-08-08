@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-redeclare
 /* global jQuery, _, Backbone, gettext */
 
 /**
@@ -8,6 +9,7 @@
  * to move to the next step).
  *
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
 (function($, _, Backbone, gettext) {
@@ -28,6 +30,7 @@ var edx = edx || {};
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var templateHtml = $('#' + this.templateName + '-tpl').html();
 
             // Allow subclasses to add additional information
@@ -54,6 +57,7 @@ var edx = edx || {};
         },
 
         templateContext: function() {
+            // eslint-disable-next-line no-var
             var context = {
                 nextStepTitle: this.nextStepTitle
             };
@@ -80,6 +84,7 @@ var edx = edx || {};
          * The default implementation is a no-op.
          */
         updateContext: function(templateContext) {
+            // eslint-disable-next-line no-var
             var view = this;
             return $.Deferred(
                 function(defer) {

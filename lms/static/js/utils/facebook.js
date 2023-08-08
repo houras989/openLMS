@@ -1,10 +1,13 @@
+/* eslint-disable-next-line no-unused-vars, no-var */
 var FaceBook = (function() {
+    // eslint-disable-next-line no-var
     var _args = {};
 
     return {
         init: function(Args) {
             _args = Args;
             window.fbAsyncInit = function() {
+                // eslint-disable-next-line no-undef
                 FB.init({
                     appId: _args.facebook_app_id,
                     xfbml: true,
@@ -12,6 +15,7 @@ var FaceBook = (function() {
                 });
             };
             (function(d, s, id) {
+                // eslint-disable-next-line no-var
                 var js,
                     fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) { return; }
@@ -20,13 +24,18 @@ var FaceBook = (function() {
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         },
+        // eslint-disable-next-line camelcase
         share: function(feed_data) {
             FB.ui( // eslint-disable-line no-undef
                 {
                     method: 'feed',
+                    // eslint-disable-next-line camelcase
                     name: feed_data.share_text,
+                    // eslint-disable-next-line camelcase
                     link: feed_data.share_link,
+                    // eslint-disable-next-line camelcase
                     picture: feed_data.picture_link,
+                    // eslint-disable-next-line camelcase
                     description: feed_data.description
                 },
                 // The Facebook API now requires a callback. Since we weren't doing anything after posting before,

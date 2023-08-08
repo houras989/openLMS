@@ -6,9 +6,12 @@
         'gettext', 'jquery', 'underscore', 'js/edxnotes/views/note_group', 'js/edxnotes/views/tab_panel',
         'js/edxnotes/views/tab_view', 'edx-ui-toolkit/js/utils/html-utils'
     ], function(gettext, $, _, NoteGroupView, TabPanelView, TabView, HtmlUtils) {
+        // eslint-disable-next-line no-var
         var view = 'Tags';
+        // eslint-disable-next-line no-var
         var TagsView = TabView.extend({
             scrollToTag: function(tagName) {
+                // eslint-disable-next-line no-var
                 var titleElement, displayedTitle;
                 if (!this.tabModel.isActive()) {
                     this.tabModel.activate();
@@ -40,9 +43,11 @@
                 noTags: gettext('[no tags]'), // User-defined tags cannot have spaces, so no risk of a collision.
 
                 renderContent: function() {
+                    // eslint-disable-next-line no-var
                     var notesByTag = {},
                         noTags = this.noTags,
                         addNoteForTag, noteList, tags, i,
+                        // eslint-disable-next-line no-unused-vars
                         sortedTagNames, container, group, noteGroup, tagTitle, titleMap;
 
                     // Iterate through all the notes and build up a dictionary structure by tag.
@@ -95,7 +100,7 @@
 
                     _.each(sortedTagNames, function(tagName) {
                         noteGroup = notesByTag[tagName];
-                        // eslint-disable-next-line no-shadow
+                        /* eslint-disable-next-line no-shadow, no-undef, no-var */
                         var tagTitle = interpolate_text(
                             '{tagName} ({numberOfNotesWithTag})',
                             {tagName: tagName, numberOfNotesWithTag: noteGroup.length}
@@ -112,6 +117,7 @@
                 },
 
                 getGroup: function(tagName) {
+                    // eslint-disable-next-line no-var
                     var group = new NoteGroupView.GroupView({
                         displayName: tagName,
                         template: '<h3 class="tags-title sr-is-focusable" tabindex="-1"><%- displayName %></h3>',
@@ -136,4 +142,5 @@
 
         return TagsView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

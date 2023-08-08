@@ -9,8 +9,10 @@ import TemplateHelpers from 'common/js/spec_helpers/template_helpers';
 import Course from 'js/models/course';
 
 describe('CourseOutlinePage', function() {
+    // eslint-disable-next-line no-var
     var createCourseOutlinePage, displayNameInput, model, outlinePage, requests, getItemsOfType, getItemHeaders,
         verifyItemsExpanded, expandItemsAndVerifyState, collapseItemsAndVerifyState, selectBasicSettings,
+        // eslint-disable-next-line no-unused-vars
         selectVisibilitySettings, selectDiscussionSettings, selectAdvancedSettings, createMockCourseJSON, createMockSectionJSON,
         createMockSubsectionJSON, verifyTypePublishable, mockCourseJSON, mockEmptyCourseJSON, setSelfPaced, setSelfPacedCustomPLS,
         mockSingleSectionCourseJSON, createMockVerticalJSON, createMockIndexJSON, mockCourseEntranceExamJSON,
@@ -168,6 +170,7 @@ describe('CourseOutlinePage', function() {
     };
 
     verifyItemsExpanded = function(type, isExpanded) {
+        // eslint-disable-next-line no-var
         var element = getItemsOfType(type);
         if (isExpanded) {
             expect(element).not.toHaveClass('is-collapsed');
@@ -198,6 +201,7 @@ describe('CourseOutlinePage', function() {
         $(".modal-section .settings-tab-button[data-tab='advanced']").click();
     };
 
+    // eslint-disable-next-line no-redeclare
     function selectDiscussionSettings() {
         $(".modal-section .settings-tab-button[data-tab='discussion']").click();
     }
@@ -226,8 +230,10 @@ describe('CourseOutlinePage', function() {
     };
 
     verifyTypePublishable = function(type, getMockCourseJSON) {
+        // eslint-disable-next-line no-var
         var createCourseOutlinePageAndShowUnit, verifyPublishButton;
 
+        // eslint-disable-next-line no-unused-vars
         createCourseOutlinePageAndShowUnit = function(test, courseJSON, createOnly) {
             outlinePage = createCourseOutlinePage.apply(this, arguments);
             if (type === 'unit') {
@@ -235,13 +241,14 @@ describe('CourseOutlinePage', function() {
             }
         };
 
+        // eslint-disable-next-line no-unused-vars
         verifyPublishButton = function(test, courseJSON, createOnly) {
             createCourseOutlinePageAndShowUnit.apply(this, arguments);
             expect(getItemHeaders(type).find('.publish-button')).toExist();
         };
 
         it('can be published', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var mockCourseJSON = getMockCourseJSON({
                 has_changes: true
             });
@@ -257,7 +264,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('should show publish button if it is not published and not changed', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var mockCourseJSON = getMockCourseJSON({
                 has_changes: false,
                 published: false
@@ -266,7 +273,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('should show publish button if it is published and changed', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var mockCourseJSON = getMockCourseJSON({
                 has_changes: true,
                 published: true
@@ -275,7 +282,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('should show publish button if it is not published, but changed', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var mockCourseJSON = getMockCourseJSON({
                 has_changes: true,
                 published: false
@@ -284,7 +291,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('should hide publish button if it is not changed, but published', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var mockCourseJSON = getMockCourseJSON({
                 has_changes: false,
                 published: true
@@ -422,6 +429,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can add a second section', function() {
+            // eslint-disable-next-line no-var
             var sectionElements;
             createCourseOutlinePage(this, mockSingleSectionCourseJSON);
             outlinePage.$('.nav-actions .button-new').click();
@@ -455,9 +463,13 @@ describe('CourseOutlinePage', function() {
 
         it('can start reindex of a course', function() {
             createCourseOutlinePage(this, mockSingleSectionCourseJSON);
+            /* eslint-disable-next-line no-undef, no-var */
             var reindexSpy = spyOn(outlinePage, 'startReIndex').and.callThrough();
+            /* eslint-disable-next-line no-undef, no-var */
             var successSpy = spyOn(outlinePage, 'onIndexSuccess').and.callThrough();
+            // eslint-disable-next-line no-var
             var reindexButton = outlinePage.$('.button.button-reindex');
+            /* eslint-disable-next-line camelcase, no-var */
             var test_url = '/course/5/search_reindex';
             reindexButton.attr('href', test_url);
             reindexButton.trigger('click');
@@ -469,9 +481,13 @@ describe('CourseOutlinePage', function() {
 
         it('shows an error message when reindexing fails', function() {
             createCourseOutlinePage(this, mockSingleSectionCourseJSON);
+            /* eslint-disable-next-line no-undef, no-var */
             var reindexSpy = spyOn(outlinePage, 'startReIndex').and.callThrough();
+            /* eslint-disable-next-line no-undef, no-var */
             var errorSpy = spyOn(outlinePage, 'onIndexError').and.callThrough();
+            // eslint-disable-next-line no-var
             var reindexButton = outlinePage.$('.button.button-reindex');
+            /* eslint-disable-next-line camelcase, no-var */
             var test_url = '/course/5/search_reindex';
             reindexButton.attr('href', test_url);
             reindexButton.trigger('click');
@@ -483,6 +499,7 @@ describe('CourseOutlinePage', function() {
     });
 
     describe('Duplicate an xblock', function() {
+        // eslint-disable-next-line no-var
         var duplicateXBlockWithSuccess;
 
         duplicateXBlockWithSuccess = function(xblockLocator, parentLocator, xblockType, xblockIndex) {
@@ -524,6 +541,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('shows a notification when duplicating', function() {
+            // eslint-disable-next-line no-var
             var notificationSpy = EditHelpers.createNotificationSpy();
             createCourseOutlinePage(this, mockCourseJSON);
             getItemHeaders('section').find('.duplicate-button').first()
@@ -534,6 +552,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('does not duplicate an xblock upon failure', function() {
+            // eslint-disable-next-line no-var
             var notificationSpy = EditHelpers.createNotificationSpy();
             createCourseOutlinePage(this, mockCourseJSON);
             expect(getItemHeaders('section').length, 1);
@@ -572,6 +591,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('remains empty if an add fails', function() {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var requestCount;
             createCourseOutlinePage(this, mockEmptyCourseJSON);
             $('.no-content .button-new').click();
@@ -619,6 +639,7 @@ describe('CourseOutlinePage', function() {
         };
 
         describe('Course Highlights Setting', function() {
+            // eslint-disable-next-line no-var
             var highlightsSetting, expectHighlightsEnabledToBe, expectServerHandshake, openHighlightsSettings;
 
             highlightsSetting = function() {
@@ -688,12 +709,14 @@ describe('CourseOutlinePage', function() {
         });
 
         describe('Section Highlights', function() {
+            // eslint-disable-next-line no-var
             var mockHighlightValues, highlightsLink, highlightInputs, openHighlights, saveHighlights,
                 cancelHighlights, setHighlights, expectHighlightLinkNumberToBe, expectHighlightsToBe,
                 expectServerHandshakeWithHighlights, expectHighlightsToUpdate,
                 maxNumHighlights = 5;
 
             mockHighlightValues = function(numberOfHighlights) {
+                // eslint-disable-next-line no-var
                 var highlights = [],
                     i;
                 for (i = 0; i < numberOfHighlights; i++) {
@@ -723,6 +746,7 @@ describe('CourseOutlinePage', function() {
             };
 
             setHighlights = function(highlights) {
+                // eslint-disable-next-line no-var
                 var i;
                 for (i = 0; i < highlights.length; i++) {
                     $(highlightInputs()[i]).val(highlights[i]);
@@ -733,12 +757,14 @@ describe('CourseOutlinePage', function() {
             };
 
             expectHighlightLinkNumberToBe = function(expectedNumber) {
+                // eslint-disable-next-line no-var
                 var link = highlightsLink();
                 expect(link).toContainText('Section Highlights');
                 expect(link.find('.number-highlights')).toHaveHtml(expectedNumber);
             };
 
             expectHighlightsToBe = function(expectedHighlights) {
+                // eslint-disable-next-line no-var
                 var highlights = highlightInputs(),
                     i;
 
@@ -791,6 +817,7 @@ describe('CourseOutlinePage', function() {
             });
 
             it('displays link when highlights exist', function() {
+                // eslint-disable-next-line no-var
                 var highlights = mockHighlightValues(2);
                 createCourseWithHighlights(highlights);
                 expectHighlightLinkNumberToBe(2);
@@ -803,6 +830,7 @@ describe('CourseOutlinePage', function() {
             });
 
             it('can view existing highlights', function() {
+                // eslint-disable-next-line no-var
                 var highlights = mockHighlightValues(2);
                 createCourseWithHighlights(highlights);
                 openHighlights();
@@ -810,6 +838,7 @@ describe('CourseOutlinePage', function() {
             });
 
             it('does not save highlights when cancelled', function() {
+                // eslint-disable-next-line no-var
                 var originalHighlights = mockHighlightValues(2),
                     editedHighlights = originalHighlights;
                 editedHighlights[1] = 'A New Value';
@@ -840,6 +869,7 @@ describe('CourseOutlinePage', function() {
             });
 
             it('can edit highlights', function() {
+                // eslint-disable-next-line no-var
                 var originalHighlights = mockHighlightValues(3),
                     editedHighlights = originalHighlights;
                 editedHighlights[2] = 'A New Value';
@@ -913,6 +943,7 @@ describe('CourseOutlinePage', function() {
     });
 
     describe('Section', function() {
+        // eslint-disable-next-line no-var
         var getDisplayNameWrapper;
 
         getDisplayNameWrapper = function() {
@@ -920,6 +951,7 @@ describe('CourseOutlinePage', function() {
         };
 
         it('can be deleted', function() {
+            // eslint-disable-next-line no-var
             var promptSpy = EditHelpers.createPromptSpy();
             createCourseOutlinePage(this, createMockCourseJSON({}, [
                 createMockSectionJSON(),
@@ -935,6 +967,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can be deleted if it is the only section', function() {
+            // eslint-disable-next-line no-var
             var promptSpy = EditHelpers.createPromptSpy();
             createCourseOutlinePage(this, mockSingleSectionCourseJSON);
             getItemHeaders('section').find('.delete-button').click();
@@ -948,7 +981,9 @@ describe('CourseOutlinePage', function() {
         });
 
         it('remains visible if its deletion fails', function() {
+            // eslint-disable-next-line no-var
             var promptSpy = EditHelpers.createPromptSpy(),
+                // eslint-disable-next-line no-unused-vars
                 requestCount;
             createCourseOutlinePage(this, mockSingleSectionCourseJSON);
             getItemHeaders('section').find('.delete-button').click();
@@ -977,6 +1012,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can be renamed inline', function() {
+            // eslint-disable-next-line no-var
             var updatedDisplayName = 'Updated Section Name',
                 displayNameWrapper,
                 sectionModel;
@@ -1025,6 +1061,7 @@ describe('CourseOutlinePage', function() {
 
             // This is the response for the change operation.
             AjaxHelpers.respondWithJson(requests, {});
+            // eslint-disable-next-line no-var
             var mockResponseSectionJSON = createMockSectionJSON({
                 release_date: 'Jan 02, 2015 at 00:00 UTC'
             }, [
@@ -1052,7 +1089,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can display a publish modal with a list of unpublished subsections and units', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var mockCourseJSON = createMockCourseJSON({}, [
                     createMockSectionJSON({has_changes: true}, [
                         createMockSubsectionJSON({has_changes: true}, [
@@ -1071,12 +1108,15 @@ describe('CourseOutlinePage', function() {
                         ])
                     ])
                 ]),
+                // eslint-disable-next-line no-unused-vars
                 modalWindow;
 
             createCourseOutlinePage(this, mockCourseJSON, false);
             getItemHeaders('section').first().find('.publish-button').click();
+            // eslint-disable-next-line no-var
             var $modalWindow = $('.wrapper-modal-window');
             expect($modalWindow.find('.outline-unit').length).toBe(3);
+            // eslint-disable-next-line no-undef
             expect(_.compact(_.map($modalWindow.find('.outline-unit').text().split('\n'), $.trim))).toEqual(
                 ['Unit 100', 'Unit 50', 'Unit 1']
             );
@@ -1085,6 +1125,7 @@ describe('CourseOutlinePage', function() {
     });
 
     describe('Subsection', function() {
+        // eslint-disable-next-line no-var
         var getDisplayNameWrapper, setEditModalValues, setEditModalValuesForCustomPacing, setContentVisibility, mockServerValuesJson,
             mockCustomPacingServerValuesJson, selectDisableSpecialExams, selectTimedExam, selectProctoredExam, selectPracticeExam,
             selectPrerequisite, selectLastPrerequisiteSubsection, selectRelativeWeeksSubsection, checkOptionFieldVisibility,
@@ -1094,6 +1135,7 @@ describe('CourseOutlinePage', function() {
             return getItemHeaders('subsection').find('.wrapper-xblock-field');
         };
 
+        // eslint-disable-next-line camelcase
         setEditModalValues = function(start_date, due_date, grading_type) {
             $('#start_date').val(start_date);
             $('#due_date').val(due_date);
@@ -1108,6 +1150,7 @@ describe('CourseOutlinePage', function() {
             $('input.no_special_exam').prop('checked', true).trigger('change');
         };
 
+        // eslint-disable-next-line camelcase
         selectTimedExam = function(time_limit) {
             $('input.timed_exam').prop('checked', true).trigger('change');
             $('.field-time-limit input').val(time_limit);
@@ -1115,18 +1158,21 @@ describe('CourseOutlinePage', function() {
             setContentVisibility('hide_after_due');
         };
 
+        // eslint-disable-next-line camelcase
         selectProctoredExam = function(time_limit) {
             $('input.proctored_exam').prop('checked', true).trigger('change');
             $('.field-time-limit input').val(time_limit);
             $('.field-time-limit input').trigger('focusout');
         };
 
+        // eslint-disable-next-line camelcase
         selectPracticeExam = function(time_limit) {
             $('input.practice_exam').prop('checked', true).trigger('change');
             $('.field-time-limit input').val(time_limit);
             $('.field-time-limit input').trigger('focusout');
         };
 
+        // eslint-disable-next-line camelcase
         selectOnboardingExam = function(time_limit) {
             $('input.onboarding_exam').prop('checked', true).trigger('change');
             $('.field-time-limit input').val(time_limit);
@@ -1144,6 +1190,7 @@ describe('CourseOutlinePage', function() {
         };
 
         // Helper to validate oft-checked additional option fields' visibility
+        // eslint-disable-next-line camelcase
         checkOptionFieldVisibility = function(time_limit, review_rules) {
             expect($('.field-time-limit').is(':visible')).toBe(time_limit);
             expect($('.field-exam-review-rules').is(':visible')).toBe(review_rules);
@@ -1154,7 +1201,9 @@ describe('CourseOutlinePage', function() {
         };
 
         getMockNoPrereqOrExamsCourseJSON = function() {
+            // eslint-disable-next-line no-var
             var mockVerticalJSON = createMockVerticalJSON({}, []);
+            // eslint-disable-next-line no-var
             var mockSubsectionJSON = createMockSubsectionJSON({}, [mockVerticalJSON]);
             delete mockSubsectionJSON.is_prereq;
             delete mockSubsectionJSON.prereqs;
@@ -1224,6 +1273,7 @@ describe('CourseOutlinePage', function() {
         ]);
 
         it('can be deleted', function() {
+            // eslint-disable-next-line no-var
             var promptSpy = EditHelpers.createPromptSpy();
             createCourseOutlinePage(this, mockCourseJSON);
             getItemHeaders('subsection').find('.delete-button').click();
@@ -1236,8 +1286,10 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can add a unit', function() {
+            // eslint-disable-next-line no-var
             var redirectSpy;
             createCourseOutlinePage(this, mockCourseJSON);
+            // eslint-disable-next-line no-undef
             redirectSpy = spyOn(ViewUtils, 'redirect');
             getItemsOfType('subsection').find('> .outline-content > .add-unit .button-new').click();
             AjaxHelpers.expectJsonRequest(requests, 'POST', '/xblock/', {
@@ -1253,6 +1305,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can be renamed inline', function() {
+            // eslint-disable-next-line no-var
             var updatedDisplayName = 'Updated Subsection Name',
                 displayNameWrapper,
                 subsectionModel;
@@ -1313,6 +1366,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('subsection does not show advanced settings tab if no special exams or prerequisites', function() {
+            // eslint-disable-next-line no-var
             var mockNoPrereqCourseJSON = getMockNoPrereqOrExamsCourseJSON();
             createCourseOutlinePage(this, mockNoPrereqCourseJSON, false);
             outlinePage.$('.outline-subsection .configure-button').click();
@@ -1322,6 +1376,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('unit does not show settings tab headers if there is only one tab to show', function() {
+            // eslint-disable-next-line no-var
             var mockNoPrereqCourseJSON = getMockNoPrereqOrExamsCourseJSON();
             createCourseOutlinePage(this, mockNoPrereqCourseJSON, false);
             outlinePage.$('.outline-unit .configure-button').click();
@@ -1329,7 +1384,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show correct editors for self_paced course', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var mockCourseJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({}, [])
@@ -1350,17 +1405,25 @@ describe('CourseOutlinePage', function() {
             outlinePage.$('.outline-subsection .configure-button').click();
             selectAdvancedSettings();
 
+            /* eslint-disable-next-line camelcase, no-var */
             var default_time = '00:30';
+            /* eslint-disable-next-line camelcase, no-var */
             var valid_times = ['00:30', '23:00', '24:00', '99:00'];
+            /* eslint-disable-next-line camelcase, no-var */
             var invalid_times = ['00:00', '100:00', '01:60'];
+            /* eslint-disable-next-line camelcase, no-var */
             var time_limit, i;
 
+            // eslint-disable-next-line camelcase
             for (i = 0; i < valid_times.length; i++) {
+                // eslint-disable-next-line camelcase
                 time_limit = valid_times[i];
                 selectTimedExam(time_limit);
                 expect($('.field-time-limit input').val()).toEqual(time_limit);
             }
+            // eslint-disable-next-line camelcase
             for (i = 0; i < invalid_times.length; i++) {
+                // eslint-disable-next-line camelcase
                 time_limit = invalid_times[i];
                 selectTimedExam(time_limit);
                 expect($('.field-time-limit input').val()).not.toEqual(time_limit);
@@ -1470,6 +1533,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can select the onboarding exam when a course supports onboarding', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1505,6 +1569,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('does not show practice exam option when course supports onboarding', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1533,6 +1598,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('does not show onboarding exam option when course does not support onboarding', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1574,6 +1640,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can select the Proctored exam option', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1622,6 +1689,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved non-special exam correctly', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1651,6 +1719,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved timed exam correctly when hide_after_due is true', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1680,6 +1749,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved timed exam correctly when hide_after_due is true', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1710,6 +1780,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved practice exam correctly', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1738,6 +1809,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved proctored exam correctly', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1766,6 +1838,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved onboarding exam correctly', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1796,6 +1869,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('does not show proctored settings if proctored exams not enabled', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithSpecialExamJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({
                     has_changes: true,
@@ -1831,7 +1905,9 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can be deleted when it is a prerequisite', function() {
+            // eslint-disable-next-line no-var
             var promptSpy = EditHelpers.createPromptSpy();
+            // eslint-disable-next-line no-var
             var mockCourseWithPrequisiteJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -1848,6 +1924,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved prerequisite correctly', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPrequisiteJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -1867,6 +1944,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can display available prerequisite subsections', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPreqsJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -1880,6 +1958,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can select prerequisite subsection', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPreqsJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -1899,6 +1978,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can display gating correctly', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPreqsJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -1916,6 +1996,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved prerequisite subsection correctly', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPreqsJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -1937,6 +2018,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can show a saved prerequisite subsection with empty min score correctly', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPreqsJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -1958,6 +2040,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can display validation error on non-integer or empty minimum score', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPreqsJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -2005,6 +2088,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can display validation error on out of bounds minimum score', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPreqsJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -2037,6 +2121,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('does not display validation error on valid minimum score', function() {
+            // eslint-disable-next-line no-var
             var mockCourseWithPreqsJSON = createMockCourseJSON({}, [
                 createMockSectionJSON({}, [
                     createMockSubsectionJSON({
@@ -2116,6 +2201,7 @@ describe('CourseOutlinePage', function() {
         });
 
         describe('Show correctness setting set as expected.', function() {
+            // eslint-disable-next-line no-var
             var setShowCorrectness;
 
             setShowCorrectness = function(showCorrectness) {
@@ -2125,6 +2211,7 @@ describe('CourseOutlinePage', function() {
             describe('Show correctness set by subsection metadata.', function() {
                 $.each(['always', 'never', 'past_due'], function(index, showCorrectness) {
                     it('show_correctness="' + showCorrectness + '"', function() {
+                        // eslint-disable-next-line no-var
                         var mockCourseJSONCorrectness = createMockCourseJSON({}, [
                             createMockSectionJSON({}, [
                                 createMockSubsectionJSON({show_correctness: showCorrectness}, [])
@@ -2154,6 +2241,7 @@ describe('CourseOutlinePage', function() {
 
                 $.each(['never', 'past_due'], function(index, showCorrectness) {
                     it('show_correctness="' + showCorrectness + '" updates settings, republishes', function() {
+                        // eslint-disable-next-line no-var
                         var expectedSettings = $.extend(true, {}, defaultModalSettings, {publish: 'republish'});
                         expectedSettings.metadata.show_correctness = showCorrectness;
 
@@ -2177,7 +2265,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('can display a publish modal with a list of unpublished units', function() {
-            // eslint-disable-next-line no-shadow
+            /* eslint-disable-next-line no-shadow, no-var */
             var mockCourseJSON = createMockCourseJSON({}, [
                     createMockSectionJSON({has_changes: true}, [
                         createMockSubsectionJSON({has_changes: true}, [
@@ -2197,6 +2285,7 @@ describe('CourseOutlinePage', function() {
             getItemHeaders('subsection').first().find('.publish-button').click();
             $modalWindow = $('.wrapper-modal-window');
             expect($modalWindow.find('.outline-unit').length).toBe(2);
+            // eslint-disable-next-line no-undef
             expect(_.compact(_.map($modalWindow.find('.outline-unit').text().split('\n'), $.trim))).toEqual(
                 ['Unit 100', 'Unit 50']
             );
@@ -2205,7 +2294,7 @@ describe('CourseOutlinePage', function() {
 
         describe('Self Paced with Custom Personalized Learner Schedules (PLS)', function() {
             beforeEach(function() {
-                // eslint-disable-next-line no-shadow
+                /* eslint-disable-next-line no-shadow, no-var */
                 var mockCourseJSON = createMockCourseJSON({}, [
                     createMockSectionJSON({}, [
                         createMockSubsectionJSON({}, [])
@@ -2216,6 +2305,7 @@ describe('CourseOutlinePage', function() {
                 course.set('start', '2014-07-09T00:00:00Z');
             });
 
+            // eslint-disable-next-line camelcase
             setEditModalValuesForCustomPacing = function(grading_type, due_in) {
                 $('#grading_type').val(grading_type);
                 $('#due_in').val(due_in);
@@ -2389,6 +2479,7 @@ describe('CourseOutlinePage', function() {
 
     // Note: most tests for units can be found in Bok Choy
     describe('Unit', function() {
+        // eslint-disable-next-line no-var
         var getUnitStatus = function(options, courseOptions) {
             courseOptions = courseOptions || {};
             mockCourseJSON = createMockCourseJSON(courseOptions, [
@@ -2404,6 +2495,7 @@ describe('CourseOutlinePage', function() {
         };
 
         it('can be deleted', function() {
+            // eslint-disable-next-line no-var
             var promptSpy = EditHelpers.createPromptSpy();
             createCourseOutlinePage(this, mockCourseJSON);
             expandItemsAndVerifyState('subsection');
@@ -2417,6 +2509,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('has a link to the unit page', function() {
+            // eslint-disable-next-line no-var
             var unitAnchor;
             createCourseOutlinePage(this, mockCourseJSON);
             expandItemsAndVerifyState('subsection');
@@ -2425,6 +2518,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('shows partition group information', function() {
+            // eslint-disable-next-line no-var
             var messages = getUnitStatus({has_partition_group_components: true});
             expect(messages.length).toBe(1);
             expect(messages).toContainText(
@@ -2433,6 +2527,7 @@ describe('CourseOutlinePage', function() {
         });
 
         it('shows partition group information with group_access set', function() {
+            // eslint-disable-next-line no-var
             var partitions = [
                 {
                     scheme: 'cohort',
@@ -2454,6 +2549,7 @@ describe('CourseOutlinePage', function() {
                     name: 'Content Group Configuration'
                 }
             ];
+            // eslint-disable-next-line no-var
             var messages = getUnitStatus({
                 has_partition_group_components: true,
                 user_partitions: partitions,
@@ -2471,11 +2567,13 @@ describe('CourseOutlinePage', function() {
         });
 
         it('does not show partition group information if visible to all', function() {
+            // eslint-disable-next-line no-var
             var messages = getUnitStatus({});
             expect(messages.length).toBe(0);
         });
 
         it('does not show partition group information if staff locked', function() {
+            // eslint-disable-next-line no-var
             var messages = getUnitStatus(
                 {has_partition_group_components: true, staff_only_message: true}
             );

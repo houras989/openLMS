@@ -39,6 +39,7 @@
             },
 
             addFilter: function(filter) {
+                // eslint-disable-next-line no-var
                 var label = new FilterLabel({model: filter});
                 this.$ul.append(label.render().el);
                 this.show();
@@ -56,11 +57,14 @@
             },
 
             clearFilter: function(event) {
+                // eslint-disable-next-line no-var
                 var $target = $(event.currentTarget);
+                // eslint-disable-next-line no-var
                 var filter = this.collection.get($target.data('type'));
                 this.trigger('clearFilter', filter.id);
             },
 
+            // eslint-disable-next-line no-unused-vars
             clearAll: function(event) {
                 this.trigger('clearAll');
             },
@@ -76,4 +80,5 @@
 
         });
     });
+// eslint-disable-next-line no-undef
 }(define || RequireJS.define));

@@ -4,6 +4,7 @@
 
     define(['edx-ui-toolkit/js/pagination/paging-collection'],
         function(PagingCollection) {
+            // eslint-disable-next-line no-var
             var BaseCollection = PagingCollection.extend({
                 constructor: function(models, options) {
                     this.options = options;
@@ -41,6 +42,7 @@
                 // remove when backbone.paginator gets a new release
                 sync: function(method, model, options) {
                     // do not send total pages and total records in request
+                    // eslint-disable-next-line no-var
                     var params;
                     if (method === 'read') {
                         params = _.values(_.pick(this.queryParams, ['totalPages', 'totalRecords']));
@@ -54,4 +56,5 @@
             });
             return BaseCollection;
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

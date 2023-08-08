@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -6,6 +6,7 @@
         'jquery', 'underscore', 'backbone', 'gettext',
         'annotator_1.2.9', 'js/edxnotes/views/visibility_decorator', 'js/utils/animation'
     ], function($, _, Backbone, gettext, Annotator, VisibilityDecorator) {
+        // eslint-disable-next-line no-var
         var ToggleVisibilityView = Backbone.View.extend({
             events: {
                 'click .action-toggle-notes': 'toggleHandler'
@@ -35,6 +36,7 @@
             },
 
             receiveMessage: function(event) {
+                // eslint-disable-next-line no-var
                 var data = event.originalEvent.data;
                 if (data === 'tools.toggleNotes') {
                     event.preventDefault();
@@ -49,6 +51,7 @@
             toggleHandler: function(event) {
                 event.preventDefault();
                 this.visibility = !this.visibility;
+                // eslint-disable-next-line no-undef
                 AnimationUtil.triggerAnimation(this.actionToggleMessage);
                 this.toggleNotes(this.visibility);
             },
@@ -123,4 +126,5 @@
             VisibilityDecorator: VisibilityDecorator
         };
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

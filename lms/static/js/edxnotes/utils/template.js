@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -8,10 +8,13 @@
      * @param name The name of the template.
      * @return The loaded template.
      */
+        // eslint-disable-next-line no-var
         var loadTemplate = function(name) {
+            // eslint-disable-next-line no-var
             var templateSelector = '#' + name + '-tpl',
                 templateText = $(templateSelector).text();
             if (!templateText) {
+                // eslint-disable-next-line no-console
                 console.error('Failed to load ' + name + ' template');
             }
             return _.template(templateText);
@@ -21,4 +24,5 @@
             loadTemplate: loadTemplate
         };
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

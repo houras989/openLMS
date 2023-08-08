@@ -1,8 +1,10 @@
 (function(requirejs, require, define) {
     define(['edx-ui-toolkit/js/utils/html-utils'], function(HtmlUtils) {
+        // eslint-disable-next-line no-use-before-define
         return BaseImage;
 
         function BaseImage(state) {
+            // eslint-disable-next-line no-var
             var $baseImageElContainer;
 
             $baseImageElContainer = $(HtmlUtils.joinHtml(
@@ -31,11 +33,13 @@
                 state.baseImageLoaded = true;
             });
             state.baseImageEl.error(function() {
+                // eslint-disable-next-line no-var
                 var errorMsg = HtmlUtils.joinHtml(
                     HtmlUtils.HTML('<span style="color: red;">'),
                     HtmlUtils.HTML('ERROR: Image "'), state.config.baseImage, HtmlUtils.HTML('" was not found!'),
                     HtmlUtils.HTML('</span>')
                 );
+                // eslint-disable-next-line no-console
                 console.log('ERROR: Image "' + state.config.baseImage + '" was not found!');
                 HtmlUtils.setHtml($baseImageElContainer, errorMsg);
                 $baseImageElContainer.appendTo(state.containerEl);

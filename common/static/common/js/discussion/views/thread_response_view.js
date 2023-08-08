@@ -5,8 +5,10 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -22,11 +24,14 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.ThreadResponseView = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(ThreadResponseView, _super);
 
             function ThreadResponseView() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.update = function() {
                     return ThreadResponseView.prototype.update.apply(self, arguments);
@@ -67,12 +72,15 @@
             };
 
             ThreadResponseView.prototype.renderTemplate = function() {
+                /* eslint-disable-next-line no-unused-vars, no-var */
                 var $container, templateData, _ref;
+                // eslint-disable-next-line no-undef
                 this.template = _.template($('#thread-response-template').html());
                 $container = $('#discussion-container');
                 if (!$container.length) {
                     $container = $('.discussion-module');
                 }
+                // eslint-disable-next-line no-undef
                 templateData = _.extend(this.model.toJSON(), {
                     wmdId: typeof this.model.id !== 'undefined' ? this.model.id : (new Date()).getTime(),
                     create_sub_comment: $container.data('user-create-subcomment'),
@@ -120,6 +128,7 @@
             };
 
             ThreadResponseView.prototype.renderComments = function() {
+                // eslint-disable-next-line no-var
                 var collectComments, comments,
                     self = this;
                 comments = new Comments();
@@ -128,6 +137,7 @@
                     return comment.get('created_at');
                 };
                 collectComments = function(comment) {
+                    // eslint-disable-next-line no-var
                     var children;
                     comments.add(comment);
                     children = new Comments(comment.get('children'));
@@ -153,6 +163,7 @@
             };
 
             ThreadResponseView.prototype.renderComment = function(comment) {
+                // eslint-disable-next-line no-var
                 var view,
                     self = this;
                 comment.set('thread', this.model.get('thread'));
@@ -183,6 +194,7 @@
             };
 
             ThreadResponseView.prototype.submitComment = function(event) {
+                // eslint-disable-next-line no-var
                 var body, comment, url, view;
                 event.preventDefault();
                 url = this.model.urlFor('reply');
@@ -202,6 +214,7 @@
                 view = this.renderComment(comment);
                 this.hideEditorChrome();
                 this.trigger('comment:add', comment);
+                // eslint-disable-next-line consistent-return
                 return DiscussionUtil.safeAjax({
                     $elem: $(event.target),
                     url: url,
@@ -223,12 +236,13 @@
             };
 
             ThreadResponseView.prototype._delete = function(event) {
+                // eslint-disable-next-line no-var
                 var $elem, url;
                 event.preventDefault();
                 if (!this.model.can('can_delete')) {
                     return;
                 }
-                // eslint-disable-next-line no-alert
+                /* eslint-disable-next-line no-alert, no-restricted-globals */
                 if (!confirm(gettext('Are you sure you want to delete this response?'))) {
                     return;
                 }
@@ -236,6 +250,7 @@
                 this.model.remove();
                 this.$el.remove();
                 $elem = $(event.target);
+                // eslint-disable-next-line consistent-return
                 return DiscussionUtil.safeAjax({
                     $elem: $elem,
                     url: url,
@@ -243,6 +258,7 @@
                 });
             };
 
+            // eslint-disable-next-line consistent-return
             ThreadResponseView.prototype.createEditView = function() {
                 if (this.showView) {
                     this.showView.$el.empty();
@@ -270,6 +286,7 @@
             };
 
             ThreadResponseView.prototype.cancelCommentEdits = function() {
+                // eslint-disable-next-line no-undef
                 return _.each(this.commentViews, function(view) {
                     return view.cancelEdit();
                 });
@@ -283,7 +300,9 @@
                 return this.$('.comment-form').closest('li').show();
             };
 
+            // eslint-disable-next-line consistent-return
             ThreadResponseView.prototype.createShowView = function() {
+                // eslint-disable-next-line no-var
                 var self = this;
 
                 if (this.editView) {
@@ -323,6 +342,7 @@
             };
 
             ThreadResponseView.prototype.update = function(event) {
+                // eslint-disable-next-line no-var
                 var newBody, url,
                     self = this;
                 newBody = this.editView.$('.edit-post-body textarea').val();

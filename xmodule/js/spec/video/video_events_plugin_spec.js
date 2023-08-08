@@ -1,16 +1,21 @@
 import '../helper.js';
 
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(undefined) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var describeInfo, state, oldOTBD;
 
+    // eslint-disable-next-line no-undef
     describeInfo = new jasmine.DescribeInfo('', function() {
+        // eslint-disable-next-line no-var
         var Logger = window.Logger;
 
         beforeEach(function() {
+            // eslint-disable-next-line no-undef
             spyOn(Logger, 'log');
+            // eslint-disable-next-line no-undef
             spyOn(state.videoEventsPlugin, 'getCurrentTime').and.returnValue(10);
         });
 
@@ -203,7 +208,9 @@ import '../helper.js';
         });
 
         it('can destroy itself', function() {
+            // eslint-disable-next-line no-var
             var plugin = state.videoEventsPlugin;
+            // eslint-disable-next-line no-undef
             spyOn($.fn, 'off').and.callThrough();
             state.videoEventsPlugin.destroy();
             expect(state.videoEventsPlugin).toBeUndefined();
@@ -231,6 +238,7 @@ import '../helper.js';
     describe('VideoPlayer Events plugin', function() {
         beforeEach(function() {
             oldOTBD = window.onTouchBasedDevice;
+            // eslint-disable-next-line no-undef
             window.onTouchBasedDevice = jasmine
                 .createSpy('onTouchBasedDevice')
                 .and.returnValue(null);
@@ -240,9 +248,11 @@ import '../helper.js';
             beforeEach(function(done) {
                 this.code = 'html5';
                 this.duration = 111;
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer('video_html5.html');
                 done();
             });
+            // eslint-disable-next-line no-undef
             jasmine.getEnv().describe(describeInfo.description, describeInfo.specDefinitions);
         });
 
@@ -250,9 +260,11 @@ import '../helper.js';
             beforeEach(function(done) {
                 this.code = 'hls';
                 this.duration = 111;
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializeHLSPlayer();
                 done();
             });
+            // eslint-disable-next-line no-undef
             jasmine.getEnv().describe(describeInfo.description, describeInfo.specDefinitions);
         });
     });

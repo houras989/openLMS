@@ -3,6 +3,7 @@
     'use strict';
 
     describe('Sequence', function() {
+        // eslint-disable-next-line no-var
         var local = {},
             keydownHandler,
             keys = {
@@ -12,9 +13,10 @@
             };
 
         beforeEach(function() {
+            /* eslint-disable-next-line no-undef, no-var */
             var runtime = jasmine.createSpyObj('TestRuntime', ['handlerUrl']);
             loadFixtures('sequence.html');
-            // eslint-disable-next-line no-multi-assign
+            /* eslint-disable-next-line no-multi-assign, no-undef */
             local.XBlock = window.XBlock = jasmine.createSpyObj('XBlock', ['initializeBlocks']);
             this.sequence = new Sequence($('.xblock-student_view-sequential'), runtime);
         });
@@ -24,6 +26,7 @@
         });
 
         keydownHandler = function(key) {
+            // eslint-disable-next-line no-var
             var event = document.createEvent('Event');
             event.keyCode = key;
             event.initEvent('keydown', false, false);
@@ -67,6 +70,7 @@
 
             it('Completion Indicator missing', function() {
                 this.sequence.$('.nav-item[data-index=0]').children('.check-circle').remove();
+                // eslint-disable-next-line no-undef
                 spyOn($, 'postWithPrefix').and.callFake(function(url, data, callback) {
                     callback({
                         complete: true
@@ -97,6 +101,7 @@
                 });
 
                 it('API check returned true', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn($, 'postWithPrefix').and.callFake(function(url, data, callback) {
                         callback({
                             complete: true
@@ -110,6 +115,7 @@
                 });
 
                 it('API check returned false', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn($, 'postWithPrefix').and.callFake(function(url, data, callback) {
                         callback({
                             complete: false

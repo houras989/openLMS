@@ -6,8 +6,10 @@
  * to subviews to render individual steps.
  *
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
+// eslint-disable-next-line no-unused-vars
 (function($, _, Backbone, gettext) {
     'use strict';
 
@@ -38,6 +40,7 @@ var edx = edx || {};
         },
 
         initializeStepViews: function(stepInfo) {
+            // eslint-disable-next-line no-var
             var i,
                 stepName,
                 stepData,
@@ -74,6 +77,7 @@ var edx = edx || {};
 
             for (i = 0; i < this.displaySteps.length; i++) {
                 stepName = this.displaySteps[i].name;
+                // eslint-disable-next-line no-unused-vars
                 subview = null;
 
                 if (i < this.displaySteps.length - 1) {
@@ -82,10 +86,12 @@ var edx = edx || {};
                     nextStepTitle = '';
                 }
 
+                // eslint-disable-next-line no-prototype-builtins
                 if (subviewConstructors.hasOwnProperty(stepName)) {
                     stepData = {};
 
                     // Add any info specific to this step
+                    // eslint-disable-next-line no-prototype-builtins
                     if (stepInfo.hasOwnProperty(stepName)) {
                         _.extend(stepData, stepInfo[stepName]);
                     }
@@ -120,6 +126,7 @@ var edx = edx || {};
         },
 
         renderCurrentStep: function() {
+            // eslint-disable-next-line no-var
             var stepName, stepView, $stepEl;
 
             // Get or create the step container
@@ -149,6 +156,7 @@ var edx = edx || {};
         },
 
         goToStep: function(stepName) {
+            // eslint-disable-next-line no-var
             var stepIndex = _.indexOf(
                 _.pluck(this.displaySteps, 'name'),
                 stepName
@@ -161,4 +169,5 @@ var edx = edx || {};
             this.render();
         }
     });
+// eslint-disable-next-line no-undef
 }(jQuery, _, Backbone, gettext));

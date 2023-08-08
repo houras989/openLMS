@@ -8,6 +8,7 @@
         ['video/03_video_player.js', 'hls', 'underscore'],
         function(VideoPlayer, HLS, _) {
             describe('VideoPlayer', function() {
+                // eslint-disable-next-line no-var
                 var STATUS = window.STATUS,
                     state,
                     oldOTBD,
@@ -19,6 +20,7 @@
 
                 beforeEach(function() {
                     oldOTBD = window.onTouchBasedDevice;
+                    // eslint-disable-next-line no-undef
                     window.onTouchBasedDevice = jasmine.createSpy('onTouchBasedDevice')
                         .and.returnValue(null);
                 });
@@ -38,6 +40,7 @@
                 describe('constructor', function() {
                     describe('always', function() {
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
                             state.videoEl = $('video, iframe');
                         });
@@ -80,10 +83,14 @@
                     });
 
                     it('create Youtube player', function() {
+                        // eslint-disable-next-line no-var
                         var events;
 
+                        // eslint-disable-next-line no-undef
                         jasmine.stubRequests();
+                        // eslint-disable-next-line no-undef
                         spyOn(window.YT, 'Player').and.callThrough();
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayerYouTube();
                         state.videoEl = $('video, iframe');
 
@@ -111,14 +118,18 @@
                     });
 
                     it('create Flash player', function() {
+                        // eslint-disable-next-line no-var
                         var player;
 
+                        // eslint-disable-next-line no-undef
                         spyOn($.fn, 'trigger');
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayerYouTube();
                         state.videoEl = state.el.find('video, iframe').width(100);
                         player = state.videoPlayer.player;
                         player.getAvailablePlaybackRates.and.returnValue([1]);
                         state.currentPlayerMode = 'html5';
+                        // eslint-disable-next-line no-undef
                         spyOn(window.YT, 'Player').and.callThrough();
                         state.videoPlayer.onReady();
 
@@ -133,6 +144,7 @@
                                 cc_load_policy: 0
                             },
                             videoId: 'abcdefghijkl',
+                            // eslint-disable-next-line no-undef
                             events: jasmine.any(Object)
                         });
 
@@ -148,6 +160,7 @@
                         $.each(['iPad', 'Android'], function(index, device) {
                             it('create video volume control on' + device, function() {
                                 window.onTouchBasedDevice.and.returnValue([device]);
+                                // eslint-disable-next-line no-undef
                                 state = jasmine.initializePlayer();
 
                                 state.videoEl = $('video, iframe');
@@ -158,10 +171,11 @@
                     });
 
                     describe('when not on a touch based device', function() {
-                        // eslint-disable-next-line no-shadow
+                        /* eslint-disable-next-line no-shadow, no-unused-vars, no-var */
                         var oldOTBD;
 
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
 
                             state.videoEl = $('video, iframe');
@@ -175,9 +189,11 @@
 
                 describe('onReady', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
 
                         state.videoEl = $('video, iframe');
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer, 'play').and.callThrough();
                         state.videoPlayer.onReady();
                     });
@@ -193,12 +209,14 @@
 
                 describe('onReady YouTube', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayerYouTube();
 
                         state.videoEl = $('video, iframe');
                     });
 
                     it('multiple speeds and flash mode, change back to html5 mode', function() {
+                        // eslint-disable-next-line no-var
                         var playbackRates = state.videoPlayer.player.getAvailablePlaybackRates();
 
                         state.currentPlayerMode = 'flash';
@@ -211,9 +229,11 @@
                 describe('onStateChange Youtube', function() {
                     describe('when the video is ended', function() {
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayerYouTube();
 
                             state.videoEl = $('video, iframe');
+                            // eslint-disable-next-line no-undef
                             spyOn($.fn, 'trigger').and.callThrough();
                             state.videoPlayer.onStateChange({
                                 data: YT.PlayerState.ENDED
@@ -234,8 +254,10 @@
                 describe('onStateChange', function() {
                     describe('when the video is unstarted', function() {
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
                             state.videoEl = $('video, iframe');
+                            // eslint-disable-next-line no-undef
                             spyOn($.fn, 'trigger').and.callThrough();
 
                             state.videoPlayer.onStateChange({
@@ -253,21 +275,27 @@
                     });
 
                     describe('when the video is playing', function() {
+                        // eslint-disable-next-line no-var
                         var oldState;
 
                         beforeEach(function() {
                             // Create the first instance of the player.
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
                             oldState = state;
 
+                            // eslint-disable-next-line no-undef
                             spyOn(oldState.videoPlayer, 'onPause').and.callThrough();
 
                             // Now initialize a second instance.
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
 
                             state.videoEl = $('video, iframe');
 
+                            // eslint-disable-next-line no-undef
                             spyOn(window, 'setInterval').and.returnValue(100);
+                            // eslint-disable-next-line no-undef
                             spyOn($.fn, 'trigger').and.callThrough();
 
                             state.videoPlayer.onStateChange({
@@ -292,13 +320,16 @@
                     });
 
                     describe('when the video is paused', function() {
+                        /* eslint-disable-next-line no-unused-vars, no-var */
                         var currentUpdateIntrval;
 
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
 
                             state.videoEl = $('video, iframe');
 
+                            // eslint-disable-next-line no-undef
                             spyOn($.fn, 'trigger').and.callThrough();
                             state.videoPlayer.onStateChange({
                                 data: YT.PlayerState.PLAYING
@@ -326,9 +357,11 @@
 
                     describe('when the video is ended', function() {
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
 
                             state.videoEl = $('video, iframe');
+                            // eslint-disable-next-line no-undef
                             spyOn($.fn, 'trigger').and.callThrough();
                             state.videoPlayer.onStateChange({
                                 data: YT.PlayerState.ENDED
@@ -347,6 +380,7 @@
 
                 describe('onSeek Youtube', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayerYouTube();
                         state.videoEl = $('video, iframe');
                     });
@@ -372,23 +406,29 @@
                 describe('onSeek', function() {
                     beforeEach(function() {
                         // jasmine.Clock can't be used to fake out debounce with newer versions of underscore
+                        // eslint-disable-next-line no-undef
                         spyOn(_, 'debounce').and.callFake(function(func) {
                             return function() {
                                 func.apply(this, arguments);
                             };
                         });
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
                         state.videoEl = $('video, iframe');
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer, 'duration').and.returnValue(120);
                     });
 
                     describe('when the video is playing', function() {
                         it('call runTimer in seekTo on player', function(done) {
                             state.videoPlayer.play();
+                            // eslint-disable-next-line no-undef
                             jasmine.waitUntil(function() {
                                 return state.videoPlayer.isPlaying();
                             }).then(function() {
+                                // eslint-disable-next-line no-undef
                                 spyOn(state.videoPlayer, 'stopTimer').and.callThrough();
+                                // eslint-disable-next-line no-undef
                                 spyOn(state.videoPlayer, 'runTimer').and.callThrough();
                                 state.videoPlayer.seekTo(10);
                                 expect(state.videoPlayer.currentTime).toBe(10);
@@ -398,8 +438,10 @@
                         });
 
                         it('seek the player', function() {
+                            // eslint-disable-next-line no-undef
                             spyOn(state.videoPlayer.player, 'seekTo').and.callThrough();
                             state.videoProgressSlider.onSlide(
+                                // eslint-disable-next-line no-undef
                                 jQuery.Event('slide'), {value: 30}
                             );
                             expect(state.videoPlayer.currentTime).toBe(30);
@@ -407,8 +449,10 @@
                         });
 
                         it('call updatePlayTime on player', function() {
+                            // eslint-disable-next-line no-undef
                             spyOn(state.videoPlayer, 'updatePlayTime').and.callThrough();
                             state.videoProgressSlider.onSlide(
+                                // eslint-disable-next-line no-undef
                                 jQuery.Event('slide'), {value: 30}
                             );
                             expect(state.videoPlayer.currentTime).toBe(30);
@@ -418,11 +462,13 @@
 
                     it('when the player is not playing: set the current time', function() {
                         state.videoProgressSlider.onSlide(
+                            // eslint-disable-next-line no-undef
                             jQuery.Event('slide'), {value: 20}
                         );
                         state.videoPlayer.pause();
                         expect(state.videoPlayer.currentTime).toBe(20);
                         state.videoProgressSlider.onSlide(
+                            // eslint-disable-next-line no-undef
                             jQuery.Event('slide'), {value: 10}
                         );
                         expect(state.videoPlayer.currentTime).toBe(10);
@@ -430,6 +476,7 @@
 
                     describe('when the video is not playing', function() {
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             spyOn(state.videoPlayer, 'setPlaybackRate')
                                 .and.callThrough();
                         });
@@ -448,12 +495,14 @@
 
                 describe('onVolumeChange', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
                         state.videoPlayer.onReady();
                         state.videoEl = $('video, iframe');
                     });
 
                     it('set the volume on player', function() {
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer.player, 'setVolume');
                         state.videoPlayer.onVolumeChange(60);
                         expect(state.videoPlayer.player.setVolume)
@@ -466,6 +515,7 @@
                         });
 
                         it('video has a correct volume', function() {
+                            // eslint-disable-next-line no-undef
                             spyOn(state.videoPlayer.player, 'setVolume');
                             state.videoVolumeControl.volume = 26;
                             state.el.trigger('play');
@@ -477,10 +527,12 @@
 
                 describe('update', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
 
                         state.videoEl = $('video, iframe');
 
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer, 'updatePlayTime').and.callThrough();
                     });
 
@@ -519,10 +571,12 @@
 
                 // Disabled 1/13/14 due to flakiness observed in master
                 xdescribe('update with start & end time', function() {
+                    // eslint-disable-next-line no-var
                     var START_TIME = 1,
                         END_TIME = 2;
 
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer(
                             {
                                 start: START_TIME,
@@ -532,8 +586,11 @@
 
                         state.videoEl = $('video, iframe');
 
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer, 'update').and.callThrough();
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer, 'pause').and.callThrough();
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoProgressSlider, 'notifyThroughHandleEnd')
                             .and.callThrough();
                     });
@@ -541,12 +598,14 @@
                     it(
                         'video is paused on first endTime, start & end time are reset',
                         function(done) {
+                            // eslint-disable-next-line no-var
                             var duration;
 
                             state.videoProgressSlider.notifyThroughHandleEnd.calls.reset();
                             state.videoPlayer.pause.calls.reset();
                             state.videoPlayer.play();
 
+                            // eslint-disable-next-line no-undef
                             jasmine.waitUntil(function() {
                                 duration = Math.round(state.videoPlayer.currentTime);
                                 return state.videoPlayer.pause.calls.count() === 1;
@@ -564,15 +623,20 @@
 
                 describe('updatePlayTime', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayerYouTube();
                         state.videoEl = $('video, iframe');
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoCaption, 'updatePlayTime').and.callThrough();
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoProgressSlider, 'updatePlayTime').and.callThrough();
                     });
 
                     it('update the video playback time', function(done) {
+                        // eslint-disable-next-line no-var
                         var duration = 0;
 
+                        // eslint-disable-next-line no-undef
                         jasmine.waitUntil(function() {
                             duration = state.videoPlayer.duration();
 
@@ -590,6 +654,7 @@
                     });
 
                     it('update the playback time on caption', function(done) {
+                        // eslint-disable-next-line no-undef
                         jasmine.waitUntil(function() {
                             return state.videoPlayer.duration() > 0;
                         }, 1000).then(function() {
@@ -602,8 +667,10 @@
                     });
 
                     it('update the playback time on progress slider', function(done) {
+                        // eslint-disable-next-line no-var
                         var duration = 0;
 
+                        // eslint-disable-next-line no-undef
                         jasmine.waitUntil(function() {
                             duration = state.videoPlayer.duration();
 
@@ -625,10 +692,12 @@
                 xdescribe(
                     'updatePlayTime when start & end times are defined',
                     function() {
+                        // eslint-disable-next-line no-var
                         var START_TIME = 1,
                             END_TIME = 2;
 
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer(
                                 {
                                     start: START_TIME,
@@ -638,8 +707,11 @@
 
                             state.videoEl = $('video, iframe');
 
+                            // eslint-disable-next-line no-undef
                             spyOn(state.videoPlayer, 'updatePlayTime').and.callThrough();
+                            // eslint-disable-next-line no-undef
                             spyOn(state.videoPlayer.player, 'seekTo').and.callThrough();
+                            // eslint-disable-next-line no-undef
                             spyOn(state.videoProgressSlider, 'updateStartEndTimeRegion')
                                 .and.callThrough();
                         });
@@ -647,6 +719,7 @@
                         it(
                             'when duration becomes available, updatePlayTime() is called',
                             function(done) {
+                                // eslint-disable-next-line no-var
                                 var duration;
 
                                 expect(state.videoPlayer.initialSeekToStartTime).toBeTruthy();
@@ -654,6 +727,7 @@
 
                                 state.videoPlayer.play();
 
+                                // eslint-disable-next-line no-undef
                                 jasmine.waitUntil(function() {
                                     duration = state.videoPlayer.duration();
 
@@ -690,7 +764,9 @@
                                 player: {
                                     seekTo: function() {}
                                 },
+                                // eslint-disable-next-line no-undef
                                 figureOutStartEndTime: jasmine.createSpy(),
+                                // eslint-disable-next-line no-undef
                                 figureOutStartingTime: jasmine.createSpy().and.returnValue(0)
                             },
                             config: {
@@ -706,6 +782,7 @@
                             currentPlayerMode: 'html5',
                             trigger: function() {},
                             browserIsFirefox: false,
+                            // eslint-disable-next-line no-undef
                             isFlashMode: jasmine.createSpy().and.returnValue(false)
                         };
                     });
@@ -714,9 +791,12 @@
                 describe('toggleFullScreen', function() {
                     describe('when the video player is not full screen', function() {
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
+                            // eslint-disable-next-line no-undef
                             jasmine.mockFullscreenAPI();
                             state.videoEl = $('video, iframe');
+                            // eslint-disable-next-line no-undef
                             spyOn($.fn, 'trigger').and.callThrough();
                             $('.add-fullscreen').click();
                         });
@@ -734,9 +814,12 @@
 
                     describe('when the video player already full screen', function() {
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
+                            // eslint-disable-next-line no-undef
                             jasmine.mockFullscreenAPI();
                             state.videoEl = $('video, iframe');
+                            // eslint-disable-next-line no-undef
                             spyOn($.fn, 'trigger').and.callThrough();
                             state.videoFullScreen.enter();
                             $('.add-fullscreen').click();
@@ -757,10 +840,12 @@
 
                 describe('duration', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
 
                         state.videoEl = $('video, iframe');
 
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer.player, 'getDuration').and.callThrough();
                         state.videoPlayer.duration();
                     });
@@ -777,12 +862,15 @@
                         // get the error:
                         //
                         //     this.metadata[this.youtubeId(...)] is undefined
+                        // eslint-disable-next-line no-undef
                         jasmine.stubRequests();
 
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayerYouTube();
 
                         state.videoEl = $('video, iframe');
 
+                        // eslint-disable-next-line no-undef
                         spyOn(state, 'getDuration').and.callThrough();
 
                         // When `state.videoPlayer.player.getDuration()` returns a `0`,
@@ -799,14 +887,17 @@
 
                 describe('volume', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
 
                         state.videoEl = $('video, iframe');
 
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer.player, 'getVolume').and.callThrough();
                     });
 
                     it('set the player volume', function() {
+                        // eslint-disable-next-line no-var
                         var expectedValue = 60,
                             realValue;
 
@@ -823,6 +914,7 @@
                             ['iPad', 'Android', 'iPhone'],
                             function(index, device) {
                                 window.onTouchBasedDevice.and.returnValue([device]);
+                                // eslint-disable-next-line no-undef
                                 state = jasmine.initializePlayer();
 
                                 state.videoEl = $('video, iframe');
@@ -833,10 +925,12 @@
 
                     it('modules are not initialized on iPhone', function() {
                         window.onTouchBasedDevice.and.returnValue(['iPhone']);
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
 
                         state.videoEl = $('video, iframe');
 
+                        // eslint-disable-next-line no-var
                         var modules = [
                             state.videoControl, state.videoCaption, state.videoProgressSlider,
                             state.videoSpeedControl, state.videoVolumeControl
@@ -848,23 +942,28 @@
                     });
 
                     $.each(['iPad', 'Android'], function(index, device) {
+                        // eslint-disable-next-line no-var
                         var message = 'controls become visible after playing starts '
                     + 'on ' + device;
 
                         it(message, function(done) {
+                            // eslint-disable-next-line no-var
                             var controls;
 
                             window.onTouchBasedDevice.and.returnValue([device]);
 
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializePlayer();
                             state.videoEl = $('video, iframe');
                             controls = state.el.find('.video-controls');
 
+                            // eslint-disable-next-line no-undef
                             jasmine.waitUntil(function() {
                                 return state.el.hasClass('is-initialized');
                             }).then(function() {
                                 expect(controls).toHaveClass('is-hidden');
                                 state.videoPlayer.play();
+                                // eslint-disable-next-line no-undef
                                 jasmine.waitUntil(function() {
                                     // Firefox does not return duration for videos until they have reached the end.
                                     // var duration = state.videoPlayer.duration();
@@ -883,14 +982,20 @@
                         state = {
                             el: $(document),
                             speed: '1.50',
+                            // eslint-disable-next-line no-undef
                             setSpeed: jasmine.createSpy(),
+                            // eslint-disable-next-line no-undef
                             saveState: jasmine.createSpy(),
                             videoPlayer: {
                                 currentTime: 60,
+                                // eslint-disable-next-line no-undef
                                 updatePlayTime: jasmine.createSpy(),
+                                // eslint-disable-next-line no-undef
                                 setPlaybackRate: jasmine.createSpy(),
+                                // eslint-disable-next-line no-undef
                                 player: jasmine.createSpyObj('player', ['setPlaybackRate'])
                             },
+                            // eslint-disable-next-line no-undef
                             isFlashMode: jasmine.createSpy().and.returnValue(false)
                         };
                     });
@@ -914,19 +1019,31 @@
                 describe('setPlaybackRate', function() {
                     beforeEach(function() {
                         state = {
+                            // eslint-disable-next-line no-undef
                             youtubeId: jasmine.createSpy().and.returnValue('videoId'),
+                            // eslint-disable-next-line no-undef
                             isFlashMode: jasmine.createSpy().and.returnValue(false),
+                            // eslint-disable-next-line no-undef
                             isHtml5Mode: jasmine.createSpy().and.returnValue(true),
+                            // eslint-disable-next-line no-undef
                             isYoutubeType: jasmine.createSpy().and.returnValue(true),
+                            // eslint-disable-next-line no-undef
                             setPlayerMode: jasmine.createSpy(),
+                            // eslint-disable-next-line no-undef
                             trigger: jasmine.createSpy(),
                             videoPlayer: {
                                 currentTime: 60,
+                                // eslint-disable-next-line no-undef
                                 isPlaying: jasmine.createSpy(),
+                                // eslint-disable-next-line no-undef
                                 seekTo: jasmine.createSpy(),
+                                // eslint-disable-next-line no-undef
                                 duration: jasmine.createSpy().and.returnValue(60),
+                                // eslint-disable-next-line no-undef
                                 updatePlayTime: jasmine.createSpy(),
+                                // eslint-disable-next-line no-undef
                                 setPlaybackRate: jasmine.createSpy(),
+                                // eslint-disable-next-line no-undef
                                 player: jasmine.createSpyObj('player', [
                                     'setPlaybackRate', 'loadVideoById', 'cueVideoById'
                                 ])
@@ -968,6 +1085,7 @@
 
                 describe('HLS Video', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializeHLSPlayer();
                     });
 
@@ -982,7 +1100,9 @@
 
                     describe('on safari', function() {
                         beforeEach(function() {
+                            // eslint-disable-next-line no-undef
                             spyOn(HLS, 'isSupported').and.returnValue(false);
+                            // eslint-disable-next-line no-undef
                             state = jasmine.initializeHLSPlayer();
                             state.canPlayHLS = true;
                             state.browserIsSafari = true;
@@ -996,7 +1116,9 @@
 
                 describe('HLS Video Errors', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         spyOn(HLS, 'isSupported').and.returnValue(false);
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializeHLSPlayer({sources: ['/base/fixtures/hls/hls.m3u8']});
                     });
 
@@ -1010,11 +1132,14 @@
 
                 describe('Video duration', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
+                        // eslint-disable-next-line no-undef
                         spyOn(state.videoPlayer, 'duration').and.returnValue(61);
                     });
 
                     it('overrides the duration if not set', function(done) {
+                        // eslint-disable-next-line no-undef
                         jasmine.waitUntil(function() {
                             return state.duration !== undefined;
                         }).then(function() {
@@ -1024,12 +1149,15 @@
                 });
 
                 describe('Overlay Play Button', function() {
+                    // eslint-disable-next-line no-var
                     var playButtonOverlaySelector = '.video-wrapper .btn-play.fa.fa-youtube-play.fa-2x';
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
                     });
 
                     it('shows the play button after player is ready', function(done) {
+                        // eslint-disable-next-line no-undef
                         jasmine.waitUntil(function() {
                             return state.videoPlayer.player.getPlayerState() !== STATUS.UNSTARTED;
                         }).then(function() {
@@ -1039,6 +1167,7 @@
 
                     it('hides the play button on play', function(done) {
                         $(state.videoPlayer.player.videoEl).trigger('click'); // play
+                        // eslint-disable-next-line no-undef
                         jasmine.waitUntil(function() {
                             return state.videoPlayer.player.getPlayerState() === STATUS.PLAYING;
                         }).then(function() {
@@ -1057,6 +1186,7 @@
                         expect(state.videoPlayer.player.getPlayerState()).toEqual(STATUS.PLAYING);
                         $(state.videoPlayer.player.videoEl).trigger('click'); // pause
                         expect(state.videoPlayer.player.getPlayerState()).toEqual(STATUS.PAUSED);
+                        // eslint-disable-next-line no-undef
                         jasmine.waitUntil(function() {
                             return $(playButtonOverlaySelector).attr('class').split(' ')
                                 .indexOf('is-hidden') === -1;
@@ -1068,6 +1198,7 @@
 
                 describe('HLS Primary Playback', function() {
                     beforeEach(function() {
+                        // eslint-disable-next-line no-undef
                         spyOn(window.YT, 'Player').and.callThrough();
                     });
 
@@ -1076,6 +1207,7 @@
                     });
 
                     it('loads youtube if flag is disabled', function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer('video_all.html', {
                             prioritizeHls: false,
                             streams: '0.5:7tqY6eQzVhE,1.0:cogebirgzzM,1.5:abcdefghijkl'
@@ -1086,6 +1218,7 @@
                     });
 
                     it('does not load youtube if flag is enabled', function() {
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer('video_all.html', {
                             prioritizeHls: true,
                             streams: '0.5:7tqY6eQzVhE,1.0:cogebirgzzM,1.5:abcdefghijkl',
@@ -1098,4 +1231,5 @@
                 });
             });
         });
+// eslint-disable-next-line no-undef
 }(require, define));

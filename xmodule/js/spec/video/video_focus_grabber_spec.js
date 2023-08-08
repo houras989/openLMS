@@ -1,6 +1,7 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(undefined) {
     describe('Video FocusGrabber', function() {
+        // eslint-disable-next-line no-var
         var state;
 
         beforeEach(function() {
@@ -14,19 +15,25 @@
             // messing with your tests. If you need to test with animations on
             // I suggest you add incremental browser-based testing to your
             // stack.
+            // eslint-disable-next-line no-undef
             jQuery.fx.off = true;
 
+            // eslint-disable-next-line no-undef
             jasmine.stubRequests();
             loadFixtures('video_html5.html');
+            // eslint-disable-next-line no-undef
             state = new Video('#example');
 
             spyOnEvent(state.el, 'mousemove');
+            // eslint-disable-next-line no-undef
             spyOn(state.focusGrabber, 'disableFocusGrabber').and.callThrough();
+            // eslint-disable-next-line no-undef
             spyOn(state.focusGrabber, 'enableFocusGrabber').and.callThrough();
         });
 
         afterEach(function() {
             // Turn jQuery animations back on.
+            // eslint-disable-next-line no-undef
             jQuery.fx.off = true;
             state.storage.clear();
             state.videoPlayer.destroy();
@@ -35,6 +42,7 @@
         it(
             'check existence of focus grabber elements and their position',
             function() {
+                // eslint-disable-next-line no-var
                 var firstFGEl = state.el.find('.focus_grabber.first'),
                     lastFGEl = state.el.find('.focus_grabber.last'),
                     tcWrapperEl = state.el.find('.tc-wrapper');
@@ -84,6 +92,7 @@
         // TODO: Most likely, focusGrabber will be disabled in the future. This
         // test could become unneeded in the future.
         xit('after controls hide focus grabbers are enabled', function() {
+            // eslint-disable-next-line no-undef
             runs(function() {
                 // Captions should not be "sticky" for the autohide mechanism
                 // to work.
@@ -96,8 +105,10 @@
 
             // Wait for the autohide to happen. We make it +100ms to make sure
             // that there is clearly no race conditions for our expect below.
+            // eslint-disable-next-line no-undef
             waits(state.videoControl.fadeOutTimeout + 100);
 
+            // eslint-disable-next-line no-undef
             runs(function() {
                 expect(
                     state.focusGrabber.enableFocusGrabber

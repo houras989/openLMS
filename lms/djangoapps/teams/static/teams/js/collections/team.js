@@ -3,6 +3,7 @@
 
     define(['teams/js/collections/base', 'teams/js/models/team', 'gettext', 'underscore'],
         function(BaseCollection, TeamModel, gettext, _) {
+            // eslint-disable-next-line no-var
             var TeamCollection = BaseCollection.extend({
                 model: TeamModel,
 
@@ -47,4 +48,5 @@
             });
             return TeamCollection;
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

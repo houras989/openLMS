@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'annotator_1.2.9', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
     'js/edxnotes/views/notes_factory', 'js/edxnotes/utils/notes_collector', 'js/spec/edxnotes/helpers'
@@ -20,6 +21,7 @@ define([
         });
 
         it('sends single search request to fetch notes for all HTML components', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 token = Helpers.makeToken();
 

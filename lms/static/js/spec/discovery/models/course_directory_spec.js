@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-undef
 define([
     'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/discovery/models/course_discovery'
 ], function(AjaxHelpers, CourseDiscovery) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var JSON_RESPONSE = {
         total: 365,
         results: [
@@ -71,6 +73,7 @@ define([
 
     describe('discovery.models.CourseDiscovery', function() {
         beforeEach(function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             this.discovery = new CourseDiscovery();
             this.discovery.fetch();
@@ -89,6 +92,7 @@ define([
         });
 
         it('returns latest course cards', function() {
+            // eslint-disable-next-line no-var
             var latest = this.discovery.latest();
             expect(latest.length).toBe(1);
         });

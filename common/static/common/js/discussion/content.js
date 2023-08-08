@@ -2,9 +2,11 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty;
 
     function __extends(child, parent) {
+        /* eslint-disable-next-line no-var, no-restricted-syntax */
         for (var key in parent) {
             if (__hasProp.call(parent, key)) {
                 child[key] = parent[key];
@@ -20,7 +22,9 @@
         return child;
     }
 
+    // eslint-disable-next-line no-var
     var __indexOf = [].indexOf || function(item) {
+        // eslint-disable-next-line no-var
         for (var i = 0, l = this.length; i < l; i++) {
             if (i in this && this[i] === item) {
                 return i;
@@ -29,8 +33,10 @@
         return -1;
     };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.Content = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(Content, _super);
 
             function Content() {
@@ -68,6 +74,7 @@
                 return false;
             };
 
+            // eslint-disable-next-line consistent-return
             Content.prototype.updateInfo = function(info) {
                 if (info) {
                     this.set('ability', info.ability);
@@ -77,11 +84,14 @@
             };
 
             Content.prototype.addComment = function(comment, options) {
+                /* eslint-disable-next-line camelcase, no-var */
                 var comments_count, model, thread;
                 options = (options) || {};
                 if (!options.silent) {
                     thread = this.get('thread');
+                    /* eslint-disable-next-line camelcase, radix */
                     comments_count = parseInt(thread.get('comments_count'));
+                    // eslint-disable-next-line camelcase
                     thread.set('comments_count', comments_count + 1);
                 }
                 this.get('children').push(comment);
@@ -94,14 +104,18 @@
             };
 
             Content.prototype.removeComment = function(comment) {
+                /* eslint-disable-next-line camelcase, no-var */
                 var comments_count, thread;
                 thread = this.get('thread');
+                /* eslint-disable-next-line camelcase, radix */
                 comments_count = parseInt(thread.get('comments_count'));
+                // eslint-disable-next-line camelcase
                 thread.set('comments_count', comments_count - 1 - comment.getCommentsCount());
                 return this.trigger('comment:remove');
             };
 
             Content.prototype.resetComments = function(children) {
+                // eslint-disable-next-line no-var
                 var comment, _i, _len, _ref, _results;
                 this.set('children', []);
                 this.set('comments', new Comments());
@@ -117,6 +131,7 @@
             };
 
             Content.prototype.initialize = function() {
+                // eslint-disable-next-line no-var
                 var userId;
                 Content.addContent(this.id, this);
                 userId = this.get('user_id');
@@ -156,8 +171,11 @@
             };
 
             Content.loadContentInfos = function(infos) {
+                // eslint-disable-next-line no-var
                 var id, info;
+                // eslint-disable-next-line no-restricted-syntax
                 for (id in infos) {
+                    // eslint-disable-next-line no-prototype-builtins
                     if (infos.hasOwnProperty(id)) {
                         info = infos[id];
                         if (this.getContent(id)) {
@@ -169,6 +187,7 @@
             };
 
             Content.prototype.pinThread = function() {
+                // eslint-disable-next-line no-var
                 var pinned;
                 pinned = this.get('pinned');
                 this.set('pinned', pinned);
@@ -176,6 +195,7 @@
             };
 
             Content.prototype.unPinThread = function() {
+                // eslint-disable-next-line no-var
                 var pinned;
                 pinned = this.get('pinned');
                 this.set('pinned', pinned);
@@ -183,8 +203,11 @@
             };
 
             Content.prototype.flagAbuse = function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var temp_array;
+                // eslint-disable-next-line camelcase
                 temp_array = this.get('abuse_flaggers');
+                // eslint-disable-next-line camelcase
                 temp_array.push(window.user.get('id'));
                 this.set('abuse_flaggers', temp_array);
                 return this.trigger('change', this);
@@ -196,6 +219,7 @@
             };
 
             Content.prototype.isFlagged = function() {
+                // eslint-disable-next-line no-var
                 var flaggers, user;
                 user = DiscussionUtil.getUser();
                 flaggers = this.get('abuse_flaggers');
@@ -206,7 +230,9 @@
             };
 
             Content.prototype.incrementVote = function(increment) {
+                // eslint-disable-next-line no-var
                 var newVotes;
+                // eslint-disable-next-line no-undef
                 newVotes = _.clone(this.get('votes'));
                 newVotes.up_count += increment;
                 return this.set('votes', newVotes);
@@ -221,8 +247,10 @@
             };
 
             return Content;
+        // eslint-disable-next-line no-undef
         }(Backbone.Model));
         this.Thread = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(Thread, _super);
 
             function Thread() {
@@ -280,6 +308,7 @@
             };
 
             Thread.prototype.comment = function() {
+                // eslint-disable-next-line radix
                 return this.set('comments_count', parseInt(this.get('comments_count')) + 1);
             };
 
@@ -312,8 +341,11 @@
             };
 
             Thread.prototype.toJSON = function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var json_attributes;
+                /* eslint-disable-next-line camelcase, no-undef */
                 json_attributes = _.clone(this.attributes);
+                // eslint-disable-next-line no-undef
                 return _.extend(json_attributes, {
                     title: this.display_title(),
                     body: this.display_body()
@@ -335,9 +367,11 @@
             return Thread;
         }(this.Content));
         this.Comment = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(Comment, _super);
 
             function Comment() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.canBeEndorsed = function() {
                     return Comment.prototype.canBeEndorsed.apply(self, arguments);
@@ -376,6 +410,7 @@
             };
 
             Comment.prototype.getCommentsCount = function() {
+                // eslint-disable-next-line no-var
                 var count;
                 count = 0;
                 this.get('comments').each(function(comment) {
@@ -386,12 +421,16 @@
             };
 
             Comment.prototype.canBeEndorsed = function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var user_id;
+                // eslint-disable-next-line camelcase
                 user_id = window.user.get('id');
+                // eslint-disable-next-line camelcase
                 return user_id && (
                     DiscussionUtil.isPrivilegedUser(user_id)
                     || (
                         this.get('thread').get('thread_type') === 'question'
+                        // eslint-disable-next-line camelcase
                         && this.get('thread').get('user_id') === user_id
                     )
                 );
@@ -401,6 +440,7 @@
         }(this.Content));
 
         this.Comments = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(Comments, _super);
 
             function Comments() {
@@ -410,6 +450,7 @@
             Comments.prototype.model = Comment;
 
             Comments.prototype.initialize = function() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 return this.bind('add', function(item) {
                     item.collection = self;
@@ -417,12 +458,14 @@
             };
 
             Comments.prototype.find = function(id) {
+                // eslint-disable-next-line no-undef
                 return _.first(this.where({
                     id: id
                 }));
             };
 
             return Comments;
+        // eslint-disable-next-line no-undef
         }(Backbone.Collection));
     }
 }).call(window);

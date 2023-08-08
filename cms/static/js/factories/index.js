@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['jquery.form', 'js/index'], function() {
     'use strict';
 
@@ -12,10 +13,13 @@ define(['jquery.form', 'js/index'], function() {
                 .toggleClass('current');
         });
 
+        // eslint-disable-next-line no-var
         var reloadPage = function() {
+            // eslint-disable-next-line no-restricted-globals
             location.reload();
         };
 
+        // eslint-disable-next-line no-var
         var showError = function() {
             $('#request-coursecreator-submit')
                 .toggleClass('has-error')
@@ -31,6 +35,7 @@ define(['jquery.form', 'js/index'], function() {
             success: reloadPage
         });
 
+        // eslint-disable-next-line no-unused-vars
         $('#request-coursecreator-submit').click(function(event) {
             $(this)
                 .toggleClass('is-disabled is-submitting')

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'underscore',
     'URI',
@@ -8,17 +9,22 @@ define([
     'use strict';
 
     describe('SearchFieldView', function() {
+        // eslint-disable-next-line no-var
         var searchFieldView,
             mockUrl = '/api/mock_collection';
 
+        // eslint-disable-next-line no-var
         var newCollection = function(size, perPage) {
+            // eslint-disable-next-line no-var
             var results = _.map(_.range(size), function(i) { return {foo: i}; });
+            // eslint-disable-next-line no-var
             var TestPagingCollection = PagingCollection.extend({
                 state: {
                     pageSize: 5
                 }
             });
 
+            // eslint-disable-next-line no-var
             var collection = new TestPagingCollection({
                 count: results.length,
                 num_pages: Math.ceil(results.length / perPage),
@@ -30,6 +36,7 @@ define([
             return collection;
         };
 
+        // eslint-disable-next-line no-var
         var createSearchFieldView = function(options) {
             options = _.extend(
                 {
@@ -42,15 +49,20 @@ define([
             return new SearchFieldView(options);
         };
 
+        // eslint-disable-next-line no-var
         var assertQueryParams = function(request, expectedParameters) {
+            // eslint-disable-next-line no-var
             var urlParams = new URI(request.url).query(true);
             _.each(expectedParameters, function(value, key) {
                 expect(urlParams[key]).toBe(value);
             });
         };
 
+        // eslint-disable-next-line no-var
         var assertNotInQueryParams = function(request, param) {
+            // eslint-disable-next-line no-var
             var urlParams = new URI(request.url).query(true);
+            // eslint-disable-next-line no-prototype-builtins
             return !urlParams.hasOwnProperty(param);
         };
 
@@ -72,6 +84,7 @@ define([
         });
 
         it('refreshes the collection when performing a search', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             searchFieldView = createSearchFieldView().render();
             searchFieldView.$('.search-field').val('foo');
@@ -92,6 +105,7 @@ define([
         });
 
         it('can clear the search', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             searchFieldView = createSearchFieldView({
                 searchString: 'foo'

@@ -1,5 +1,6 @@
 // Backbone Application View: Certificates List
 
+// eslint-disable-next-line no-undef
 define([
     'gettext',
     'js/views/list',
@@ -8,6 +9,7 @@ define([
 function(gettext, ListView, CertificateItemView) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var CertificatesListView = ListView.extend({
         tagName: 'div',
         className: 'certificates-list',

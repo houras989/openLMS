@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['js/views/baseview', 'js/views/course_info_update', 'js/views/course_info_handout'],
     function(BaseView, CourseInfoUpdateView, CourseInfoHandoutView) {
         /*  this view should own everything on the page which has controls effecting its operation
@@ -6,6 +7,7 @@ define(['js/views/baseview', 'js/views/course_info_update', 'js/views/course_inf
    generate any html for the surrounding page.
 */
 
+        // eslint-disable-next-line no-var
         var CourseInfoEdit = BaseView.extend({
             // takes CMS.Models.CourseInfo as model
             tagName: 'div',

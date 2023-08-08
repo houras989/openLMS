@@ -2,11 +2,13 @@
  * This class defines a list view for partition groups.
  * It is expected to be backed by a Group collection.
  */
+// eslint-disable-next-line no-undef
 define([
     'underscore', 'js/views/list', 'js/views/partition_group_item', 'gettext'
 ], function(_, ListView, PartitionGroupItemView, gettext) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var PartitionGroupListView = ListView.extend({
         initialize: function(options) {
             ListView.prototype.initialize.apply(this, [options]);

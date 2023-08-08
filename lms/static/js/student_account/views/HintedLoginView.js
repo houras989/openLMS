@@ -32,6 +32,7 @@
                     return this;
                 },
 
+                // eslint-disable-next-line no-unused-vars
                 proceedWithHintedAuth: function(event) {
                     this.redirect(this.hintedProvider.loginUrl);
                 },
@@ -45,4 +46,5 @@
                 }
             });
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

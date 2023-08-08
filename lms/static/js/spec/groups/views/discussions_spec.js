@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['backbone', 'jquery', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
     'common/js/spec_helpers/template_helpers',
     'js/discussions_management/views/discussions', 'js/discussions_management/models/course_discussions_detail',
@@ -8,11 +9,13 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
     'use strict';
 
     describe('Discussions View', function() {
+        // eslint-disable-next-line no-var
         var createMockDiscussionsSettingsJson, createDiscussionsView, discussionsView, requests, verifyMessage,
             createMockDiscussionsSettings, createMockDiscussionsJson, createMockDiscussions,
             showAndAssertDiscussionTopics;
 
         // Selectors
+        // eslint-disable-next-line no-var
         var inlineDiscussionsFormCss = '.cohort-inline-discussions-form',
             courseWideDiscussionsFormCss = '.cohort-course-wide-discussions-form',
             courseWideDiscussionsSaveButtonCss = '.cohort-course-wide-discussions-form .action-save',
@@ -103,6 +106,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
         };
 
         createDiscussionsView = function(test, options) {
+            // eslint-disable-next-line no-var
             var discussionSettings, dividedDiscussions, discussionOptions;
             discussionOptions = options || {};
             discussionSettings = discussionOptions.cohortSettings || createMockDiscussionsSettings();
@@ -123,6 +127,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
         };
 
         showAndAssertDiscussionTopics = function() {
+            // eslint-disable-next-line no-var
             var $courseWideDiscussionsForm,
                 $inlineDiscussionsForm;
 
@@ -168,6 +173,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
         });
 
         describe('Discussion Topics', function() {
+            // eslint-disable-next-line no-var
             var courseWideView, assertDividedTopics;
 
             assertDividedTopics = function(view, type) {
@@ -238,6 +244,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
                 });
 
                 it('shows an appropriate message when subsequent "GET" returns HTTP500', function() {
+                    // eslint-disable-next-line no-var
                     var expectedTitle;
                     createDiscussionsView(this);
                     $($('.check-discussion-subcategory-course-wide')[1]).prop('checked', 'checked').change();
@@ -267,6 +274,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
                 });
 
                 it('shows an appropriate error message for HTTP500', function() {
+                    // eslint-disable-next-line no-var
                     var expectedTitle;
                     createDiscussionsView(this);
                     $($('.check-discussion-subcategory-course-wide')[1]).prop('checked', 'checked').change();
@@ -279,6 +287,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
             });
 
             describe('Inline', function() {
+                // eslint-disable-next-line no-var
                 var enableSaveButton, mockGetRequest, verifySuccess, mockPatchRequest;
 
                 enableSaveButton = function() {
@@ -453,6 +462,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
                 });
 
                 it('shows an appropriate message when no inline topics exist', function() {
+                    // eslint-disable-next-line no-var
                     var topicsJson, options, expectedTitle;
 
                     topicsJson = {
@@ -479,6 +489,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
                 });
 
                 it('shows an appropriate message when subsequent "GET" returns HTTP500', function() {
+                    // eslint-disable-next-line no-var
                     var expectedTitle;
                     createDiscussionsView(this);
                     enableSaveButton();
@@ -499,6 +510,7 @@ function(Backbone, $, AjaxHelpers, TemplateHelpers, DiscussionsView, CourseDiscu
                 });
 
                 it('shows an appropriate error message for HTTP500', function() {
+                    // eslint-disable-next-line no-var
                     var expectedTitle;
                     createDiscussionsView(this);
                     enableSaveButton();

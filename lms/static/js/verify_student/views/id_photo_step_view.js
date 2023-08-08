@@ -1,6 +1,7 @@
 /**
  * View for the "id photo" step of the payment/verification flow.
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
 (function($) {
@@ -19,6 +20,7 @@ var edx = edx || {};
         },
 
         postRender: function() {
+            // eslint-disable-next-line no-var
             var webcam = edx.verify_student.getSupportedWebcamView({
                 el: $('#idcam'),
                 model: this.model,
@@ -38,7 +40,9 @@ var edx = edx || {};
                 });
             });
 
+            // eslint-disable-next-line no-undef
             $('#next_step_button').on('click', _.bind(this.nextStep, this));
         }
     });
+// eslint-disable-next-line no-undef
 }(jQuery));

@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-undef
 define(['js/views/baseview', 'underscore', 'gettext', 'common/js/components/views/feedback_prompt',
     'common/js/components/views/feedback_notification', 'edx-ui-toolkit/js/utils/html-utils'],
 function(BaseView, _, gettext, PromptView, NotificationView, HtmlUtils) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var AssetView = BaseView.extend({
         initialize: function() {
             this.template = this.loadTemplate('asset');
@@ -15,7 +17,9 @@ function(BaseView, _, gettext, PromptView, NotificationView, HtmlUtils) {
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var uniqueId = _.uniqueId('lock_asset_');
+            // eslint-disable-next-line no-var
             var attributes = {
                 display_name: this.model.get('display_name'),
                 thumbnail: this.model.get('thumbnail'),
@@ -33,6 +37,7 @@ function(BaseView, _, gettext, PromptView, NotificationView, HtmlUtils) {
         },
 
         updateLockState: function() {
+            // eslint-disable-next-line no-var
             var lockedClass = 'is-locked';
 
             // Add a class of "locked" to the tr element if appropriate,
@@ -47,6 +52,7 @@ function(BaseView, _, gettext, PromptView, NotificationView, HtmlUtils) {
         },
 
         confirmDelete: function(e) {
+            // eslint-disable-next-line no-var
             var asset = this.model;
             if (e && e.preventDefault) { e.preventDefault(); }
             new PromptView.Warning({
@@ -80,7 +86,9 @@ function(BaseView, _, gettext, PromptView, NotificationView, HtmlUtils) {
         },
 
         lockAsset: function() {
+            // eslint-disable-next-line no-var
             var asset = this.model;
+            // eslint-disable-next-line no-var
             var saving = new NotificationView.Mini({
                 title: gettext('Saving')
             }).show();

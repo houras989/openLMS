@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery',
     'js/certificates/views/certificate_bulk_allowlist'
@@ -6,7 +7,9 @@ function($, CertificateBulkAllowlistView) {
     'use strict';
 
     describe('certificate bulk exceptions generation', function() {
+        /* eslint-disable-next-line camelcase, no-var */
         var certificate_bulk_exception_url = 'test/url/';
+        // eslint-disable-next-line no-var
         var SELECTORS = {
             upload_csv_button: '.upload-csv-button',
             bulk_allowlist_exception_form: 'form#bulk-allowlist-exception-form',
@@ -14,6 +17,7 @@ function($, CertificateBulkAllowlistView) {
         };
         beforeEach(function() {
             setFixtures();
+            // eslint-disable-next-line no-var
             var fixture = readFixtures(
                 'templates/instructor/instructor_dashboard_2/certificate-bulk-allowlist.underscore'
             );
@@ -24,13 +28,16 @@ function($, CertificateBulkAllowlistView) {
             );
 
             this.view = new CertificateBulkAllowlistView({
+                // eslint-disable-next-line camelcase
                 bulk_exception_url: certificate_bulk_exception_url
             });
             this.view.render();
         });
 
         it('bind the ajax call and the result will be success', function() {
+            // eslint-disable-next-line no-var
             var submitCallback;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 params.success({
                     row_errors: {},
@@ -41,6 +48,7 @@ function($, CertificateBulkAllowlistView) {
                     always: function() {}
                 };
             });
+            // eslint-disable-next-line no-undef
             submitCallback = jasmine.createSpy().and.returnValue();
             this.view.$el.find(SELECTORS.bulk_allowlist_exception_form).submit(submitCallback);
             this.view.$el.find(SELECTORS.upload_csv_button).click();
@@ -49,7 +57,9 @@ function($, CertificateBulkAllowlistView) {
         });
 
         it('bind the ajax call and the result will be general error', function() {
+            // eslint-disable-next-line no-var
             var submitCallback;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 params.success({
                     row_errors: {},
@@ -60,6 +70,7 @@ function($, CertificateBulkAllowlistView) {
                     always: function() {}
                 };
             });
+            // eslint-disable-next-line no-undef
             submitCallback = jasmine.createSpy().and.returnValue();
             this.view.$el.find(SELECTORS.bulk_allowlist_exception_form).submit(submitCallback);
             this.view.$el.find(SELECTORS.upload_csv_button).click();
@@ -67,7 +78,9 @@ function($, CertificateBulkAllowlistView) {
         });
 
         it('bind the ajax call and the result will be singular form of row errors', function() {
+            // eslint-disable-next-line no-var
             var submitCallback;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 params.success({
                     general_errors: [],
@@ -84,6 +97,7 @@ function($, CertificateBulkAllowlistView) {
                     always: function() {}
                 };
             });
+            // eslint-disable-next-line no-undef
             submitCallback = jasmine.createSpy().and.returnValue();
             this.view.$el.find(SELECTORS.bulk_allowlist_exception_form).submit(submitCallback);
             this.view.$el.find(SELECTORS.upload_csv_button).click();
@@ -100,7 +114,9 @@ function($, CertificateBulkAllowlistView) {
         });
 
         it('bind the ajax call and the result will be plural form of row errors', function() {
+            // eslint-disable-next-line no-var
             var submitCallback;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 params.success({
                     general_errors: [],
@@ -117,6 +133,7 @@ function($, CertificateBulkAllowlistView) {
                     always: function() {}
                 };
             });
+            // eslint-disable-next-line no-undef
             submitCallback = jasmine.createSpy().and.returnValue();
             this.view.$el.find(SELECTORS.bulk_allowlist_exception_form).submit(submitCallback);
             this.view.$el.find(SELECTORS.upload_csv_button).click();
@@ -133,7 +150,9 @@ function($, CertificateBulkAllowlistView) {
         });
 
         it('toggle message details', function() {
+            // eslint-disable-next-line no-var
             var submitCallback;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 params.success({
                     row_errors: {},
@@ -144,6 +163,7 @@ function($, CertificateBulkAllowlistView) {
                     always: function() {}
                 };
             });
+            // eslint-disable-next-line no-undef
             submitCallback = jasmine.createSpy().and.returnValue();
             this.view.$el.find(SELECTORS.bulk_allowlist_exception_form).submit(submitCallback);
             this.view.$el.find(SELECTORS.upload_csv_button).click();

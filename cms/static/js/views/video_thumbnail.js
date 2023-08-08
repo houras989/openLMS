@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     ['underscore', 'gettext', 'moment', 'js/utils/date_utils', 'js/views/baseview',
         'common/js/components/utils/view_utils', 'edx-ui-toolkit/js/utils/html-utils',
@@ -7,6 +8,7 @@ define(
         VideoThumbnailErrorTemplate) {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var VideoThumbnailView = BaseView.extend({
 
             events: {
@@ -100,6 +102,7 @@ define(
             },
 
             getVideoImageSupportedFileFormats: function() {
+                // eslint-disable-next-line no-var
                 var supportedFormats = _.reject(_.keys(this.videoImageSettings.supported_file_formats), function(item) {
                     // Don't show redundant extensions to end user.
                     return item === '.bmp2' || item === '.jpeg';
@@ -160,6 +163,7 @@ define(
             },
 
             getDurationTextHuman: function(durationSeconds) {
+                // eslint-disable-next-line no-var
                 var humanize = this.getHumanizeDuration(durationSeconds);
 
                 // This case is specifically to handle values between 0 and 1 seconds excluding upper bound
@@ -177,6 +181,7 @@ define(
             },
 
             getHumanizeDuration: function(durationSeconds) {
+                // eslint-disable-next-line no-var
                 var minutes,
                     seconds,
                     minutesText = null,
@@ -208,6 +213,7 @@ define(
             },
 
             getDurationTextMachine: function(durationSeconds) {
+                // eslint-disable-next-line no-var
                 var minutes = Math.floor(durationSeconds / 60),
                     seconds = Math.floor(durationSeconds - minutes * 60);
                 return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
@@ -223,6 +229,7 @@ define(
             },
 
             imageSelected: function(event, data) {
+                // eslint-disable-next-line no-var
                 var errorMessage;
                 // If an error is already present above the video element, remove it.
                 this.clearErrorMessage(this.model.get('edx_video_id'));
@@ -247,6 +254,7 @@ define(
             },
 
             imageUploadFailed: function(event, data) {
+                // eslint-disable-next-line no-var
                 var errorText = JSON.parse(data.jqXHR.responseText).error;
                 this.showErrorMessage(errorText);
             },
@@ -275,6 +283,7 @@ define(
             },
 
             setActionInfo: function(action, showText, additionalSRText) {
+                // eslint-disable-next-line no-var
                 var hasError = this.$('.thumbnail-wrapper').hasClass('error');
                 this.$('.thumbnail-action').toggle(showText);
                 HtmlUtils.setHtml(
@@ -312,6 +321,7 @@ define(
             },
 
             validateImageFile: function(imageFile) {
+                // eslint-disable-next-line no-var
                 var errorMessage = '';
 
                 if (!_.contains(this.getVideoImageSupportedFileFormats().machine, imageFile.type)) {
@@ -346,6 +356,7 @@ define(
             },
 
             clearErrorMessage: function(videoId) {
+                // eslint-disable-next-line no-var
                 var $thumbnailWrapperEl = $('.thumbnail-error-wrapper[data-video-id="' + videoId + '"]');
                 if ($thumbnailWrapperEl.length) {
                     $thumbnailWrapperEl.remove();
@@ -355,6 +366,7 @@ define(
             },
 
             showErrorMessage: function(errorText) {
+                // eslint-disable-next-line no-var
                 var videoId = this.model.get('edx_video_id'),
                     $parentRowEl = $(this.$el.parent());
 

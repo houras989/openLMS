@@ -1,7 +1,9 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'underscore', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'URI', 'js/models/xblock_info',
     'js/views/paged_container', 'js/views/paging_header',
     'common/js/components/views/paging_footer', 'js/views/xblock'],
 function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, PagingFooter, XBlockView) {
+    // eslint-disable-next-line no-var
     var htmlResponseTpl = _.template(''
             + '<div class="xblock-container-paging-parameters" '
                 + 'data-start="<%= start %>" '
@@ -10,13 +12,18 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 + 'data-previews="<%= previews %>"></div>'
     );
 
+    // eslint-disable-next-line camelcase
     function getResponseHtml(override_options) {
+        /* eslint-disable-next-line camelcase, no-var */
         var default_options = {
             start: 0,
+            // eslint-disable-next-line no-use-before-define
             displayed: PAGE_SIZE,
+            // eslint-disable-next-line no-use-before-define
             total: PAGE_SIZE + 1,
             previews: true
         };
+        // eslint-disable-next-line no-var
         var options = _.extend(default_options, override_options);
         return '<div class="xblock" data-request-token="request_token">'
                 + '<div class="container-paging-header"></div>'
@@ -25,6 +32,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 + '</div>';
     }
 
+    /* eslint-disable-next-line camelcase, no-var */
     var makePage = function(html_parameters) {
         return {
             resources: [],
@@ -32,37 +40,47 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
         };
     };
 
+    // eslint-disable-next-line no-var
     var PAGE_SIZE = 3;
 
+    // eslint-disable-next-line no-var
     var mockFirstPage = makePage({
         start: 0,
         displayed: PAGE_SIZE,
         total: PAGE_SIZE + 1
     });
 
+    // eslint-disable-next-line no-var
     var mockSecondPage = makePage({
         start: PAGE_SIZE,
         displayed: 1,
         total: PAGE_SIZE + 1
     });
 
+    // eslint-disable-next-line no-var
     var mockEmptyPage = makePage({
         start: 0,
         displayed: 0,
         total: 0
     });
 
+    // eslint-disable-next-line no-var
     var respondWithMockPage = function(requests, mockPage) {
+        // eslint-disable-next-line no-var
         var request = AjaxHelpers.currentRequest(requests);
         if (typeof mockPage === 'undefined') {
+            // eslint-disable-next-line no-var
             var url = new URI(request.url);
+            // eslint-disable-next-line no-var
             var queryParameters = url.query(true); // Returns an object with each query parameter stored as a value
+            // eslint-disable-next-line no-var
             var page = queryParameters.page_number;
             mockPage = page === '0' ? mockFirstPage : mockSecondPage;
         }
         AjaxHelpers.respondWithJson(requests, mockPage);
     };
 
+    // eslint-disable-next-line no-var
     var MockPagingView = PagedContainer.extend({
         view: 'container_preview',
         el: $("<div><div class='xblock' data-request-token='test_request_token'/></div>"),
@@ -70,11 +88,13 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
     });
 
     describe('Paging Container', function() {
+        // eslint-disable-next-line no-var
         var pagingContainer;
 
         beforeEach(function() {
             pagingContainer = new MockPagingView({
                 page_size: PAGE_SIZE,
+                // eslint-disable-next-line no-undef
                 page: jasmine.createSpyObj('page', ['updatePreviewButton', 'renderAddXBlockComponents'])
             });
         });
@@ -82,6 +102,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
         describe('Container', function() {
             describe('rendering', function() {
                 it('should set show_previews', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     expect(pagingContainer.collection.showChildrenPreviews).toBe(true); // precondition check
 
@@ -97,6 +118,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
             describe('setPage', function() {
                 it('can set the current page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -107,6 +129,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should not change page after a server error', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -118,6 +141,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
             describe('nextPage', function() {
                 it('does not move forward after a server error', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -127,6 +151,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('can move to the next page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -136,6 +161,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('can not move forward from the final page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -146,6 +172,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
             describe('previousPage', function() {
                 it('can move back a page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -155,6 +182,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('can not move back from the first page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -163,6 +191,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('does not move back after a server error', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -180,6 +209,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('does not move forward if a server error occurs', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -189,6 +219,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('can move to the next page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -198,6 +229,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be enabled when there is at least one more page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -205,6 +237,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be disabled on the final page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -212,6 +245,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be disabled on an empty page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     AjaxHelpers.respondWithJson(requests, mockEmptyPage);
@@ -225,6 +259,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('does not move back if a server error occurs', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -234,6 +269,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('can go back a page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -243,6 +279,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be disabled on the first page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -250,6 +287,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be enabled on the second page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -257,6 +295,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be disabled for an empty page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     AjaxHelpers.respondWithJson(requests, mockEmptyPage);
@@ -266,6 +305,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
             describe('Page metadata section', function() {
                 it('shows the correct metadata for the current page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this),
                         message;
                     pagingContainer.setPage(0);
@@ -279,6 +319,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
             describe('Children count label', function() {
                 it('should show correct count on first page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -286,6 +327,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should show correct count on second page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -293,6 +335,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should show correct count for an empty collection', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     AjaxHelpers.respondWithJson(requests, mockEmptyPage);
@@ -302,6 +345,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
             describe('Children total label', function() {
                 it('should show correct total on the first page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -309,6 +353,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should show correct total on the second page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -316,6 +361,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should show zero total for an empty collection', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     AjaxHelpers.respondWithJson(requests, mockEmptyPage);
@@ -332,6 +378,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('does not move forward if a server error occurs', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -341,6 +388,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('can move to the next page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -350,6 +398,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be enabled when there is at least one more page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -357,6 +406,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be disabled on the final page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -364,6 +414,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be disabled on an empty page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     AjaxHelpers.respondWithJson(requests, mockEmptyPage);
@@ -378,6 +429,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('does not move back if a server error occurs', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -387,6 +439,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('can go back a page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -396,6 +449,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be disabled on the first page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -403,6 +457,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be enabled on the second page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -410,6 +465,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should be disabled for an empty page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     AjaxHelpers.respondWithJson(requests, mockEmptyPage);
@@ -419,6 +475,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
             describe('Current page label', function() {
                 it('should show 1 on the first page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -426,6 +483,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should show 2 on the second page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(1);
                     respondWithMockPage(requests);
@@ -433,6 +491,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should show 1 for an empty collection', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     AjaxHelpers.respondWithJson(requests, mockEmptyPage);
@@ -442,6 +501,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
             describe('Page total label', function() {
                 it('should show the correct value with more than one page', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -449,6 +509,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should show page 1 when there are no assets', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     AjaxHelpers.respondWithJson(requests, mockEmptyPage);
@@ -457,9 +518,11 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
             });
 
             describe('Page input field', function() {
+                /* eslint-disable-next-line no-unused-vars, no-var */
                 var input;
 
                 it('should initially have a blank page input', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -467,6 +530,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should handle invalid page requests', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -477,6 +541,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should switch pages via the input field', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -488,6 +553,7 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should handle AJAX failures when switching pages via the input field', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
@@ -502,15 +568,22 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
 
         describe('Previews', function() {
             describe('Toggle Previews', function() {
+                // eslint-disable-next-line no-var
                 var testSendsAjax,
                     defaultUrl = '/preview/xblock/handler/trigger_previews';
 
+                // eslint-disable-next-line camelcase
                 testSendsAjax = function(show_previews) {
+                    // eslint-disable-next-line camelcase
                     it('should send ' + (!show_previews) + ' when showChildrenPreviews was ' + show_previews, function() {
+                        // eslint-disable-next-line no-var
                         var requests = AjaxHelpers.requests(this);
+                        // eslint-disable-next-line camelcase
                         pagingContainer.collection.showChildrenPreviews = show_previews;
                         pagingContainer.togglePreviews();
+                        // eslint-disable-next-line camelcase
                         AjaxHelpers.expectJsonRequest(requests, 'POST', defaultUrl, {showChildrenPreviews: !show_previews});
+                        // eslint-disable-next-line camelcase
                         AjaxHelpers.respondWithJson(requests, {showChildrenPreviews: !show_previews});
                     });
                 };
@@ -518,7 +591,9 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 testSendsAjax(false);
 
                 it('should trigger render on success', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn(pagingContainer, 'render');
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
 
                     pagingContainer.togglePreviews();
@@ -528,7 +603,9 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should not trigger render on failure', function() {
+                    // eslint-disable-next-line no-undef
                     spyOn(pagingContainer, 'render');
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
 
                     pagingContainer.togglePreviews();
@@ -538,11 +615,15 @@ function($, _, AjaxHelpers, URI, XBlockInfo, PagedContainer, PagingHeader, Pagin
                 });
 
                 it('should send force_render when new block causes page change', function() {
+                    // eslint-disable-next-line no-var
                     var requests = AjaxHelpers.requests(this);
                     pagingContainer.setPage(0);
                     respondWithMockPage(requests);
+                    // eslint-disable-next-line no-undef
                     spyOn(pagingContainer, 'render');
+                    // eslint-disable-next-line no-var
                     var mockXBlockInfo = new XBlockInfo({id: 'mock-location'});
+                    // eslint-disable-next-line no-var
                     var mockXBlockView = new XBlockView({model: mockXBlockInfo});
                     mockXBlockView.model.id = 'mock-location';
                     pagingContainer.refresh(mockXBlockView, true);

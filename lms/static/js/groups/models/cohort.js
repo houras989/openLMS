@@ -2,6 +2,7 @@
     'use strict';
 
     define(['backbone'], function(Backbone) {
+        // eslint-disable-next-line no-var
         var CohortModel = Backbone.Model.extend({
             idAttribute: 'id',
             defaults: {
@@ -25,4 +26,5 @@
         });
         return CohortModel;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

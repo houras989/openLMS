@@ -3,6 +3,7 @@
 
     describe('Bulk Email Queueing', function() {
         beforeEach(function() {
+            // eslint-disable-next-line no-var
             var testBody, testSubject;
             testSubject = 'Test Subject';
             testBody = 'Hello, World! This is a test email message!';
@@ -28,16 +29,19 @@
                     subject: testSubject,
                     message: testBody
                 },
-                // eslint-disable-next-line react/forbid-prop-types
+                /* eslint-disable-next-line react/forbid-prop-types, no-undef */
                 success: jasmine.any(Function),
-                // eslint-disable-next-line react/forbid-prop-types
+                /* eslint-disable-next-line react/forbid-prop-types, no-undef */
                 error: jasmine.any(Function)
             };
             return this.ajax_params;
         });
         it('cannot send an email with no target', function() {
+            // eslint-disable-next-line no-var
             var target, i, len, ref;
+            // eslint-disable-next-line no-undef
             spyOn(window, 'alert');
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax');
             ref = this.send_email.$send_to;
             for (i = 0, len = ref.length; i < len; i++) {
@@ -49,7 +53,9 @@
             return expect($.ajax).not.toHaveBeenCalled();
         });
         it('cannot send an email with no subject', function() {
+            // eslint-disable-next-line no-undef
             spyOn(window, 'alert');
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax');
             this.send_email.$subject.val('');
             this.send_email.$btn_send.click();
@@ -57,7 +63,9 @@
             return expect($.ajax).not.toHaveBeenCalled();
         });
         it('cannot send an email with no message', function() {
+            // eslint-disable-next-line no-undef
             spyOn(window, 'alert');
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax');
             this.send_email.$emailEditor = {
                 save: function() {
@@ -71,6 +79,7 @@
             return expect($.ajax).not.toHaveBeenCalled();
         });
         it('can send a simple message to a single target', function() {
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 return params.success();
             });
@@ -79,11 +88,14 @@
             return expect($.ajax).toHaveBeenCalledWith(this.ajax_params);
         });
         it('can send a simple message to a multiple targets', function() {
+            // eslint-disable-next-line no-var
             var target, i, len, ref;
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 return params.success();
             });
             this.ajax_params.data.send_to = JSON.stringify((function() {
+                // eslint-disable-next-line no-var
                 var j, len1, ref1, results;
                 ref1 = this.send_email.$send_to;
                 results = [];
@@ -103,9 +115,11 @@
             return expect($.ajax).toHaveBeenCalledWith(this.ajax_params);
         });
         it('can handle an error result from the bulk email api', function() {
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 return params.error();
             });
+            // eslint-disable-next-line no-undef
             spyOn(console, 'warn');
             this.send_email.$btn_send.click();
             return expect($('.request-response-error').text()).toEqual('Error sending email.');

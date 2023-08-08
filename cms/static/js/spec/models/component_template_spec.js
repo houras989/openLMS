@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-undef
 define(['js/models/component_template'],
     function(ComponentTemplate) {
         describe('ComponentTemplates', function() {
+            // eslint-disable-next-line no-var
             var mockTemplateJSON = {
                 templates: [
                     {
@@ -53,6 +55,7 @@ define(['js/models/component_template'],
             };
 
             it('orders templates correctly', function() {
+                // eslint-disable-next-line no-var
                 var lastTemplate = null,
                     firstComparison = true,
                     componentTemplate = new ComponentTemplate(),

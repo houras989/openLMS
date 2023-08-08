@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-undef
 define(
     ['backbone', 'underscore', 'underscore.string', 'js/utils/module'],
     function(Backbone, _, str, ModuleUtils) {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var XBlockInfo = Backbone.Model.extend({
 
             urlRoot: ModuleUtils.urlRoot,
@@ -197,6 +199,7 @@ define(
             },
 
             hasChildren: function() {
+                // eslint-disable-next-line no-var
                 var childInfo = this.get('child_info');
                 return childInfo && childInfo.children.length > 0;
             },
@@ -233,6 +236,7 @@ define(
          * @return {boolean}
         */
             isActionRequired: function(actionName) {
+                // eslint-disable-next-line no-var
                 var actions = this.get('actions');
                 if (actions !== null) {
                     if (_.has(actions, actionName) && !actions[actionName]) {
@@ -247,6 +251,7 @@ define(
          * @return {Array}
         */
             getCategoryHelpers: function() {
+                // eslint-disable-next-line no-var
                 var categories = ['course', 'chapter', 'sequential', 'vertical'],
                     helpers = {};
 

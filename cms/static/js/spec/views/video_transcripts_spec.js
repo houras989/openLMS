@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     ['jquery', 'underscore', 'backbone', 'js/views/video_transcripts', 'js/views/previous_video_upload_list',
         'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'common/js/spec_helpers/template_helpers'],
@@ -5,6 +6,7 @@ define(
         'use strict';
 
         describe('VideoTranscriptsView', function() {
+            // eslint-disable-next-line no-var
             var videoTranscriptsView,
                 renderView,
                 verifyTranscriptStateInfo,
@@ -46,6 +48,7 @@ define(
                 videoListView;
 
             verifyTranscriptStateInfo = function($transcriptEl, transcriptLanguage) {
+                // eslint-disable-next-line no-var
                 var $transcriptActionsEl = $transcriptEl.find('.transcript-actions'),
                     downloadTranscriptActionEl = $transcriptActionsEl.find('.download-transcript-button'),
                     uploadTranscriptActionEl = $transcriptActionsEl.find('.upload-transcript-button');
@@ -68,6 +71,7 @@ define(
             };
 
             verifyMessage = function($transcriptEl, status) {
+                // eslint-disable-next-line no-var
                 var $transcriptStatusEl = $transcriptEl.find('.transcript-upload-status-container'),
                     statusData = videoTranscriptsView.transcriptUploadStatuses[status];
 
@@ -88,6 +92,7 @@ define(
             };
 
             createFakeTranscriptFile = function(transcriptFileName) {
+                // eslint-disable-next-line no-var
                 var transcriptFileName = transcriptFileName || 'test-transcript.srt', // eslint-disable-line no-redeclare, max-len
                     size = 100,
                     type = '';
@@ -95,6 +100,7 @@ define(
             };
 
             renderView = function(availableTranscripts) {
+                // eslint-disable-next-line no-var
                 var videoViewIndex = 0,
                     videoData = {
                         client_video_id: clientVideoID,
@@ -208,6 +214,7 @@ define(
             });
 
             it('renders correct transcript attributes', function() {
+                // eslint-disable-next-line no-var
                 var $transcriptEl;
                 // Show transcripts
                 videoTranscriptsView.$el.find('.toggle-show-transcripts-button').click();
@@ -227,6 +234,7 @@ define(
             });
 
             it('can upload transcript', function() {
+                // eslint-disable-next-line no-var
                 var languageCode = 'en',
                     newLanguageCode = 'ar',
                     requests = AjaxHelpers.requests(this),
@@ -267,6 +275,7 @@ define(
             });
 
             it('can delete transcript', function() {
+                // eslint-disable-next-line no-var
                 var languageCode = 'en',
                     requests = AjaxHelpers.requests(this),
                     $transcriptEl = videoTranscriptsView.$el.find('.video-transcript-content[data-language-code="' + languageCode + '"]'); // eslint-disable-line max-len
@@ -303,6 +312,7 @@ define(
             });
 
             it('should show error message when deleting a transcript in case of server error', function() {
+                // eslint-disable-next-line no-var
                 var languageCode = 'en',
                     requests = AjaxHelpers.requests(this),
                     $transcriptEl = videoTranscriptsView.$el.find('.video-transcript-content[data-language-code="' + languageCode + '"]'); // eslint-disable-line max-len
@@ -353,6 +363,7 @@ define(
             });
 
             it('shows error state correctly', function() {
+                // eslint-disable-next-line no-var
                 var languageCode = 'en',
                     requests = AjaxHelpers.requests(this),
                     errorMessage = 'Transcript failed error message',
@@ -380,6 +391,7 @@ define(
             });
 
             it('should show error message in case of server error', function() {
+                // eslint-disable-next-line no-var
                 var languageCode = 'en',
                     requests = AjaxHelpers.requests(this),
                     $transcriptEl = videoTranscriptsView.$el.find('.video-transcript-content[data-language-code="' + languageCode + '"]'); // eslint-disable-line max-len
@@ -405,6 +417,7 @@ define(
             });
 
             it('should show error message in case of unsupported transcript file format', function() {
+                // eslint-disable-next-line no-var
                 var languageCode = 'en',
                     transcriptFileName = 'unsupported-transcript-file-format.txt',
                     errorMessage = 'This file type is not supported. Supported file type is ' + TRANSCRIPT_DOWNLOAD_FILE_FORMAT + '.', // eslint-disable-line max-len

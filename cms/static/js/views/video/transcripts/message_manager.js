@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery', 'backbone', 'underscore',
@@ -5,6 +6,7 @@ define(
         'gettext'
     ],
     function($, Backbone, _, Utils, FileUploader, gettext) {
+        // eslint-disable-next-line no-var
         var MessageManager = Backbone.View.extend({
             tagName: 'div',
             elClass: '.wrapper-transcripts-message',
@@ -44,7 +46,9 @@ define(
                 });
             },
 
+            // eslint-disable-next-line camelcase
             render: function(template_id, params) {
+                /* eslint-disable-next-line camelcase, no-var */
                 var tplHtml = $(this.templates[template_id]).text(),
                     videoList = this.options.parent.getVideoObjectsList(),
                     // Change list representation format to more convenient and group
@@ -69,6 +73,7 @@ define(
                     template;
 
                 if (!tplHtml) {
+                    // eslint-disable-next-line no-console
                     console.error('Couldn\'t load Transcripts status template');
 
                     return this;
@@ -100,6 +105,7 @@ define(
         *
         */
             showError: function(err, hideButtons) {
+                // eslint-disable-next-line no-var
                 var $error = this.$el.find('.transcripts-error-message');
 
                 if (err) {
@@ -166,6 +172,7 @@ define(
             chooseHandler: function(event) {
                 event.preventDefault();
 
+                // eslint-disable-next-line no-var
                 var videoId = $(event.currentTarget).data('video-id');
 
                 this.processCommand('choose', gettext('Error: Choosing failed.'), videoId);
@@ -201,7 +208,9 @@ define(
         *
         */
             processCommand: function(action, errorMessage, videoId) {
+                // eslint-disable-next-line no-var
                 var self = this,
+                    // eslint-disable-next-line camelcase
                     component_locator = this.component_locator,
                     videoList = this.options.parent.getVideoObjectsList(),
                     extraParam, xhr;
@@ -212,12 +221,14 @@ define(
 
                 xhr = Utils.command(action, component_locator, videoList, extraParam)
                     .done(function(resp) {
+                        // eslint-disable-next-line no-var
                         var edxVideoID = resp.edx_video_id;
 
                         self.render('found', resp);
                         Backbone.trigger('transcripts:basicTabUpdateEdxVideoId', edxVideoID);
                     })
                     .fail(function(resp) {
+                        // eslint-disable-next-line no-var
                         var message = resp.status || errorMessage;
                         self.showError(message);
                     });

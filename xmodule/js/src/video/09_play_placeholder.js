@@ -10,11 +10,13 @@
      * @param {Object} i18n The object containing strings with translations.
      * @return {jquery Promise}
      */
+        // eslint-disable-next-line no-var
         var PlayPlaceholder = function(state, i18n) {
             if (!(this instanceof PlayPlaceholder)) {
                 return new PlayPlaceholder(state, i18n);
             }
 
+            // eslint-disable-next-line no-undef
             _.bindAll(this, 'onClick', 'hide', 'show', 'destroy');
             this.state = state;
             this.state.videoPlayPlaceholder = this;
@@ -46,6 +48,7 @@
             },
 
             /** Initializes the module. */
+            // eslint-disable-next-line consistent-return
             initialize: function() {
                 if (!this.shouldBeShown()) {
                     return false;

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'backbone', 'jquery', 'underscore', 'moment',
@@ -10,12 +11,17 @@ define(
         'use strict';
 
         describe('edx.user.ShareModalView', function() {
+            // eslint-disable-next-line no-var
             var keys = $.simulate.keyCode;
 
+            // eslint-disable-next-line no-var
             var view;
 
+            // eslint-disable-next-line no-var
             var createModalView = function() {
+                // eslint-disable-next-line no-var
                 var badge = LearnerProfileHelpers.makeBadge(1);
+                // eslint-disable-next-line no-var
                 var context = _.extend(badge, {
                     created: new Moment(badge.created),
                     ownProfile: true,
@@ -41,6 +47,7 @@ define(
             });
 
             it('modal view closes on escape', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(view, 'close');
                 view.delegateEvents();
                 expect(view.close).not.toHaveBeenCalled();
@@ -49,7 +56,9 @@ define(
             });
 
             it('modal view closes click on close', function() {
+                // eslint-disable-next-line no-var
                 var $closeButton;
+                // eslint-disable-next-line no-undef
                 spyOn(view, 'close');
                 view.delegateEvents();
                 $closeButton = view.$el.find('button.close');

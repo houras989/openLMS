@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone', 'cms/js/main', 'js/models/group_configuration',
     'js/models/group', 'js/collections/group', 'squire'
@@ -24,6 +25,7 @@ define([
             });
 
             it('should have a collection with 2 groups by default', function() {
+                // eslint-disable-next-line no-var
                 var groups = this.model.get('groups');
 
                 expect(groups).toBeInstanceOf(GroupCollection);
@@ -36,6 +38,7 @@ define([
             });
 
             it('should be able to reset itself', function() {
+                // eslint-disable-next-line no-var
                 var originalName = 'Original Name',
                     model = new GroupConfigurationModel({name: originalName});
                 model.set({name: 'New Name'});
@@ -65,15 +68,19 @@ define([
         });
 
         describe('Input/Output', function() {
+            // eslint-disable-next-line no-var
             var deepAttributes = function(obj) {
                 if (obj instanceof Backbone.Model) {
                     return deepAttributes(obj.attributes);
                 } else if (obj instanceof Backbone.Collection) {
                     return obj.map(deepAttributes);
                 } else if ($.isPlainObject(obj)) {
+                    // eslint-disable-next-line no-var
                     var attributes = {};
 
+                    /* eslint-disable-next-line no-var, no-restricted-syntax */
                     for (var prop in obj) {
+                        // eslint-disable-next-line no-prototype-builtins
                         if (obj.hasOwnProperty(prop)) {
                             attributes[prop] = deepAttributes(obj[prop]);
                         }
@@ -85,6 +92,7 @@ define([
             };
 
             it('should match server model to client model', function() {
+                // eslint-disable-next-line no-var
                 var serverModelSpec = {
                         id: 10,
                         name: 'My Group Configuration',
@@ -139,6 +147,7 @@ define([
 
         describe('Validation', function() {
             it('requires a name', function() {
+                // eslint-disable-next-line no-var
                 var model = new GroupConfigurationModel({name: ''});
 
                 expect(model.isValid()).toBeFalsy();
@@ -147,12 +156,14 @@ define([
             it('can pass validation', function() {
                 // Note that two groups - Group A and Group B - are
                 // created by default.
+                // eslint-disable-next-line no-var
                 var model = new GroupConfigurationModel({name: 'foo'});
 
                 expect(model.isValid()).toBeTruthy();
             });
 
             it('requires at least one group', function() {
+                // eslint-disable-next-line no-var
                 var group1 = new GroupModel({name: 'Group A'}),
                     model = new GroupConfigurationModel({name: 'foo', groups: []});
 
@@ -163,18 +174,21 @@ define([
             });
 
             it('requires a valid group', function() {
+                // eslint-disable-next-line no-var
                 var model = new GroupConfigurationModel({name: 'foo', groups: [{name: ''}]});
 
                 expect(model.isValid()).toBeFalsy();
             });
 
             it('requires all groups to be valid', function() {
+                // eslint-disable-next-line no-var
                 var model = new GroupConfigurationModel({name: 'foo', groups: [{name: 'Group A'}, {name: ''}]});
 
                 expect(model.isValid()).toBeFalsy();
             });
 
             it('requires all groups to have unique names', function() {
+                // eslint-disable-next-line no-var
                 var model = new GroupConfigurationModel({
                     name: 'foo', groups: [{name: 'Group A'}, {name: 'Group A'}]
                 });
@@ -202,12 +216,14 @@ define([
 
         describe('Validation', function() {
             it('requires a name', function() {
+                // eslint-disable-next-line no-var
                 var model = new GroupModel({name: ''});
 
                 expect(model.isValid()).toBeFalsy();
             });
 
             it('can pass validation', function() {
+                // eslint-disable-next-line no-var
                 var model = new GroupConfigurationModel({name: 'foo'});
 
                 expect(model.isValid()).toBeTruthy();
@@ -239,10 +255,11 @@ define([
         });
 
         describe('getGroupId', function() {
+            // eslint-disable-next-line no-var
             var collection, injector, mockGettext, initializeGroupModel, cleanUp;
 
             mockGettext = function(returnedValue) {
-                // eslint-disable-next-line no-shadow
+                /* eslint-disable-next-line no-shadow, no-var */
                 var injector = new Squire();
 
                 injector.mock('gettext', function() {
@@ -255,6 +272,7 @@ define([
             };
 
             initializeGroupModel = function(dict) {
+                // eslint-disable-next-line no-var
                 var deferred = $.Deferred();
 
                 injector = mockGettext(dict);
@@ -275,7 +293,7 @@ define([
             };
 
             it('returns correct ids', function() {
-                // eslint-disable-next-line no-shadow
+                /* eslint-disable-next-line no-shadow, no-var */
                 var collection = new GroupCollection();
 
                 expect(collection.getGroupId(0)).toBe('A');

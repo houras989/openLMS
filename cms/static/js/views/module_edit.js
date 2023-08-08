@@ -1,9 +1,12 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            // eslint-disable-next-line no-var
             var key;
+            // eslint-disable-next-line no-restricted-syntax
             for (key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -18,9 +21,12 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     define(['jquery', 'underscore', 'gettext', 'xblock/runtime.v1', 'js/views/xblock', 'js/views/modals/edit_xblock'],
         function($, _, gettext, XBlock, XBlockView, EditXBlockModal) {
+            // eslint-disable-next-line no-var
             var ModuleEdit = (function(_super) {
+                // eslint-disable-next-line no-use-before-define
                 __extends(ModuleEdit, _super);
 
                 // eslint-disable-next-line no-shadow
@@ -44,7 +50,9 @@
                     return this.render();
                 };
 
+                // eslint-disable-next-line consistent-return
                 ModuleEdit.prototype.loadDisplay = function() {
+                    // eslint-disable-next-line no-var
                     var xblockElement;
                     xblockElement = this.$el.find('.xblock-student_view');
                     if (xblockElement.length > 0) {
@@ -53,6 +61,7 @@
                 };
 
                 ModuleEdit.prototype.createItem = function(parent, payload, callback) {
+                    // eslint-disable-next-line no-var
                     var _this = this;
                     if (_.isNull(callback)) {
                         callback = function() {};
@@ -68,7 +77,9 @@
                     }).success(callback);
                 };
 
+                // eslint-disable-next-line consistent-return
                 ModuleEdit.prototype.loadView = function(viewName, target, callback) {
+                    // eslint-disable-next-line no-var
                     var _this = this;
                     if (this.model.id) {
                         return $.ajax({
@@ -86,6 +97,7 @@
                 };
 
                 ModuleEdit.prototype.render = function() {
+                    // eslint-disable-next-line no-var
                     var _this = this;
                     return this.loadView('student_view', this.$el, function() {
                         _this.loadDisplay();
@@ -94,6 +106,7 @@
                 };
 
                 ModuleEdit.prototype.clickEditButton = function(event) {
+                    // eslint-disable-next-line no-var
                     var modal;
                     event.preventDefault();
                     modal = new EditXBlockModal();

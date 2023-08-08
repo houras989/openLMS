@@ -1,4 +1,5 @@
 // Backbone Application View: CertificateBulkAllowlist View
+// eslint-disable-next-line no-redeclare
 /* global define, RequireJS */
 
 (function(define) {
@@ -12,6 +13,7 @@
     ],
 
     function($, _, gettext, Backbone) {
+        // eslint-disable-next-line no-var
         var DOM_SELECTORS = {
             bulk_exception: '.bulk-allowlist-exception',
             upload_csv_button: '.upload-csv-button',
@@ -19,6 +21,7 @@
             bulk_allowlist_exception_form: 'form#bulk-allowlist-exception-form'
         };
 
+        // eslint-disable-next-line no-var
         var MESSAGE_GROUP = {
             successfully_added: 'successfully-added',
             general_errors: 'general-errors',
@@ -43,20 +46,25 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var template = this.loadTemplate('certificate-bulk-allowlist');
                 this.$el.html(template()); // xss-lint: disable=javascript-jquery-html
             },
 
             loadTemplate: function(name) {
+                // eslint-disable-next-line no-var
                 var templateSelector = '#' + name + '-tpl',
                     templateText = $(templateSelector).text();
                 return _.template(templateText);
             },
 
             uploadCSV: function() {
+                // eslint-disable-next-line no-var
                 var form = this.$el.find(DOM_SELECTORS.bulk_allowlist_exception_form);
+                // eslint-disable-next-line no-var
                 var self = this;
                 form.unbind('submit').submit(function(e) {
+                    // eslint-disable-next-line no-var
                     var data = new FormData(e.currentTarget);
                     $.ajax({
                         dataType: 'json',
@@ -65,6 +73,7 @@
                         data: data,
                         processData: false,
                         contentType: false,
+                        // eslint-disable-next-line camelcase
                         success: function(data_from_server) {
                             self.display_response(data_from_server);
                         }
@@ -73,7 +82,9 @@
                 });
             },
 
+            // eslint-disable-next-line camelcase
             display_response: function(data_from_server) {
+                // eslint-disable-next-line no-var
                 var UserOnCertificateInvalidationList;
 
                 $('.bulk-exception-results').removeClass('hidden').empty();
@@ -88,6 +99,7 @@
                             class: group
                         }));
 
+                    // eslint-disable-next-line no-var
                     for (var i = 0; i < displayData.length; i++) { // eslint-disable-line vars-on-top
                         $('<li/>', {
                             text: displayData[i]
@@ -98,6 +110,7 @@
 
                 function getDisplayText(qty, group) {
                     // inner function to display appropriate heading text
+                    // eslint-disable-next-line no-var
                     var text;
 
                     switch (group) {
@@ -156,7 +169,9 @@
                 }
 
                 // Display general error messages
+                // eslint-disable-next-line camelcase
                 if (data_from_server.general_errors.length) {
+                    /* eslint-disable-next-line camelcase, no-var */
                     var errors = data_from_server.general_errors;
                     generateDiv(
                         MESSAGE_GROUP.general_errors,
@@ -166,55 +181,74 @@
                 }
 
                 // Display success message
+                // eslint-disable-next-line camelcase
                 if (data_from_server.success.length) {
+                    /* eslint-disable-next-line camelcase, no-var */
                     var success_data = data_from_server.success;
                     generateDiv(
                         MESSAGE_GROUP.successfully_added,
+                        // eslint-disable-next-line camelcase
                         getDisplayText(success_data.length, MESSAGE_GROUP.successfully_added),
                         success_data
                     );
                 }
 
                 // Display data row error messages
+                // eslint-disable-next-line camelcase
                 if (Object.keys(data_from_server.row_errors).length) {
+                    /* eslint-disable-next-line camelcase, no-var */
                     var row_errors = data_from_server.row_errors;
 
+                    // eslint-disable-next-line camelcase
                     if (row_errors.data_format_error.length) {
+                        /* eslint-disable-next-line camelcase, no-var */
                         var format_errors = row_errors.data_format_error;
                         generateDiv(
                             MESSAGE_GROUP.data_format_error,
+                            // eslint-disable-next-line camelcase
                             getDisplayText(format_errors.length, MESSAGE_GROUP.data_format_error),
                             format_errors
                         );
                     }
+                    // eslint-disable-next-line camelcase
                     if (row_errors.user_not_exist.length) {
+                        /* eslint-disable-next-line camelcase, no-var */
                         var user_not_exist = row_errors.user_not_exist;
                         generateDiv(
                             MESSAGE_GROUP.user_not_exist,
+                            // eslint-disable-next-line camelcase
                             getDisplayText(user_not_exist.length, MESSAGE_GROUP.user_not_exist),
                             user_not_exist
                         );
                     }
+                    // eslint-disable-next-line camelcase
                     if (row_errors.user_already_allowlisted.length) {
+                        /* eslint-disable-next-line camelcase, no-var */
                         var user_already_allowlisted = row_errors.user_already_allowlisted;
                         generateDiv(
                             MESSAGE_GROUP.user_already_allowlisted,
                             getDisplayText(
+                                // eslint-disable-next-line camelcase
                                 user_already_allowlisted.length,
                                 MESSAGE_GROUP.user_already_allowlisted
                             ),
                             user_already_allowlisted
                         );
                     }
+                    // eslint-disable-next-line camelcase
                     if (row_errors.user_not_enrolled.length) {
+                        /* eslint-disable-next-line camelcase, no-var */
                         var user_not_enrolled = row_errors.user_not_enrolled;
                         generateDiv(
                             MESSAGE_GROUP.user_not_enrolled,
+                            // eslint-disable-next-line camelcase
                             getDisplayText(user_not_enrolled.length, MESSAGE_GROUP.user_not_enrolled),
                             user_not_enrolled
                         );
                     }
+                    // eslint-disable-next-line camelcase
                     if (row_errors.user_on_certificate_invalidation_list.length) {
+                        // eslint-disable-next-line camelcase
                         UserOnCertificateInvalidationList = row_errors.user_on_certificate_invalidation_list;
                         generateDiv(
                             MESSAGE_GROUP.user_on_certificate_invalidation_list,
@@ -230,6 +264,7 @@
 
             toggleMessageDetails: function(event) {
                 if (event && event.preventDefault) { event.preventDefault(); }
+                // eslint-disable-next-line no-var
                 var group = event.target.id;
                 $('div.message > .' + group).slideToggle('fast', function() {
                     if ($(this).is(':visible')) {

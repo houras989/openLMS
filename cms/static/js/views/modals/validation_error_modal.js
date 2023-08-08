@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'underscore', 'gettext', 'js/views/modals/base_modal'],
     function($, _, gettext, BaseModal) {
+        // eslint-disable-next-line no-var
         var ValidationErrorModal = BaseModal.extend({
             events: {
                 'click .action-cancel': 'cancel',
@@ -28,7 +30,9 @@ define(['jquery', 'underscore', 'gettext', 'js/views/modals/base_modal'],
 
             /* Set the JSON object of error_models that will be displayed
              * it must be an object, not json string. */
+            // eslint-disable-next-line camelcase
             setContent: function(json_object) {
+                // eslint-disable-next-line camelcase
                 this.response = json_object;
             },
 
@@ -43,7 +47,9 @@ define(['jquery', 'underscore', 'gettext', 'js/views/modals/base_modal'],
 
             /* Receive calback function from the view, so that it can be
              * invoked when the user clicks the reset button */
+            // eslint-disable-next-line camelcase
             setResetCallback: function(reset_callback) {
+                // eslint-disable-next-line camelcase
                 this.reset_callback = reset_callback;
             },
 

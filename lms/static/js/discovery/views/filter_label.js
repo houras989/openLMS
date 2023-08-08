@@ -21,6 +21,7 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var data = _.clone(this.model.attributes);
                 data.name = data.name || data.query;
                 this.className = data.type;
@@ -33,4 +34,5 @@
 
         });
     });
+// eslint-disable-next-line no-undef
 }(define || RequireJS.define));

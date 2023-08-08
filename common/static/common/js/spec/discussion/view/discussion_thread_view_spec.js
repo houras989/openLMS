@@ -6,26 +6,36 @@
     'use strict';
 
     describe('DiscussionThreadView', function() {
+        // eslint-disable-next-line no-var
         var assertContentVisible, assertExpandedContentVisible, assertResponseCountAndPaginationCorrect,
             createAjaxResponseJson, createTestResponseJson, postResponse, renderWithContent, renderWithTestResponses;
         beforeEach(function() {
+            // eslint-disable-next-line no-var
             var deferred;
             DiscussionSpecHelper.setUpGlobals();
             DiscussionSpecHelper.setUnderscoreFixtures();
+            // eslint-disable-next-line no-undef
             jasmine.clock().install();
             this.threadData = DiscussionViewSpecHelper.makeThreadWithProps({});
             this.thread = new Thread(this.threadData);
             this.discussion = new Discussion(this.thread);
             deferred = $.Deferred();
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.returnValue(deferred);
+            // eslint-disable-next-line no-undef
             spyOn(DiscussionThreadShowView.prototype, 'convertMath');
+            // eslint-disable-next-line no-undef
             spyOn(DiscussionContentView.prototype, 'makeWmdEditor');
+            // eslint-disable-next-line no-undef
             spyOn(DiscussionUtil, 'makeWmdEditor');
+            // eslint-disable-next-line no-undef
             spyOn(DiscussionUtil, 'setWmdContent');
+            // eslint-disable-next-line no-undef
             return spyOn(ThreadResponseShowView.prototype, 'convertMath');
         });
         afterEach(function() {
             $.ajax.calls.reset();
+            // eslint-disable-next-line no-undef
             return jasmine.clock().uninstall();
         });
 
@@ -38,13 +48,16 @@
                 };
             });
             view.render();
+            // eslint-disable-next-line no-undef
             return jasmine.clock().tick(100);
         };
         renderWithTestResponses = function(view, count, options) {
+            // eslint-disable-next-line no-var
             var index;
             return renderWithContent(view, _.extend({
                 resp_total: count,
                 children: count > 0 ? (function() {
+                    // eslint-disable-next-line no-var
                     var _i, _results;
                     _results = [];
                     // eslint-disable-next-line no-multi-assign
@@ -64,6 +77,7 @@
             };
         };
         assertContentVisible = function(view, selector, visible) {
+            // eslint-disable-next-line no-var
             var content;
             content = view.$el.find(selector);
             expect(content.length).toBeGreaterThan(0);
@@ -71,6 +85,7 @@
                 return expect($(elem).is(':visible')).toEqual(visible);
             });
         };
+        // eslint-disable-next-line no-unused-vars
         assertExpandedContentVisible = function(view, expanded) {
             expect(view.$el.hasClass('expanded')).toEqual(expanded);
             assertContentVisible(view, '.post-extended-content', expanded);
@@ -90,23 +105,30 @@
                 return expect(view.$el.find('.load-response-button').length).toEqual(0);
             }
         };
+        // eslint-disable-next-line camelcase
         createAjaxResponseJson = function(content, can_act) {
             return {
                 content: content,
                 annotated_content_info: {
                     ability: {
+                        // eslint-disable-next-line camelcase
                         editable: can_act,
+                        // eslint-disable-next-line camelcase
                         can_delete: can_act,
+                        // eslint-disable-next-line camelcase
                         can_reply: can_act,
+                        // eslint-disable-next-line camelcase
                         can_vote: can_act
                     }
                 }
             };
         };
         postResponse = function(view, index) {
+            // eslint-disable-next-line no-var
             var responseText, testResponseJson;
             testResponseJson = createTestResponseJson(index);
             responseText = testResponseJson.body;
+            // eslint-disable-next-line no-undef
             spyOn(view, 'getWmdContent').and.returnValue(responseText);
             $.ajax.and.callFake(function(params) {
                 expect(params.type).toEqual('POST');
@@ -120,13 +142,16 @@
             return view.$('.discussion-submit-post').click();
         };
         describe('closed and open Threads', function() {
+            // eslint-disable-next-line no-var
             var checkCommentForm, checkVoteDisplay, createDiscussionThreadView;
             createDiscussionThreadView = function(originallyClosed) {
+                // eslint-disable-next-line no-var
                 var discussion, thread, threadData, view;
                 threadData = DiscussionViewSpecHelper.makeThreadWithProps({
                     closed: originallyClosed
                 });
                 thread = new Thread(threadData);
+                // eslint-disable-next-line no-unused-vars
                 discussion = new Discussion(thread);
                 view = new DiscussionThreadView({
                     model: thread,
@@ -134,12 +159,14 @@
                     course_settings: DiscussionSpecHelper.createTestCourseSettings()
                 });
                 renderWithTestResponses(view, 1);
+                // eslint-disable-next-line no-undef
                 spyOn(DiscussionUtil, 'updateWithUndo').and.callFake(function(model, updates) {
                     return model.set(updates);
                 });
                 return view;
             };
             checkCommentForm = function(originallyClosed) {
+                // eslint-disable-next-line no-var
                 var view;
                 view = createDiscussionThreadView(originallyClosed);
                 expect(view.$('.comment-form').closest('li').is(':visible')).toBe(!originallyClosed);
@@ -149,6 +176,7 @@
                 return expect(view.$('.discussion-reply-new').is(':visible')).toBe(originallyClosed);
             };
             checkVoteDisplay = function(originallyClosed) {
+                // eslint-disable-next-line no-var
                 var view;
                 view = createDiscussionThreadView(originallyClosed);
                 expect(view.$('.thread-main-wrapper .action-vote').is(':visible')).toBe(!originallyClosed);
@@ -185,6 +213,7 @@
                     el: $('#fixture-element'),
                     course_settings: DiscussionSpecHelper.createTestCourseSettings()
                 });
+                // eslint-disable-next-line no-undef
                 spyOn($.fn, 'focus');
             });
             describe('responses', function() {
@@ -278,6 +307,7 @@
             });
         });
         describe('for question threads', function() {
+            // eslint-disable-next-line no-var
             var generateContent, renderTestCase;
             beforeEach(function() {
                 this.thread.set('thread_type', 'question');

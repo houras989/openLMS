@@ -2,12 +2,14 @@
  * This class defines an edit view for groups within content experiment group configurations.
  * It is expected to be backed by a Group model.
  */
+// eslint-disable-next-line no-undef
 define([
     'js/views/baseview', 'underscore', 'underscore.string', 'gettext', 'text!templates/group-edit.underscore'
 ],
 function(BaseView, _, str, gettext, groupEditTemplate) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var ExperimentGroupEditView = BaseView.extend({
         tagName: 'li',
         events: {
@@ -18,6 +20,7 @@ function(BaseView, _, str, gettext, groupEditTemplate) {
         },
 
         className: function() {
+            // eslint-disable-next-line no-var
             var index = this.model.collection.indexOf(this.model);
             return 'field-group group group-' + index;
         },
@@ -27,6 +30,7 @@ function(BaseView, _, str, gettext, groupEditTemplate) {
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var collection = this.model.collection,
                 index = collection.indexOf(this.model);
 

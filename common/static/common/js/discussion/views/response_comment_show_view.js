@@ -1,9 +1,12 @@
+// eslint-disable-next-line no-unused-vars
 /* globals DiscussionContentShowView, DiscussionUtil, MathJax */
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -19,11 +22,14 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.ResponseCommentShowView = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(ResponseCommentShowView, _super);
 
             function ResponseCommentShowView() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.edit = function() {
                     return ResponseCommentShowView.prototype.edit.apply(self, arguments);
@@ -37,7 +43,9 @@
             ResponseCommentShowView.prototype.tagName = 'li';
 
             ResponseCommentShowView.prototype.render = function() {
+                // eslint-disable-next-line no-var
                 var template = edx.HtmlUtils.template($('#response-comment-show-template').html());
+                /* eslint-disable-next-line no-undef, no-var */
                 var context = _.extend({
                     cid: this.model.cid,
                     author_display: this.getAuthorDisplay(),
@@ -53,8 +61,11 @@
                 return this;
             };
 
+            // eslint-disable-next-line consistent-return
             ResponseCommentShowView.prototype.addReplyLink = function() {
+                // eslint-disable-next-line no-var
                 var html, name;
+                // eslint-disable-next-line no-prototype-builtins
                 if (this.model.hasOwnProperty('parent')) {
                     name = this.model.parent.get('username') || gettext('anonymous');
                     html = edx.HtmlUtils.interpolateHtml(

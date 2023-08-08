@@ -11,6 +11,7 @@ The RequireJS Optimizer is only enabled in Studio at present, so the page factor
 We do intend to enable page factories on the LMS too.
 */
 
+// eslint-disable-next-line no-undef
 define([
     'jquery',
     'js/certificates/collections/certificates',
@@ -24,6 +25,7 @@ function($, CertificatesCollection, Certificate, CertificatesPage, CertificatePr
     return function(certificatesJson, certificateUrl, courseOutlineUrl, courseModes, certificateWebViewUrl,
         isActive, certificateActivationHandlerUrl) {
         // Initialize the model collection, passing any necessary options to the constructor
+        // eslint-disable-next-line no-var
         var certificatesCollection = new CertificatesCollection(certificatesJson, {
             parse: true,
             canBeEmpty: true,

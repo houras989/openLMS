@@ -3,8 +3,10 @@
  * the ancestors of the unit along with its direct siblings. It also has a single "New Unit"
  * button to allow a new sibling unit to be added.
  */
+// eslint-disable-next-line no-undef
 define(['underscore', 'js/views/xblock_outline', 'js/views/unit_outline_child'],
     function(_, XBlockOutlineView, UnitOutlineChildView) {
+        // eslint-disable-next-line no-var
         var UnitOutlineView = XBlockOutlineView.extend({
             // takes XBlockInfo as a model
 
@@ -17,6 +19,7 @@ define(['underscore', 'js/views/xblock_outline', 'js/views/unit_outline_child'],
             },
 
             renderAncestors: function() {
+                // eslint-disable-next-line no-var
                 var i, listElement,
                     ancestors, ancestor,
                     ancestorView = this,

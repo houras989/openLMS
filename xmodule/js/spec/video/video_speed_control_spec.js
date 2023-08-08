@@ -1,12 +1,14 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(undefined) {
     'use strict';
 
     describe('VideoSpeedControl', function() {
+        // eslint-disable-next-line no-var
         var state, oldOTBD;
 
         beforeEach(function() {
             oldOTBD = window.onTouchBasedDevice;
+            // eslint-disable-next-line no-undef
             window.onTouchBasedDevice = jasmine.createSpy('onTouchBasedDevice')
                 .and.returnValue(null);
         });
@@ -21,10 +23,12 @@
         describe('constructor', function() {
             describe('always', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer();
                 });
 
                 it('add the video speed control to player', function() {
+                    // eslint-disable-next-line no-var
                     var $secondaryControls = $('.secondary-controls'),
                         li = $secondaryControls.find('.video-speeds li');
 
@@ -50,6 +54,7 @@
                 $.each(['iPad', 'Android'], function(index, device) {
                     it('is not rendered on' + device, function() {
                         window.onTouchBasedDevice.and.returnValue([device]);
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
 
                         expect(state.el.find('.speeds')).not.toExist();
@@ -58,6 +63,7 @@
             });
 
             describe('when running on non-touch based device', function() {
+                // eslint-disable-next-line no-var
                 var $speedControl, speedEntries, $speedButton, $speedsContainer,
                     KEY = $.ui.keyCode,
 
@@ -66,6 +72,7 @@
                     };
 
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer();
                     $speedControl = $('.speeds');
                     $speedButton = $('.speed-button');
@@ -120,16 +127,20 @@
 
                 it('UP and DOWN keydown function as expected on speed entries',
                     function() {
+                        /* eslint-disable-next-line camelcase, no-var */
                         var speed_0_75 = speedEntries.filter(':contains("0.75x")'),
+                            // eslint-disable-next-line camelcase
                             speed_1_0 = speedEntries.filter(':contains("1.0x")');
 
                         // First open menu
                         $speedControl.trigger(keyPressEvent(KEY.UP));
                         expect(speed_0_75).toBeFocused();
 
+                        // eslint-disable-next-line camelcase
                         speed_0_75.trigger(keyPressEvent(KEY.UP));
                         expect(speed_1_0).toBeFocused();
 
+                        // eslint-disable-next-line camelcase
                         speed_1_0.trigger(keyPressEvent(KEY.DOWN));
                         expect(speed_0_75).toBeFocused();
                     });
@@ -188,6 +199,7 @@
 
             describe('when new speed is not the same', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer();
                     state.videoSpeedControl.setSpeed(1.0);
                 });
@@ -204,6 +216,7 @@
 
         describe('onSpeedChange', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer();
                 $('li[data-speed="1.0"]').addClass('is-active').attr('aria-pressed', 'true');
                 state.videoSpeedControl.setSpeed(0.75);
@@ -221,6 +234,7 @@
         });
 
         it('can destroy itself', function() {
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer();
             state.videoSpeedControl.destroy();
             expect(state.videoSpeedControl).toBeUndefined();

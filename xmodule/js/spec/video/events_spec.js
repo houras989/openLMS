@@ -1,15 +1,18 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(undefined) {
     describe('VideoPlayer Events', function() {
+        // eslint-disable-next-line no-var
         var state, oldOTBD;
 
         describe('HTML5', function() {
             beforeEach(function() {
                 oldOTBD = window.onTouchBasedDevice;
+                // eslint-disable-next-line no-undef
                 window.onTouchBasedDevice = jasmine
                     .createSpy('onTouchBasedDevice')
                     .and.returnValue(null);
 
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer();
 
                 state.videoEl = $('video, iframe');
@@ -23,6 +26,7 @@
             });
 
             it('initialize', function(done) {
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return state.el.hasClass('is-initialized');
                 }).then(function() {
@@ -31,6 +35,7 @@
             });
 
             it('ready', function(done) {
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return state.el.hasClass('is-initialized');
                 }).then(function() {
@@ -80,10 +85,12 @@
         describe('YouTube', function() {
             beforeEach(function() {
                 oldOTBD = window.onTouchBasedDevice;
+                // eslint-disable-next-line no-undef
                 window.onTouchBasedDevice = jasmine
                     .createSpy('onTouchBasedDevice')
                     .and.returnValue(null);
 
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayerYouTube();
             });
 

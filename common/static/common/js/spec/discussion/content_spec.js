@@ -15,19 +15,29 @@
                 });
             });
             it('anonymous thread should not include login role label', function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var anon_content;
+                // eslint-disable-next-line camelcase
                 anon_content = new Content();
+                // eslint-disable-next-line camelcase
                 anon_content.initialize();
+                // eslint-disable-next-line camelcase
                 expect(anon_content.get('staff_authored')).toBe(false);
+                // eslint-disable-next-line camelcase
                 return expect(anon_content.get('community_ta_authored')).toBe(false);
             });
             return it('general thread should include login role label', function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var anon_content;
+                // eslint-disable-next-line camelcase
                 anon_content = new Content({
                     user_id: '567'
                 });
+                // eslint-disable-next-line camelcase
                 anon_content.initialize();
+                // eslint-disable-next-line camelcase
                 expect(anon_content.get('staff_authored')).toBe(true);
+                // eslint-disable-next-line camelcase
                 return expect(anon_content.get('community_ta_authored')).toBe(true);
             });
         });
@@ -50,6 +60,7 @@
                 expect(this.content.get('id')).toEqual('01234567');
                 expect(this.content.get('user_url')).toEqual('/courses/edX/999/test/discussion/forum/users/567');
                 expect(this.content.get('children')).toEqual([]);
+                // eslint-disable-next-line no-undef
                 return expect(this.content.get('comments')).toEqual(jasmine.any(Comments));
             });
             it('can update info', function() {
@@ -71,8 +82,11 @@
                 return expect(this.content.get('abuse_flaggers')).toEqual(['123', '567']);
             });
             return it('can be unflagged for abuse', function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var temp_array;
+                // eslint-disable-next-line camelcase
                 temp_array = [];
+                // eslint-disable-next-line camelcase
                 temp_array.push(window.user.get('id'));
                 this.content.set('abuse_flaggers', temp_array);
                 this.content.unflagAbuse();
@@ -89,6 +103,7 @@
                 });
             });
             it('can contain multiple comments', function() {
+                // eslint-disable-next-line no-var
                 var myComments;
                 myComments = new Comments();
                 expect(myComments.length).toEqual(0);
@@ -98,6 +113,7 @@
                 return expect(myComments.length).toEqual(2);
             });
             it('returns results to the find method', function() {
+                // eslint-disable-next-line no-var
                 var myComments;
                 myComments = new Comments();
                 myComments.add(this.comment1);

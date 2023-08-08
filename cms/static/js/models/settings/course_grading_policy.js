@@ -1,8 +1,10 @@
 /* globals _ */
+// eslint-disable-next-line no-undef
 define(['backbone', 'js/models/location', 'js/collections/course_grader', 'edx-ui-toolkit/js/utils/string-utils'],
     function(Backbone, Location, CourseGraderCollection, StringUtils) {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var CourseGradingPolicy = Backbone.Model.extend({
             defaults: {
                 graders: null, // CourseGraderCollection
@@ -14,6 +16,7 @@ define(['backbone', 'js/models/location', 'js/collections/course_grader', 'edx-u
             },
             parse: function(attributes) {
                 if (attributes.graders) {
+                    // eslint-disable-next-line no-var
                     var graderCollection;
                     // interesting race condition: if {parse:true} when newing, then parse called before .attributes created
                     if (this.attributes && this.has('graders')) {
@@ -40,6 +43,7 @@ define(['backbone', 'js/models/location', 'js/collections/course_grader', 'edx-u
                 return attributes;
             },
             gracePeriodToDate: function() {
+                // eslint-disable-next-line no-var
                 var newDate = new Date();
                 if (this.has('grace_period') && this.get('grace_period').hours) {
                     newDate.setHours(this.get('grace_period').hours);
@@ -53,25 +57,32 @@ define(['backbone', 'js/models/location', 'js/collections/course_grader', 'edx-u
 
                 return newDate;
             },
+            // eslint-disable-next-line camelcase
             parseGracePeriod: function(grace_period) {
                 // Enforce hours:minutes format
                 if (!/^\d{2,3}:\d{2}$/.test(grace_period)) {
                     return null;
                 }
+                /* eslint-disable-next-line camelcase, no-var */
                 var pieces = grace_period.split(/:/);
                 return {
                     hours: parseInt(pieces[0], 10),
                     minutes: parseInt(pieces[1], 10)
                 };
             },
+            // eslint-disable-next-line camelcase
             parseMinimumGradeCredit: function(minimum_grade_credit) {
                 // get the value of minimum grade credit value in percentage
+                // eslint-disable-next-line no-restricted-globals
                 if (isNaN(minimum_grade_credit)) {
                     return 0;
                 }
+                // eslint-disable-next-line radix
                 return parseInt(minimum_grade_credit);
             },
+            // eslint-disable-next-line consistent-return
             validate: function(attrs) {
+                // eslint-disable-next-line no-var
                 var minimumGradeCutoff;
                 if (_.has(attrs, 'grace_period')) {
                     if (attrs.grace_period === null) {
@@ -83,6 +94,7 @@ define(['backbone', 'js/models/location', 'js/collections/course_grader', 'edx-u
                 if (this.get('is_credit_course') && _.has(attrs, 'minimum_grade_credit')) {
                     // Getting minimum grade cutoff value
                     minimumGradeCutoff = _.min(_.values(attrs.grade_cutoffs));
+                    // eslint-disable-next-line no-restricted-globals
                     if (isNaN(attrs.minimum_grade_credit) || attrs.minimum_grade_credit === null
                       || attrs.minimum_grade_credit < minimumGradeCutoff) {
                         return {

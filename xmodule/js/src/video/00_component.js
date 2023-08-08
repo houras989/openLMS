@@ -11,16 +11,20 @@
      * @throws {TypeError, Error}
      * @return {Object}
      */
+            // eslint-disable-next-line no-var
             var inherit = Object.create || (function() {
+                // eslint-disable-next-line no-var
                 var F = function() {};
 
                 return function(o) {
                     if (arguments.length > 1) {
                         throw Error('Second argument not supported');
                     }
+                    // eslint-disable-next-line no-undef
                     if (_.isNull(o) || _.isUndefined(o)) {
                         throw Error('Cannot set a null [[Prototype]]');
                     }
+                    // eslint-disable-next-line no-undef
                     if (!_.isObject(o)) {
                         throw TypeError('Argument must be an object');
                     }
@@ -37,6 +41,7 @@
      * @constructor
      * @return {jquery Promise}
      */
+            /* eslint-disable-next-line consistent-return, no-var */
             var Component = function() {
                 if ($.isFunction(this.initialize)) {
                     // eslint-disable-next-line prefer-spread
@@ -52,7 +57,9 @@
      * @return {Object}
      */
             Component.extend = function(protoProps, staticProps) {
+                // eslint-disable-next-line no-var
                 var Parent = this,
+                    // eslint-disable-next-line consistent-return
                     Child = function() {
                         if ($.isFunction(this.initialize)) {
                             // eslint-disable-next-line prefer-spread

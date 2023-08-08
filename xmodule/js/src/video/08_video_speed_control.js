@@ -13,11 +13,13 @@
      * @param {object} state The object containing the state of the video player.
      * @return {jquery Promise}
      */
+            // eslint-disable-next-line no-var
             var SpeedControl = function(state) {
                 if (!(this instanceof SpeedControl)) {
                     return new SpeedControl(state);
                 }
 
+                // eslint-disable-next-line no-undef
                 _.bindAll(this, 'onSetSpeed', 'onRenderSpeed', 'clickLinkHandler',
                     'keyDownLinkHandler', 'mouseEnterHandler', 'mouseLeaveHandler',
                     'clickMenuHandler', 'keyDownMenuHandler', 'destroy'
@@ -71,9 +73,11 @@
 
                 /** Initializes the module. */
                 initialize: function() {
+                    // eslint-disable-next-line no-var
                     var state = this.state;
 
                     if (!this.isPlaybackRatesSupported(state)) {
+                        // eslint-disable-next-line no-console
                         console.log(
                             '[Video info]: playbackRate is not supported.'
                         );
@@ -97,6 +101,7 @@
          * @param {string} currentSpeed The current speed set to the player.
          */
                 render: function(speeds, currentSpeed) {
+                    // eslint-disable-next-line no-var
                     var speedsContainer = this.speedsContainer,
                         reversedSpeeds = speeds.concat().reverse(),
                         instructionsId = 'speed-instructions-' + this.state.id,
@@ -180,6 +185,7 @@
          *   false: Browser doesn't support playbackRate functionality.
          */
                 isPlaybackRatesSupported: function(state) {
+                    // eslint-disable-next-line no-var
                     var isHtml5 = state.videoType === 'html5',
                         isTouch = state.isTouch,
                         video = document.createElement('video');
@@ -233,6 +239,7 @@
          * not differs from current speed.
          */
                 setSpeed: function(speed, silent, forceUpdate) {
+                    // eslint-disable-next-line no-var
                     var newSpeed = this.state.speedToString(speed);
                     if (newSpeed !== this.currentSpeed || forceUpdate) {
                         this.speedsContainer
@@ -252,6 +259,7 @@
                 },
 
                 resetActiveSpeed: function() {
+                    // eslint-disable-next-line no-var
                     var speedOptions = this.speedsContainer.find('li');
 
                     $(speedOptions).each(function(index, el) {
@@ -262,6 +270,7 @@
                 },
 
                 setActiveSpeed: function(speed) {
+                    // eslint-disable-next-line no-var
                     var speedOption = this.speedsContainer.find('li[data-speed="' + this.state.speedToString(speed) + '"]');
 
                     speedOption.addClass('is-active')
@@ -286,6 +295,7 @@
          * @param {jquery Event} event
          */
                 clickLinkHandler: function(event) {
+                    // eslint-disable-next-line no-var
                     var el = $(event.currentTarget).parent(),
                         speed = $(el).data('speed');
 
@@ -325,6 +335,7 @@
          * @param {jquery Event} event
          */
                 keyDownMenuHandler: function(event) {
+                    // eslint-disable-next-line no-var
                     var KEY = $.ui.keyCode,
                         keyCode = event.keyCode;
 
@@ -358,6 +369,7 @@
                         return true;
                     }
 
+                    // eslint-disable-next-line no-var
                     var KEY = $.ui.keyCode,
                         self = this,
                         parent = $(event.currentTarget).parent(),

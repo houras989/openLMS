@@ -13,11 +13,13 @@
      * @param {Object} i18n The object containing strings with translations.
      * @return {jquery Promise}
      */
+            // eslint-disable-next-line no-var
             var SkipControl = function(state, i18n) {
                 if (!(this instanceof SkipControl)) {
                     return new SkipControl(state, i18n);
                 }
 
+                // eslint-disable-next-line no-undef
                 _.bindAll(this, 'onClick', 'render', 'destroy');
                 this.state = state;
                 this.state.videoSkipControl = this;
@@ -60,6 +62,7 @@
                 bindHandlers: function() {
                     this.el.on('click', this.onClick);
                     this.state.el.on({
+                        // eslint-disable-next-line no-undef
                         'play.skip': _.once(this.render),
                         'destroy.skip': this.destroy
                     });

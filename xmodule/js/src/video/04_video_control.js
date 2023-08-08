@@ -8,12 +8,16 @@
         function(Time) {
             // VideoControl() function - what this module "exports".
             return function(state) {
+                // eslint-disable-next-line no-var
                 var dfd = $.Deferred();
 
                 state.videoControl = {};
 
+                // eslint-disable-next-line no-use-before-define
                 _makeFunctionsPublic(state);
+                // eslint-disable-next-line no-use-before-define
                 _renderElements(state);
+                // eslint-disable-next-line no-use-before-define
                 _bindHandlers(state);
 
                 dfd.resolve();
@@ -29,12 +33,19 @@
             //     Functions which will be accessible via 'state' object. When called, these functions will
             //     get the 'state' object as a context.
             function _makeFunctionsPublic(state) {
+                // eslint-disable-next-line no-var
                 var methodsDict = {
+                    // eslint-disable-next-line no-use-before-define
                     destroy: destroy,
+                    // eslint-disable-next-line no-use-before-define
                     hideControls: hideControls,
+                    // eslint-disable-next-line no-use-before-define
                     show: show,
+                    // eslint-disable-next-line no-use-before-define
                     showControls: showControls,
+                    // eslint-disable-next-line no-use-before-define
                     focusFirst: focusFirst,
+                    // eslint-disable-next-line no-use-before-define
                     updateVcrVidTime: updateVcrVidTime
                 };
 
@@ -105,6 +116,7 @@
                 this.el.trigger('controls:show', arguments);
             }
 
+            // eslint-disable-next-line no-unused-vars
             function showControls(event) {
                 if (!this.controlShowLock) {
                     if (!this.captionsHidden) {
@@ -129,6 +141,7 @@
             }
 
             function hideControls() {
+                // eslint-disable-next-line no-var
                 var _this = this;
 
                 this.controlHideTimeout = null;
@@ -152,6 +165,7 @@
             }
 
             function updateVcrVidTime(params) {
+                // eslint-disable-next-line no-var
                 var endTime = (this.config.endTime !== null) ? this.config.endTime : params.duration;
                 // in case endTime is accidentally specified as being greater than the video
                 endTime = Math.min(endTime, params.duration);

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 /* globals Discussion */
 (function(define) {
     'use strict';
@@ -15,6 +16,7 @@
     ],
     function(_, Backbone, HtmlUtils, Constants, DiscussionUtil,
         DiscussionThreadListView, DiscussionFakeBreadcrumbs, DiscussionSearchView, discussionHomeTemplate) {
+        // eslint-disable-next-line no-var
         var DiscussionBoardView = Backbone.View.extend({
             events: {
                 'click .forum-nav-browse-title': 'selectTopicHandler',
@@ -58,6 +60,7 @@
             },
 
             renderBreadcrumbs: function() {
+                // eslint-disable-next-line no-var
                 var BreadcrumbsModel = Backbone.Model.extend({
                     defaults: {
                         contents: []
@@ -91,6 +94,7 @@
             },
 
             hideBrowseMenu: function() {
+                // eslint-disable-next-line no-var
                 var selectedTopicList = this.$('.forum-nav-browse-title.is-focused');
                 if (this.isBrowseMenuVisible()) {
                     selectedTopicList.removeClass('is-focused');
@@ -103,6 +107,7 @@
             },
 
             toggleBrowseMenu: function(event) {
+                // eslint-disable-next-line no-var
                 var inputText = this.$('.forum-nav-browse-filter-input').val();
                 event.preventDefault();
                 event.stopPropagation();
@@ -163,6 +168,7 @@
             },
 
             selectOption: function(element) {
+                // eslint-disable-next-line no-var
                 var activeDescendantId, activeDescendantText;
                 if (this.selectedTopic.length > 0) {
                     this.selectedTopic.removeClass('is-focused');
@@ -180,6 +186,7 @@
             },
 
             keyboardBinding: function(event) {
+                // eslint-disable-next-line no-var
                 var key = event.which,
                     $inputText = $('.forum-nav-browse-filter-input'),
                     $filteredMenuItems = $('.forum-nav-browse-menu-item:visible'),
@@ -238,6 +245,7 @@
             },
 
             filterTopics: function() {
+                // eslint-disable-next-line no-var
                 var $items, query, filteredItems,
                     self = this;
                 query = this.$('.forum-nav-browse-filter-input').val();
@@ -249,6 +257,7 @@
                     if (self.filterEnabled) {
                         $items.hide();
                         filteredItems = $items.each(function(i, item) {
+                            // eslint-disable-next-line no-var
                             var path, pathText,
                                 $item = $(item);
                             if (!$item.is(':visible')) {
@@ -267,6 +276,7 @@
             },
 
             getPathText: function(item) {
+                // eslint-disable-next-line no-var
                 var path, pathTitles;
                 path = item.parents('.forum-nav-browse-menu-item').andSelf();
                 pathTitles = path.children('.forum-nav-browse-title').map(function(i, elem) {
@@ -276,6 +286,7 @@
             },
 
             selectTopicHandler: function(event) {
+                // eslint-disable-next-line no-var
                 var $item = $(event.target).closest('.forum-nav-browse-menu-item');
                 event.preventDefault();
                 this.hideBrowseMenu();
@@ -284,6 +295,7 @@
             },
 
             getBreadcrumbText: function($item) {
+                // eslint-disable-next-line no-var
                 var $parentSubMenus = $item.parents('.forum-nav-browse-submenu'),
                     crumbs = [],
                     subTopic = $('.forum-nav-browse-title', $item)
@@ -315,4 +327,5 @@
 
         return DiscussionBoardView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

@@ -2,6 +2,7 @@
 (function() {
     'use strict';
 
+    /* eslint-disable-next-line camelcase, no-var */
     var $$course_id = '$$course_id';
     describe('DiscussionThreadShowView', function() {
         beforeEach(function() {
@@ -12,6 +13,7 @@
                 id: 'dummy',
                 user_id: this.user.id,
                 username: this.user.get('username'),
+                // eslint-disable-next-line camelcase
                 course_id: $$course_id,
                 title: 'dummy title',
                 body: 'this is a thread',
@@ -30,6 +32,7 @@
                 model: this.thread
             });
             this.view.setElement($('#fixture-element'));
+            // eslint-disable-next-line no-undef
             return spyOn(this.view, 'convertMath');
         });
         describe('voting', function() {
@@ -54,8 +57,10 @@
             });
         });
         describe('pinning', function() {
+            // eslint-disable-next-line no-var
             var expectPinnedRendered;
             expectPinnedRendered = function(view, model) {
+                // eslint-disable-next-line no-var
                 var button, pinned;
                 pinned = model.get('pinned');
                 button = view.$el.find('.action-pin');
@@ -94,8 +99,10 @@
             });
         });
         describe('labels', function() {
+            // eslint-disable-next-line no-var
             var expectOneElement;
             expectOneElement = function(view, selector, visible) {
+                // eslint-disable-next-line no-var
                 var elements;
                 if (typeof visible === 'undefined' || visible === null) {
                     visible = true;
@@ -136,35 +143,43 @@
             });
         });
         describe('author display', function() {
+            // eslint-disable-next-line no-var
             var checkUserLink;
             beforeEach(function() {
                 return this.thread.set('user_url', 'test_user_url');
             });
+            // eslint-disable-next-line camelcase
             checkUserLink = function(element, is_ta, is_staff) {
                 expect(element.find('.username').length).toEqual(1);
                 expect(element.find('.username').text()).toEqual('test_user');
                 expect(element.find('.username').attr('href')).toEqual('test_user_url');
+                // eslint-disable-next-line camelcase
                 expect(element.find('.user-label-community-ta').length).toEqual(is_ta ? 1 : 0);
+                // eslint-disable-next-line camelcase
                 return expect(element.find('.user-label-staff').length).toEqual(is_staff ? 1 : 0);
             };
             it('renders correctly for a student-authored thread', function() {
+                // eslint-disable-next-line no-var
                 var $el;
                 $el = $('#fixture-element').html(this.view.getAuthorDisplay());
                 return checkUserLink($el, false, false);
             });
             it('renders correctly for a community TA-authored thread', function() {
+                // eslint-disable-next-line no-var
                 var $el;
                 this.thread.set('community_ta_authored', true);
                 $el = $('#fixture-element').html(this.view.getAuthorDisplay());
                 return checkUserLink($el, true, false);
             });
             it('renders correctly for a staff-authored thread', function() {
+                // eslint-disable-next-line no-var
                 var $el;
                 this.thread.set('staff_authored', true);
                 $el = $('#fixture-element').html(this.view.getAuthorDisplay());
                 return checkUserLink($el, false, true);
             });
             it('renders correctly for an anonymously-authored thread', function() {
+                // eslint-disable-next-line no-var
                 var $el;
                 this.thread.set('username', null);
                 $el = $('#fixture-element').html(this.view.getAuthorDisplay());

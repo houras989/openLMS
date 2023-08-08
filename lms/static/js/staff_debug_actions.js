@@ -1,16 +1,22 @@
 /* globals _ */
 // Build StaffDebug object
+// eslint-disable-next-line no-var
 var StaffDebug = (function() {
+    // eslint-disable-next-line no-var
     var getURL = function(courseId, action) {
         return '/courses/' + courseId + '/instructor/api/' + action;
     };
 
+    // eslint-disable-next-line no-var
     var sanitizeString = function(string) {
         return string.replace(/[.*+?^:${}()|[\]\\]/g, '\\$&');
     };
 
+    // eslint-disable-next-line no-var
     var getUser = function(locationName) {
+        // eslint-disable-next-line no-var
         var sanitizedLocationName = sanitizeString(locationName);
+        // eslint-disable-next-line no-var
         var uname = $('#sd_fu_' + sanitizedLocationName).val();
         if (uname === '') {
             uname = $('#sd_fu_' + sanitizedLocationName).attr('placeholder');
@@ -18,8 +24,11 @@ var StaffDebug = (function() {
         return uname;
     };
 
+    // eslint-disable-next-line no-var
     var getScore = function(locationName) {
+        // eslint-disable-next-line no-var
         var sanitizedLocationName = sanitizeString(locationName);
+        // eslint-disable-next-line no-var
         var score = $('#sd_fs_' + sanitizedLocationName).val();
         if (score === '') {
             score = $('#sd_fs_' + sanitizedLocationName).attr('placeholder');
@@ -27,8 +36,11 @@ var StaffDebug = (function() {
         return score;
     };
 
+    // eslint-disable-next-line no-var
     var doInstructorDashAction = function(action) {
+        // eslint-disable-next-line no-var
         var user = getUser(action.locationName);
+        // eslint-disable-next-line no-var
         var pdata = {
             problem_to_reset: action.location,
             unique_student_identifier: user,
@@ -40,10 +52,13 @@ var StaffDebug = (function() {
             type: 'POST',
             url: getURL(action.courseId, action.method),
             data: pdata,
+            // eslint-disable-next-line no-unused-vars
             success: function(data) {
+                // eslint-disable-next-line no-var
                 var text = _.template(action.success_msg, {interpolate: /\{(.+?)\}/g})(
                     {user: user}
                 );
+                // eslint-disable-next-line no-var
                 var html = _.template('<p id="idash_msg" class="success">{text}</p>', {interpolate: /\{(.+?)\}/g})(
                     {text: text}
                 );
@@ -52,8 +67,11 @@ var StaffDebug = (function() {
                     edx.HtmlUtils.HTML(html)
                 );
             },
+            // eslint-disable-next-line no-unused-vars
             error: function(request, status, error) {
+                // eslint-disable-next-line no-var
                 var responseJSON;
+                // eslint-disable-next-line no-var
                 var errorMsg = _.template(action.error_msg, {interpolate: /\{(.+?)\}/g})(
                     {user: user}
                 );
@@ -62,12 +80,14 @@ var StaffDebug = (function() {
                 } catch (e) {
                     responseJSON = 'Unknown Error Occurred.';
                 }
+                // eslint-disable-next-line no-var
                 var text = _.template('{error_msg} {error}', {interpolate: /\{(.+?)\}/g})(
                     {
                         error_msg: errorMsg,
                         error: gettext(responseJSON)
                     }
                 );
+                // eslint-disable-next-line no-var
                 var html = _.template('<p id="idash_msg" class="error">{text}</p>', {interpolate: /\{(.+?)\}/g})(
                     {text: text}
                 );
@@ -80,6 +100,7 @@ var StaffDebug = (function() {
         });
     };
 
+    // eslint-disable-next-line no-var
     var reset = function(courseId, locname, location) {
         this.doInstructorDashAction({
             courseId: courseId,
@@ -92,6 +113,7 @@ var StaffDebug = (function() {
         });
     };
 
+    // eslint-disable-next-line no-var
     var deleteStudentState = function(courseId, locname, location) {
         this.doInstructorDashAction({
             courseId: courseId,
@@ -104,6 +126,7 @@ var StaffDebug = (function() {
         });
     };
 
+    // eslint-disable-next-line no-var
     var rescore = function(courseId, locname, location) {
         this.doInstructorDashAction({
             courseId: courseId,
@@ -116,6 +139,7 @@ var StaffDebug = (function() {
         });
     };
 
+    // eslint-disable-next-line no-var
     var rescoreIfHigher = function(courseId, locname, location) {
         this.doInstructorDashAction({
             courseId: courseId,
@@ -128,6 +152,7 @@ var StaffDebug = (function() {
         });
     };
 
+    // eslint-disable-next-line no-var
     var overrideScore = function(courseId, locname, location) {
         this.doInstructorDashAction({
             courseId: courseId,
@@ -158,6 +183,7 @@ var StaffDebug = (function() {
 
 // Register click handlers
 $(document).ready(function() {
+    // eslint-disable-next-line no-var
     var $mainContainer = $('#main');
     $mainContainer.on('click', '.staff-debug-reset', function() {
         StaffDebug.reset(

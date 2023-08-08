@@ -2,31 +2,47 @@
 
 'use strict';
 
+// eslint-disable-next-line no-var
 var path = require('path');
+// eslint-disable-next-line no-var
 var webpack = require('webpack');
+// eslint-disable-next-line no-var
 var BundleTracker = require('webpack-bundle-tracker');
+// eslint-disable-next-line no-var
 var StringReplace = require('string-replace-webpack-plugin');
+// eslint-disable-next-line no-var
 var Merge = require('webpack-merge');
 
+// eslint-disable-next-line no-var
 var files = require('./webpack-config/file-lists.js');
-var builtinBlocksJS = require('./webpack.builtinblocks.config.js');
+// eslint-disable-next-line no-var, no-unused-vars
+var xmoduleJS = require('./common/static/xmodule/webpack.xmodule.config.js');
 
+// eslint-disable-next-line no-var
 var filesWithRequireJSBlocks = [
     path.resolve(__dirname, 'common/static/common/js/components/utils/view_utils.js'),
     /xmodule\/js\/src/
 ];
 
+// eslint-disable-next-line no-var
 var defineHeader = /\(function ?\(((define|require|requirejs|\$)(, )?)+\) ?\{/;
+// eslint-disable-next-line no-var
 var defineCallFooter = /\}\)\.call\(this, ((define|require)( \|\| RequireJS\.(define|require))?(, )?)+?\);/;
+// eslint-disable-next-line no-var
 var defineDirectFooter = /\}\(((window\.)?(RequireJS\.)?(requirejs|define|require|jQuery)(, )?)+\)\);/;
+// eslint-disable-next-line no-var
 var defineFancyFooter = /\}\).call\(\s*this(\s|.)*define(\s|.)*\);/;
+// eslint-disable-next-line no-var
 var defineFooter = new RegExp('(' + defineCallFooter.source + ')|('
                              + defineDirectFooter.source + ')|('
                              + defineFancyFooter.source + ')', 'm');
 
+// eslint-disable-next-line no-var
 var staticRootLms = process.env.STATIC_ROOT_LMS || './test_root/staticfiles';
+// eslint-disable-next-line no-var
 var staticRootCms = process.env.STATIC_ROOT_CMS || (staticRootLms + '/studio');
 
+// eslint-disable-next-line no-var
 var workerConfig = function() {
     try {
         return {
@@ -555,4 +571,5 @@ module.exports = Merge.smart({
         }
 
     }
+// eslint-disable-next-line no-undef
 }, {web: builtinBlocksJS}, workerConfig());

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone',
     'jquery',
@@ -9,6 +10,7 @@ define([
     /* jslint maxlen: 500 */
 
     describe('Financial Assistance View', function() {
+        // eslint-disable-next-line no-var
         var view = null,
             context = {
                 fields: [
@@ -109,8 +111,10 @@ define([
             validCountry;
 
         completeForm = function() {
+            // eslint-disable-next-line no-var
             var courseOptions = context.fields[0].options,
                 courseSelectValue = courseOptions[courseOptions.length - 1].value;
+            // eslint-disable-next-line no-var
             var incomeOptions = context.fields[1].options,
                 incomeSelectValue = incomeOptions[incomeOptions.length - 1].value;
 
@@ -158,6 +162,7 @@ define([
         beforeEach(function() {
             setFixtures('<div class="financial-assistance-wrapper"></div>');
 
+            // eslint-disable-next-line no-undef
             spyOn(FinancialAssistanceModel.prototype, 'save');
 
             view = new FinancialAssistanceFormView({
@@ -176,6 +181,7 @@ define([
         });
 
         it('should load the form based on passed in context', function() {
+            // eslint-disable-next-line no-var
             var $form = view.$('.financial-assistance-form');
 
             expect($form.find('select').first().attr('name')).toEqual(context.fields[0].name);

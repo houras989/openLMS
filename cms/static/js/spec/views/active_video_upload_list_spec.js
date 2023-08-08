@@ -1,4 +1,5 @@
 /* global _ */
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery',
@@ -13,6 +14,7 @@ define(
     function($, ActiveVideoUpload, ActiveVideoUploadListView, StringUtils, TemplateHelpers, AjaxHelpers) {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var concurrentUploadLimit = 2,
             POST_URL = '/test/post/url',
             VIDEO_ID = 'video101',
@@ -64,12 +66,14 @@ define(
                 $courseVideoSettingsButton = $('.course-video-settings-button');
                 this.view = createActiveUploadListView(true);
                 this.view.render();
+                // eslint-disable-next-line no-undef
                 jasmine.Ajax.install();
             });
 
             // Remove window unload handler triggered by the upload requests
             afterEach(function() {
                 $(window).off('beforeunload');
+                // eslint-disable-next-line no-undef
                 jasmine.Ajax.uninstall();
 
                 if (this.view.courseVideoSettingsView) {
@@ -78,6 +82,7 @@ define(
             });
 
             it('renders correct text in file drag/drop area', function() {
+                // eslint-disable-next-line no-var
                 var messages = {
                         '.video-uploads-header': this.view.uploadHeader,
                         '.video-upload-text': this.view.uploadText.toString(),
@@ -92,6 +97,7 @@ define(
             });
 
             it('should trigger file selection when the drop zone is clicked', function() {
+                /* eslint-disable-next-line no-undef, no-var */
                 var clickSpy = jasmine.createSpy();
                 clickSpy.and.callFake(function(event) { event.preventDefault(); });
                 this.view.$('.js-file-input').on('click', clickSpy);
@@ -121,6 +127,7 @@ define(
             };
 
             getSentRequests = function() {
+                // eslint-disable-next-line no-undef
                 return jasmine.Ajax.requests.filter(function(request) {
                     return request.readyState > 0;
                 });
@@ -136,6 +143,7 @@ define(
             };
 
             getStatusUpdateRequest = function() {
+                // eslint-disable-next-line no-var
                 var sentRequests = getSentRequests();
                 return sentRequests.filter(function(request) {
                     return request.method === 'POST' && _.has(
@@ -145,6 +153,7 @@ define(
             };
 
             verifyStatusUpdateRequest = function(videoId, status, message, expectedRequest) {
+                // eslint-disable-next-line no-var
                 var request = expectedRequest || getStatusUpdateRequest(),
                     expectedData = JSON.stringify({
                         edxVideoId: videoId,
@@ -162,6 +171,7 @@ define(
 
             verifyUploadPostRequest = function(requestParams) {
                 // get latest requestParams.length requests
+                // eslint-disable-next-line no-var
                 var postRequests = getSentRequests().slice(-requestParams.length);
                 _.each(postRequests, function(postRequest, index) {
                     expect(postRequest.method).toEqual('POST');
@@ -216,6 +226,7 @@ define(
                 });
 
                 it('should correctly parse and show S3 error response xml', function() {
+                    // eslint-disable-next-line no-var
                     var fileInfo = {name: 'video.mp4', size: 10000},
                         videos = {
                             files: [
@@ -226,6 +237,7 @@ define(
                         requests;
 
                     // this is required so that we can use AjaxHelpers ajax mock utils instead of jasmine mock-ajax.js
+                    // eslint-disable-next-line no-undef
                     jasmine.Ajax.uninstall();
 
                     requests = AjaxHelpers.requests(this);
@@ -267,12 +279,14 @@ define(
 
                     // this is required otherwise mock-ajax will throw an exception when it tries to uninstall Ajax in
                     // outer afterEach
+                    // eslint-disable-next-line no-undef
                     jasmine.Ajax.install();
                 });
             });
 
             describe('upload cancelled', function() {
                 it('should send correct status update request', function() {
+                    // eslint-disable-next-line no-var
                     var fileInfo = {name: 'video.mp4'},
                         videos = {
                             files: [
@@ -297,6 +311,7 @@ define(
 
                     // upload_cancelled request should be sent
                     this.view.onUnload();
+                    // eslint-disable-next-line no-undef
                     uploadCancelledRequest = jasmine.Ajax.requests.mostRecent();
                     expect(uploadCancelledRequest.params).toEqual(
                         JSON.stringify(
@@ -312,6 +327,7 @@ define(
 
             describe('file formats', function() {
                 it('should not fail upload for supported file formats', function() {
+                    // eslint-disable-next-line no-var
                     var supportedFiles = {
                             files: [
                                 {name: 'test-1.mp4'},
@@ -325,6 +341,7 @@ define(
                     verifyUploadPostRequest(requestParams);
                 });
                 it('should fail upload for unspported file formats', function() {
+                    // eslint-disable-next-line no-var
                     var files = [
                             {name: 'test-3.txt', size: 0},
                             {name: 'test-4.png', size: 0}
@@ -332,6 +349,7 @@ define(
                         unSupportedFiles = {
                             files: files
                         },
+                        // eslint-disable-next-line no-unused-vars
                         self = this;
 
                     this.view.$uploadForm.fileupload('add', unSupportedFiles);
@@ -357,6 +375,7 @@ define(
                     ],
                     function(caseInfo) {
                         it(caseInfo.desc + 'max file size', function() {
+                            // eslint-disable-next-line no-var
                             var maxFileSizeInBytes = this.view.getMaxFileSizeInBytes(),
                                 fileSize = maxFileSizeInBytes + caseInfo.additionalBytes,
                                 fileToUpload = {
@@ -413,6 +432,7 @@ define(
                     {desc: 'more files than upload limit', numFiles: concurrentUploadLimit + 1}
                 ],
                 function(caseInfo) {
+                    // eslint-disable-next-line no-var
                     var fileNames = _.map(
                         _.range(caseInfo.numFiles),
                         function(i) { return 'test' + i + '.mp4'; }
@@ -423,7 +443,9 @@ define(
                             // The files property cannot be set on a file input for
                             // security reasons, so we must mock the access mechanism
                             // that jQuery-File-Upload uses to retrieve it.
+                            // eslint-disable-next-line no-var
                             var realProp = $.prop;
+                            /* eslint-disable-next-line consistent-return, no-undef */
                             spyOn($, 'prop').and.callFake(function(el, propName) {
                                 if (arguments.length === 2 && propName === 'files') {
                                     return _.map(
@@ -435,14 +457,19 @@ define(
                                 }
                             });
                             this.view.$('.js-file-input').change();
+                            // eslint-disable-next-line no-undef
                             this.request = jasmine.Ajax.requests.mostRecent();
                         });
 
                         it('should trigger the correct request', function() {
+                            // eslint-disable-next-line no-var
                             var request,
+                                // eslint-disable-next-line no-unused-vars
                                 self = this;
+                            // eslint-disable-next-line no-undef
                             expect(jasmine.Ajax.requests.count()).toEqual(caseInfo.numFiles);
                             _.each(_.range(caseInfo.numFiles), function(index) {
+                                // eslint-disable-next-line no-undef
                                 request = jasmine.Ajax.requests.at(index);
                                 expect(request.url).toEqual(POST_URL);
                                 expect(request.method).toEqual('POST');
@@ -456,13 +483,16 @@ define(
 
                         describe('and successful server response', function() {
                             beforeEach(function() {
+                                // eslint-disable-next-line no-undef
                                 jasmine.Ajax.requests.reset();
                                 sendUploadPostResponse(this.request, fileNames);
                                 this.$uploadElems = this.view.$('.active-video-upload');
                             });
 
                             it('should start uploads', function() {
+                                /* eslint-disable-next-line no-unused-vars, no-var */
                                 var spec = this;
+                                // eslint-disable-next-line no-var
                                 var sentRequests = getSentRequests();
                                 expect(sentRequests.length).toEqual(
                                     _.min([concurrentUploadLimit, caseInfo.numFiles])
@@ -481,7 +511,9 @@ define(
                             it('should display upload status and progress', function() {
                                 expect(this.$uploadElems.length).toEqual(caseInfo.numFiles);
                                 this.$uploadElems.each(function(i, uploadElem) {
+                                    // eslint-disable-next-line no-var
                                     var $uploadElem = $(uploadElem);
+                                    // eslint-disable-next-line no-var
                                     var queued = i >= concurrentUploadLimit;
                                     expect($.trim($uploadElem.find('.video-detail-name').text())).toEqual(
                                         fileNames[i]
@@ -509,7 +541,9 @@ define(
 
                             _.each([true, false],
                                 function(isViewRefresh) {
+                                    // eslint-disable-next-line no-var
                                     var refreshDescription = isViewRefresh ? ' (refreshed)' : ' (not refreshed)';
+                                    // eslint-disable-next-line no-var
                                     var subCases = [
                                         {
                                             desc: 'completion' + refreshDescription,
@@ -534,9 +568,11 @@ define(
                                     _.each(subCases,
                                         function(subCaseInfo) {
                                             describe('and upload ' + subCaseInfo.desc, function() {
+                                                // eslint-disable-next-line no-var
                                                 var refreshSpy = null;
 
                                                 beforeEach(function() {
+                                                    // eslint-disable-next-line no-undef
                                                     refreshSpy = subCaseInfo.isViewRefresh ? jasmine.createSpy() : null;
                                                     this.view.onFileUploadDone = refreshSpy;
                                                     getSentRequests()[0].respondWith(
@@ -552,6 +588,7 @@ define(
                                                 });
 
                                                 it('should update status and progress', function() {
+                                                    // eslint-disable-next-line no-var
                                                     var $uploadElem = this.view.$('.active-video-upload:first');
                                                     if (subCaseInfo.isViewRefresh
                                                         && subCaseInfo.responseStatus === 204) {
@@ -580,6 +617,7 @@ define(
 
                                                 if (caseInfo.numFiles > concurrentUploadLimit) {
                                                     it('should start a new upload', function() {
+                                                        // eslint-disable-next-line no-var
                                                         var $uploadElem = $(this.$uploadElems[concurrentUploadLimit]);
 
                                                         // we try to upload 3 files. 2 files(2 requests) will start

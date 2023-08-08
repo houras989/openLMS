@@ -1,7 +1,9 @@
+// eslint-disable-next-line no-undef
 define(['js/dashboard/dropdown', 'jquery.simulate'],
     function() {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var keys = $.simulate.keyCode,
             toggleButtonSelector = '#actions-dropdown-link-2',
             dropdownSelector = '#actions-dropdown-2',
@@ -16,6 +18,7 @@ define(['js/dashboard/dropdown', 'jquery.simulate'],
                 expect($(dropdownSelector)).not.toBeVisible();
             },
             waitForElementToBeFocused = function(element, done) {
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return element === document.activeElement;
                 }).always(done);

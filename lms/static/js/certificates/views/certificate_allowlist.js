@@ -1,4 +1,5 @@
 // Backbone Application View: CertificateAllowlist View
+// eslint-disable-next-line no-redeclare
 /* global define, RequireJS */
 
 (function(define) {
@@ -32,6 +33,7 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var template = this.loadTemplate('certificate-allowlist');
                 this.$el.html(HtmlUtils.HTML(template({certificates: this.collection.models})).toString());
                 if (!this.active_certificate || this.collection.isEmpty()) {
@@ -42,14 +44,18 @@
             },
 
             loadTemplate: function(name) {
+                // eslint-disable-next-line no-var
                 var templateSelector = '#' + name + '-tpl',
                     templateText = $(templateSelector).text();
                 return _.template(templateText);
             },
 
             removeException: function(event) {
+                // eslint-disable-next-line no-var
                 var certificate = $(event.target).data();
+                // eslint-disable-next-line no-var
                 var model = this.collection.findWhere(certificate);
+                // eslint-disable-next-line no-var
                 var self = this;
                 if (model) {
                     model.destroy(
@@ -90,18 +96,24 @@
                 $(this.message_div).fadeOut(6000, 'linear');
             },
 
+            // eslint-disable-next-line camelcase
             showSuccess: function(caller_object) {
                 return function(xhr) {
+                    // eslint-disable-next-line camelcase
                     caller_object.escapeAndShowMessage(xhr.message);
                 };
             },
 
+            // eslint-disable-next-line camelcase
             showError: function(caller_object) {
                 return function(xhr) {
                     try {
+                        // eslint-disable-next-line no-var
                         var response = JSON.parse(xhr.responseText);
+                        // eslint-disable-next-line camelcase
                         caller_object.escapeAndShowMessage(response.message);
                     } catch (exception) {
+                        // eslint-disable-next-line camelcase
                         caller_object.escapeAndShowMessage(
                             gettext('Server Error, Please refresh the page and try again.')
                         );

@@ -1,9 +1,12 @@
+// eslint-disable-next-line no-unused-vars
 /* globals DiscussionUtil, DiscussionContentShowView, MathJax */
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -19,8 +22,10 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.DiscussionThreadShowView = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(DiscussionThreadShowView, _super);
 
             function DiscussionThreadShowView() {
@@ -28,6 +33,7 @@
             }
 
             DiscussionThreadShowView.prototype.initialize = function(options) {
+                // eslint-disable-next-line no-var
                 var _ref;
                 DiscussionThreadShowView.__super__.initialize.call(this);
                 this.mode = options.mode || 'inline';
@@ -40,6 +46,7 @@
             };
 
             DiscussionThreadShowView.prototype.renderTemplate = function() {
+                // eslint-disable-next-line no-var
                 var context = $.extend({
                     mode: this.mode,
                     startHeader: this.startHeader,

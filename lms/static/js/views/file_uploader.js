@@ -22,8 +22,10 @@
  * @param errorNotification, optional callback that can return a success NotificationModel for display
  *     after a file failed to upload. This method will be passed the attempted file, event, and data.
  */
+// eslint-disable-next-line camelcase
 (function(Backbone, $, _, gettext, interpolate_text, NotificationModel, NotificationView) {
     // Requires JQuery-File-Upload.
+    // eslint-disable-next-line no-var
     var FileUploaderView = Backbone.View.extend({
 
         initialize: function(options) {
@@ -32,9 +34,13 @@
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var options = this.options,
+                // eslint-disable-next-line camelcase
                 get_option_with_default = function(option, default_value) {
+                    // eslint-disable-next-line no-var
                     var optionVal = options[option];
+                    // eslint-disable-next-line camelcase
                     return optionVal || default_value;
                 },
                 submitButton, resultNotification;
@@ -60,6 +66,7 @@
                 autoUpload: false,
                 replaceFileInput: false,
                 add: function(e, data) {
+                    /* eslint-disable-next-line no-unused-vars, no-var */
                     var file = data.files[0];
                     submitButton.removeClass('is-disabled').attr('aria-disabled', false);
                     submitButton.unbind('click');
@@ -75,7 +82,9 @@
         },
 
         successHandler: function(event, data) {
+            // eslint-disable-next-line no-var
             var file = data.files[0].name;
+            // eslint-disable-next-line no-var
             var notificationModel;
             if (this.options.successNotification) {
                 notificationModel = this.options.successNotification(file, event, data);
@@ -85,6 +94,7 @@
                     title: interpolate_text(gettext("Your upload of '{file}' succeeded."), {file: file})
                 });
             }
+            // eslint-disable-next-line no-var
             var notification = new NotificationView({
                 el: this.$('.result'),
                 model: notificationModel
@@ -93,9 +103,11 @@
         },
 
         errorHandler: function(event, data) {
+            // eslint-disable-next-line no-var
             var file = data.files[0].name,
                 message = null,
                 jqXHR = data.response().jqXHR;
+            // eslint-disable-next-line no-var
             var notificationModel;
             if (this.options.errorNotification) {
                 notificationModel = this.options.errorNotification(file, event, data);
@@ -115,6 +127,7 @@
                     title: message
                 });
             }
+            // eslint-disable-next-line no-var
             var notification = new NotificationView({
                 el: this.$('.result'),
                 model: notificationModel
@@ -124,4 +137,5 @@
     });
 
     this.FileUploaderView = FileUploaderView;
+// eslint-disable-next-line no-undef
 }).call(this, Backbone, $, _, gettext, interpolate_text, NotificationModel, NotificationView);

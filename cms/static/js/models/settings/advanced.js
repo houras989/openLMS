@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-undef
 define(['backbone'], function(Backbone) {
+    // eslint-disable-next-line no-var
     var Advanced = Backbone.Model.extend({
 
         defaults: {
@@ -9,6 +11,7 @@ define(['backbone'], function(Backbone) {
         // Only 'value' is editable.
         },
 
+        // eslint-disable-next-line no-unused-vars
         validate: function(attrs) {
         // Keys can no longer be edited. We are currently not validating values.
         }

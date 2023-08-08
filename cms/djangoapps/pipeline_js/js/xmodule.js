@@ -4,6 +4,7 @@
 // These files assume that several libraries are available and bound to
 // variables in the global context, so we load those libraries with requirejs
 // and attach them to the global context manually.
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery', 'underscore', 'codemirror', 'tinymce', 'scriptjs',
@@ -51,6 +52,7 @@ define(
                 window.MathJax.Hub.processSectionDelay = 0;
                 window.MathJax.Hub.Configured();
 
+                // eslint-disable-next-line no-use-before-define
                 window.addEventListener('resize', MJrenderer);
 
                 let t = -1;
@@ -65,7 +67,9 @@ define(
                     if (oldWidth !== document.documentElement.scrollWidth) {
                         t = window.setTimeout(function() {
                             oldWidth = document.documentElement.scrollWidth;
+                            // eslint-disable-next-line no-undef
                             MathJax.Hub.Queue(
+                                // eslint-disable-next-line no-undef
                                 ['Rerender', MathJax.Hub],
                                 [() => $('.MathJax_SVG>svg').toArray().forEach(el => {
                                     if ($(el).width() === 0) {
@@ -83,6 +87,7 @@ define(
         window.RequireJS = {
             requirejs: {}, // This is never used by current xmodules
             require: $script, // $script([deps], callback) acts approximately like the require function
+            // eslint-disable-next-line no-undef
             define: define
         };
         /**
@@ -92,6 +97,7 @@ define(
          * @return {jQuery Promise}
          * */
         function requireQueue(modules) {
+            // eslint-disable-next-line no-var
             var deferred = $.Deferred();
             function loadScript(queue) {
                 $script.ready('mathjax', function() {

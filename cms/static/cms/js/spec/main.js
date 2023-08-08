@@ -4,8 +4,10 @@
 (function(requirejs, requireSerial) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var i, specHelpers, testFiles;
     if (window) {
+        // eslint-disable-next-line no-undef
         define('add-a11y-deps',
             [
                 'underscore',
@@ -225,6 +227,7 @@
         }
     });
 
+    // eslint-disable-next-line no-undef
     jasmine.getFixtures().fixturesPath = '/base/templates';
 
     testFiles = [

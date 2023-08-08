@@ -5,6 +5,7 @@
     'use strict';
 
     define(['backbone'], function(Backbone) {
+        // eslint-disable-next-line no-var
         var HeaderModel = Backbone.Model.extend({
             defaults: {
                 title: '',
@@ -16,4 +17,5 @@
 
         return HeaderModel;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-undef
 define(['backbone', 'underscore', 'gettext', 'js/models/chapter', 'js/collections/chapter',
     'backbone.associations', 'cms/js/main'],
 function(Backbone, _, gettext, ChapterModel, ChapterCollection) {
+    // eslint-disable-next-line no-var
     var Textbook = Backbone.AssociatedModel.extend({
         defaults: function() {
             return {
@@ -32,8 +34,10 @@ function(Backbone, _, gettext, ChapterModel, ChapterCollection) {
         isEmpty: function() {
             return !this.get('name') && this.get('chapters').isEmpty();
         },
+        // eslint-disable-next-line no-undef
         urlRoot: function() { return CMS.URL.TEXTBOOKS; },
         parse: function(response) {
+            // eslint-disable-next-line no-var
             var ret = $.extend(true, {}, response);
             if ('tab_title' in ret && !('name' in ret)) {
                 ret.name = ret.tab_title;
@@ -56,6 +60,7 @@ function(Backbone, _, gettext, ChapterModel, ChapterCollection) {
         },
         // NOTE: validation functions should return non-internationalized error
         // messages. The messages will be passed through gettext in the template.
+        /* eslint-disable-next-line consistent-return, no-unused-vars */
         validate: function(attrs, options) {
             if (!attrs.name) {
                 return {
@@ -70,6 +75,7 @@ function(Backbone, _, gettext, ChapterModel, ChapterCollection) {
                 };
             } else {
                 // validate all chapters
+                // eslint-disable-next-line no-var
                 var invalidChapters = [];
                 attrs.chapters.each(function(chapter) {
                     if (!chapter.isValid()) {

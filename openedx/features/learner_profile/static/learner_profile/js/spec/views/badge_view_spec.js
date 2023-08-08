@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone', 'jquery', 'underscore',
     'learner_profile/js/spec_helpers/helpers',
@@ -7,12 +8,15 @@ function(Backbone, $, _, LearnerProfileHelpers, BadgeView) {
     'use strict';
 
     describe('edx.user.BadgeView', function() {
+        // eslint-disable-next-line no-var
         var view,
             badge,
             testBadgeNameIsDisplayed,
             testBadgeIconIsDisplayed;
 
+        // eslint-disable-next-line no-var
         var createView = function(ownProfile) {
+            // eslint-disable-next-line no-var
             var options,
                 testView;
             badge = LearnerProfileHelpers.makeBadge(1);
@@ -47,8 +51,10 @@ function(Backbone, $, _, LearnerProfileHelpers, BadgeView) {
         });
 
         it('click on share button calls createModal function', function() {
+            // eslint-disable-next-line no-var
             var shareButton;
             view = createView(true);
+            // eslint-disable-next-line no-undef
             spyOn(view, 'createModal');
             view.delegateEvents();
             expect(view.context.ownProfile).toBeTruthy();
@@ -60,6 +66,7 @@ function(Backbone, $, _, LearnerProfileHelpers, BadgeView) {
         });
 
         it('click on share button calls shows the dialog', function(done) {
+            // eslint-disable-next-line no-var
             var shareButton,
                 $modalElement;
             view = createView(true);
@@ -72,12 +79,14 @@ function(Backbone, $, _, LearnerProfileHelpers, BadgeView) {
             shareButton.click();
             // Note: this element should have appeared in the dom during: shareButton.click();
             $modalElement = $('.badges-modal');
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return $modalElement.is(':visible');
             }).always(done);
         });
 
         testBadgeNameIsDisplayed = function(ownProfile) {
+            // eslint-disable-next-line no-var
             var badgeDiv;
             view = createView(ownProfile);
             badgeDiv = view.$el.find('.badge-name');
@@ -95,6 +104,7 @@ function(Backbone, $, _, LearnerProfileHelpers, BadgeView) {
         });
 
         testBadgeIconIsDisplayed = function(ownProfile) {
+            // eslint-disable-next-line no-var
             var badgeImg;
             view = createView(ownProfile);
             badgeImg = view.$el.find('img.badge');

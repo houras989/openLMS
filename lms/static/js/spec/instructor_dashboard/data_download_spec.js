@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 /* global define, DataDownload */
 
 define([
@@ -9,6 +10,7 @@ function($, id, AjaxHelper) {
     'use strict';
 
     describe('edx.instructor_dashboard.data_download', function() {
+        // eslint-disable-next-line no-var
         var requests, $selected, dataDownload, url, errorMessage;
 
         beforeEach(function() {
@@ -45,6 +47,7 @@ function($, id, AjaxHelper) {
         });
 
         it('renders enrolled student list in case of successful request ', function() {
+            // eslint-disable-next-line no-var
             var data = {
                 available_features: [
                     'id',
@@ -132,9 +135,9 @@ function($, id, AjaxHelper) {
             dataDownload.renderDataTable($selected, errorMessage);
             AjaxHelper.expectRequest(requests, 'POST', url);
             AjaxHelper.respondWithJson(requests, data);
-            // eslint-disable-next-line vars-on-top
+            /* eslint-disable-next-line vars-on-top, no-var */
             var dataTable = dataDownload.$data_display_table.html();
-            // eslint-disable-next-line vars-on-top
+            /* eslint-disable-next-line vars-on-top, no-var */
             var existInHtml = function(value) {
                 expect(dataTable.indexOf(data.feature_names[value]) !== -1).toBe(false);
                 expect(dataTable.indexOf(data.students[0][value]) !== -1).toBe(false);
@@ -144,14 +147,18 @@ function($, id, AjaxHelper) {
 
         it('calls renderDataTable function if data-datatable is true', function() {
             $selected = $selected.attr('data-datatable', true);
+            // eslint-disable-next-line no-undef
             spyOn(dataDownload, 'selectedOption').and.returnValue($selected);
+            // eslint-disable-next-line no-undef
             spyOn(dataDownload, 'renderDataTable');
             dataDownload.downloadReportClickHandler();
             expect(dataDownload.renderDataTable).toHaveBeenCalled();
         });
 
         it('calls downloadCSV function if no other data type is specified', function() {
+            // eslint-disable-next-line no-undef
             spyOn(dataDownload, 'selectedOption').and.returnValue($selected);
+            // eslint-disable-next-line no-undef
             spyOn(dataDownload, 'downloadCSV');
             dataDownload.downloadReportClickHandler();
             expect(dataDownload.downloadCSV).toHaveBeenCalled();

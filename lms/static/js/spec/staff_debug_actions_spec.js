@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone',
     'jquery',
@@ -7,21 +8,35 @@ define([
 function(Backbone, $, tmp, AjaxHelpers) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var StaffDebug = window.StaffDebug;
 
     describe('StaffDebugActions', function() {
+        // eslint-disable-next-line no-var
         var courseId = 'course-v1:edX+DemoX+1';
+        // eslint-disable-next-line no-var
         var location = 'block-v1:edX+DemoX+1+type@problem+block@9518dd51055b40cd82feb01502644c89';
+        // eslint-disable-next-line no-var
         var locationName = 'test_loc';
+        // eslint-disable-next-line no-var
         var usernameFixtureID = 'sd_fu_' + locationName;
+        // eslint-disable-next-line no-var
         var $usernameFixture = $('<input>', {id: usernameFixtureID, placeholder: 'userman'});
+        // eslint-disable-next-line no-var
         var scoreFixtureID = 'sd_fs_' + locationName;
+        // eslint-disable-next-line no-var
         var $scoreFixture = $('<input>', {id: scoreFixtureID, placeholder: '0'});
+        /* eslint-disable-next-line no-useless-escape, no-var */
         var escapableLocationName = 'test\.\*\+\?\^\:\$\{\}\(\)\|\]\[loc';
+        // eslint-disable-next-line no-var
         var escapableFixtureID = 'sd_fu_' + escapableLocationName;
+        // eslint-disable-next-line no-var
         var $escapableFixture = $('<input>', {id: escapableFixtureID, placeholder: 'userman'});
+        // eslint-disable-next-line no-var
         var esclocationName = 'P2:problem_1';
+        // eslint-disable-next-line no-var
         var escapableId = 'result_' + esclocationName;
+        // eslint-disable-next-line no-var
         var $escapableResultArea = $('<div>', {id: escapableId});
 
         describe('getURL ', function() {
@@ -83,7 +98,9 @@ function(Backbone, $, tmp, AjaxHelpers) {
         describe('doInstructorDashAction success', function() {
             it('adds a success message to the results element after using an action', function() {
                 $('body').append($escapableResultArea);
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this);
+                // eslint-disable-next-line no-var
                 var action = {
                     courseId: courseId,
                     locationName: esclocationName,
@@ -98,7 +115,9 @@ function(Backbone, $, tmp, AjaxHelpers) {
         describe('doInstructorDashAction error', function() {
             it('adds a failure message to the results element after using an action', function() {
                 $('body').append($escapableResultArea);
+                // eslint-disable-next-line no-var
                 var requests = AjaxHelpers.requests(this);
+                // eslint-disable-next-line no-var
                 var action = {
                     courseId: courseId,
                     locationName: esclocationName,
@@ -114,6 +133,7 @@ function(Backbone, $, tmp, AjaxHelpers) {
             it('makes an ajax call with the expected parameters', function() {
                 $('body').append($usernameFixture);
 
+                // eslint-disable-next-line no-undef
                 spyOn($, 'ajax');
                 StaffDebug.reset(courseId, locationName, location);
 
@@ -135,6 +155,7 @@ function(Backbone, $, tmp, AjaxHelpers) {
             it('makes an ajax call with the expected parameters', function() {
                 $('body').append($usernameFixture);
 
+                // eslint-disable-next-line no-undef
                 spyOn($, 'ajax');
                 StaffDebug.deleteStudentState(courseId, locationName, location);
 
@@ -157,6 +178,7 @@ function(Backbone, $, tmp, AjaxHelpers) {
             it('makes an ajax call with the expected parameters', function() {
                 $('body').append($usernameFixture);
 
+                // eslint-disable-next-line no-undef
                 spyOn($, 'ajax');
                 StaffDebug.rescore(courseId, locationName, location);
 
@@ -178,6 +200,7 @@ function(Backbone, $, tmp, AjaxHelpers) {
             it('makes an ajax call with the expected parameters', function() {
                 $('body').append($usernameFixture);
 
+                // eslint-disable-next-line no-undef
                 spyOn($, 'ajax');
                 StaffDebug.rescoreIfHigher(courseId, locationName, location);
 
@@ -200,6 +223,7 @@ function(Backbone, $, tmp, AjaxHelpers) {
                 $('body').append($usernameFixture);
                 $('body').append($scoreFixture);
                 $('#' + scoreFixtureID).val('1');
+                // eslint-disable-next-line no-undef
                 spyOn($, 'ajax');
                 StaffDebug.overrideScore(courseId, locationName, location);
 

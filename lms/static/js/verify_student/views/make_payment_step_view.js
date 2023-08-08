@@ -1,8 +1,10 @@
 /**
  * View for the "make payment" step of the payment/verification flow.
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
+// eslint-disable-next-line camelcase
 (function($, _, gettext, interpolate_text) {
     'use strict';
 
@@ -60,8 +62,10 @@ var edx = edx || {};
         },
 
         _getPaymentButtonText: function(processorName) {
+            // eslint-disable-next-line eqeqeq
             if (processorName.toLowerCase().substr(0, 11) == 'cybersource') {
                 return gettext('Checkout');
+            // eslint-disable-next-line eqeqeq
             } else if (processorName.toLowerCase() == 'paypal') {
                 return gettext('Checkout with PayPal');
             } else {
@@ -72,6 +76,7 @@ var edx = edx || {};
         },
 
         _getPaymentButtonHtml: function(processorName) {
+            // eslint-disable-next-line no-var
             var self = this;
             return _.template(
                 '<button class="next <%- btnClass %> payment-button" id="<%- name %>" ><%- text %></button> '
@@ -79,6 +84,7 @@ var edx = edx || {};
         },
 
         postRender: function() {
+            // eslint-disable-next-line no-var
             var templateContext = this.templateContext(),
                 hasVisibleReqs = _.some(
                     templateContext.requirements,
@@ -152,6 +158,7 @@ var edx = edx || {};
         // and the expected response will consist of an appropriate payment processor endpoint for
         // redirection, along with parameters to be passed along in the request.
         createOrder: function(event) {
+            // eslint-disable-next-line no-var
             var paymentAmount = this.getPaymentAmount(),
                 postData = {
                     processor: event.target.id,
@@ -186,6 +193,7 @@ var edx = edx || {};
             // these parameters, then submit it to the payment processor.
             // This will send the user to an externally-hosted page
             // where she can proceed with payment.
+            // eslint-disable-next-line no-var
             var $form = $('#payment-processor-form');
 
             $('input', $form).remove();
@@ -210,6 +218,7 @@ var edx = edx || {};
         },
 
         handleCreateOrderError: function(xhr) {
+            // eslint-disable-next-line no-var
             var errorMsg = gettext('An error has occurred. Please try again.');
 
             if (xhr.status === 400) {
@@ -229,6 +238,7 @@ var edx = edx || {};
         },
 
         getPaymentAmount: function() {
+            // eslint-disable-next-line no-var
             var $contributionInput = $('input[name="contribution"]:checked', this.el),
                 amount = null;
 
@@ -248,6 +258,7 @@ var edx = edx || {};
         },
 
         selectPaymentAmount: function(amount) {
+            // eslint-disable-next-line no-var
             var amountFloat = parseFloat(amount),
                 foundPrice,
                 sel;
@@ -282,4 +293,5 @@ var edx = edx || {};
         }
 
     });
+// eslint-disable-next-line no-undef
 }(jQuery, _, gettext, interpolate_text));

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery',
     'underscore',
@@ -11,6 +12,7 @@ define([
     'use strict';
 
     describe('CreateEditTeam', function() {
+        // eslint-disable-next-line no-var
         var editTeamID = 'av',
             DEFAULT_MEMBERSHIP = [
                 {
@@ -57,6 +59,7 @@ define([
                 };
             },
             createEditTeamMembersView = function(membership) {
+                // eslint-disable-next-line no-var
                 var teamModel = new TeamModel(
                     createTeamModelData(membership),
                     {parse: true}
@@ -72,19 +75,24 @@ define([
 
         beforeEach(function() {
             setFixtures('<div id="page-prompt"></div><div class="teams-content"></div>');
+            // eslint-disable-next-line no-undef
             spyOn(Backbone.history, 'navigate');
+            // eslint-disable-next-line no-undef
             spyOn(TeamUtils, 'showMessage');
         });
 
         it('can render a message when there are no members', function() {
+            // eslint-disable-next-line no-var
             var view = createEditTeamMembersView([]);
             verifyNoMembersView(view);
         });
 
         it('can delete a team member and update the view', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 view = createEditTeamMembersView(DEFAULT_MEMBERSHIP);
 
+            // eslint-disable-next-line no-undef
             spyOn(view.teamEvents, 'trigger');
             verifyTeamMembersView(view);
 
@@ -108,9 +116,11 @@ define([
         });
 
         it('can show an error message if removing the user fails', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 view = createEditTeamMembersView(DEFAULT_MEMBERSHIP);
 
+            // eslint-disable-next-line no-undef
             spyOn(view.teamEvents, 'trigger');
             verifyTeamMembersView(view);
 
@@ -130,9 +140,12 @@ define([
         });
 
         it('can cancel team membership deletion', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var view = createEditTeamMembersView(DEFAULT_MEMBERSHIP);
 
+            // eslint-disable-next-line no-undef
             spyOn(view.teamEvents, 'trigger');
             verifyTeamMembersView(view);
 

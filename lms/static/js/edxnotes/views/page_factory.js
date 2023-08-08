@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -16,6 +16,7 @@
      * @return {Object} An instance of NotesPageView.
      */
         return function(params) {
+            // eslint-disable-next-line no-var
             var collection = new NotesCollection(
                 params.notes,
                 {
@@ -34,4 +35,5 @@
             });
         };
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

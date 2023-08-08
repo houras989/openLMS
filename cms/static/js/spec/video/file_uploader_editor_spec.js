@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery', 'underscore', 'squire'
@@ -6,6 +7,7 @@ define(
         'use strict';
 
         describe('FileUploader', function() {
+            // eslint-disable-next-line no-var
             var FileUploaderTemplate = readFixtures(
                     'metadata-file-uploader-entry.underscore'
                 ),
@@ -24,15 +26,19 @@ define(
                 },
                 self, injector;
 
+            // eslint-disable-next-line no-var
             var setValue = function(view, value) {
                 view.setValueInEditor(value);
                 view.updateModel();
             };
 
+            // eslint-disable-next-line no-var
             var createPromptSpy = function(name) {
+                /* eslint-disable-next-line no-undef, no-var */
                 var spy = jasmine.createSpyObj(name, ['constructor', 'show', 'hide']);
                 spy.constructor.and.returnValue(spy);
                 spy.show.and.returnValue(spy);
+                // eslint-disable-next-line no-undef
                 spy.extend = jasmine.createSpy().and.returnValue(spy.constructor);
 
                 return spy;
@@ -41,10 +47,12 @@ define(
             beforeEach(function(done) {
                 self = this;
 
+                // eslint-disable-next-line no-undef
                 jasmine.addMatchers({
                     assertValueInView: function() {
                         return {
                             compare: function(actual, expected) {
+                                // eslint-disable-next-line no-var
                                 var value = actual.getValueFromEditor(),
                                     passed = _.isEqual(value, expected);
 
@@ -58,6 +66,7 @@ define(
                     assertCanUpdateView: function() {
                         return {
                             compare: function(actual, expected) {
+                                // eslint-disable-next-line no-var
                                 var view = actual,
                                     value,
                                     passed;
@@ -77,6 +86,7 @@ define(
                     assertClear: function() {
                         return {
                             compare: function(actual, modelValue) {
+                                // eslint-disable-next-line no-var
                                 var view = actual,
                                     model = view.model,
                                     passed;
@@ -94,6 +104,7 @@ define(
                     assertUpdateModel: function() {
                         return {
                             compare: function(actual, originalValue, newValue) {
+                                // eslint-disable-next-line no-var
                                 var view = actual,
                                     model = view.model,
                                     expectOriginal,
@@ -115,6 +126,7 @@ define(
                     verifyButtons: function() {
                         return {
                             compare: function(actual, upload, download) {
+                                // eslint-disable-next-line no-var
                                 var view = actual,
                                     uploadBtn = view.$('.upload-setting'),
                                     downloadBtn = view.$('.download-setting'),
@@ -155,6 +167,7 @@ define(
                     'js/models/metadata', 'js/views/metadata'
                 ],
                 function(MetadataModel, MetadataView) {
+                    // eslint-disable-next-line no-var
                     var model = new MetadataModel($.extend(true, {}, modelStub));
                     self.view = new MetadataView.FileUploader({
                         model: model,
@@ -180,6 +193,7 @@ define(
             });
 
             it('upload works correctly', function() {
+                // eslint-disable-next-line no-var
                 var options;
 
                 setValue(this.view, '');

@@ -2,8 +2,10 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -19,8 +21,10 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.ResponseCommentEditView = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(ResponseCommentEditView, _super);
 
             function ResponseCommentEditView(options) {
@@ -42,6 +46,7 @@
             };
 
             ResponseCommentEditView.prototype.render = function() {
+                // eslint-disable-next-line no-var
                 var context = $.extend({mode: this.options.mode, startHeader: this.options.startHeader},
                     this.model.attributes);
                 this.template = edx.HtmlUtils.template($('#response-comment-edit-template').html());
@@ -63,6 +68,7 @@
             };
 
             return ResponseCommentEditView;
+        // eslint-disable-next-line no-undef
         }(Backbone.View));
     }
 }).call(window);

@@ -1,11 +1,15 @@
 (function(requirejs, require, define) {
     define('PollMain', ['edx-ui-toolkit/js/utils/html-utils'], function(HtmlUtils) {
+        // eslint-disable-next-line no-use-before-define
         PollMain.prototype = {
 
+            // eslint-disable-next-line camelcase
             showAnswerGraph: function(poll_answers, total) {
+                // eslint-disable-next-line no-var
                 var _this, totalValue;
 
                 totalValue = parseFloat(total);
+                // eslint-disable-next-line no-restricted-globals
                 if (isFinite(totalValue) === false) {
                     return;
                 }
@@ -13,9 +17,11 @@
                 _this = this;
 
                 $.each(poll_answers, function(index, value) {
+                    // eslint-disable-next-line no-var
                     var numValue, percentValue;
 
                     numValue = parseFloat(value);
+                    // eslint-disable-next-line no-restricted-globals
                     if (isFinite(numValue) === false) {
                         return;
                     }
@@ -32,6 +38,7 @@
             },
 
             submitAnswer: function(answer, answerObj) {
+                // eslint-disable-next-line no-var
                 var _this;
 
                 // Make sure that the user can answer a question only once.
@@ -42,6 +49,7 @@
 
                 _this = this;
 
+                // eslint-disable-next-line no-console
                 console.log('submit answer');
 
                 answerObj.buttonEl.addClass('answered');
@@ -51,7 +59,9 @@
                 $.postWithPrefix(
                     _this.ajax_url + '/' + answer, {},
                     function(response) {
+                        // eslint-disable-next-line no-console
                         console.log('success! response = ');
+                        // eslint-disable-next-line no-console
                         console.log(response);
 
                         _this.showAnswerGraph(response.poll_answers, response.total);
@@ -72,10 +82,12 @@
             }, // End-of: 'submitAnswer': function (answer, answerEl) {
 
             submitReset: function() {
+                // eslint-disable-next-line no-var
                 var _this;
 
                 _this = this;
 
+                // eslint-disable-next-line no-console
                 console.log('submit reset');
 
                 // Send the data to the server as an AJAX request. Attach a callback that will
@@ -85,10 +97,13 @@
                     this.ajax_url + '/' + 'reset_poll',
                     {},
                     function(response) {
+                        // eslint-disable-next-line no-console
                         console.log('success! response = ');
+                        // eslint-disable-next-line no-console
                         console.log(response);
 
                         if (
+                            // eslint-disable-next-line no-prototype-builtins
                             (response.hasOwnProperty('status') !== true)
                 || (typeof response.status !== 'string')
                 || (response.status.toLowerCase() !== 'success')) {
@@ -113,6 +128,7 @@
             }, // End-of: 'submitAnswer': function (answer, answerEl) {
 
             postInit: function() {
+                // eslint-disable-next-line no-var
                 var _this;
 
                 // Access this object inside inner functions.
@@ -120,6 +136,7 @@
 
                 if (
                     (this.jsonConfig.poll_answer.length > 0)
+        // eslint-disable-next-line no-prototype-builtins
         && (this.jsonConfig.answers.hasOwnProperty(this.jsonConfig.poll_answer) === false)
                 ) {
                     HtmlUtils.append(this.questionEl, HtmlUtils.joinHtml(
@@ -154,6 +171,7 @@
                 });
 
                 $.each(this.jsonConfig.answers, function(index, value) {
+                    // eslint-disable-next-line no-var
                     var answer;
 
                     answer = {};
@@ -187,6 +205,7 @@
                     if (_this.shortVersion === true) {
                         // eslint-disable-next-line no-shadow
                         $.each(answer, function(index, value) {
+                            // eslint-disable-next-line no-undef
                             if (value instanceof jQuery) {
                                 value.addClass('short');
                             }
@@ -209,6 +228,7 @@
                     }
                 });
 
+                // eslint-disable-next-line no-console
                 console.log(this.jsonConfig.reset);
 
                 if ((typeof this.jsonConfig.reset === 'string') && (this.jsonConfig.reset.toLowerCase() === 'true')) {
@@ -235,15 +255,18 @@
             } // End-of: 'postInit': function () {
         }; // End-of: PollMain.prototype = {
 
+        // eslint-disable-next-line no-use-before-define
         return PollMain;
 
         function PollMain(el, runtime) {
+            // eslint-disable-next-line no-var
             var _this;
 
             this.runtime = runtime;
             this.questionEl = $(el).find('.poll_question');
             if (this.questionEl.length !== 1) {
                 // We require one question DOM element.
+                // eslint-disable-next-line no-console
                 console.log('ERROR: PollMain constructor requires one question DOM element.');
 
                 return;
@@ -252,6 +275,7 @@
             // Just a safety precussion. If we run this code more than once, multiple 'click' callback handlers will be
             // attached to the same DOM elements. We don't want this to happen.
             if (this.questionEl.attr('poll_main_processed') === 'true') {
+                // eslint-disable-next-line no-console
                 console.log(
                     'ERROR: PolMain JS constructor was called on a DOM element that has already been processed once.'
                 );
@@ -314,6 +338,7 @@
 
                 return;
             } catch (err) {
+                // eslint-disable-next-line no-console
                 console.log(
                     'ERROR: Invalid JSON config for poll ID "' + this.id + '".',
                     'Error messsage: "' + err.message + '".'

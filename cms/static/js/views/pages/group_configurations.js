@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'gettext', 'js/views/pages/base_page',
     'js/views/group_configurations_list', 'js/views/partition_group_list'
@@ -5,8 +6,10 @@ define([
 function($, _, gettext, BasePage, GroupConfigurationsListView, PartitionGroupListView) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var GroupConfigurationsPage = BasePage.extend({
         initialize: function(options) {
+            // eslint-disable-next-line no-var
             var currentScheme,
                 i;
 
@@ -34,6 +37,7 @@ function($, _, gettext, BasePage, GroupConfigurationsListView, PartitionGroupLis
         },
 
         renderPage: function() {
+            // eslint-disable-next-line no-var
             var hash = this.getLocationHash(),
                 i,
                 currentClass;
@@ -64,6 +68,7 @@ function($, _, gettext, BasePage, GroupConfigurationsListView, PartitionGroupLis
          * @returns {boolean} True if any partition group has the dirty bit set.
          */
         areAnyConfigurationsDirty: function() {
+            // eslint-disable-next-line no-var
             var i;
             for (i = 0; i < this.allGroupConfigurations.length; i++) {
                 if (this.allGroupConfigurations[i].isDirty()) {
@@ -73,7 +78,9 @@ function($, _, gettext, BasePage, GroupConfigurationsListView, PartitionGroupLis
             return false;
         },
 
+        // eslint-disable-next-line consistent-return
         onBeforeUnload: function() {
+            // eslint-disable-next-line no-var
             var dirty = this.areAnyConfigurationsDirty()
                 || (this.experimentsEnabled && this.experimentGroupConfigurations.find(function(configuration) {
                     return configuration.isDirty();
@@ -97,7 +104,9 @@ function($, _, gettext, BasePage, GroupConfigurationsListView, PartitionGroupLis
          * @param {String|Number} Id of the group configuration.
          */
         expandConfiguration: function(id) {
+            // eslint-disable-next-line no-var
             var groupConfig = this.experimentsEnabled && this.experimentGroupConfigurations.findWhere({
+                // eslint-disable-next-line radix
                 id: parseInt(id)
             });
 

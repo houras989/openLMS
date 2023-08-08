@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-redeclare
 /* global gettext */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -32,6 +33,7 @@ class MultiselectDropdown extends React.Component {
 
     // eslint-disable-next-line react/sort-comp
     findOption(data) {
+        // eslint-disable-next-line eqeqeq
         return this.props.options.find((o) => o.value == data || o.display_name == data);
     }
 
@@ -40,11 +42,13 @@ class MultiselectDropdown extends React.Component {
     }
 
     handleKeydown(event) {
+        // eslint-disable-next-line eqeqeq
         if (this.state.open && event.keyCode == 27) {
             this.setState({open: false}, this.focusButton);
         }
     }
 
+    // eslint-disable-next-line no-unused-vars
     handleButtonClick(e) {
         // eslint-disable-next-line react/no-access-state-in-setstate
         this.setState({open: !this.state.open});
@@ -81,6 +85,7 @@ class MultiselectDropdown extends React.Component {
     }
 
     renderSelected() {
+        // eslint-disable-next-line eqeqeq
         if (this.props.selected.length == 0) {
             return this.props.emptyLabel;
         }
@@ -119,6 +124,7 @@ class MultiselectDropdown extends React.Component {
             );
         });
 
+        // eslint-disable-next-line consistent-return
         return (
             <fieldset id="multiselect-dropdown-fieldset" disabled={this.props.disabled}>
                 <legend className="sr-only">{this.props.label}</legend>

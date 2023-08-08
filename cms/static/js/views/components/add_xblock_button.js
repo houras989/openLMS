@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['js/views/baseview', 'edx-ui-toolkit/js/utils/html-utils'],
     function(BaseView, HtmlUtils) {
         'use strict';
@@ -5,6 +6,7 @@ define(['js/views/baseview', 'edx-ui-toolkit/js/utils/html-utils'],
         return BaseView.extend({
             tagName: 'li',
             initialize: function() {
+                // eslint-disable-next-line no-var
                 var attributes = {
                     type: this.model.type,
                     templates: this.model.templates,

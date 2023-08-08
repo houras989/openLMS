@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     [
         'jquery', 'underscore', 'backbone',
@@ -9,6 +10,7 @@ define(
         'use strict';
 
         describe('Transcripts.MessageManager', function() {
+            // eslint-disable-next-line no-var
             var videoListEntryTemplate = readFixtures(
                     'video/transcripts/metadata-videolist-entry.underscore'
                 ),
@@ -23,6 +25,7 @@ define(
                 view, fileUploader, sinonXhr;
 
             beforeEach(function() {
+                // eslint-disable-next-line no-var
                 var videoList, $container;
 
                 fileUploader = FileUploader.prototype;
@@ -40,14 +43,18 @@ define(
                     ).text(foundTemplate)
                 );
 
+                // eslint-disable-next-line no-undef
                 videoList = jasmine.createSpyObj(
                     'MetadataView.VideoList',
                     ['getVideoObjectsList']
                 );
                 $container = $('#metadata-videolist-entry');
 
+                // eslint-disable-next-line no-undef
                 spyOn(fileUploader, 'initialize').and.callThrough();
+                // eslint-disable-next-line no-undef
                 spyOn(console, 'error');
+                // eslint-disable-next-line no-undef
                 spyOn(Utils.Storage, 'set');
 
                 view = new MessageManager({
@@ -67,13 +74,16 @@ define(
 
             describe('Render', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     spyOn(_, 'template').and.callThrough();
+                    // eslint-disable-next-line no-undef
                     spyOn(view.fileUploader, 'render');
                 });
 
                 it('Template doesn\'t exist', function() {
                     view.render('incorrect_template_name');
 
+                    // eslint-disable-next-line no-console
                     expect(console.error).toHaveBeenCalled();
                     expect(_.template).not.toHaveBeenCalled();
                     expect(view.$el.find('.transcripts-status'))
@@ -84,6 +94,7 @@ define(
                 it('All works okay if correct data is passed', function() {
                     view.render('found');
 
+                    // eslint-disable-next-line no-console
                     expect(console.error).not.toHaveBeenCalled();
                     expect(_.template).toHaveBeenCalled();
                     expect(view.$el).not.toHaveClass('is-invisible');
@@ -92,12 +103,15 @@ define(
             });
 
             describe('showError', function() {
+                // eslint-disable-next-line no-var
                 var errorMessage = 'error',
                     $error, $buttons;
 
                 beforeEach(function() {
                     view.render('found');
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'hideError');
+                    // eslint-disable-next-line no-undef
                     spyOn($.fn, 'html').and.callThrough();
                     $error = view.$el.find('.transcripts-error-message');
                     $buttons = view.$el.find('.wrapper-transcripts-buttons');
@@ -134,6 +148,7 @@ define(
             it('hideError', function() {
                 view.render('found');
 
+                // eslint-disable-next-line no-var
                 var $error = view.$el.find('.transcripts-error-message'),
                     $buttons = view.$el.find('.wrapper-transcripts-buttons');
 
@@ -143,8 +158,11 @@ define(
 
             $.each(handlers, function(key, value) {
                 it(key, function() {
+                    /* eslint-disable-next-line no-undef, no-var */
                     var eventObj = jasmine.createSpyObj('event', ['preventDefault']);
+                    // eslint-disable-next-line no-undef
                     spyOn($.fn, 'data').and.returnValue('video_id');
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'processCommand');
                     view[key](eventObj);
                     expect(view.processCommand.calls.mostRecent().args).toEqual(value);
@@ -152,6 +170,7 @@ define(
             });
 
             describe('processCommand', function() {
+                // eslint-disable-next-line no-var
                 var action = 'replace',
                     errorMessage = 'errorMessage',
                     // eslint-disable-next-line no-void
@@ -160,8 +179,11 @@ define(
 
                 beforeEach(function() {
                     view.render('found');
+                    // eslint-disable-next-line no-undef
                     spyOn(Utils, 'command').and.callThrough();
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'render');
+                    // eslint-disable-next-line no-undef
                     spyOn(view, 'showError');
 
                     sinonXhr = sinon.fakeServer.create();
@@ -172,13 +194,16 @@ define(
                     sinonXhr.restore();
                 });
 
+                // eslint-disable-next-line no-var
                 var assertCommand = function(config) {
+                    // eslint-disable-next-line no-var
                     var defaults = {
                         action: 'replace',
                         errorMessage: 'errorMessage',
                         // eslint-disable-next-line no-void
                         extraParamas: void 0
                     };
+                    // eslint-disable-next-line no-var
                     var args = $.extend({}, defaults, config);
 
                     return view
@@ -186,6 +211,7 @@ define(
                 };
 
                 it('Invoke without extraParamas', function(done) {
+                    // eslint-disable-next-line no-undef
                     spyOn(Backbone, 'trigger');
 
                     sinonXhr.respondWith([
@@ -215,6 +241,7 @@ define(
                 });
 
                 it('Invoke with extraParamas', function(done) {
+                    // eslint-disable-next-line no-undef
                     spyOn(Backbone, 'trigger');
 
                     sinonXhr.respondWith([

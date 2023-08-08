@@ -1,10 +1,13 @@
+// eslint-disable-next-line no-var
 var Language = (function() {
     'use strict';
 
+    /* eslint-disable-next-line camelcase, no-var */
     var $settings_language_selector,
         self = null;
     return {
         init: function() {
+            // eslint-disable-next-line camelcase
             $settings_language_selector = $('#settings-language-value');
             self = this;
             this.listenForLanguagePreferenceChange();
@@ -15,12 +18,16 @@ var Language = (function() {
              * Send an ajax request to save user language preferences.
              */
         listenForLanguagePreferenceChange: function() {
+            // eslint-disable-next-line camelcase
             $settings_language_selector.change(function(event) {
+                // eslint-disable-next-line no-var
                 var language = this.value,
                     url = $('.url-endpoint').val(),
+                    // eslint-disable-next-line camelcase
                     is_user_authenticated = JSON.parse($('.url-endpoint').data('user-is-authenticated'));
                 event.preventDefault();
                 self.submitAjaxRequest(language, url, function() {
+                    // eslint-disable-next-line camelcase
                     if (is_user_authenticated) {
                         // User language preference has been set successfully
                         // Now submit the form in success callback.
@@ -58,6 +65,7 @@ var Language = (function() {
              */
         refresh: function() {
             // reloading the page so we can get the latest state of released languages from model
+            // eslint-disable-next-line no-restricted-globals
             location.reload();
         }
 

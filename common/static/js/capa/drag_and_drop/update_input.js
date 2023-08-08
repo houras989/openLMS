@@ -1,11 +1,14 @@
 (function(requirejs, require, define) {
     define([], function() {
         return {
+            // eslint-disable-next-line no-use-before-define
             check: check,
+            // eslint-disable-next-line no-use-before-define
             update: update
         };
 
         function update(state) {
+            // eslint-disable-next-line no-var
             var draggables, tempObj;
 
             draggables = [];
@@ -37,6 +40,7 @@
                                 if (state.targets[c1].type === 'base') {
                                     tempObj[state.targets[c1].draggableList[c2].id] = state.targets[c1].id;
                                 } else {
+                                    // eslint-disable-next-line no-use-before-define
                                     addTargetRecursively(tempObj, state.targets[c1].draggableList[c2], state.targets[c1]);
                                 }
                                 draggables.push(tempObj);
@@ -68,6 +72,7 @@
         // Check if input has an answer from server. If yes, then position
         // all draggables according to answer.
         function check(state) {
+            // eslint-disable-next-line no-var
             var inputElVal;
 
             inputElVal = $('#input_' + state.problemId).val();
@@ -76,12 +81,14 @@
                 return false;
             }
 
+            // eslint-disable-next-line no-use-before-define
             repositionDraggables(state, JSON.parse(inputElVal));
 
             return true;
         }
 
         function processAnswerTargets(state, answerSortedByDepth, minDepth, maxDepth, depth, i) {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var baseDraggableId, baseDraggable, baseTargetId, baseTarget,
                 layeredDraggableId, layeredDraggable, layeredTargetId, layeredTarget,
                 chain;
@@ -92,6 +99,7 @@
                 return;
             }
 
+            // eslint-disable-next-line no-prototype-builtins
             if (answerSortedByDepth.hasOwnProperty(depth) === false) {
             // We have a depth that ts not valid, we decrease the depth by one.
                 processAnswerTargets(state, answerSortedByDepth, minDepth, maxDepth, depth - 1, 0);
@@ -128,17 +136,20 @@
                 baseTargetId = chain[layeredDraggableId][layeredTargetId][baseDraggableId];
             }
 
+            // eslint-disable-next-line no-use-before-define
             checkBaseDraggable();
 
             // eslint-disable-next-line no-useless-return
             return;
 
             function checkBaseDraggable() {
-                // eslint-disable-next-line no-cond-assign
+                /* eslint-disable-next-line no-cond-assign, no-use-before-define */
                 if ((baseDraggable = getById(state, 'draggables', baseDraggableId, null, false, baseTargetId)) === null) {
+                    // eslint-disable-next-line no-use-before-define
                     createBaseDraggableOnTarget(state, baseDraggableId, baseTargetId, true, function() {
-                        // eslint-disable-next-line no-cond-assign
+                        /* eslint-disable-next-line no-cond-assign, no-use-before-define */
                         if ((baseDraggable = getById(state, 'draggables', baseDraggableId, null, false, baseTargetId)) === null) {
+                            // eslint-disable-next-line no-console
                             console.log('ERROR: Could not successfully create a base draggable on a base target.');
                         } else {
                             baseTarget = baseDraggable.onTarget;
@@ -146,6 +157,7 @@
                             if ((layeredTargetId === null) || (layeredDraggableId === null)) {
                                 processAnswerTargets(state, answerSortedByDepth, minDepth, maxDepth, depth, i + 1);
                             } else {
+                                // eslint-disable-next-line no-use-before-define
                                 checklayeredDraggable();
                             }
                         }
@@ -156,14 +168,16 @@
                     if ((layeredTargetId === null) || (layeredDraggableId === null)) {
                         processAnswerTargets(state, answerSortedByDepth, minDepth, maxDepth, depth, i + 1);
                     } else {
+                        // eslint-disable-next-line no-use-before-define
                         checklayeredDraggable();
                     }
                 }
             }
 
             function checklayeredDraggable() {
-                // eslint-disable-next-line no-cond-assign
+                /* eslint-disable-next-line no-cond-assign, no-use-before-define */
                 if ((layeredDraggable = getById(state, 'draggables', layeredDraggableId, null, false, layeredTargetId, baseDraggableId, baseTargetId)) === null) {
+                    // eslint-disable-next-line no-use-before-define
                     layeredDraggable = getById(state, 'draggables', layeredDraggableId);
                     layeredTarget = null;
                     baseDraggable.targetField.every(function(target) {
@@ -188,11 +202,13 @@
         }
 
         function createBaseDraggableOnTarget(state, draggableId, targetId, reportError, funcCallback) {
+            // eslint-disable-next-line no-var
             var draggable, target;
 
-            // eslint-disable-next-line no-cond-assign
+            /* eslint-disable-next-line no-cond-assign, no-use-before-define */
             if ((draggable = getById(state, 'draggables', draggableId)) === null) {
                 if (reportError !== false) {
+                    // eslint-disable-next-line no-console
                     console.log(
                         'ERROR: In answer there exists a '
                     + 'draggable ID "' + draggableId + '". No '
@@ -203,9 +219,10 @@
                 return false;
             }
 
-            // eslint-disable-next-line no-cond-assign
+            /* eslint-disable-next-line no-cond-assign, no-use-before-define */
             if ((target = getById(state, 'targets', targetId)) === null) {
                 if (reportError !== false) {
+                    // eslint-disable-next-line no-console
                     console.log(
                         'ERROR: In answer there exists a target '
                     + 'ID "' + targetId + '". No target with this '
@@ -222,18 +239,22 @@
         }
 
         function processAnswerPositions(state, answer) {
+            // eslint-disable-next-line no-var
             var draggableId, draggable;
 
             (function(c1) {
                 while (c1 < answer.length) {
+                    // eslint-disable-next-line no-restricted-syntax
                     for (draggableId in answer[c1]) {
+                        // eslint-disable-next-line no-prototype-builtins
                         if (answer[c1].hasOwnProperty(draggableId) === false) {
                             // eslint-disable-next-line no-continue
                             continue;
                         }
 
-                        // eslint-disable-next-line no-cond-assign
+                        /* eslint-disable-next-line no-cond-assign, no-use-before-define */
                         if ((draggable = getById(state, 'draggables', draggableId)) === null) {
+                            // eslint-disable-next-line no-console
                             console.log(
                                 'ERROR: In answer there exists a '
                             + 'draggable ID "' + draggableId + '". No '
@@ -256,6 +277,7 @@
         }
 
         function repositionDraggables(state, answer) {
+            // eslint-disable-next-line no-var
             var answerSortedByDepth, minDepth, maxDepth;
 
             answerSortedByDepth = {};
@@ -263,8 +285,10 @@
             maxDepth = 0;
 
             answer.every(function(chain) {
+                // eslint-disable-next-line no-var
                 var depth;
 
+                // eslint-disable-next-line no-use-before-define
                 depth = findDepth(chain, 0);
 
                 if (depth < minDepth) {
@@ -274,6 +298,7 @@
                     maxDepth = depth;
                 }
 
+                // eslint-disable-next-line no-prototype-builtins
                 if (answerSortedByDepth.hasOwnProperty(depth) === false) {
                     answerSortedByDepth[depth] = [];
                 }
@@ -300,6 +325,7 @@
         }
 
         function findDepth(tempObj, depth) {
+            // eslint-disable-next-line no-var
             var i;
 
             if ($.isPlainObject(tempObj) === false) {
@@ -308,7 +334,9 @@
 
             depth += 1;
 
+            // eslint-disable-next-line no-restricted-syntax
             for (i in tempObj) {
+                // eslint-disable-next-line no-prototype-builtins
                 if (tempObj.hasOwnProperty(i) === true) {
                     depth = findDepth(tempObj[i], depth);
                 }

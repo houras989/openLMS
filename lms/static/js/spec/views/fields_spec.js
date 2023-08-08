@@ -1,19 +1,23 @@
+// eslint-disable-next-line no-undef
 define(['backbone', 'jquery', 'underscore', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
     'common/js/spec_helpers/template_helpers', 'js/views/fields', 'js/spec/views/fields_helpers',
     'string_utils'],
 function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpecHelpers) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var USERNAME = 'Legolas',
         BIO = "My Name is Theon Greyjoy. I'm member of House Greyjoy";
 
     describe('edx.FieldViews', function() {
+        // eslint-disable-next-line no-var
         var requests,
             timerCallback,
             dropdownSelectClass = '.u-field-value > select',
             dropdownButtonClass = '.u-field-value > button',
             textareaLinkClass = '.u-field-value .clickable';
 
+        // eslint-disable-next-line no-var
         var fieldViewClasses = [
             FieldViews.ReadonlyFieldView,
             FieldViews.TextFieldView,
@@ -23,37 +27,48 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         ];
 
         beforeEach(function() {
+            // eslint-disable-next-line no-undef
             timerCallback = jasmine.createSpy('timerCallback');
+            // eslint-disable-next-line no-undef
             jasmine.clock().install();
         });
 
         afterEach(function() {
+            // eslint-disable-next-line no-undef
             jasmine.clock().uninstall();
         });
 
         it('updates messages correctly for all fields', function() {
+            // eslint-disable-next-line no-var
             for (var i = 0; i < fieldViewClasses.length; i++) {
+                // eslint-disable-next-line no-var
                 var fieldViewClass = fieldViewClasses[i];
+                // eslint-disable-next-line no-var
                 var fieldData = FieldViewsSpecHelpers.createFieldData(fieldViewClass, {
                     title: 'Username',
                     valueAttribute: 'username',
                     helpMessage: 'The username that you use to sign in to edX.'
                 });
 
+                // eslint-disable-next-line no-var
                 var view = new fieldViewClass(fieldData).render();
                 FieldViewsSpecHelpers.verifyMessageUpdates(view, fieldData, timerCallback);
             }
         });
 
         it('resets to help message some time after success message is set', function() {
+            // eslint-disable-next-line no-var
             for (var i = 0; i < fieldViewClasses.length; i++) {
+                // eslint-disable-next-line no-var
                 var fieldViewClass = fieldViewClasses[i];
+                // eslint-disable-next-line no-var
                 var fieldData = FieldViewsSpecHelpers.createFieldData(fieldViewClass, {
                     title: 'Username',
                     valueAttribute: 'username',
                     helpMessage: 'The username that you use to sign in to edX.'
                 });
 
+                // eslint-disable-next-line no-var
                 var view = new fieldViewClass(fieldData).render();
                 FieldViewsSpecHelpers.verifySuccessMessageReset(view, fieldData, timerCallback);
             }
@@ -62,7 +77,9 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         it('sends a PATCH request when saveAttributes is called', function() {
             requests = AjaxHelpers.requests(this);
 
+            // eslint-disable-next-line no-var
             var fieldViewClass = FieldViews.EditableFieldView;
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(fieldViewClass, {
                 title: 'Preferred Language',
                 valueAttribute: 'language',
@@ -70,12 +87,14 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
                 persistChanges: true
             });
 
+            // eslint-disable-next-line no-var
             var view = new fieldViewClass(fieldData);
             view.saveAttributes(
                 {language: 'ur'},
                 {headers: {Priority: 'Urgent'}}
             );
 
+            // eslint-disable-next-line no-var
             var request = requests[0];
             expect(request.method).toBe('PATCH');
             expect(request.requestHeaders['Content-Type']).toBe('application/merge-patch+json;charset=utf-8');
@@ -84,11 +103,13 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         });
 
         it('correctly renders and updates ReadonlyFieldView', function() {
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.ReadonlyFieldView, {
                 title: 'Username',
                 valueAttribute: 'username',
                 helpMessage: 'The username that you use to sign in to edX.'
             });
+            // eslint-disable-next-line no-var
             var view = new FieldViews.ReadonlyFieldView(fieldData).render();
 
             FieldViewsSpecHelpers.expectTitleAndMessageToContain(view, fieldData.title, fieldData.helpMessage);
@@ -101,12 +122,14 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         it('correctly renders, updates and persists changes to TextFieldView when editable == always', function() {
             requests = AjaxHelpers.requests(this);
 
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.TextFieldView, {
                 title: 'Full Name',
                 valueAttribute: 'name',
                 helpMessage: 'How are you?',
                 persistChanges: true
             });
+            // eslint-disable-next-line no-var
             var view = new FieldViews.TextFieldView(fieldData).render();
 
             FieldViewsSpecHelpers.verifyTextField(view, {
@@ -124,6 +147,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         it('correctly renders and updates DropdownFieldView when editable == never', function() {
             requests = AjaxHelpers.requests(this);
 
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.DropdownFieldView, {
                 title: 'Full Name',
                 valueAttribute: 'name',
@@ -132,7 +156,9 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
                 persistChanges: true
 
             });
+            // eslint-disable-next-line no-var
             var view = new FieldViews.DropdownFieldView(fieldData).render();
+            // eslint-disable-next-line no-var
             var readOnlyDisplayClass = '.u-field-value-readonly';
 
             FieldViewsSpecHelpers.expectDropdownSrTitleToContain(view, fieldData.title);
@@ -162,12 +188,14 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         it('correctly renders, updates and persists changes to DropdownFieldView when editable == always', function() {
             requests = AjaxHelpers.requests(this);
 
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.DropdownFieldView, {
                 title: 'Full Name',
                 valueAttribute: 'name',
                 helpMessage: 'edX full name',
                 persistChanges: true
             });
+            // eslint-disable-next-line no-var
             var view = new FieldViews.DropdownFieldView(fieldData).render();
 
             FieldViewsSpecHelpers.verifyDropDownField(view, {
@@ -185,6 +213,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         it('correctly renders, updates and persists changes to DropdownFieldView when editable == toggle', function() {
             requests = AjaxHelpers.requests(this);
 
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.DropdownFieldView, {
                 title: 'Full Name',
                 valueAttribute: 'name',
@@ -192,6 +221,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
                 editable: 'toggle',
                 persistChanges: true
             });
+            // eslint-disable-next-line no-var
             var view = new FieldViews.DropdownFieldView(fieldData).render();
 
             FieldViewsSpecHelpers.verifyDropDownField(view, {
@@ -210,8 +240,10 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         it('only shows empty option in DropdownFieldView if required is false or model value is not set', function() {
             requests = AjaxHelpers.requests(this);
 
+            // eslint-disable-next-line no-var
             var editableOptions = ['toggle', 'always'];
             _.each(editableOptions, function(editable) {
+                // eslint-disable-next-line no-var
                 var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.DropdownFieldView, {
                     title: 'Drop Down Field',
                     valueAttribute: 'drop-down',
@@ -220,6 +252,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
                     required: true,
                     persistChanges: true
                 });
+                // eslint-disable-next-line no-var
                 var view = new FieldViews.DropdownFieldView(fieldData).render();
 
                 expect(view.modelValueIsSet()).toBe(false);
@@ -242,6 +275,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         });
 
         it('correctly renders and updates TextAreaFieldView when editable == never', function() {
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.TextareaFieldView, {
                 title: 'About me',
                 valueAttribute: 'bio',
@@ -255,12 +289,14 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
 
             // set bio to empty to see the placeholder.
             fieldData.model.set({bio: ''});
+            // eslint-disable-next-line no-var
             var view = new FieldViews.TextareaFieldView(fieldData).render();
             FieldViewsSpecHelpers.expectTitleAndMessageToContain(view, fieldData.title, fieldData.helpMessage);
             expect(view.el).toHaveClass('mode-hidden');
             expect(view.fieldValue()).toBe(fieldData.placeholderValue);
             expect(view.$(textareaLinkClass).length).toBe(0);
 
+            // eslint-disable-next-line no-var
             var bio = 'Too much to tell!';
             view.model.set({bio: bio});
             expect(view.el).toHaveClass('mode-display');
@@ -273,7 +309,9 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         it('correctly renders, updates and persists changes to TextAreaFieldView when editable == toggle', function() {
             requests = AjaxHelpers.requests(this);
 
+            // eslint-disable-next-line no-var
             var valueInputSelector = '.u-field-value > textarea';
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.TextareaFieldView, {
                 title: 'About me',
                 valueAttribute: 'bio',
@@ -286,6 +324,7 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
             });
             fieldData.model.set({bio: ''});
 
+            // eslint-disable-next-line no-var
             var view = new FieldViews.TextareaFieldView(fieldData).render();
 
             FieldViewsSpecHelpers.expectTitleToContain(view, fieldData.title);
@@ -314,12 +353,14 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
         });
 
         it('correctly renders LinkFieldView', function() {
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.LinkFieldView, {
                 title: 'Title',
                 linkTitle: 'Link title',
                 helpMessage: 'Click the link.',
                 valueAttribute: 'password-reset'
             });
+            // eslint-disable-next-line no-var
             var view = new FieldViews.LinkFieldView(fieldData).render();
 
             FieldViewsSpecHelpers.expectTitleAndMessageToContain(view, fieldData.title, fieldData.helpMessage);
@@ -328,17 +369,20 @@ function(Backbone, $, _, AjaxHelpers, TemplateHelpers, FieldViews, FieldViewsSpe
 
         it("can't persist changes if persistChanges is off", function() {
             requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var fieldClasses = [
                 FieldViews.TextFieldView,
                 FieldViews.DropdownFieldView,
                 FieldViews.TextareaFieldView
             ];
+            // eslint-disable-next-line no-var
             for (var i = 0; i < fieldClasses.length; i++) {
                 FieldViewsSpecHelpers.verifyPersistence(fieldClasses[i], requests);
             }
         });
 
         it('correctly renders DateFieldView', function() {
+            // eslint-disable-next-line no-var
             var fieldData = FieldViewsSpecHelpers.createFieldData(FieldViews.DateFieldView, {
                     title: 'Title',
                     helpMessage: '',

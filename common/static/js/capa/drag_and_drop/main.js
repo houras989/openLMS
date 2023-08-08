@@ -6,6 +6,7 @@
             'js/capa/drag_and_drop/draggables', 'js/capa/drag_and_drop/targets',
             'js/capa/drag_and_drop/update_input'],
         function(State, configParser, Container, BaseImage, Scroller, Draggables, Targets, updateInput) {
+            // eslint-disable-next-line no-use-before-define
             return Main;
 
             function Main() {
@@ -16,6 +17,7 @@
                 if (!Array.prototype.every) {
                     // eslint-disable-next-line no-extend-native
                     Array.prototype.every = function(fun /* , thisp */) {
+                        // eslint-disable-next-line no-var
                         var thisp, t, len, i;
 
                         if (this == null) {
@@ -41,11 +43,13 @@
                     };
                 }
 
+                // eslint-disable-next-line no-use-before-define
                 $('.drag_and_drop_problem_div').each(processProblem);
             }
 
             // $(value) - get the element of the entire problem
             function processProblem(index, value) {
+                // eslint-disable-next-line no-var
                 var problemId, config, state;
 
                 if ($(value).attr('data-problem-processed') === 'true') {
@@ -58,6 +62,7 @@
 
                 problemId = $(value).attr('data-plain-id');
                 if (typeof problemId !== 'string') {
+                    // eslint-disable-next-line no-console
                     console.log('ERROR: Could not find the ID of the problem DOM element.');
 
                     return;
@@ -66,7 +71,9 @@
                 try {
                     config = JSON.parse($('#drag_and_drop_json_' + problemId).html());
                 } catch (err) {
+                    // eslint-disable-next-line no-console
                     console.log('ERROR: Could not parse the JSON configuration options.');
+                    // eslint-disable-next-line no-console
                     console.log('Error message: "' + err.message + '".');
 
                     return;
@@ -75,6 +82,7 @@
                 state = State(problemId);
 
                 if (configParser(state, config) !== true) {
+                    // eslint-disable-next-line no-console
                     console.log('ERROR: Could not make sense of the JSON configuration options.');
 
                     return;

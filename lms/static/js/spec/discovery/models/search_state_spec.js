@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-undef
 define([
     'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/discovery/models/search_state'
 ], function(AjaxHelpers, SearchState) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var JSON_RESPONSE = {
         total: 365,
         results: [
@@ -31,8 +33,11 @@ define([
     describe('discovery.models.SearchState', function() {
         beforeEach(function() {
             this.search = new SearchState();
+            // eslint-disable-next-line no-undef
             this.onSearch = jasmine.createSpy('onSearch');
+            // eslint-disable-next-line no-undef
             this.onNext = jasmine.createSpy('onNext');
+            // eslint-disable-next-line no-undef
             this.onError = jasmine.createSpy('onError');
             this.search.on('search', this.onSearch);
             this.search.on('next', this.onNext);
@@ -40,6 +45,7 @@ define([
         });
 
         it('perform search', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             this.search.performSearch('dummy');
             AjaxHelpers.respondWithJson(requests, JSON_RESPONSE);
@@ -51,6 +57,7 @@ define([
         });
 
         it('returns an error', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             this.search.performSearch('');
             AjaxHelpers.respondWithError(requests, 500);
@@ -58,6 +65,7 @@ define([
         });
 
         it('loads next page', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             this.search.performSearch('dummy');
             AjaxHelpers.respondWithJson(requests, JSON_RESPONSE);
@@ -67,6 +75,7 @@ define([
         });
 
         it('shows all results when there are none', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             this.search.performSearch('dummy', {modes: 'SomeOption'});
             // no results

@@ -1,9 +1,11 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'js/models/settings/course_details', 'js/views/settings/main',
     'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'common/js/spec_helpers/template_helpers'
 ], function($, CourseDetailsModel, MainView, AjaxHelpers, TemplateHelpers) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var SELECTORS = {
         entrance_exam_min_score: '#entrance-exam-minimum-score-pct',
         entrance_exam_enabled_field: '#entrance-exam-enabled',
@@ -15,6 +17,7 @@ define([
     };
 
     describe('Settings/Main', function() {
+        // eslint-disable-next-line no-var
         var urlRoot = '/course/settings/org/DemoX/Demo_Course',
             modelData = {
                 start_date: '2014-10-05T00:00:00Z',
@@ -91,6 +94,7 @@ define([
         });
 
         it('Changing the time field do not affect other time fields', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
                     // Expect to see changes just in `start_date` field.
@@ -109,12 +113,16 @@ define([
         });
 
         it('Selecting a course in pre-requisite drop down should save it as part of course details', function() {
+            /* eslint-disable-next-line camelcase, no-var */
             var pre_requisite_courses = ['test/CSS101/2012_T1'];
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
+                    // eslint-disable-next-line camelcase
                     pre_requisite_courses: pre_requisite_courses
                 });
             this.view.$el.find('#pre-requisite-course')
+                // eslint-disable-next-line camelcase
                 .val(pre_requisite_courses[0])
                 .trigger('change');
 
@@ -126,27 +134,35 @@ define([
         });
 
         it('should disallow save with an invalid minimum score percentage', function() {
+            /* eslint-disable-next-line camelcase, no-unused-vars, no-var */
             var entrance_exam_enabled_field = this.view.$(SELECTORS.entrance_exam_enabled_field),
+                // eslint-disable-next-line camelcase
                 entrance_exam_min_score = this.view.$(SELECTORS.entrance_exam_min_score);
 
             // input some invalid values.
+            // eslint-disable-next-line camelcase
             expect(entrance_exam_min_score.val('101').trigger('input')).toHaveClass('error');
+            // eslint-disable-next-line camelcase
             expect(entrance_exam_min_score.val('invalidVal').trigger('input')).toHaveClass('error');
         });
 
         it('should provide a default value for the minimum score percentage', function() {
+            /* eslint-disable-next-line camelcase, no-var */
             var entrance_exam_min_score = this.view.$(SELECTORS.entrance_exam_min_score);
 
             // if input an empty value, model should be populated with the default value.
+            // eslint-disable-next-line camelcase
             entrance_exam_min_score.val('').trigger('input');
             expect(this.model.get('entrance_exam_minimum_score_pct'))
                 .toEqual(this.model.defaults.entrance_exam_minimum_score_pct);
         });
 
         it('shows and hide the grade requirement section appropriately', function() {
+            /* eslint-disable-next-line camelcase, no-var */
             var entrance_exam_enabled_field = this.view.$(SELECTORS.entrance_exam_enabled_field);
 
             // select the entrance-exam-enabled checkbox. grade requirement section should be visible.
+            // eslint-disable-next-line camelcase
             entrance_exam_enabled_field
                 .prop('checked', true)
                 .trigger('change');
@@ -155,6 +171,7 @@ define([
             expect(this.view.$(SELECTORS.grade_requirement_div)).toBeVisible();
 
             // deselect the entrance-exam-enabled checkbox. grade requirement section should be hidden.
+            // eslint-disable-next-line camelcase
             entrance_exam_enabled_field
                 .prop('checked', false)
                 .trigger('change');
@@ -163,23 +180,32 @@ define([
         });
 
         it('should save entrance exam course details information correctly', function() {
+            /* eslint-disable-next-line camelcase, no-var */
             var entrance_exam_minimum_score_pct = '60',
+                // eslint-disable-next-line camelcase
                 entrance_exam_enabled = 'true',
+                // eslint-disable-next-line camelcase
                 entrance_exam_min_score = this.view.$(SELECTORS.entrance_exam_min_score),
+                // eslint-disable-next-line camelcase
                 entrance_exam_enabled_field = this.view.$(SELECTORS.entrance_exam_enabled_field);
 
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
+                    // eslint-disable-next-line camelcase
                     entrance_exam_enabled: entrance_exam_enabled,
+                    // eslint-disable-next-line camelcase
                     entrance_exam_minimum_score_pct: entrance_exam_minimum_score_pct
                 });
 
             // select the entrance-exam-enabled checkbox.
+            // eslint-disable-next-line camelcase
             entrance_exam_enabled_field
                 .prop('checked', true)
                 .trigger('change');
 
             // input a valid value for entrance exam minimum score.
+            // eslint-disable-next-line camelcase
             entrance_exam_min_score.val(entrance_exam_minimum_score_pct).trigger('input');
 
             this.view.saveView();
@@ -190,7 +216,9 @@ define([
         });
 
         it('should save language as part of course details', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var expectedJson = $.extend(true, {}, modelData, {
                 language: 'en'
             });
@@ -203,6 +231,7 @@ define([
         });
 
         it('should not error if about_page_editable is False', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
             // if about_page_editable is false, there is no section.course_details
             $('.course_details').remove();
@@ -212,6 +241,7 @@ define([
         });
 
         it('should save title', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
                     title: 'course title'
@@ -228,6 +258,7 @@ define([
         });
 
         it('should save subtitle', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
                     subtitle: 'course subtitle'
@@ -244,6 +275,7 @@ define([
         });
 
         it('should save duration', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
                     duration: '8 weeks'
@@ -260,6 +292,7 @@ define([
         });
 
         it('should save description', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
                     description: 'course description'
@@ -284,6 +317,7 @@ define([
         });
 
         it('can delete learning information', function() {
+            // eslint-disable-next-line no-var
             for (var i = 0; i < 2; i++) {
                 this.view.$(SELECTORS.add_course_learning_info).click();
             }
@@ -295,6 +329,7 @@ define([
 
         it('can save learning information', function() {
             expect(this.model.get('learning_info').length).toEqual(1);
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
                     learning_info: ['testing info']
@@ -327,6 +362,7 @@ define([
         });
 
         it('can save instructor information', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectedJson = $.extend(true, {}, modelData, {
                     instructor_info: {

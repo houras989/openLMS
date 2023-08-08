@@ -2,7 +2,9 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __indexOf = [].indexOf || function(item) {
+        // eslint-disable-next-line no-var
         for (var i = 0, l = this.length; i < l; i++) {
             if (i in this && this[i] === item) {
                 return i;
@@ -12,12 +14,14 @@
     };
 
     this.DiscussionViewSpecHelper = (function() {
+        // eslint-disable-next-line no-var
         var triggerVoteEvent;
 
         function DiscussionViewSpecHelper() {
         }
 
         DiscussionViewSpecHelper.makeThreadWithProps = function(props) {
+            // eslint-disable-next-line no-var
             var thread;
             thread = {
                 id: 'dummy_id',
@@ -45,15 +49,20 @@
         };
 
         DiscussionViewSpecHelper.checkVoteClasses = function(view) {
+            /* eslint-disable-next-line camelcase, no-var */
             var action_button, display_button;
             view.render();
+            // eslint-disable-next-line camelcase
             display_button = view.$el.find('.display-vote');
+            // eslint-disable-next-line camelcase
             expect(display_button.hasClass('is-hidden')).toBe(true);
+            // eslint-disable-next-line camelcase
             action_button = view.$el.find('.action-vote');
             return expect(action_button).not.toHaveAttr('style', 'display: inline; ');
         };
 
         DiscussionViewSpecHelper.expectVoteRendered = function(view, model, user) {
+            // eslint-disable-next-line no-var
             var button;
             button = view.$el.find('.action-vote');
             expect(button.hasClass('is-checked')).toBe(user.voted(model));
@@ -75,8 +84,10 @@
         };
 
         triggerVoteEvent = function(view, event, expectedUrl) {
+            // eslint-disable-next-line no-var
             var deferred;
             deferred = $.Deferred();
+            // eslint-disable-next-line no-undef
             spyOn($, 'ajax').and.callFake(function(params) {
                 expect(params.url.toString()).toEqual(expectedUrl);
                 return deferred;
@@ -88,6 +99,7 @@
         };
 
         DiscussionViewSpecHelper.checkUpvote = function(view, model, user, event) {
+            // eslint-disable-next-line no-var
             var initialVoteCount, _ref, _ref1;
             expect((_ref = model.id, __indexOf.call(user.get('upvoted_ids'), _ref) >= 0)).toBe(false);
             initialVoteCount = model.get('votes').up_count;
@@ -97,6 +109,7 @@
         };
 
         DiscussionViewSpecHelper.checkUnvote = function(view, model, user, event) {
+            // eslint-disable-next-line no-var
             var initialVoteCount, _ref;
             user.vote(model);
             expect((_ref = model.id, __indexOf.call(user.get('upvoted_ids'), _ref) >= 0)).toBe(true);
@@ -109,7 +122,9 @@
         };
 
         DiscussionViewSpecHelper.checkButtonEvents = function(view, viewFunc, buttonSelector) {
+            // eslint-disable-next-line no-var
             var button, spy;
+            // eslint-disable-next-line no-undef
             spy = spyOn(view, viewFunc);
             button = view.$el.find(buttonSelector);
             button.click();

@@ -1,10 +1,11 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
     define([
         'jquery', 'underscore', 'js/edxnotes/views/notes_factory'
     ], function($, _, NotesFactory) {
+        // eslint-disable-next-line no-var
         var parameters = {},
             visibility = null,
             getIds, createNote, cleanup, factory;
@@ -23,10 +24,12 @@
         };
 
         cleanup = function(ids) {
+            /* eslint-disable-next-line no-undef, no-var */
             var list = _.clone(Annotator._instances);
             ids = ids || [];
 
             _.each(list, function(instance) {
+                // eslint-disable-next-line no-var
                 var id = instance.element.attr('id');
                 if (!_.contains(ids, id)) {
                     instance.destroy();
@@ -74,4 +77,5 @@
             }
         };
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

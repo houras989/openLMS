@@ -10,11 +10,13 @@
      * @param {Object} i18n The object containing strings with translations.
      * @return {jquery Promise}
      */
+        // eslint-disable-next-line no-var
         var PlayPauseControl = function(state, i18n) {
             if (!(this instanceof PlayPauseControl)) {
                 return new PlayPauseControl(state, i18n);
             }
 
+            // eslint-disable-next-line no-undef
             _.bindAll(this, 'play', 'pause', 'onClick', 'destroy');
             this.state = state;
             this.state.videoPlayPauseControl = this;

@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'underscore', 'js/spec_helpers/validation_helpers', 'js/views/modals/validation_error_modal'],
     function($, _, ValidationHelpers, ValidationErrorModal) {
         describe('ValidationErrorModal', function() {
+            // eslint-disable-next-line no-var
             var modal, showModal;
 
             showModal = function(jsonContent, callback) {
@@ -26,6 +28,7 @@ define(['jquery', 'underscore', 'js/spec_helpers/validation_helpers', 'js/views/
             });
 
             it('displays none if no error given', function() {
+                // eslint-disable-next-line no-var
                 var errorObjects = [];
 
                 showModal(errorObjects);
@@ -34,6 +37,7 @@ define(['jquery', 'underscore', 'js/spec_helpers/validation_helpers', 'js/views/
             });
 
             it('correctly displays json error message objects', function() {
+                // eslint-disable-next-line no-var
                 var errorObjects = [
                     {
                         model: {display_name: 'test_attribute1'},
@@ -51,6 +55,7 @@ define(['jquery', 'underscore', 'js/spec_helpers/validation_helpers', 'js/views/
             });
 
             it('run callback when undo changes button is clicked', function(done) {
+                // eslint-disable-next-line no-var
                 var errorObjects = [
                     {
                         model: {display_name: 'test_attribute1'},
@@ -62,6 +67,7 @@ define(['jquery', 'underscore', 'js/spec_helpers/validation_helpers', 'js/views/
                     }
                 ];
 
+                // eslint-disable-next-line no-var
                 var callback = function() {
                     done();
                 };

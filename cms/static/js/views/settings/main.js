@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['js/views/validation', 'codemirror', 'underscore', 'jquery', 'jquery.ui', 'js/utils/date_utils',
     'js/models/uploads', 'js/views/uploads', 'js/views/license', 'js/models/license',
     'common/js/components/views/feedback_notification', 'jquery.timepicker', 'date', 'gettext',
@@ -5,6 +6,7 @@ define(['js/views/validation', 'codemirror', 'underscore', 'jquery', 'jquery.ui'
 function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
     FileUploadDialog, LicenseView, LicenseModel, NotificationView,
     timepicker, date, gettext, LearningInfoView, InstructorInfoView, StringUtils) {
+    // eslint-disable-next-line no-var
     var DetailsView = ValidatingView.extend({
     // Model class is CMS.Models.Settings.CourseDetails
         events: {
@@ -93,6 +95,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
             if (this.model.get('title') !== '') {
                 this.$el.find('#' + this.fieldToSelectorMap.title).val(this.model.get('title'));
             } else {
+                // eslint-disable-next-line no-var
                 var displayName = this.$el.find('#' + this.fieldToSelectorMap.title).attr('data-display-name');
                 this.$el.find('#' + this.fieldToSelectorMap.title).val(displayName);
             }
@@ -116,22 +119,28 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
             this.$el.find('#' + this.fieldToSelectorMap.certificates_display_behavior).val(this.model.get('certificates_display_behavior'));
             this.updateCertificatesDisplayBehavior();
 
+            // eslint-disable-next-line no-var
             var courseImageURL = this.model.get('course_image_asset_path');
             this.$el.find('#course-image-url').val(courseImageURL);
             this.$el.find('#course-image').attr('src', courseImageURL);
 
+            // eslint-disable-next-line no-var
             var bannerImageURL = this.model.get('banner_image_asset_path');
             this.$el.find('#banner-image-url').val(bannerImageURL);
             this.$el.find('#banner-image').attr('src', bannerImageURL);
 
+            // eslint-disable-next-line no-var
             var videoThumbnailImageURL = this.model.get('video_thumbnail_image_asset_path');
             this.$el.find('#video-thumbnail-image-url').val(videoThumbnailImageURL);
             this.$el.find('#video-thumbnail-image').attr('src', videoThumbnailImageURL);
 
+            /* eslint-disable-next-line camelcase, no-var */
             var pre_requisite_courses = this.model.get('pre_requisite_courses');
+            // eslint-disable-next-line camelcase
             pre_requisite_courses = pre_requisite_courses.length > 0 ? pre_requisite_courses : '';
             this.$el.find('#' + this.fieldToSelectorMap.pre_requisite_courses).val(pre_requisite_courses);
 
+            // eslint-disable-next-line eqeqeq
             if (this.model.get('entrance_exam_enabled') == 'true') {
                 this.$('#' + this.fieldToSelectorMap.entrance_exam_enabled).attr('checked', this.model.get('entrance_exam_enabled'));
                 this.$('.div-grade-requirements').show();
@@ -141,6 +150,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
             }
             this.$('#' + this.fieldToSelectorMap.entrance_exam_minimum_score_pct).val(this.model.get('entrance_exam_minimum_score_pct'));
 
+            // eslint-disable-next-line no-var
             var selfPacedButton = this.$('#course-pace-self-paced'),
                 instructorPacedButton = this.$('#course-pace-instructor-paced'),
                 paceToggleTip = this.$('#course-pace-toggle-tip');
@@ -195,6 +205,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
         /*
         * Add new course learning fields.
         * */
+            // eslint-disable-next-line no-var
             var existingInfo = _.clone(this.model.get('learning_info'));
             existingInfo.push('');
             this.model.set('learning_info', existingInfo);
@@ -204,6 +215,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
         /*
         * Add new course instructor fields.
         * */
+            // eslint-disable-next-line no-var
             var instructors = this.model.get('instructor_info').instructors.slice(0);
             instructors.push({
                 name: '',
@@ -216,6 +228,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
         },
 
         updateTime: function(e) {
+            // eslint-disable-next-line no-var
             var now = new Date(),
                 hours = now.getUTCHours(),
                 minutes = now.getUTCMinutes(),
@@ -230,11 +243,14 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
             $(e.currentTarget).attr('title', currentTimeText);
         },
         updateModel: function(event) {
+            // eslint-disable-next-line no-var
             var value;
+            // eslint-disable-next-line no-var
             var index = event.currentTarget.getAttribute('data-index');
             switch (event.currentTarget.id) {
             case 'course-learning-info-' + index:
                 value = $(event.currentTarget).val();
+                // eslint-disable-next-line no-var
                 var learningInfo = this.model.get('learning_info');
                 learningInfo[index] = value;
                 this.showNotificationBar();
@@ -244,6 +260,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
             case 'course-instructor-organization-' + index:
             case 'course-instructor-bio-' + index:
                 value = $(event.currentTarget).val();
+                // eslint-disable-next-line no-var
                 var field = event.currentTarget.getAttribute('data-field'),
                     instructors = this.model.get('instructor_info').instructors.slice(0);
                 instructors[index][field] = value;
@@ -283,7 +300,9 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
                 }
                 break;
             case 'pre-requisite-course':
+                /* eslint-disable-next-line no-var, no-redeclare */
                 var value = $(event.currentTarget).val();
+                // eslint-disable-next-line eqeqeq
                 value = value == '' ? [] : [value];
                 this.model.set('pre_requisite_courses', value);
                 break;
@@ -291,6 +310,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
                 // Wait for a second to load the video, avoiding egregious AJAX calls.
             case 'course-introduction-video':
                 this.clearValidationErrors();
+                // eslint-disable-next-line no-var
                 var previewsource = this.model.set_videosource($(event.currentTarget).val());
                 clearTimeout(this.videoTimer);
                 this.videoTimer = setTimeout(_.bind(function() {
@@ -324,11 +344,15 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
                 break;
             }
         },
+        // eslint-disable-next-line camelcase
         updateImageField: function(event, image_field, selector) {
             this.setField(event);
+            // eslint-disable-next-line no-var
             var url = $(event.currentTarget).val();
+            /* eslint-disable-next-line camelcase, no-var */
             var image_name = _.last(url.split('/'));
             // If image path is entered directly, we need to strip the asset prefix
+            // eslint-disable-next-line camelcase
             image_name = _.last(image_name.split('block@'));
             this.model.set(image_field, image_name);
             this.updateImagePreview(event.currentTarget, selector);
@@ -351,6 +375,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
         },
         codeMirrors: {},
         codeMirrorize: function(e, forcedTarget) {
+            // eslint-disable-next-line no-var
             var thisTarget, cachethis, field, cmTextArea;
             if (forcedTarget) {
                 thisTarget = forcedTarget;
@@ -373,7 +398,9 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
                 this.codeMirrors[thisTarget.id].on('change', function(mirror) {
                     mirror.save();
                     cachethis.clearValidationErrors();
+                    // eslint-disable-next-line no-var
                     var newVal = mirror.getValue();
+                    // eslint-disable-next-line eqeqeq
                     if (cachethis.model.get(field) != newVal) {
                         cachethis.setAndValidate(field, newVal);
                     }
@@ -391,7 +418,7 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
             if (!this.useV2CertDisplaySettings) {
                 return;
             }
-            // eslint-disable-next-line prefer-const
+            /* eslint-disable-next-line prefer-const, eqeqeq */
             let showDatepicker = this.model.get('certificates_display_behavior') == 'end_with_date';
             // eslint-disable-next-line prefer-const
             let datepicker = this.$el.find('#certificate-available-date');
@@ -412,12 +439,15 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
         revertView: function() {
         // Make sure that the CodeMirror instance has the correct
         // data from its corresponding textarea
+            // eslint-disable-next-line no-var
             var self = this;
             this.model.fetch({
                 success: function() {
                     self.render();
                     _.each(self.codeMirrors, function(mirror) {
+                        // eslint-disable-next-line no-var
                         var ele = mirror.getTextArea();
+                        // eslint-disable-next-line no-var
                         var field = self.selectorToField[ele.id];
                         mirror.setValue(self.model.get(field));
                     });
@@ -450,43 +480,58 @@ function(ValidatingView, CodeMirror, _, $, ui, DateUtils, FileUploadModel,
 
         uploadImage: function(event) {
             event.preventDefault();
+            // eslint-disable-next-line no-var
             var title = '',
                 selector = '',
+                // eslint-disable-next-line camelcase
                 image_key = '',
+                // eslint-disable-next-line camelcase
                 image_path_key = '';
             // eslint-disable-next-line default-case
             switch (event.currentTarget.id) {
             case 'upload-course-image':
                 title = gettext('Upload your course image.');
                 selector = '#course-image';
+                // eslint-disable-next-line camelcase
                 image_key = 'course_image_name';
+                // eslint-disable-next-line camelcase
                 image_path_key = 'course_image_asset_path';
                 break;
             case 'upload-banner-image':
                 title = gettext('Upload your banner image.');
                 selector = '#banner-image';
+                // eslint-disable-next-line camelcase
                 image_key = 'banner_image_name';
+                // eslint-disable-next-line camelcase
                 image_path_key = 'banner_image_asset_path';
                 break;
             case 'upload-video-thumbnail-image':
                 title = gettext('Upload your video thumbnail image.');
                 selector = '#video-thumbnail-image';
+                // eslint-disable-next-line camelcase
                 image_key = 'video_thumbnail_image_name';
+                // eslint-disable-next-line camelcase
                 image_path_key = 'video_thumbnail_image_asset_path';
                 break;
             }
 
+            // eslint-disable-next-line no-var
             var upload = new FileUploadModel({
                 title: title,
                 message: gettext('Files must be in JPEG or PNG format.'),
                 mimeTypes: ['image/jpeg', 'image/png']
             });
+            // eslint-disable-next-line no-var
             var self = this;
+            // eslint-disable-next-line no-var
             var modal = new FileUploadDialog({
                 model: upload,
                 onSuccess: function(response) {
+                    // eslint-disable-next-line no-var
                     var options = {};
+                    // eslint-disable-next-line camelcase
                     options[image_key] = response.asset.display_name;
+                    // eslint-disable-next-line camelcase
                     options[image_path_key] = response.asset.url;
                     self.model.set(options);
                     self.render();

@@ -2,6 +2,7 @@
     'use strict';
 
     define(['backbone'], function(Backbone) {
+        // eslint-disable-next-line no-var
         var CourseDiscussionsSettingsModel = Backbone.Model.extend({
             idAttribute: 'id',
             defaults: {
@@ -13,4 +14,5 @@
         });
         return CourseDiscussionsSettingsModel;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

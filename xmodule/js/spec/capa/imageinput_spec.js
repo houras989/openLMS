@@ -8,14 +8,17 @@
 // eslint-disable-next-line no-shadow-restricted-names
 (function($, ImageInput, undefined) {
     describe('ImageInput', function() {
+        // eslint-disable-next-line no-var
         var state;
 
         beforeEach(function() {
+            // eslint-disable-next-line no-var
             var $el;
 
             loadFixtures('imageinput.html');
             $el = $('#imageinput_12345');
 
+            // eslint-disable-next-line no-use-before-define
             $el.append(createTestImage('cross_12345', 300, 400, 'red'));
 
             state = new ImageInput('12345');
@@ -45,9 +48,11 @@
         });
 
         it('coordinates are updated [offsetX is set]', function() {
+            // eslint-disable-next-line no-var
             var event, posX, posY, cssLeft, cssTop;
 
             // Set up of 'click' event.
+            // eslint-disable-next-line no-undef
             event = jQuery.Event(
                 'click',
                 {offsetX: 35.3, offsetY: 42.7}
@@ -58,11 +63,14 @@
             posY = event.offsetY;
 
             // Triggering 'click' event.
+            // eslint-disable-next-line no-undef
             jQuery(state.el).trigger(event);
 
             // Getting actual (new) coordinates, and testing them against the
             // expected.
+            // eslint-disable-next-line no-use-before-define
             cssLeft = stripPx(state.crossEl.css('left'));
+            // eslint-disable-next-line no-use-before-define
             cssTop = stripPx(state.crossEl.css('top'));
 
             expect(cssLeft).toBeCloseTo(posX - 15, 1);
@@ -73,10 +81,12 @@
         });
 
         it('coordinates are updated [offsetX is NOT set]', function() {
+            // eslint-disable-next-line no-var
             var offset = state.el.offset(),
                 event, posX, posY, cssLeft, cssTop;
 
             // Set up of 'click' event.
+            // eslint-disable-next-line no-undef
             event = jQuery.Event(
                 'click',
                 {
@@ -92,11 +102,14 @@
             posY = event.pageY - offset.top;
 
             // Triggering 'click' event.
+            // eslint-disable-next-line no-undef
             jQuery(state.el).trigger(event);
 
             // Getting actual (new) coordinates, and testing them against the
             // expected.
+            // eslint-disable-next-line no-use-before-define
             cssLeft = stripPx(state.crossEl.css('left'));
+            // eslint-disable-next-line no-use-before-define
             cssTop = stripPx(state.crossEl.css('top'));
 
             expect(cssLeft).toBeCloseTo(posX - 15, 1);
@@ -113,6 +126,7 @@
     // Create a simple image from a canvas. The canvas is filled by a colored
     // rectangle.
     function createTestImage(id, width, height, fillStyle) {
+        // eslint-disable-next-line no-var
         var canvas, ctx, img;
 
         canvas = document.createElement('canvas');

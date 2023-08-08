@@ -1,6 +1,7 @@
 /**
  * Course import-related js.
  */
+// eslint-disable-next-line no-undef
 define(
     ['jquery', 'underscore', 'gettext', 'moment', 'edx-ui-toolkit/js/utils/html-utils', 'jquery.cookie'],
     function($, _, gettext, moment, HtmlUtils) {
@@ -8,8 +9,10 @@ define(
 
         /** ******** Private properties *************************************** */
 
+        // eslint-disable-next-line no-var
         var COOKIE_NAME = 'lastimportupload';
 
+        // eslint-disable-next-line no-var
         var STAGE = {
             UPLOADING: 0,
             UNPACKING: 1,
@@ -18,6 +21,7 @@ define(
             SUCCESS: 4
         };
 
+        // eslint-disable-next-line no-var
         var STATE = {
             READY: 1,
             IN_PROGRESS: 2,
@@ -25,16 +29,22 @@ define(
             ERROR: 4
         };
 
+        // eslint-disable-next-line no-var
         var current = {stage: 0, state: STATE.READY};
+        // eslint-disable-next-line no-var
         var deferred = null;
+        // eslint-disable-next-line no-var
         var file = {name: null, url: null};
+        // eslint-disable-next-line no-var
         var timeout = {id: null, delay: 3000};
+        // eslint-disable-next-line no-var
         var $dom = {
             stages: $('ol.status-progress').children(),
             successStage: $('.item-progresspoint-success'),
             wrapper: $('div.wrapper-status')
         };
 
+        // eslint-disable-next-line no-var
         var CourseImport;
 
         /** ******** Private functions **************************************** */
@@ -44,6 +54,7 @@ define(
          * during the process the import
          *
          */
+        // eslint-disable-next-line no-var
         var destroyEventListeners = function() {
             $(window).off('beforeunload.import');
         };
@@ -52,6 +63,7 @@ define(
          * Makes Import feedback status list visible
          *
          */
+        // eslint-disable-next-line no-var
         var displayFeedbackList = function() {
             $dom.wrapper.removeClass('is-hidden');
         };
@@ -60,6 +72,7 @@ define(
          * Initializes the event listeners
          *
          */
+        // eslint-disable-next-line no-var
         var initEventListeners = function() {
             $(window).on('beforeunload.import', function() { // eslint-disable-line consistent-return
                 if (current.stage < STAGE.UNPACKING) {
@@ -73,6 +86,7 @@ define(
          *
          * @param {boolean} [completed=false] If the import has been completed or not
          */
+        // eslint-disable-next-line no-var
         var storeImport = function(completed) {
             $.cookie(COOKIE_NAME, JSON.stringify({
                 file: file,
@@ -87,8 +101,11 @@ define(
          * @param {string} [currStageMsg=''] The message to show on the
          *   current stage (for now only in case of error)
          */
+        // eslint-disable-next-line no-var
         var updateFeedbackList = function(currStageMsg) {
+            // eslint-disable-next-line no-var
             var $checkmark, $curr, $prev, $next;
+            // eslint-disable-next-line no-var
             var date, stageMsg, successUnix, time;
 
             $checkmark = $dom.successStage.find('.icon');
@@ -188,6 +205,7 @@ define(
          * @param {string} msg Error message to display.
          * @param {int} [stage=current.stage] Stage of import process at which error occurred.
          */
+        // eslint-disable-next-line no-var
         var error = function(msg, stage) {
             current.stage = Math.abs(stage || current.stage); // Could be negative
             current.state = STATE.ERROR;
@@ -205,6 +223,7 @@ define(
          * If it wasn't already, marks the stored import as "completed",
          * and updates its date timestamp
          */
+        // eslint-disable-next-line no-var
         var success = function() {
             current.state = STATE.SUCCESS;
 

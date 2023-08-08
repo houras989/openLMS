@@ -2,8 +2,10 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -21,9 +23,11 @@
 
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.NewPostView = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(NewPostView, _super);
 
             function NewPostView() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.updateStyles = function() {
                     return NewPostView.prototype.updateStyles.apply(self, arguments);
@@ -35,6 +39,7 @@
             }
 
             NewPostView.prototype.initialize = function(options) {
+                // eslint-disable-next-line no-var
                 var _ref;
                 this.mode = options.mode || 'inline';
                 this.startHeader = options.startHeader;
@@ -50,6 +55,7 @@
             };
 
             NewPostView.prototype.render = function() {
+                // eslint-disable-next-line no-var
                 var context,
                     threadTypeTemplate;
                 context = _.clone(this.course_settings.attributes);
@@ -102,6 +108,7 @@
             };
 
             NewPostView.prototype.getGroupOptions = function() {
+                // eslint-disable-next-line no-var
                 var userGroupId;
                 if (this.course_settings.get('is_discussion_division_enabled') && DiscussionUtil.isPrivilegedUser()) {
                     userGroupId = $('#discussion-container').data('user-group-id');
@@ -118,8 +125,11 @@
             };
 
             NewPostView.prototype.getGroupName = function() {
+                // eslint-disable-next-line no-var
                 var userGroupId;
+                // eslint-disable-next-line no-var
                 var group;
+                // eslint-disable-next-line no-var
                 var groupName = null;
                 if (this.course_settings.get('is_discussion_division_enabled')) {
                     userGroupId = $('#discussion-container').data('user-group-id');
@@ -164,8 +174,11 @@
             };
 
             NewPostView.prototype.updateVisibilityMessage = function($target, forceDivided) {
+                // eslint-disable-next-line no-var
                 var $visEl = $('#wrapper-visibility-message');
+                // eslint-disable-next-line no-var
                 var visTemplate = edx.HtmlUtils.template($('#new-post-visibility-template').html());
+                // eslint-disable-next-line no-var
                 var groupName = null;
                 if (($target && $target.data('divided')) || forceDivided) {
                     groupName = this.group_name;
@@ -175,6 +188,7 @@
             };
 
             NewPostView.prototype.postOptionChange = function(event) {
+                // eslint-disable-next-line no-var
                 var $optionElem, $target;
                 $target = $(event.target);
                 $optionElem = $target.closest('.post-option');
@@ -186,6 +200,7 @@
             };
 
             NewPostView.prototype.createPost = function(event) {
+                // eslint-disable-next-line no-var
                 var anonymous, anonymousToPeers, body, follow, group, threadType, title, topicId, url,
                     self = this;
                 event.preventDefault();
@@ -216,6 +231,7 @@
                     },
                     error: DiscussionUtil.formErrorHandler(this.$('.post-errors')),
                     success: function(response) {
+                        // eslint-disable-next-line no-var
                         var thread, discussionBreadcrumbsModel;
                         thread = new Thread(response.content);
                         // Update the breadcrumbs and discussion Id(s) related to current topic
@@ -235,6 +251,7 @@
             };
 
             NewPostView.prototype.formModified = function() {
+                // eslint-disable-next-line no-var
                 var postBodyHasContent = this.$('.js-post-body').find('.wmd-input').val() !== '',
                     titleHasContent = this.$('.js-post-title').val() !== '';
                 return postBodyHasContent || titleHasContent;
@@ -243,6 +260,7 @@
             NewPostView.prototype.cancel = function(event) {
                 event.preventDefault();
                 if (this.formModified()) {
+                    // eslint-disable-next-line no-restricted-globals
                     if (!confirm(gettext('Your post will be discarded.'))) { // eslint-disable-line no-alert
                         return;
                     }
@@ -252,6 +270,7 @@
             };
 
             NewPostView.prototype.resetForm = function() {
+                // eslint-disable-next-line no-var
                 var $general;
                 this.$('.forum-new-post-form')[0].reset();
                 DiscussionUtil.clearFormErrors(this.$('.post-errors'));
@@ -263,11 +282,13 @@
             };
 
             NewPostView.prototype.updateStyles = function() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 return setTimeout(function() { return self.$('.post-option-input').trigger('change'); }, 1);
             };
 
             NewPostView.prototype.groupOptionChange = function(event) {
+                // eslint-disable-next-line no-var
                 var $target = $(event.target),
                     data = $target.data();
                 this.group_name = this.$('.js-group-select option:selected').text();

@@ -1,26 +1,36 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'underscore', 'js/views/baseview', 'js/utils/handle_iframe_binding', 'sinon'],
     function($, _, BaseView, IframeBinding, sinon) {
         describe('BaseView', function() {
+            // eslint-disable-next-line no-var
             var baseViewPrototype;
 
             describe('BaseView rendering', function() {
+                /* eslint-disable-next-line camelcase, no-var */
                 var iframeBinding_spy;
 
                 beforeEach(function() {
                     baseViewPrototype = BaseView.prototype;
+                    // eslint-disable-next-line camelcase
                     iframeBinding_spy = sinon.spy(IframeBinding, 'iframeBinding');
 
+                    // eslint-disable-next-line no-undef
                     spyOn(baseViewPrototype, 'initialize');
+                    // eslint-disable-next-line no-undef
                     spyOn(baseViewPrototype, 'beforeRender');
+                    // eslint-disable-next-line no-undef
                     spyOn(baseViewPrototype, 'render').and.callThrough();
+                    // eslint-disable-next-line no-undef
                     spyOn(baseViewPrototype, 'afterRender').and.callThrough();
                 });
 
                 afterEach(function() {
+                    // eslint-disable-next-line camelcase
                     iframeBinding_spy.restore();
                 });
 
                 it('calls before and after render functions when render of baseview is called', function() {
+                    // eslint-disable-next-line no-var
                     var baseView = new BaseView();
                     baseView.render();
 
@@ -31,19 +41,24 @@ define(['jquery', 'underscore', 'js/views/baseview', 'js/utils/handle_iframe_bin
                 });
 
                 it('calls iframeBinding function when afterRender of baseview is called', function() {
+                    // eslint-disable-next-line no-var
                     var baseView = new BaseView();
                     baseView.render();
                     expect(baseViewPrototype.afterRender).toHaveBeenCalled();
+                    // eslint-disable-next-line camelcase
                     expect(iframeBinding_spy.called).toEqual(true);
 
                     // check calls count of iframeBinding function
+                    // eslint-disable-next-line camelcase
                     expect(iframeBinding_spy.callCount).toBe(1);
                     IframeBinding.iframeBinding();
+                    // eslint-disable-next-line camelcase
                     expect(iframeBinding_spy.callCount).toBe(2);
                 });
             });
 
             describe('Expand/Collapse', function() {
+                // eslint-disable-next-line no-var
                 var view, MockCollapsibleViewClass;
 
                 MockCollapsibleViewClass = BaseView.extend({

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'common/js/spec_helpers/template_helpers',
     'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/spec/edxnotes/helpers',
@@ -6,6 +7,7 @@ define([
     'use strict';
 
     describe('EdxNotes NotesPage', function() {
+        // eslint-disable-next-line no-var
         var notes = Helpers.getDefaultNotes();
 
         beforeEach(function() {
@@ -17,6 +19,7 @@ define([
         });
 
         it('should be displayed properly', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 tab;
 

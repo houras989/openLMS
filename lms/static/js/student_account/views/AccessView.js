@@ -132,6 +132,7 @@
             },
 
             loadForm: function(type) {
+                // eslint-disable-next-line no-var
                 var loadFunc;
                 if (type === 'reset') {
                     loadFunc = _.bind(this.load.login, this);
@@ -143,10 +144,12 @@
 
             load: {
                 login: function(data) {
+                    // eslint-disable-next-line no-var
                     var model = new LoginModel({}, {
                         method: data.method,
                         url: data.submit_url
                     });
+                    // eslint-disable-next-line no-var
                     var isTpaSaml = this.thirdPartyAuth && this.thirdPartyAuth.finishAuthUrl
                         ? this.thirdPartyAuth.finishAuthUrl.indexOf('tpa-saml') >= 0 : false;
 
@@ -174,6 +177,7 @@
                     this.listenTo(this.subview.login, 'password-help', this.resetPassword);
 
                     // Listen for 'auth-complete' event so we can enroll/redirect the user appropriately.
+                    // eslint-disable-next-line eqeqeq
                     if (this.isEnterpriseEnable == true && !isTpaSaml) {
                         this.listenTo(this.subview.login, 'auth-complete', this.loginComplete);
                     } else {
@@ -198,6 +202,7 @@
                 },
 
                 register: function(data) {
+                    // eslint-disable-next-line no-var
                     var model = new RegisterModel({}, {
                         method: data.method,
                         url: data.submit_url,
@@ -218,6 +223,7 @@
                     this.listenTo(this.subview.register, 'auth-complete', this.authComplete);
                 },
 
+                // eslint-disable-next-line no-unused-vars
                 institution_login: function(unused) {
                     this.subview.institutionLogin = new InstitutionLoginView({
                         thirdPartyAuth: this.thirdPartyAuth,
@@ -228,6 +234,7 @@
                     this.subview.institutionLogin.render();
                 },
 
+                // eslint-disable-next-line no-unused-vars
                 hinted_login: function(unused) {
                     this.subview.hintedLogin = new HintedLoginView({
                         thirdPartyAuth: this.thirdPartyAuth,
@@ -240,6 +247,7 @@
             },
 
             passwordEmailSent: function() {
+                // eslint-disable-next-line no-var
                 var $loginAnchorElement = $('#login-form');
                 this.element.hide($(this.el).find('#password-reset-anchor'));
                 this.element.show($loginAnchorElement);
@@ -257,10 +265,12 @@
             },
 
             toggleForm: function(e) {
+                // eslint-disable-next-line no-var
                 var type = $(e.currentTarget).data('type'),
                     $form = $('#' + type + '-form'),
                     scrollX = window.scrollX,
                     scrollY = window.scrollY,
+                    // eslint-disable-next-line no-undef
                     queryParams = url('?'),
                     queryStr = queryParams.length > 0 ? '?' + queryParams : '';
 
@@ -271,6 +281,7 @@
                 });
 
                 // Load the form. Institution login is always refreshed since it changes based on the previous form.
+                // eslint-disable-next-line eqeqeq
                 if (!this.form.isLoaded($form) || type == 'institution_login') {
                     // We need a special case for loading reset form as there is mismatch of form id
                     // value ie 'password-reset' vs load function name ie 'reset'
@@ -286,9 +297,11 @@
                 this.element.show($form);
 
                 // Update url without reloading page
+                // eslint-disable-next-line eqeqeq
                 if (type != 'institution_login' && type != 'reset') {
                     History.pushState(null, document.title, '/' + type + queryStr);
                 }
+                // eslint-disable-next-line no-undef
                 analytics.page('login_and_registration', type);
 
                 // Focus on the form
@@ -366,4 +379,5 @@
             }
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

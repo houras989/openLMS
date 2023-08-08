@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/spec/edxnotes/helpers',
     'annotator_1.2.9', 'logger', 'js/edxnotes/views/notes_factory'
@@ -5,6 +6,7 @@ define([
     'use strict';
 
     describe('EdxNotes Events Plugin', function() {
+        // eslint-disable-next-line no-var
         var note = {
                 user: 'user-123',
                 id: 'note-123',
@@ -28,6 +30,7 @@ define([
                     eventStringLimit: 300
                 }
             );
+            // eslint-disable-next-line no-undef
             spyOn(Logger, 'log');
         });
 
@@ -57,6 +60,7 @@ define([
         });
 
         it('should log edx.course.student_notes.added event properly', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 newNote = {
                     user: 'user-123',
@@ -80,6 +84,7 @@ define([
         });
 
         it('should log the edx.course.student_notes.edited event properly', function() {
+            // eslint-disable-next-line no-var
             var oldNote = note,
                 newNote = $.extend({}, note, {text: 'text-456', tags: []});
 
@@ -104,6 +109,7 @@ define([
         });
 
         it('should not log the edx.course.student_notes.edited event if the note is new', function() {
+            // eslint-disable-next-line no-var
             var oldNote = noteWithoutId,
                 newNote = $.extend({}, noteWithoutId, {text: 'text-456'});
 
@@ -135,6 +141,7 @@ define([
         });
 
         it('should truncate values of some fields', function() {
+            // eslint-disable-next-line no-var
             var oldNote = $.extend({}, note, {text: Helpers.LONG_TEXT, tags: ['review', Helpers.LONG_TEXT]}),
                 newNote = $.extend({}, note, {
                     text: Helpers.LONG_TEXT + '123',

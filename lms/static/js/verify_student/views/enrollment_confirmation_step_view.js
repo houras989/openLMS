@@ -2,6 +2,7 @@
  * View for the "enrollment confirmation" step of
  * the payment/verification flow.
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
 (function() {

@@ -5,10 +5,12 @@
  * XBlock field's value if it has been changed. If the user presses Escape, then any changes will
  * be removed and the input hidden again.
  */
+// eslint-disable-next-line no-undef
 define(['js/views/baseview', 'js/views/utils/xblock_utils', 'edx-ui-toolkit/js/utils/html-utils'],
     function(BaseView, XBlockViewUtils, HtmlUtils) {
         'use strict';
 
+        // eslint-disable-next-line no-var
         var XBlockStringFieldEditor = BaseView.extend({
             events: {
                 'click .xblock-field-value-edit': 'showInput',
@@ -31,6 +33,7 @@ define(['js/views/baseview', 'js/views/utils/xblock_utils', 'edx-ui-toolkit/js/u
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var attributes = {
                     // xss-lint: disable=javascript-escape
                     value: this.model.escape(this.fieldName),
@@ -50,6 +53,7 @@ define(['js/views/baseview', 'js/views/utils/xblock_utils', 'edx-ui-toolkit/js/u
             },
 
             onInputFocusLost: function() {
+                // eslint-disable-next-line no-var
                 var currentValue = this.model.get(this.fieldName);
                 if (currentValue === this.getInput().val()) {
                     this.hideInput();
@@ -73,6 +77,7 @@ define(['js/views/baseview', 'js/views/utils/xblock_utils', 'edx-ui-toolkit/js/u
             },
 
             onChangeField: function() {
+                // eslint-disable-next-line no-var
                 var value = this.model.get(this.fieldName);
                 this.getLabel().text(value);
                 this.getInput().val(value);
@@ -80,6 +85,7 @@ define(['js/views/baseview', 'js/views/utils/xblock_utils', 'edx-ui-toolkit/js/u
             },
 
             showInput: function(event) {
+                // eslint-disable-next-line no-var
                 var input = this.getInput();
                 event.preventDefault();
                 event.stopPropagation();
@@ -104,6 +110,7 @@ define(['js/views/baseview', 'js/views/utils/xblock_utils', 'edx-ui-toolkit/js/u
             },
 
             updateField: function() {
+                // eslint-disable-next-line no-var
                 var self = this,
                     xblockInfo = this.model,
                     newValue = this.getInput().val().trim(),
@@ -113,6 +120,7 @@ define(['js/views/baseview', 'js/views/utils/xblock_utils', 'edx-ui-toolkit/js/u
                     this.cancelInput();
                     return;
                 }
+                // eslint-disable-next-line consistent-return
                 return XBlockViewUtils.updateXBlockField(xblockInfo, this.fieldName, newValue).done(function() {
                     self.refresh();
                 });

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'annotator_1.2.9', 'js/edxnotes/views/visibility_decorator',
     'js/spec/edxnotes/helpers'
@@ -5,6 +6,7 @@ define([
     'use strict';
 
     describe('EdxNotes VisibilityDecorator', function() {
+        // eslint-disable-next-line no-var
         var params = {
             endpoint: '/test_endpoint',
             user: 'a user',
@@ -27,11 +29,14 @@ define([
         });
 
         it('can initialize Notes if it visibility equals True', function() {
+            // eslint-disable-next-line no-var
             var note = VisibilityDecorator.factory(this.wrapper, params, true);
+            // eslint-disable-next-line no-undef
             expect(note).toEqual(jasmine.any(Annotator));
         });
 
         it('does not initialize Notes if it visibility equals False', function() {
+            // eslint-disable-next-line no-var
             var note = VisibilityDecorator.factory(this.wrapper, params, false);
             expect(note).toBeNull();
         });
@@ -45,6 +50,7 @@ define([
         });
 
         it('can enable the note', function() {
+            // eslint-disable-next-line no-var
             var secondWrapper = document.getElementById('edx-notes-wrapper-456');
             VisibilityDecorator.factory(this.wrapper, params, false);
             VisibilityDecorator.factory(secondWrapper, params, false);

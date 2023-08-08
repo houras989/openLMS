@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -39,6 +39,7 @@
 
             restoreSelection: function() {
                 if (this.savedRange) {
+                    // eslint-disable-next-line no-var
                     var browserRange = new Annotator.Range.BrowserRange(this.savedRange),
                         normedRange = browserRange.normalize().limit(this.annotator.wrapper[0]);
 
@@ -47,7 +48,9 @@
                 }
             },
 
+            // eslint-disable-next-line consistent-return
             onKeyUp: function(event) {
+                // eslint-disable-next-line no-var
                 var annotator = this.annotator,
                     self = this,
                     isAnnotator, annotation, highlights, position, save, cancel, cleanup;
@@ -116,4 +119,5 @@
             }
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

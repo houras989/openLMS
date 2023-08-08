@@ -1,11 +1,15 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'backbone', 'xblock/runtime.v1', 'URI', 'gettext', 'js/utils/modal',
     'common/js/components/views/feedback_notification'],
 function($, Backbone, XBlock, URI, gettext, ModalUtils, NotificationView) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            // eslint-disable-next-line no-var
             var key;
+            // eslint-disable-next-line no-restricted-syntax
             for (key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -24,9 +28,12 @@ function($, Backbone, XBlock, URI, gettext, ModalUtils, NotificationView) {
         StudioRuntime = {};
 
     BaseRuntime.v1 = (function(_super) {
+        // eslint-disable-next-line no-use-before-define
         __extends(v1, _super);
 
+        // eslint-disable-next-line no-use-before-define
         v1.prototype.handlerUrl = function(element, handlerName, suffix, query) {
+            // eslint-disable-next-line no-var
             var uri;
             uri = URI(this.handlerPrefix)
                 .segment($(element).data('usage-id'))
@@ -43,6 +50,7 @@ function($, Backbone, XBlock, URI, gettext, ModalUtils, NotificationView) {
 
         function v1() {
             v1.__super__.constructor.call(this);
+            // eslint-disable-next-line no-undef
             this.dispatcher = _.clone(Backbone.Events);
             this.listenTo('save', this._handleSave);
             this.listenTo('cancel', this._handleCancel);
@@ -91,6 +99,7 @@ function($, Backbone, XBlock, URI, gettext, ModalUtils, NotificationView) {
         };
 
         v1.prototype._handleError = function(data) {
+            // eslint-disable-next-line no-var
             var message, title;
             message = data.message || data.msg;
             if (message) {
@@ -107,6 +116,7 @@ function($, Backbone, XBlock, URI, gettext, ModalUtils, NotificationView) {
         };
 
         v1.prototype._handleSave = function(data) {
+            // eslint-disable-next-line no-var
             var message;
             // Starting to save, so show a notification
             if (data.state === 'start') {
@@ -152,6 +162,7 @@ function($, Backbone, XBlock, URI, gettext, ModalUtils, NotificationView) {
     }(XBlock.Runtime.v1));
 
     PreviewRuntime.v1 = (function(_super) {
+        // eslint-disable-next-line no-use-before-define
         __extends(v1, _super);
 
         function v1() {
@@ -164,6 +175,7 @@ function($, Backbone, XBlock, URI, gettext, ModalUtils, NotificationView) {
     }(BaseRuntime.v1));
 
     StudioRuntime.v1 = (function(_super) {
+        // eslint-disable-next-line no-use-before-define
         __extends(v1, _super);
 
         function v1() {

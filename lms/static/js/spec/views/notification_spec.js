@@ -1,9 +1,12 @@
+// eslint-disable-next-line no-undef
 define(['backbone', 'jquery', 'js/models/notification', 'js/views/notification', 'common/js/spec_helpers/template_helpers'],
     function(Backbone, $, NotificationModel, NotificationView, TemplateHelpers) {
         describe('NotificationView', function() {
+            // eslint-disable-next-line no-var
             var createNotification, verifyTitle, verifyMessage, verifyDetails, verifyAction, notificationView;
 
             createNotification = function(modelVals) {
+                // eslint-disable-next-line no-var
                 var notificationModel = new NotificationModel(modelVals);
                 notificationView = new NotificationView({
                     model: notificationModel
@@ -21,6 +24,7 @@ define(['backbone', 'jquery', 'js/models/notification', 'js/views/notification',
             };
 
             verifyDetails = function(expectedDetails) {
+                // eslint-disable-next-line no-var
                 var details = notificationView.$('.summary-item');
                 expect(details.length).toBe(expectedDetails.length);
                 details.each(function(index) {
@@ -29,6 +33,7 @@ define(['backbone', 'jquery', 'js/models/notification', 'js/views/notification',
             };
 
             verifyAction = function(expectedActionText) {
+                // eslint-disable-next-line no-var
                 var actionButton = notificationView.$('.action-primary');
                 if (expectedActionText) {
                     expect(actionButton.text().trim()).toBe(expectedActionText);
@@ -67,6 +72,7 @@ define(['backbone', 'jquery', 'js/models/notification', 'js/views/notification',
             });
 
             it('can specify details', function() {
+                // eslint-disable-next-line no-var
                 var expectedDetails = ['detail 1', 'detail 2'];
                 createNotification({details: expectedDetails});
                 verifyDetails(expectedDetails);
@@ -88,7 +94,9 @@ define(['backbone', 'jquery', 'js/models/notification', 'js/views/notification',
             });
 
             it('triggers the callback when the action button is clicked', function() {
+                /* eslint-disable-next-line no-undef, no-var */
                 var actionCallback = jasmine.createSpy('Spy on callback');
+                // eslint-disable-next-line no-var
                 var view = createNotification({actionText: 'action text', actionCallback: actionCallback});
                 notificationView.$('button.action-primary').click();
                 expect(actionCallback).toHaveBeenCalledWith(view);

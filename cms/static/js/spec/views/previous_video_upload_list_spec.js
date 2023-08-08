@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(
     ['jquery', 'underscore', 'backbone', 'js/views/previous_video_upload_list',
         'common/js/spec_helpers/template_helpers', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers'],
@@ -5,8 +6,10 @@ define(
         'use strict';
 
         describe('PreviousVideoUploadListView', function() {
+            // eslint-disable-next-line no-var
             var videoHandlerUrl = '/videos/course-v1:org.0+course_0+Run_0',
                 render = function(numModels) {
+                    // eslint-disable-next-line no-var
                     var modelData = {
                         client_video_id: 'foo.mp4',
                         duration: 42,
@@ -15,6 +18,7 @@ define(
                         status: 'uploading',
                         transcripts: []
                     };
+                    // eslint-disable-next-line no-var
                     var collection = new Backbone.Collection(
                         _.map(
                             _.range(numModels),
@@ -25,6 +29,7 @@ define(
                             }
                         )
                     );
+                    // eslint-disable-next-line no-var
                     var view = new PreviousVideoUploadListView({
                         collection: collection,
                         videoHandlerUrl: videoHandlerUrl,
@@ -44,6 +49,7 @@ define(
             });
 
             verifyVideosInfo = function(test, confirmRemove) {
+                // eslint-disable-next-line no-var
                 var firstVideo,
                     numVideos = 5,
                     $el = render(numVideos),
@@ -85,12 +91,14 @@ define(
             };
 
             it('should render an empty collection', function() {
+                // eslint-disable-next-line no-var
                 var $el = render(0);
                 expect($el.find('.js-table-body').length).toEqual(1);
                 expect($el.find('.js-table-body .video-row').length).toEqual(0);
             });
 
             it('should render a non-empty collection', function() {
+                // eslint-disable-next-line no-var
                 var $el = render(5);
                 expect($el.find('.js-table-body').length).toEqual(1);
                 expect($el.find('.js-table-body .video-row').length).toEqual(5);

@@ -5,17 +5,21 @@ import * as Time from 'time.js';
     'use strict';
 
     describe('VideoPlayer Save State plugin', function() {
+        // eslint-disable-next-line no-var
         var state, oldOTBD;
 
         beforeEach(function() {
             oldOTBD = window.onTouchBasedDevice;
+            // eslint-disable-next-line no-undef
             window.onTouchBasedDevice = jasmine
                 .createSpy('onTouchBasedDevice')
                 .and.returnValue(null);
 
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer({
                 recordedYoutubeIsAvailable: true
             });
+            // eslint-disable-next-line no-undef
             spyOn(state.storage, 'setItem');
         });
 
@@ -29,6 +33,7 @@ import * as Time from 'time.js';
         });
 
         describe('saveState function', function() {
+            // eslint-disable-next-line no-var
             var videoPlayerCurrentTime, newCurrentTime, speed;
 
             // We make sure that `currentTime` is a float. We need to test
@@ -49,6 +54,7 @@ import * as Time from 'time.js';
             });
 
             it('data is not an object, async is true', function() {
+                // eslint-disable-next-line no-use-before-define
                 itSpec({
                     asyncVal: true,
                     speedVal: undefined,
@@ -61,6 +67,7 @@ import * as Time from 'time.js';
             });
 
             it('data contains speed, async is false', function() {
+                // eslint-disable-next-line no-use-before-define
                 itSpec({
                     asyncVal: false,
                     speedVal: speed,
@@ -75,6 +82,7 @@ import * as Time from 'time.js';
             });
 
             it('data contains float position, async is true', function() {
+                // eslint-disable-next-line no-use-before-define
                 itSpec({
                     asyncVal: true,
                     speedVal: undefined,
@@ -89,6 +97,7 @@ import * as Time from 'time.js';
             });
 
             it('data contains speed and rounded position, async is false', function() {
+                // eslint-disable-next-line no-use-before-define
                 itSpec({
                     asyncVal: false,
                     speedVal: speed,
@@ -105,6 +114,7 @@ import * as Time from 'time.js';
             });
 
             it('data contains empty object, async is true', function() {
+                // eslint-disable-next-line no-use-before-define
                 itSpec({
                     asyncVal: true,
                     speedVal: undefined,
@@ -115,6 +125,7 @@ import * as Time from 'time.js';
             });
 
             it('data contains position 0, async is true', function() {
+                // eslint-disable-next-line no-use-before-define
                 itSpec({
                     asyncVal: true,
                     speedVal: undefined,
@@ -130,6 +141,7 @@ import * as Time from 'time.js';
 
             function itSpec(value) {
                 state.config.saveStateEnabled = true;
+                // eslint-disable-next-line no-var
                 var asyncVal = value.asyncVal,
                     speedVal = value.speedVal,
                     positionVal = value.positionVal,
@@ -259,7 +271,9 @@ import * as Time from 'time.js';
         });
 
         it('can destroy itself', function() {
+            // eslint-disable-next-line no-var
             var plugin = state.videoSaveStatePlugin;
+            // eslint-disable-next-line no-undef
             spyOn($.fn, 'off').and.callThrough();
             state.videoSaveStatePlugin.destroy();
             expect(state.videoSaveStatePlugin).toBeUndefined();

@@ -2,8 +2,10 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -19,11 +21,14 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.ResponseCommentView = (function(_super) {
+            // eslint-disable-next-line no-use-before-define
             __extends(ResponseCommentView, _super);
 
             function ResponseCommentView() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.update = function() {
                     return ResponseCommentView.prototype.update.apply(self, arguments);
@@ -62,6 +67,7 @@
                 return view.delegateEvents();
             };
 
+            // eslint-disable-next-line consistent-return
             ResponseCommentView.prototype.renderShowView = function() {
                 if (!this.showView) {
                     if (this.editView) {
@@ -78,6 +84,7 @@
                 }
             };
 
+            // eslint-disable-next-line consistent-return
             ResponseCommentView.prototype.renderEditView = function() {
                 if (!this.editView) {
                     if (this.showView) {
@@ -96,18 +103,20 @@
             };
 
             ResponseCommentView.prototype._delete = function(event) {
+                // eslint-disable-next-line no-var
                 var $elem, url,
                     self = this;
                 event.preventDefault();
                 if (!this.model.can('can_delete')) {
                     return;
                 }
-                // eslint-disable-next-line no-alert
+                /* eslint-disable-next-line no-alert, no-restricted-globals */
                 if (!confirm(gettext('Are you sure you want to delete this comment?'))) {
                     return;
                 }
                 url = this.model.urlFor('_delete');
                 $elem = $(event.target);
+                // eslint-disable-next-line consistent-return
                 return DiscussionUtil.safeAjax({
                     $elem: $elem,
                     url: url,
@@ -136,6 +145,7 @@
             };
 
             ResponseCommentView.prototype.update = function(event) {
+                // eslint-disable-next-line no-var
                 var newBody, url,
                     self = this;
                 newBody = this.editView.$('.edit-comment-body textarea').val();

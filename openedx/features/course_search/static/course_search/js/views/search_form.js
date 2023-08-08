@@ -23,6 +23,7 @@
             },
 
             doSearch: function(term) {
+                // eslint-disable-next-line no-var
                 var trimmedTerm;
                 if (term) {
                     trimmedTerm = term.trim();
@@ -65,4 +66,5 @@
             }
         });
     });
+// eslint-disable-next-line no-undef
 }(define || RequireJS.define));

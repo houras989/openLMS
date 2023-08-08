@@ -20,6 +20,7 @@
                 },
 
                 url: function() {
+                    // eslint-disable-next-line no-var
                     var url = '/certificates/search?user=' + this.userFilter;
                     if (this.courseFilter) {
                         url += '&course_id=' + this.courseFilter;
@@ -28,4 +29,5 @@
                 }
             });
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

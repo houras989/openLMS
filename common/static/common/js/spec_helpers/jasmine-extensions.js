@@ -11,6 +11,7 @@
 //    jQuery has been loaded, we set these matchers up again in this module.
 
 (function(root, factory) {
+    // eslint-disable-next-line no-undef
     if (typeof define === 'function' && define.amd) {
         // eslint-disable-next-line global-require
         require(['jquery'], function($) {
@@ -27,13 +28,16 @@
     // Add custom Jasmine matchers.
     beforeEach(function() {
         if (window.imagediff) {
+            // eslint-disable-next-line no-undef
             jasmine.addMatchers(window.imagediff.jasmine);
         }
 
+        // eslint-disable-next-line no-undef
         jasmine.addMatchers({
             toHaveAttrs: function() {
                 return {
                     compare: function(actual, attrs) {
+                        // eslint-disable-next-line no-var
                         var result = {},
                             element = actual;
 
@@ -43,6 +47,7 @@
                             };
                         }
 
+                        // eslint-disable-next-line no-undef
                         result.pass = _.every(attrs, function(value, name) {
                             return element.attr(name) === value;
                         });

@@ -5,6 +5,7 @@
     'use strict';
 
     define(['backbone'], function(Backbone) {
+        // eslint-disable-next-line no-var
         var Team = Backbone.Model.extend({
             defaults: {
                 id: null,
@@ -25,4 +26,5 @@
         });
         return Team;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

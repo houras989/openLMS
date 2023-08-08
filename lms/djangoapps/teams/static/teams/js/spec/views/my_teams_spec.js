@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone',
     'teams/js/collections/my_teams',
@@ -7,6 +8,7 @@ define([
 ], function(Backbone, MyTeamsCollection, MyTeamsView, TeamSpecHelpers, AjaxHelpers) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var createMyTeamsView, mockGetTopic;
     describe('My Teams View', function() {
         beforeEach(function() {
@@ -31,6 +33,7 @@ define([
         };
 
         it('can render itself', function() {
+            // eslint-disable-next-line no-var
             var teamsData = TeamSpecHelpers.createMockTeamData(1, 5),
                 teams = TeamSpecHelpers.createMockTeams({results: teamsData}),
                 myTeamsView = createMyTeamsView(teams);
@@ -38,6 +41,7 @@ define([
         });
 
         it('shows a message when the user is not a member of any teams', function() {
+            // eslint-disable-next-line no-var
             var teams = TeamSpecHelpers.createMockTeams({results: []}),
                 myTeamsView = createMyTeamsView(teams);
             TeamSpecHelpers.verifyCards(myTeamsView, []);
@@ -45,6 +49,7 @@ define([
         });
 
         it('hides pagination when the user is not a member of any teams', function() {
+            // eslint-disable-next-line no-var
             var teams = TeamSpecHelpers.createMockTeams({results: []}),
                 myTeamsView = createMyTeamsView(teams);
             TeamSpecHelpers.verifyCards(myTeamsView, []);
@@ -55,6 +60,7 @@ define([
         });
 
         it('refreshes a stale membership collection when rendering', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 teams = TeamSpecHelpers.createMockTeams({
                     results: []
@@ -84,6 +90,7 @@ define([
         });
 
         it('sets showTeamsetOnTeamCards on child Teams view', function() {
+            // eslint-disable-next-line no-var
             var teams = TeamSpecHelpers.createMockTeams({results: []}),
                 myTeamsView = createMyTeamsView(teams);
             TeamSpecHelpers.verifyCards(myTeamsView, [], true);

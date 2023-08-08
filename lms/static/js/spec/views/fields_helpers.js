@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['backbone',
     'jquery',
     'underscore',
@@ -9,13 +10,16 @@ define(['backbone',
 function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var API_URL = '/api/end_point/v1';
 
+    // eslint-disable-next-line no-var
     var USERNAME = 'Legolas',
         FULLNAME = 'Legolas Thranduil',
         EMAIL = 'legolas@woodland.middlearth',
         SELECT_OPTIONS = [['si', 'sindarin'], ['el', 'elvish'], ['na', 'nandor']];
 
+    // eslint-disable-next-line no-var
     var UserAccountModel = Backbone.Model.extend({
         idAttribute: 'username',
         defaults: {
@@ -27,7 +31,9 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         url: API_URL
     });
 
+    // eslint-disable-next-line no-var
     var createFieldData = function(fieldType, fieldData) {
+        // eslint-disable-next-line no-var
         var data = {
             model: fieldData.model || new UserAccountModel({}),
             title: fieldData.title || 'Field Title',
@@ -55,40 +61,52 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         return data;
     };
 
+    /* eslint-disable-next-line camelcase, no-var */
     var createErrorMessage = function(attribute, user_message) {
+        /* eslint-disable-next-line camelcase, no-var */
         var field_errors = {};
+        // eslint-disable-next-line camelcase
         field_errors[attribute] = {
+            // eslint-disable-next-line camelcase
             user_message: user_message
         };
         return {
+            // eslint-disable-next-line camelcase
             field_errors: field_errors
         };
     };
 
+    // eslint-disable-next-line no-var
     var expectTitleToContain = function(view, expectedTitle) {
         expect(view.$('.u-field-title').text().trim()).toContain(expectedTitle);
     };
 
+    // eslint-disable-next-line no-var
     var expectDropdownSrTitleToContain = function(view, expectedTitle) {
         expect(view.$('.u-field-value .sr').text().trim()).toContain(expectedTitle);
     };
 
+    // eslint-disable-next-line no-var
     var expectMessageContains = function(view, expectedText) {
         expect(view.$('.u-field-message').html()).toContain(expectedText);
     };
 
+    // eslint-disable-next-line no-var
     var expectTitleAndMessageToContain = function(view, expectedTitle, expectedMessage) {
         expectTitleToContain(view, expectedTitle);
         expectMessageContains(view, expectedMessage);
     };
 
+    // eslint-disable-next-line no-var
     var expectAjaxRequestWithData = function(requests, data) {
         AjaxHelpers.expectJsonRequest(
             requests, 'PATCH', API_URL, data
         );
     };
 
+    // eslint-disable-next-line no-var
     var verifyMessageUpdates = function(view, data, timerCallback) {
+        // eslint-disable-next-line no-var
         var message = 'Here to help!';
 
         view.showHelpMessage(message);
@@ -118,11 +136,13 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         expectMessageContains(view, view.indicators.error);
     };
 
+    // eslint-disable-next-line no-var
     var verifySuccessMessageReset = function(view) {
         view.showHelpMessage();
         expectMessageContains(view, view.helpMessage);
         view.showSuccessMessage();
         expectMessageContains(view, view.indicators.success);
+        // eslint-disable-next-line no-undef
         jasmine.clock().tick(7000);
         // Message gets reset
         expectMessageContains(view, view.helpMessage);
@@ -131,11 +151,14 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         expectMessageContains(view, view.indicators.success);
         // But if we change the message, it should not get reset.
         view.showHelpMessage('Do not reset this!');
+        // eslint-disable-next-line no-undef
         jasmine.clock().tick(7000);
         expectMessageContains(view, 'Do not reset this!');
     };
 
+    // eslint-disable-next-line no-var
     var verifyPersistence = function(fieldClass, requests) {
+        // eslint-disable-next-line no-var
         var fieldData = createFieldData(fieldClass, {
             title: 'Username',
             valueAttribute: 'username',
@@ -144,7 +167,9 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
             persistChanges: false,
             messagePosition: 'header'
         });
+        // eslint-disable-next-line no-var
         var view = new fieldClass(fieldData).render();
+        // eslint-disable-next-line no-var
         var valueInputSelector;
 
         // eslint-disable-next-line default-case
@@ -167,8 +192,11 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         AjaxHelpers.expectNoRequests(requests);
     };
 
+    // eslint-disable-next-line no-var
     var verifyEditableField = function(view, data, requests) {
+        /* eslint-disable-next-line camelcase, no-var */
         var request_data = {};
+        // eslint-disable-next-line no-var
         var url = view.model.url;
 
         if (data.editable === 'toggle') {
@@ -191,6 +219,7 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         expect(view.fieldValue()).toBe(data.validValue);
         expectMessageContains(view, view.indicators.inProgress);
         expectMessageContains(view, view.messages.inProgress);
+        // eslint-disable-next-line camelcase
         request_data[data.valueAttribute] = data.validValue;
         AjaxHelpers.expectJsonRequest(
             requests, 'PATCH', url, request_data
@@ -207,6 +236,7 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
 
         view.$(data.valueInputSelector).val(data.invalidValue1).change();
         view.$(data.valueInputSelector).focusout();
+        // eslint-disable-next-line camelcase
         request_data[data.valueAttribute] = data.invalidValue1;
         AjaxHelpers.expectJsonRequest(
             requests, 'PATCH', url, request_data
@@ -219,6 +249,7 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
 
         view.$(data.valueInputSelector).val(data.invalidValue2).change();
         view.$(data.valueInputSelector).focusout();
+        // eslint-disable-next-line camelcase
         request_data[data.valueAttribute] = data.invalidValue2;
         AjaxHelpers.expectJsonRequest(
             requests, 'PATCH', url, request_data
@@ -233,6 +264,7 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         view.$(data.valueInputSelector).focusout();
         // When the value in the field is changed
         expect(view.fieldValue()).toBe(data.defaultValue);
+        // eslint-disable-next-line camelcase
         request_data[data.valueAttribute] = data.defaultValue;
         AjaxHelpers.expectJsonRequest(
             requests, 'PATCH', url, request_data
@@ -246,6 +278,7 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         }
     };
 
+    // eslint-disable-next-line no-var
     var verifyReadonlyField = function(view, data) {
         if (data.editable === 'toggle') {
             expect(view.el).toHaveClass('mode-placeholder');
@@ -262,12 +295,14 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         }
     };
 
+    // eslint-disable-next-line no-var
     var verifyUneditableDropdownField = function(view, data) {
         expectTitleAndMessageToContain(view, data.title, data.helpMessage);
         expect(view.el).toHaveClass('u-field-dropdown');
         expect(view.el).toHaveClass('editable-never');
     };
 
+    // eslint-disable-next-line no-var
     var verifyTextField = function(view, data, requests) {
         verifyEditableField(view, _.extend({
             valueSelector: '.u-field-value',
@@ -276,12 +311,14 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         requests);
     };
 
+    // eslint-disable-next-line no-var
     var verifyReadonlyTextField = function(view, data) {
         verifyReadonlyField(view, _.extend({
             valueSelector: '.u-field-value'
         }, data));
     };
 
+    // eslint-disable-next-line no-var
     var verifyDropDownField = function(view, data, requests) {
         verifyEditableField(view, _.extend({
             valueSelector: '.u-field-value',
@@ -290,6 +327,7 @@ function(Backbone, $, _, HtmlUtils, AjaxHelpers, TemplateHelpers, FieldViews) {
         ), requests);
     };
 
+    // eslint-disable-next-line no-var
     var verifyReadonlyDropDownField = function(view, data) {
         verifyUneditableDropdownField(view, _.extend({
             valueSelector: '.editable-never'

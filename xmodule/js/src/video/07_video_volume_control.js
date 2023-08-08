@@ -13,11 +13,13 @@
      * @param {Object} i18n The object containing strings with translations.
      * @return {jquery Promise}
      */
+            // eslint-disable-next-line no-var
             var VolumeControl = function(state, i18n) {
                 if (!(this instanceof VolumeControl)) {
                     return new VolumeControl(state, i18n);
                 }
 
+                // eslint-disable-next-line no-undef
                 _.bindAll(this, 'keyDownHandler', 'updateVolumeSilently',
                     'onVolumeChangeHandler', 'openMenu', 'closeMenu',
                     'toggleMuteHandler', 'keyDownButtonHandler', 'destroy'
@@ -102,7 +104,9 @@
                 },
 
                 /** Initializes the module. */
+                // eslint-disable-next-line consistent-return
                 initialize: function() {
+                    // eslint-disable-next-line no-var
                     var volume;
 
                     if (this.state.isTouch) {
@@ -115,7 +119,9 @@
                     // So, we disallow focusing on iframe.
                     this.state.el.find('iframe').attr('tabindex', -1);
                     this.button = this.el.children('.control');
+                    // eslint-disable-next-line no-use-before-define
                     this.cookie = new CookieManager(this.min, this.max);
+                    // eslint-disable-next-line no-use-before-define
                     this.a11y = new Accessibility(
                         this.button, this.min, this.max, this.i18n
                     );
@@ -133,6 +139,7 @@
          * initial configuration.
          */
                 render: function() {
+                    // eslint-disable-next-line no-var
                     var container = this.el.find('.volume-slider'),
                         instructionsId = 'volume-instructions-' + this.state.id;
 
@@ -160,6 +167,7 @@
                 /** Bind any necessary function callbacks to DOM events. */
                 bindHandlers: function() {
                     this.state.el.on({
+                        // eslint-disable-next-line no-undef
                         'play.volume': _.once(this.updateVolumeSilently),
                         volumechange: this.onVolumeChangeHandler
                     });
@@ -202,6 +210,7 @@
          * triggering `volumechange` event and updating the cookie.
          * @param {Boolean} [withoutSlider] Disables updating the slider.
          */
+                // eslint-disable-next-line consistent-return
                 setVolume: function(volume, silent, withoutSlider) {
                     if (volume === this.getVolume()) {
                         return false;
@@ -222,6 +231,7 @@
 
                 /** Increases current volume level using previously defined step. */
                 increaseVolume: function() {
+                    // eslint-disable-next-line no-var
                     var volume = Math.min(this.getVolume() + this.step, this.max);
 
                     this.setVolume(volume, false, false);
@@ -231,6 +241,7 @@
 
                 /** Decreases current volume level using previously defined step. */
                 decreaseVolume: function() {
+                    // eslint-disable-next-line no-var
                     var volume = Math.max(this.getVolume() - this.step, this.min);
 
                     this.setVolume(volume, false, false);
@@ -250,6 +261,7 @@
          * @param {Number} muteStatus Flag to mute/unmute volume.
          */
                 mute: function(muteStatus) {
+                    // eslint-disable-next-line no-var
                     var volume;
 
                     this.updateMuteButtonView(muteStatus);
@@ -277,6 +289,7 @@
          * @param {Boolean} isMuted Flag to use muted or unmuted view.
          */
                 updateMuteButtonView: function(isMuted) {
+                    // eslint-disable-next-line no-var
                     var action = isMuted ? 'addClass' : 'removeClass';
 
                     this.el[action]('is-muted');
@@ -308,6 +321,7 @@
                     if (volume <= this.min) {
                         this.updateMuteButtonView(true);
                         this.state.el.off('volumechange.is-muted');
+                        // eslint-disable-next-line no-undef
                         this.state.el.on('volumechange.is-muted', _.once(function() {
                             this.updateMuteButtonView(false);
                         }.bind(this)));
@@ -341,6 +355,7 @@
                         return true;
                     }
 
+                    // eslint-disable-next-line no-var
                     var KEY = $.ui.keyCode,
                         keyCode = event.keyCode;
 
@@ -391,6 +406,7 @@
                         return true;
                     }
 
+                    // eslint-disable-next-line no-var
                     var KEY = $.ui.keyCode,
                         keyCode = event.keyCode;
 
@@ -444,6 +460,7 @@
      * @param {Number} max Maximum value for the volume slider.
      * @param {Object} i18n The object containing strings with translations.
      */
+            // eslint-disable-next-line no-var
             var Accessibility = function(button, min, max, i18n) {
                 this.min = min;
                 this.max = max;
@@ -513,6 +530,7 @@
      * @param {Number} min Minimum value for the volume slider.
      * @param {Number} max Maximum value for the volume slider.
      */
+            // eslint-disable-next-line no-var
             var CookieManager = function(min, max) {
                 this.min = min;
                 this.max = max;
@@ -525,8 +543,10 @@
          * @return {Number} Volume level.
          */
                 getVolume: function() {
+                    // eslint-disable-next-line no-var
                     var volume = parseInt($.cookie(this.cookieName), 10);
 
+                    // eslint-disable-next-line no-undef
                     if (_.isFinite(volume)) {
                         volume = Math.max(volume, this.min);
                         volume = Math.min(volume, this.max);

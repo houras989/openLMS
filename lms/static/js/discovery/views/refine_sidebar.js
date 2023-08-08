@@ -37,6 +37,7 @@
 
             renderOptions: function(options) {
                 return HtmlUtils.joinHtml.apply(this, _.map(options, function(option) {
+                    // eslint-disable-next-line no-var
                     var data = _.clone(option.attributes);
                     data.name = this.termName(data.facet, data.term);
                     return this.facetOptionTpl(data);
@@ -53,8 +54,11 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var grouped = this.collection.groupBy('facet');
+                // eslint-disable-next-line no-var
                 var htmlSnippet = HtmlUtils.joinHtml.apply(
+                    // eslint-disable-next-line consistent-return
                     this, _.map(grouped, function(options, facetKey) {
                         if (options.length > 0) {
                             return this.renderFacet(facetKey, options);
@@ -66,6 +70,7 @@
             },
 
             collapse: function(event) {
+                // eslint-disable-next-line no-var
                 var $el = $(event.currentTarget),
                     $more = $el.siblings('.show-more'),
                     $ul = $el.parent().siblings('ul');
@@ -76,6 +81,7 @@
             },
 
             expand: function(event) {
+                // eslint-disable-next-line no-var
                 var $el = $(event.currentTarget),
                     $ul = $el.parent('div').siblings('ul');
 
@@ -85,6 +91,7 @@
             },
 
             selectOption: function(event) {
+                // eslint-disable-next-line no-var
                 var $target = $(event.currentTarget);
                 this.trigger(
                     'selectOption',
@@ -96,4 +103,5 @@
 
         });
     });
+// eslint-disable-next-line no-undef
 }(define || RequireJS.define));

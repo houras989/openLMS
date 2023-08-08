@@ -3,8 +3,10 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var DataDownload, DataDownloadCertificate, PendingInstructorTasks, ReportDownloads, statusAjaxError;
 
+    // eslint-disable-next-line no-unused-vars
     statusAjaxError = function() {
         return window.InstructorDashboard.util.statusAjaxError.apply(this, arguments);
     };
@@ -19,6 +21,7 @@
 
     DataDownloadCertificate = (function() {
         function InstructorDashboardDataDownloadCertificate($container) {
+            // eslint-disable-next-line no-var
             var dataDownloadCert = this;
             this.$container = $container;
             this.$list_issued_certificate_table_btn = this.$container.find("input[name='issued-certificates-list']");
@@ -26,6 +29,7 @@
             this.$certificate_display_table = this.$container.find('.certificate-data-display-table');
             this.$certificates_request_err = this.$container.find('.issued-certificates-error.request-response-error');
             this.$list_issued_certificate_table_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadCert.$list_issued_certificate_table_btn.data('endpoint');
                 dataDownloadCert.clear_ui();
                 dataDownloadCert.$certificate_display_table.text(gettext('Loading data...'));
@@ -42,6 +46,7 @@
                         });
                     },
                     success: function(data) {
+                        // eslint-disable-next-line no-var
                         var $tablePlaceholder, columns, feature, gridData, options;
                         dataDownloadCert.clear_ui();
                         options = {
@@ -51,6 +56,7 @@
                             rowHeight: 35
                         };
                         columns = (function() {
+                            // eslint-disable-next-line no-var
                             var i, len, ref, results;
                             ref = data.queried_features;
                             results = [];
@@ -75,6 +81,7 @@
             });
             this.$list_issued_certificate_csv_btn.click(function() {
                 dataDownloadCert.clear_ui();
+                // eslint-disable-next-line no-restricted-globals
                 location.href = dataDownloadCert.$list_issued_certificate_csv_btn.data('endpoint') + '?csv=true';
             });
         }
@@ -92,6 +99,7 @@
 
     DataDownload = (function() {
         function InstructorDashboardDataDownload($section) {
+            // eslint-disable-next-line no-var
             var dataDownloadObj = this;
             this.$section = $section;
             this.$section.data('wrapper', this);
@@ -119,7 +127,9 @@
             this.instructor_tasks = new (PendingInstructorTasks())(this.$section);
             this.clear_display();
             this.$list_anon_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadObj.$list_anon_btn.data('endpoint');
+                // eslint-disable-next-line no-var
                 var errorMessage = gettext('Error generating anonymous IDs. Please try again.');
                 return $.ajax({
                     type: 'POST',
@@ -145,7 +155,9 @@
                 });
             });
             this.$proctored_exam_csv_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadObj.$proctored_exam_csv_btn.data('endpoint');
+                // eslint-disable-next-line no-var
                 var errorMessage = gettext('Error generating proctored exam results. Please try again.');
                 return $.ajax({
                     type: 'POST',
@@ -171,7 +183,9 @@
                 });
             });
             this.$survey_results_csv_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadObj.$survey_results_csv_btn.data('endpoint');
+                // eslint-disable-next-line no-var
                 var errorMessage = gettext('Error generating survey results. Please try again.');
                 return $.ajax({
                     type: 'POST',
@@ -197,7 +211,9 @@
                 });
             });
             this.$list_studs_csv_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadObj.$list_studs_csv_btn.data('endpoint') + '/csv';
+                // eslint-disable-next-line no-var
                 var errorMessage = gettext('Error generating student profile information. Please try again.');
                 dataDownloadObj.clear_display();
                 return $.ajax({
@@ -222,6 +238,7 @@
                 });
             });
             this.$list_studs_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadObj.$list_studs_btn.data('endpoint');
                 dataDownloadObj.clear_display();
                 dataDownloadObj.$download_display_table.text(gettext('Loading'));
@@ -239,6 +256,7 @@
                         });
                     },
                     success: function(data) {
+                        // eslint-disable-next-line no-var
                         var $tablePlaceholder, columns, feature, gridData, options;
                         dataDownloadObj.clear_display();
                         options = {
@@ -248,6 +266,7 @@
                             rowHeight: 35
                         };
                         columns = (function() {
+                            // eslint-disable-next-line no-var
                             var i, len, ref, results;
                             ref = data.queried_features;
                             results = [];
@@ -271,6 +290,7 @@
                 });
             });
             this.$list_problem_responses_csv_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadObj.$list_problem_responses_csv_btn.data('endpoint');
                 dataDownloadObj.clear_display();
                 return $.ajax({
@@ -297,7 +317,9 @@
                 });
             });
             this.$list_may_enroll_csv_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadObj.$list_may_enroll_csv_btn.data('endpoint');
+                // eslint-disable-next-line no-var
                 var errorMessage = gettext('Error generating list of students who may enroll. Please try again.');
                 dataDownloadObj.clear_display();
                 return $.ajax({
@@ -322,6 +344,7 @@
                 });
             });
             this.$grade_config_btn.click(function() {
+                // eslint-disable-next-line no-var
                 var url = dataDownloadObj.$grade_config_btn.data('endpoint');
                 return $.ajax({
                     type: 'POST',
@@ -344,7 +367,9 @@
                 });
             });
             this.$async_report_btn.click(function(e) {
+                // eslint-disable-next-line no-var
                 var url = $(e.target).data('endpoint');
+                // eslint-disable-next-line no-var
                 var errorMessage = '';
                 dataDownloadObj.clear_display();
                 return $.ajax({

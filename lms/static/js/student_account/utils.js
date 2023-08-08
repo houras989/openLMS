@@ -2,8 +2,10 @@
     'use strict';
 
     define(['jquery'], function($) {
+        // eslint-disable-next-line no-var
         var edxUserCookieUtils = {
             userFromEdxUserCookie: function(edxUserInfoCookieName) {
+                // eslint-disable-next-line no-var
                 var cookie, user, userCookie;
 
                 cookie = document.cookie.match('(^|;)\\s*' + edxUserInfoCookieName + '\\s*=\\s*([^;]+)');
@@ -22,4 +24,5 @@
 
         return edxUserCookieUtils;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

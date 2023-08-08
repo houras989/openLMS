@@ -14,6 +14,7 @@
          * Because of how it's structured there, extracting it is a massive task. Significant refactoring is needed
          * in order to clean up that file and make it possible to break its logic into files like this one.
          */
+        // eslint-disable-next-line no-var
         var searchView = Backbone.View.extend({
             initialize: function(options) {
                 _.extend(this, _.pick(options, ['discussionBoardView']));
@@ -30,4 +31,5 @@
 
         return searchView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

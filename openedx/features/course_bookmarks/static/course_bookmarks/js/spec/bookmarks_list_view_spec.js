@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'backbone',
     'jquery',
@@ -16,6 +17,7 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
     'use strict';
 
     describe('BookmarksListView', function() {
+        // eslint-disable-next-line no-var
         var createBookmarksView, verifyRequestParams;
 
         beforeEach(function() {
@@ -23,7 +25,9 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
             TemplateHelpers.installTemplates([
                 'templates/fields/message_banner'
             ]);
+            // eslint-disable-next-line no-undef
             spyOn(Logger, 'log').and.returnValue($.Deferred().resolve());
+            // eslint-disable-next-line no-undef
             jasmine.addMatchers({
                 toHaveBeenCalledWithUrl: function() {
                     return {
@@ -38,6 +42,7 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         });
 
         createBookmarksView = function() {
+            // eslint-disable-next-line no-var
             var bookmarksCollection = new BookmarksCollection(
                 [],
                 {
@@ -45,6 +50,7 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
                     url: BookmarkHelpers.TEST_API_URL
                 }
             );
+            // eslint-disable-next-line no-var
             var bookmarksView = new BookmarksListView({
                 $el: $('.course-bookmarks'),
                 collection: bookmarksCollection,
@@ -55,6 +61,7 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         };
 
         verifyRequestParams = function(requests, params) {
+            // eslint-disable-next-line no-var
             var urlParams = (new URI(requests[requests.length - 1].url)).query(true);
             _.each(params, function(value, key) {
                 expect(urlParams[key]).toBe(value);
@@ -62,8 +69,11 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         };
 
         it('can correctly render an empty bookmarks list', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var bookmarksView = createBookmarksView();
+            // eslint-disable-next-line no-var
             var expectedData = BookmarkHelpers.createBookmarksData({numBookmarksToCreate: 0});
 
             bookmarksView.showBookmarks();
@@ -83,8 +93,11 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         });
 
         it('has rendered bookmarked list correctly', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var bookmarksView = createBookmarksView();
+            // eslint-disable-next-line no-var
             var expectedData = BookmarkHelpers.createBookmarksData({numBookmarksToCreate: 3});
 
             bookmarksView.showBookmarks();
@@ -106,7 +119,9 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         });
 
         it('calls bookmarks list render on page_changed event', function() {
+            /* eslint-disable-next-line no-undef, no-var */
             var renderSpy = spyOn(BookmarksListView.prototype, 'render');
+            // eslint-disable-next-line no-var
             var listView = new BookmarksListView({
                 collection: new BookmarksCollection([], {
                     course_id: 'abc',
@@ -118,7 +133,9 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         });
 
         it('can go to a page number', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var expectedData = BookmarkHelpers.createBookmarksData(
                 {
                     numBookmarksToCreate: 10,
@@ -128,6 +145,7 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
                     start: 0
                 }
             );
+            // eslint-disable-next-line no-var
             var bookmarksView = createBookmarksView();
             bookmarksView.showBookmarks();
             AjaxHelpers.respondWithJson(requests, expectedData);
@@ -153,8 +171,11 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         });
 
         it('can navigate forward and backward', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var bookmarksView = createBookmarksView();
+            // eslint-disable-next-line no-var
             var expectedData = BookmarkHelpers.createBookmarksData(
                 {
                     numBookmarksToCreate: 10,
@@ -238,9 +259,13 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         });
 
         xit('can navigate to correct url', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var bookmarksView = createBookmarksView();
+            // eslint-disable-next-line no-var
             var url;
+            // eslint-disable-next-line no-undef
             spyOn(bookmarksView, 'visitBookmark');
             bookmarksView.showBookmarks();
             AjaxHelpers.respondWithJson(requests, BookmarkHelpers.createBookmarksData({numBookmarksToCreate: 1}));
@@ -251,7 +276,9 @@ function(Backbone, $, _, Logger, URI, AjaxHelpers, TemplateHelpers, MessageBanne
         });
 
         it('shows an error message for HTTP 500', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-var
             var bookmarksView = createBookmarksView();
             bookmarksView.showBookmarks();
             AjaxHelpers.respondWithError(requests);

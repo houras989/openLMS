@@ -5,8 +5,10 @@
 (function() {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            /* eslint-disable-next-line no-var, no-restricted-syntax */
             for (var key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -22,13 +24,17 @@
             return child;
         };
 
+    // eslint-disable-next-line no-undef
     if (typeof Backbone !== 'undefined' && Backbone !== null) {
         this.DiscussionThreadView = (function(_super) {
+            // eslint-disable-next-line no-var
             var INITIAL_RESPONSE_PAGE_SIZE, SUBSEQUENT_RESPONSE_PAGE_SIZE;
 
+            // eslint-disable-next-line no-use-before-define
             __extends(DiscussionThreadView, _super);
 
             function DiscussionThreadView() {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this._delete = function() {
                     return DiscussionThreadView.prototype._delete.apply(self, arguments);
@@ -78,11 +84,13 @@
             };
 
             DiscussionThreadView.prototype.initialize = function(options) {
+                // eslint-disable-next-line no-var
                 var _ref,
                     self = this;
                 DiscussionThreadView.__super__.initialize.call(this);
                 this.mode = options.mode || 'inline';
                 this.context = options.context || 'course';
+                // eslint-disable-next-line no-undef
                 this.options = _.extend({}, options);
                 this.startHeader = options.startHeader;
                 // eslint-disable-next-line no-cond-assign
@@ -91,6 +99,7 @@
                 }
                 this.readOnly = $('.discussion-module').data('read-only');
                 this.model.collection.on('reset', function(collection) {
+                    // eslint-disable-next-line no-var
                     var id;
                     id = self.model.get('id');
                     if (collection.get(id)) {
@@ -123,13 +132,16 @@
             };
 
             DiscussionThreadView.prototype.renderTemplate = function() {
+                // eslint-disable-next-line no-var
                 var $container,
                     templateData;
+                // eslint-disable-next-line no-undef
                 this.template = _.template($('#thread-template').html());
                 $container = $('#discussion-container');
                 if (!$container.length) {
                     $container = $('.discussion-module');
                 }
+                // eslint-disable-next-line no-undef
                 templateData = _.extend(this.model.toJSON(), {
                     readOnly: this.readOnly,
                     startHeader: this.startHeader + 1, // this is a child so headers should be increased
@@ -139,7 +151,9 @@
             };
 
             DiscussionThreadView.prototype.render = function() {
+                // eslint-disable-next-line no-var
                 var self = this;
+                // eslint-disable-next-line no-var
                 var $element = $(this.renderTemplate());
                 this.$el.empty();
                 this.$el.append($element);
@@ -172,6 +186,7 @@
                 }
             });
 
+            // eslint-disable-next-line consistent-return
             DiscussionThreadView.prototype.cleanup = function() {
                 // jQuery.ajax after 1.5 returns a jqXHR which doesn't implement .abort
                 // but I don't feel confident enough about what's going on here to remove this code
@@ -182,6 +197,7 @@
             };
 
             DiscussionThreadView.prototype.loadResponses = function(responseLimit, $elem, firstLoad) {
+                // eslint-disable-next-line no-var
                 var self = this;
                 this.responsesRequest = DiscussionUtil.safeAjax({
                     url: DiscussionUtil.urlFor(
@@ -242,7 +258,9 @@
                 return this.loadResponses(INITIAL_RESPONSE_PAGE_SIZE, this.$el.find('.js-response-list'), true);
             };
 
+            // eslint-disable-next-line consistent-return
             DiscussionThreadView.prototype.renderResponseCountAndPagination = function(responseTotal) {
+                // eslint-disable-next-line no-var
                 var buttonText, $loadMoreButton, responseCountFormat, responseLimit, responsePagination,
                     responsesRemaining, showingResponsesText,
                     self = this;
@@ -306,6 +324,7 @@
             };
 
             DiscussionThreadView.prototype.renderResponseToList = function(response, listSelector, options) {
+                // eslint-disable-next-line no-var
                 var view;
                 response.set('thread', this.model);
                 view = new ThreadResponseView($.extend({
@@ -334,6 +353,7 @@
             };
 
             DiscussionThreadView.prototype.scrollToAddResponse = function(event) {
+                // eslint-disable-next-line no-var
                 var form;
                 event.preventDefault();
                 form = $(event.target).parents('article.discussion-article').find('form.discussion-reply-new');
@@ -350,6 +370,7 @@
             };
 
             DiscussionThreadView.prototype.submitComment = function(event) {
+                // eslint-disable-next-line no-var
                 var body, comment, url, view;
                 event.preventDefault();
                 url = this.model.urlFor('reply');
@@ -375,6 +396,7 @@
                 });
                 this.model.addComment();
                 this.renderAddResponseButton();
+                // eslint-disable-next-line consistent-return
                 return DiscussionUtil.safeAjax({
                     $elem: $(event.target),
                     url: url,
@@ -451,12 +473,13 @@
             };
 
             DiscussionThreadView.prototype._delete = function(event) {
+                // eslint-disable-next-line no-var
                 var $elem, url;
                 url = this.model.urlFor('_delete');
                 if (!this.model.can('can_delete')) {
                     return;
                 }
-                // eslint-disable-next-line no-alert
+                /* eslint-disable-next-line no-alert, no-restricted-globals */
                 if (!confirm(gettext('Are you sure you want to delete this post?'))) {
                     return;
                 }
@@ -465,6 +488,7 @@
                 this.undelegateEvents();
                 this.$el.empty();
                 $elem = $(event.target);
+                // eslint-disable-next-line consistent-return
                 return DiscussionUtil.safeAjax({
                     $elem: $elem,
                     url: url,

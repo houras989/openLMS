@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'underscore', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers',
     'common/js/spec_helpers/template_helpers', 'common/js/spec_helpers/view_helpers',
     'js/views/modals/move_xblock_modal', 'js/models/xblock_info'],
@@ -5,6 +6,7 @@ function($, _, AjaxHelpers, TemplateHelpers, ViewHelpers, MoveXBlockModal, XBloc
     'use strict';
 
     describe('MoveXBlockModal', function() {
+        // eslint-disable-next-line no-var
         var modal,
             showModal,
             DISPLAY_NAME = 'HTML 101',
@@ -56,10 +58,12 @@ function($, _, AjaxHelpers, TemplateHelpers, ViewHelpers, MoveXBlockModal, XBloc
         });
 
         it('sends request to fetch course outline', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 renderViewsSpy;
             showModal();
             expect(modal.$el.find('.ui-loading.is-hidden')).not.toExist();
+            // eslint-disable-next-line no-undef
             renderViewsSpy = spyOn(modal, 'renderViews');
             expect(requests.length).toEqual(2);
             AjaxHelpers.expectRequest(requests, 'GET', OUTLINE_URL);
@@ -71,6 +75,7 @@ function($, _, AjaxHelpers, TemplateHelpers, ViewHelpers, MoveXBlockModal, XBloc
         });
 
         it('shows error notification when fetch course outline request fails', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 notificationSpy = ViewHelpers.createNotificationSpy('Error');
             showModal();

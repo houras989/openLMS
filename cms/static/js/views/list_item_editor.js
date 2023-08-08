@@ -9,12 +9,14 @@
  * - getSaveableModel (function): Return the model which should be
  *   saved by this view.  Note this may be a parent model.
  */
+// eslint-disable-next-line no-undef
 define([
     'js/views/baseview', 'common/js/components/utils/view_utils', 'underscore', 'gettext',
     'edx-ui-toolkit/js/utils/html-utils'
 ], function(BaseView, ViewUtils, _, gettext, HtmlUtils) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var ListItemEditorView = BaseView.extend({
         initialize: function() {
             this.listenTo(this.model, 'invalid', this.render);
@@ -22,6 +24,7 @@ define([
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var template = this.template(_.extend({
                 error: this.model.validationError || this.getSaveableModel().validationError
             }, this.getTemplateOptions())
@@ -29,6 +32,7 @@ define([
             this.$el.html(HtmlUtils.HTML(template).toString());
         },
 
+        // eslint-disable-next-line consistent-return
         setAndClose: function(event) {
             if (event && event.preventDefault) { event.preventDefault(); }
 
@@ -40,7 +44,9 @@ define([
             ViewUtils.runOperationShowingMessage(
                 gettext('Saving'),
                 function() {
+                    // eslint-disable-next-line no-var
                     var dfd = $.Deferred();
+                    // eslint-disable-next-line no-var
                     var actionableModel = this.getSaveableModel();
 
                     actionableModel.save({}, {

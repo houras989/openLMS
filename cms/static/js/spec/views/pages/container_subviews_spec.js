@@ -1,19 +1,23 @@
 import $ from 'jquery';
 import _ from 'underscore';
+// eslint-disable-next-line no-unused-vars
 import str from 'underscore.string';
 import AjaxHelpers from 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers';
 import TemplateHelpers from 'common/js/spec_helpers/template_helpers';
 import EditHelpers from 'js/spec_helpers/edit_helpers';
 import Prompt from 'common/js/components/views/feedback_prompt';
 import ContainerPage from 'js/views/pages/container';
+// eslint-disable-next-line no-unused-vars
 import ContainerSubviews from 'js/views/pages/container_subviews';
 import XBlockInfo from 'js/models/xblock_info';
 import XBlockUtils from 'js/views/utils/xblock_utils';
 import Course from 'js/models/course';
 
+// eslint-disable-next-line no-var
 var VisibilityState = XBlockUtils.VisibilityState;
 
 describe('Container Subviews', function() {
+    // eslint-disable-next-line no-var
     var model, containerPage, requests, createContainerPage, renderContainerPage,
         respondWithHtml, fetch,
         disabledCss = 'is-disabled',
@@ -98,7 +102,9 @@ describe('Container Subviews', function() {
     };
 
     describe('ViewLiveButtonController', function() {
+        // eslint-disable-next-line no-var
         var viewPublishedCss = '.button-view',
+            // eslint-disable-next-line no-unused-vars
             visibilityNoteCss = '.note-visibility';
 
         it('renders correctly for unscheduled unit', function() {
@@ -120,6 +126,7 @@ describe('Container Subviews', function() {
     });
 
     describe('Publisher', function() {
+        // eslint-disable-next-line no-var
         var headerCss = '.pub-status',
             bitPublishingCss = 'div.bit-publishing',
             liveClass = 'is-live',
@@ -166,13 +173,16 @@ describe('Container Subviews', function() {
         };
 
         beforeEach(function() {
+            // eslint-disable-next-line no-undef
             promptSpies = jasmine.stealth.spyOnConstructor(Prompt, 'Warning', ['show', 'hide']);
             promptSpies.show.and.returnValue(this.promptSpies);
         });
 
+        // eslint-disable-next-line no-undef
         afterEach(jasmine.stealth.clearSpies);
 
         it('renders correctly with private content', function() {
+            // eslint-disable-next-line no-var
             var verifyPrivateState = function() {
                 expect(containerPage.$(headerCss).text()).toContain('Draft (Never published)');
                 expect(containerPage.$(publishButtonCss)).not.toHaveClass(disabledCss);
@@ -240,6 +250,7 @@ describe('Container Subviews', function() {
         });
 
         it('can publish private content', function() {
+            // eslint-disable-next-line no-var
             var notificationSpy = EditHelpers.createNotificationSpy();
             renderContainerPage(this, mockContainerXBlockHtml);
             expect(containerPage.$(bitPublishingCss)).not.toHaveClass(hasWarningsClass);
@@ -291,9 +302,11 @@ describe('Container Subviews', function() {
         });
 
         it('can discard changes', function() {
+            // eslint-disable-next-line no-var
             var notificationSpy, renderPageSpy, numRequests;
             createContainerPage(this);
             notificationSpy = EditHelpers.createNotificationSpy();
+            // eslint-disable-next-line no-undef
             renderPageSpy = spyOn(containerPage.xblockPublisher, 'renderPage').and.callThrough();
 
             sendDiscardChangesToServer();
@@ -311,8 +324,10 @@ describe('Container Subviews', function() {
         });
 
         it('does not fetch if discard changes fails', function() {
+            /* eslint-disable-next-line no-unused-vars, no-var */
             var renderPageSpy, numRequests;
             createContainerPage(this);
+            // eslint-disable-next-line no-undef
             renderPageSpy = spyOn(containerPage.xblockPublisher, 'renderPage').and.callThrough();
 
             sendDiscardChangesToServer();
@@ -409,10 +424,12 @@ describe('Container Subviews', function() {
         });
 
         describe('Content Visibility', function() {
+            // eslint-disable-next-line no-var
             var requestStaffOnly, verifyStaffOnly, verifyExplicitStaffOnly, verifyImplicitStaffOnly, promptSpy,
                 visibilityTitleCss = '.wrapper-visibility .title';
 
             requestStaffOnly = function(isStaffOnly) {
+                // eslint-disable-next-line no-var
                 var newVisibilityState;
 
                 containerPage.$('.action-staff-lock').click();
@@ -449,6 +466,7 @@ describe('Container Subviews', function() {
             };
 
             verifyStaffOnly = function(isStaffOnly) {
+                // eslint-disable-next-line no-var
                 var visibilityCopy = containerPage.$('.wrapper-visibility .copy').text().trim();
                 if (isStaffOnly) {
                     expect(visibilityCopy).toContain('Staff Only');
@@ -582,6 +600,7 @@ describe('Container Subviews', function() {
     });
 
     describe('PublishHistory', function() {
+        // eslint-disable-next-line no-var
         var lastPublishCss = '.wrapper-last-publish';
 
         it('renders never published when the block is unpublished', function() {
@@ -610,6 +629,7 @@ describe('Container Subviews', function() {
     });
 
     describe('Message Area', function() {
+        // eslint-disable-next-line no-var
         var messageSelector = '.container-message .warning',
             warningMessage = 'Caution: The last published version of this unit is live. '
                 + 'By publishing changes you will change the student experience.';

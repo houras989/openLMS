@@ -21,6 +21,7 @@
             },
 
             sync: function(method, model) {
+                // eslint-disable-next-line no-var
                 var headers = {'X-CSRFToken': $.cookie('csrftoken')},
                     data = {},
                     analytics,
@@ -53,4 +54,5 @@
             }
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

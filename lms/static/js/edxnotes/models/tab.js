@@ -1,8 +1,9 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
     define(['underscore', 'backbone', 'js/edxnotes/utils/logger'], function(_, Backbone, NotesLogger) {
+        // eslint-disable-next-line no-var
         var TabModel = Backbone.Model.extend({
             defaults: {
                 identifier: '',
@@ -41,4 +42,5 @@
 
         return TabModel;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

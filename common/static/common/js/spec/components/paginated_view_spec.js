@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery',
     'backbone',
@@ -9,6 +10,7 @@ define([
     'use strict';
 
     describe('PaginatedView', function() {
+        // eslint-disable-next-line no-var
         var TestItemView = Backbone.View.extend({
                 className: 'test-item',
                 tagName: 'div',
@@ -37,6 +39,7 @@ define([
         beforeEach(function() {
             setFixtures('<div class="test-container"></div>');
             initialItems = generateItems(5);
+            // eslint-disable-next-line no-var
             var TestPagingCollection = PagingCollection.extend({
                 state: {
                     pageSize: 5
@@ -67,8 +70,10 @@ define([
          * @param expectedItems an array of topic objects we expect to see
          */
         function expectItems(expectedItems) {
+            // eslint-disable-next-line no-var
             var $items = testView.$('.test-item');
             _.each(expectedItems, function(item, index) {
+                // eslint-disable-next-line no-var
                 var currentItem = $items.eq(index);
                 expect(currentItem.text()).toMatch(item.text);
             });
@@ -82,8 +87,10 @@ define([
          *  - isHidden: whether the footer is expected to be visible
          */
         function expectFooter(options) {
+            // eslint-disable-next-line no-var
             var footerEl = testView.$('.test-paging-footer');
             expect(footerEl.text())
+                // eslint-disable-next-line no-useless-escape
                 .toMatch(new RegExp(options.currentPage + '\\s+out of\\s+\/\\s+' + options.totalPages));
             expect(footerEl.hasClass('hidden')).toBe(options.isHidden);
         }
@@ -112,6 +119,7 @@ define([
         });
 
         it('can change to the next page', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 newItems = generateItems(1);
             expectHeader('Showing 1-5 out of 6 total');
@@ -131,6 +139,7 @@ define([
         });
 
         it('can change to the previous page', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 previousPageItems;
             initialItems = generateItems(1);
@@ -160,7 +169,9 @@ define([
         });
 
         it('sets focus for screen readers', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this);
+            // eslint-disable-next-line no-undef
             spyOn($.fn, 'focus');
             testView.$(nextPageButtonCss).click();
             AjaxHelpers.respondWithJson(requests, {
@@ -173,6 +184,7 @@ define([
         });
 
         it('does not change on server error', function() {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 expectInitialState = function() {
                     expectHeader('Showing 1-5 out of 6 total');

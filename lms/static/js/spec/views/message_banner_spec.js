@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['backbone', 'jquery', 'underscore',
     'common/js/spec_helpers/template_helpers', 'js/views/message_banner'
 ],
@@ -11,7 +12,9 @@ function(Backbone, $, _, TemplateHelpers, MessageBannerView) {
         });
 
         it('renders message correctly', function() {
+            // eslint-disable-next-line no-var
             var messageSelector = '.message-banner';
+            // eslint-disable-next-line no-var
             var messageView = new MessageBannerView({
                 el: $(messageSelector)
             });

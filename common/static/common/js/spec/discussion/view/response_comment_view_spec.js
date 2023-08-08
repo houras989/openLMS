@@ -2,6 +2,7 @@
 (function() {
     'use strict';
 
+    /* eslint-disable-next-line camelcase, no-var */
     var $$course_id = '$$course_id';
 
     describe('ResponseCommentView', function() {
@@ -10,6 +11,7 @@
             this.comment = new Comment({
                 id: '01234567',
                 user_id: user.id,
+                // eslint-disable-next-line camelcase
                 course_id: $$course_id,
                 body: 'this is a response',
                 created_at: '2013-04-03T20:08:39Z',
@@ -21,11 +23,14 @@
                 model: this.comment,
                 el: $('#fixture-element')
             });
+            // eslint-disable-next-line no-undef
             spyOn(ResponseCommentShowView.prototype, 'convertMath');
+            // eslint-disable-next-line no-undef
             spyOn(DiscussionUtil, 'makeWmdEditor');
             return this.view.render();
         });
         describe('_delete', function() {
+            // eslint-disable-next-line no-var
             var setAjaxResult;
             beforeEach(function() {
                 this.comment.updateInfo({
@@ -35,11 +40,14 @@
                 });
                 this.event = DiscussionSpecHelper.makeEventSpy();
                 this.event.target = $('body');
+                // eslint-disable-next-line no-undef
                 spyOn(this.comment, 'remove');
+                // eslint-disable-next-line no-undef
                 spyOn(this.view.$el, 'remove');
                 $(this.event.target).prop('disabled', false);
             });
             setAjaxResult = function(isSuccess) {
+                // eslint-disable-next-line no-undef
                 return spyOn($, 'ajax').and.callFake(function(params) {
                     (isSuccess ? params.success : params.error)({});
                     return {
@@ -49,6 +57,7 @@
                 });
             };
             it('requires confirmation before deleting', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(window, 'confirm').and.returnValue(false);
                 setAjaxResult(true);
                 this.view._delete(this.event);
@@ -71,6 +80,7 @@
                     .toEqual('/courses/edX/999/test/discussion/comments/01234567/delete');
             });
             it('handles ajax errors', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(DiscussionUtil, 'discussionAlert');
                 setAjaxResult(false);
                 this.view._delete(this.event);
@@ -86,6 +96,7 @@
                         can_delete: false
                     }
                 });
+                // eslint-disable-next-line no-undef
                 spyOn(window, 'confirm');
                 setAjaxResult(true);
                 this.view._delete(this.event);
@@ -97,7 +108,9 @@
         });
         describe('renderShowView', function() {
             it('renders the show view, removes the edit view, and registers event handlers', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, '_delete');
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'edit');
                 this.view.renderEditView();
                 this.view.renderShowView();
@@ -111,7 +124,9 @@
         });
         describe('renderEditView', function() {
             it('renders the edit view, removes the show view, and registers event handlers', function() {
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'update');
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'cancelEdit');
                 this.view.renderEditView();
                 this.view.editView.trigger('comment:update', DiscussionSpecHelper.makeEventSpy());
@@ -123,8 +138,11 @@
         });
         describe('edit', function() {
             it('triggers the appropriate event and switches to the edit view', function() {
+                // eslint-disable-next-line no-var
                 var editTarget;
+                // eslint-disable-next-line no-undef
                 spyOn(this.view, 'renderEditView');
+                // eslint-disable-next-line no-undef
                 editTarget = jasmine.createSpy();
                 this.view.bind('comment:edit', editTarget);
                 this.view.edit();
@@ -138,8 +156,11 @@
             });
             describe('cancelEdit', function() {
                 it('triggers the appropriate event and switches to the show view', function() {
+                    // eslint-disable-next-line no-var
                     var cancelEditTarget;
+                    // eslint-disable-next-line no-undef
                     spyOn(this.view, 'renderShowView');
+                    // eslint-disable-next-line no-undef
                     cancelEditTarget = jasmine.createSpy();
                     this.view.bind('comment:cancel_edit', cancelEditTarget);
                     this.view.cancelEdit();
@@ -149,11 +170,14 @@
             });
             describe('update', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-var
                     var self = this;
                     this.updatedBody = 'updated body';
                     this.view.$el.find('.edit-comment-body').html($('<textarea></textarea>'));
                     this.view.$el.find('.edit-comment-body textarea').val(this.updatedBody);
+                    // eslint-disable-next-line no-undef
                     spyOn(this.view, 'cancelEdit');
+                    // eslint-disable-next-line no-undef
                     spyOn($, 'ajax').and.callFake(function(params) {
                         if (self.ajaxSucceed) {
                             params.success();
@@ -186,6 +210,7 @@
                     return expect(this.view.cancelEdit).toHaveBeenCalled();
                 });
                 it('handles AJAX errors', function() {
+                    // eslint-disable-next-line no-var
                     var originalBody;
                     originalBody = this.comment.get('body');
                     this.ajaxSucceed = false;

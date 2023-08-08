@@ -72,6 +72,7 @@
             },
 
             renderFields: function(fields, className) {
+                // eslint-disable-next-line no-var
                 var html = [],
                     i,
                     fieldTpl = this.fieldTpl;
@@ -95,6 +96,7 @@
             },
 
             buildForm: function(data) {
+                // eslint-disable-next-line no-var
                 var html = [],
                     i,
                     field,
@@ -145,6 +147,7 @@
             },
 
             render: function(html) {
+                // eslint-disable-next-line no-var
                 var fields = html || '',
                     formErrorsTitle = gettext('An error occurred.'),
                     renderHtml = _.template(this.tpl)({
@@ -185,6 +188,7 @@
             },
 
             postRender: function() {
+                // eslint-disable-next-line no-var
                 var inputs = this.$('.form-field'),
                     inputSelectors = 'input, select, textarea',
                     inputTipSelectors = ['tip error', 'tip tip-input'],
@@ -236,6 +240,7 @@
                     },
                     handleAutocomplete = function() {
                         $(inputs).each(function() {
+                            // eslint-disable-next-line no-var
                             var $input = $(this),
                                 isCheckbox = $input.attr('class').indexOf('checkbox') !== -1;
 
@@ -290,6 +295,7 @@
                     $(this).find('option:first').html('');
                 });
                 $(inputs).each(function() {
+                    // eslint-disable-next-line no-var
                     var $input = $(this),
                         isCheckbox = $input.attr('class').indexOf('checkbox') !== -1;
                     if ($input.length > 0 && !isCheckbox) {
@@ -316,11 +322,13 @@
             },
 
             doOnInputLabel: function($el, action) {
+                // eslint-disable-next-line no-var
                 var $label = this.getRequiredTextLabel($el);
                 action($label);
             },
 
             handleRequiredInputFocus: function(event) {
+                // eslint-disable-next-line no-var
                 var $el = $(event.currentTarget);
                 // Avoid rendering for required checkboxes.
                 if ($el.attr('type') !== 'checkbox') {
@@ -344,6 +352,7 @@
             },
 
             renderLiveValidations: function($el, decisions) {
+                // eslint-disable-next-line no-var
                 var $label = this.getLabel($el),
                     $requiredTextLabel = this.getRequiredTextLabel($el),
                     $icon = this.getIcon($el),
@@ -372,12 +381,16 @@
             },
 
             addValidationErrorMsgForScreenReader: function($el) {
+                /* eslint-disable-next-line camelcase, no-var */
                 var $validation_node = this.$form.find('#' + $el.attr('id') + '-validation-error');
+                // eslint-disable-next-line camelcase
                 $validation_node.find('.sr-only').text('ERROR:');
             },
 
             removeValidationErrorMsgForScreenReader: function($el) {
+                /* eslint-disable-next-line camelcase, no-var */
                 var $validation_node = this.$form.find('#' + $el.attr('id') + '-validation-error');
+                // eslint-disable-next-line camelcase
                 $validation_node.find('.sr-only').text('');
             },
 
@@ -394,6 +407,7 @@
             },
 
             clearFieldTimeout: function($el) {
+                // eslint-disable-next-line no-var
                 var timeout = this.getFieldTimeout($el);
                 if (timeout) {
                     clearTimeout(this.getFieldTimeout($el));
@@ -414,6 +428,7 @@
             },
 
             renderLiveValidationSuccess: function($el, $label, $req, $icon, $tip) {
+                // eslint-disable-next-line no-var
                 var self = this,
                     validationFadeTime = this.successfulValidationDisplaySeconds * 1000;
                 this.removeLiveValidationIndicators(
@@ -456,6 +471,7 @@
             },
 
             thirdPartyAuth: function(event) {
+                // eslint-disable-next-line no-var
                 var providerUrl = $(event.currentTarget).data('provider-url') || '';
 
                 if (providerUrl) {
@@ -479,6 +495,7 @@
                             } else {
                                 return _.map(
                                     errorList,
+                                    // eslint-disable-next-line consistent-return
                                     function(errorItem) {
                                         if (errorItem.user_message) {
                                             return StringUtils.interpolate('<li {suppressAttr} >{error}</li>', {
@@ -512,6 +529,7 @@
             },
 
             renderAuthWarning: function() {
+                // eslint-disable-next-line no-var
                 var msgPart1 = gettext('You\'ve successfully signed into %(currentProvider)s.'),
                     msgPart2 = gettext(
                         'We just need a little more information before you start learning with %(platformName)s.'
@@ -529,6 +547,7 @@
             },
 
             submitForm: function(event) { // eslint-disable-line no-unused-vars
+                // eslint-disable-next-line no-var
                 var elements = this.$form[0].elements,
                     $el,
                     i;
@@ -549,6 +568,7 @@
             },
 
             getFormData: function() {
+                // eslint-disable-next-line no-var
                 var obj = FormView.prototype.getFormData.apply(this, arguments),
                     $emailElement = this.$form.find('input[name=email]'),
                     $confirmEmail = this.$form.find('input[name=confirm_email]');
@@ -566,6 +586,7 @@
             },
 
             liveValidateHandler: function(event) {
+                // eslint-disable-next-line no-var
                 var $el = $(event.currentTarget);
                 // Until we get a back-end that can handle all available
                 // registration fields, we do some generic validation here.
@@ -583,6 +604,7 @@
             },
 
             liveValidate: function($el) {
+                // eslint-disable-next-line no-var
                 var data = {},
                     field,
                     i;
@@ -596,6 +618,7 @@
             },
 
             liveValidateCheckbox: function($checkbox) {
+                // eslint-disable-next-line no-var
                 var validationDecisions = {validation_decisions: {}},
                     decisions = validationDecisions.validation_decisions,
                     name = $checkbox.attr('name'),
@@ -606,6 +629,7 @@
             },
 
             genericLiveValidateHandler: function($el) {
+                // eslint-disable-next-line no-var
                 var elementType = $el.attr('type');
                 if (elementType === 'checkbox') {
                     // We are already validating checkboxes in a generic way.
@@ -616,6 +640,7 @@
             },
 
             genericLiveValidate: function($el) {
+                // eslint-disable-next-line no-var
                 var validationDecisions = {validation_decisions: {}},
                     decisions = validationDecisions.validation_decisions,
                     name = $el.attr('name'),
@@ -625,4 +650,5 @@
             }
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

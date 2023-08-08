@@ -3,9 +3,12 @@
 (function(URI) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) {
+            // eslint-disable-next-line no-var
             var key;
+            // eslint-disable-next-line no-restricted-syntax
             for (key in parent) {
                 if (__hasProp.call(parent, key)) {
                     child[key] = parent[key];
@@ -23,6 +26,7 @@
     this.LmsRuntime = {};
 
     this.LmsRuntime.v1 = (function(_super) {
+        // eslint-disable-next-line no-use-before-define
         __extends(v1, _super);
 
         function v1() {
@@ -30,6 +34,7 @@
         }
 
         v1.prototype.handlerUrl = function(element, handlerName, suffix, query, thirdparty) {
+            // eslint-disable-next-line no-var
             var courseId, handlerAuth, uri, usageId;
             courseId = $(element).data('course-id');
             usageId = $(element).data('usage-id');

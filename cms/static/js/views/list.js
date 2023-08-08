@@ -13,11 +13,13 @@
  * - emptyMessage (string): Text to render when the list is empty.
  * - restrictEditing (bool) : Boolean flag for hiding edit and remove options, defaults to false.
  */
+// eslint-disable-next-line no-undef
 define([
     'js/views/baseview'
 ], function(BaseView) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var ListView = BaseView.extend({
         events: {
             'click .action-add': 'onAddItem',
@@ -39,6 +41,7 @@ define([
         },
 
         render: function(model) {
+            // eslint-disable-next-line no-var
             var template = this.template({
                 itemCategoryDisplayName: this.itemCategoryDisplayName,
                 newItemMessage: this.newItemMessage,
@@ -61,6 +64,7 @@ define([
         },
 
         hideOrShowAddButton: function(shouldShow) {
+            // eslint-disable-next-line no-var
             var addButtonCss = '.action-add';
             if (this.collection.length) {
                 if (shouldShow) {
@@ -80,6 +84,7 @@ define([
         },
 
         addNewItemView: function(model) {
+            // eslint-disable-next-line no-var
             var view = this.createItemView({model: model});
 
             // If items already exist, just append one new.
@@ -94,9 +99,12 @@ define([
         },
 
         canCreateItem: function(collection) {
+            // eslint-disable-next-line no-var
             var canCreateNewItem = true;
             if (collection.length > 0) {
+                // eslint-disable-next-line no-var
                 var maxAllowed = collection.maxAllowed;
+                // eslint-disable-next-line no-undef
                 if (!_.isUndefined(maxAllowed) && collection.length >= maxAllowed) {
                     canCreateNewItem = false;
                 }

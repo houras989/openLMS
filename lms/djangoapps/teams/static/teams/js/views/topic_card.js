@@ -12,6 +12,7 @@
         'edx-ui-toolkit/js/utils/html-utils',
         'edx-ui-toolkit/js/utils/string-utils'],
     function(Backbone, _, gettext, CardView, HtmlUtils, StringUtils) {
+        // eslint-disable-next-line no-var
         var TeamCountDetailView = Backbone.View.extend({
             tagName: 'p',
             className: 'team-count',
@@ -21,11 +22,13 @@
             },
 
             render: function() {
+                // eslint-disable-next-line no-var
                 var team_count = this.model.get('team_count'); // eslint-disable-line camelcase
                 HtmlUtils.setHtml(
                     this.$el,
                     HtmlUtils.HTML(_.escape(StringUtils.interpolate(
                         ngettext('{team_count} Team', '{team_count} Teams', team_count),
+                        // eslint-disable-next-line camelcase
                         {team_count: team_count},
                         true
                     )))
@@ -35,6 +38,7 @@
             }
         });
 
+        // eslint-disable-next-line no-var
         var TopicCardView = CardView.extend({
             initialize: function() {
                 this.detailViews = [new TeamCountDetailView({model: this.model})];
@@ -53,6 +57,7 @@
             details: function() { return this.detailViews; },
             actionClass: 'action-view',
             actionContent: function() {
+                // eslint-disable-next-line no-var
                 var screenReaderText = _.escape(StringUtils.interpolate(
                     gettext('View Teams in the {topic_name} Topic'),
                     {topic_name: this.model.get('name')}, true
@@ -64,4 +69,5 @@
 
         return TopicCardView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

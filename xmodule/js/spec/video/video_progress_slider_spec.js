@@ -1,10 +1,12 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(undefined) {
     describe('VideoProgressSlider', function() {
+        // eslint-disable-next-line no-var
         var state, oldOTBD;
 
         beforeEach(function() {
             oldOTBD = window.onTouchBasedDevice;
+            // eslint-disable-next-line no-undef
             window.onTouchBasedDevice = jasmine.createSpy('onTouchBasedDevice')
                 .and.returnValue(null);
         });
@@ -19,8 +21,10 @@
         describe('constructor', function() {
             describe('on a non-touch based device', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     spyOn($.fn, 'slider').and.callThrough();
 
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer();
                 });
 
@@ -42,6 +46,7 @@
                 });
 
                 it('add ARIA attributes to time control', function() {
+                    // eslint-disable-next-line no-var
                     var $timeControl = $('div.slider > .progress-handle');
 
                     expect($timeControl).toHaveAttrs({
@@ -58,6 +63,7 @@
                 it('does not build the slider on iPhone', function() {
                     window.onTouchBasedDevice.and.returnValue(['iPhone']);
 
+                    // eslint-disable-next-line no-undef
                     state = jasmine.initializePlayer();
 
                     expect(state.videoProgressSlider).toBeUndefined();
@@ -69,6 +75,7 @@
                     it('build the slider on ' + device, function() {
                         window.onTouchBasedDevice.and.returnValue([device]);
 
+                        // eslint-disable-next-line no-undef
                         state = jasmine.initializePlayer();
 
                         expect(state.videoProgressSlider.slider).toBeDefined();
@@ -79,13 +86,16 @@
 
         describe('play', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer();
             });
 
             describe('when the slider was already built', function() {
+                // eslint-disable-next-line no-var
                 var spy;
 
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     spy = spyOn(state.videoProgressSlider, 'buildSlider');
                     spy.and.callThrough();
                     state.videoPlayer.play();
@@ -101,11 +111,13 @@
 
         describe('updatePlayTime', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer();
             });
 
             describe('when frozen', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     spyOn($.fn, 'slider').and.callThrough();
                     state.videoProgressSlider.frozen = true;
                     state.videoProgressSlider.updatePlayTime(20, 120);
@@ -118,6 +130,7 @@
 
             describe('when not frozen', function() {
                 beforeEach(function() {
+                    // eslint-disable-next-line no-undef
                     spyOn($.fn, 'slider').and.callThrough();
                     state.videoProgressSlider.frozen = false;
                     state.videoProgressSlider.updatePlayTime({
@@ -147,15 +160,19 @@
 
         describe('onSlide', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer();
 
+                // eslint-disable-next-line no-undef
                 spyOn($.fn, 'slider').and.callThrough();
+                // eslint-disable-next-line no-undef
                 spyOn(state.videoPlayer, 'onSlideSeek').and.callThrough();
             });
 
             // Disabled 12/30/13 due to flakiness in master
             xit('freeze the slider', function() {
                 state.videoProgressSlider.onSlide(
+                    // eslint-disable-next-line no-undef
                     jQuery.Event('slide'), {value: 20}
                 );
 
@@ -165,6 +182,7 @@
             // Disabled 12/30/13 due to flakiness in master
             xit('trigger seek event', function() {
                 state.videoProgressSlider.onSlide(
+                    // eslint-disable-next-line no-undef
                     jQuery.Event('slide'), {value: 20}
                 );
 
@@ -174,20 +192,25 @@
 
         describe('onStop', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 jasmine.clock().install();
 
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer();
 
+                // eslint-disable-next-line no-undef
                 spyOn(state.videoPlayer, 'onSlideSeek').and.callThrough();
             });
 
             afterEach(function() {
+                // eslint-disable-next-line no-undef
                 jasmine.clock().uninstall();
             });
 
             // Disabled 12/30/13 due to flakiness in master
             xit('freeze the slider', function() {
                 state.videoProgressSlider.onStop(
+                    // eslint-disable-next-line no-undef
                     jQuery.Event('stop'), {value: 20}
                 );
 
@@ -197,6 +220,7 @@
             // Disabled 12/30/13 due to flakiness in master
             xit('trigger seek event', function() {
                 state.videoProgressSlider.onStop(
+                    // eslint-disable-next-line no-undef
                     jQuery.Event('stop'), {value: 20}
                 );
 
@@ -206,9 +230,11 @@
             // Disabled 12/30/13 due to flakiness in master
             xit('set timeout to unfreeze the slider', function() {
                 state.videoProgressSlider.onStop(
+                    // eslint-disable-next-line no-undef
                     jQuery.Event('stop'), {value: 20}
                 );
 
+                // eslint-disable-next-line no-undef
                 jasmine.clock().tick(200);
 
                 expect(state.videoProgressSlider.frozen).toBeFalsy();
@@ -216,6 +242,7 @@
         });
 
         it('getRangeParams', function() {
+            // eslint-disable-next-line no-var
             var testCases = [
                 {
                     startTime: 10,
@@ -234,9 +261,11 @@
                 }
             ];
 
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer();
 
             $.each(testCases, function(index, testCase) {
+                // eslint-disable-next-line no-var
                 var step = 100 / testCase.duration,
                     left = testCase.startTime * step,
                     width = testCase.endTime * step - left,
@@ -254,9 +283,11 @@
 
         describe('notifyThroughHandleEnd', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 state = jasmine.initializePlayer();
 
                 spyOnEvent(state.videoProgressSlider.handle, 'focus');
+                // eslint-disable-next-line no-undef
                 spyOn(state.videoProgressSlider, 'notifyThroughHandleEnd')
                     .and.callThrough();
             });
@@ -285,6 +316,7 @@
 
             it('is called when video plays', function(done) {
                 state.videoPlayer.play();
+                // eslint-disable-next-line no-undef
                 jasmine.waitUntil(function() {
                     return state.videoPlayer.isPlaying();
                 }).done(function() {
@@ -294,6 +326,7 @@
         });
 
         it('getTimeDescription', function() {
+            // eslint-disable-next-line no-var
             var cases = {
                     0: '0 seconds',
                     1: '1 second',
@@ -307,6 +340,7 @@
                 },
                 getTimeDescription;
 
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer();
 
             getTimeDescription = state.videoProgressSlider.getTimeDescription;
@@ -317,6 +351,7 @@
         });
 
         it('can destroy itself', function() {
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer();
             state.videoProgressSlider.destroy();
             expect(state.videoProgressSlider).toBeUndefined();

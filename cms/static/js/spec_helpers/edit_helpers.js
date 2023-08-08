@@ -5,6 +5,7 @@ import $ from 'jquery';
 import _ from 'underscore';
 import AjaxHelpers from 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers';
 import TemplateHelpers from 'common/js/spec_helpers/template_helpers';
+// eslint-disable-next-line camelcase
 import modal_helpers from 'js/spec_helpers/modal_helpers';
 import EditXBlockModal from 'js/views/modals/edit_xblock';
 import ComponentTemplates from 'js/collections/component_template';
@@ -12,12 +13,14 @@ import XModule from 'xmodule/js/src/xmodule';
 import 'cms/js/main';
 import 'xblock/cms.runtime.v1';
 
-// eslint-disable-next-line import/no-mutable-exports
+/* eslint-disable-next-line import/no-mutable-exports, no-var */
 var installMockXBlock, uninstallMockXBlock, installMockXModule, uninstallMockXModule,
     mockComponentTemplates, installEditTemplates, showEditModal, verifyXBlockRequest;
 
 installMockXBlock = function(mockResult) {
+    // eslint-disable-next-line no-unused-vars
     window.MockXBlock = function(runtime, element) {
+        // eslint-disable-next-line no-var
         var block = {
             runtime: runtime
         };
@@ -78,6 +81,7 @@ mockComponentTemplates = new ComponentTemplates([
 });
 
 installEditTemplates = function(append) {
+    // eslint-disable-next-line camelcase
     modal_helpers.installModalTemplates(append);
 
     // Add templates needed by the add XBlock menu
@@ -100,6 +104,7 @@ installEditTemplates = function(append) {
 };
 
 showEditModal = function(requests, xblockElement, model, mockHtml, options) {
+    // eslint-disable-next-line no-var
     var modal = new EditXBlockModal({});
     modal.edit(xblockElement, model, options);
     AjaxHelpers.respondWithJson(requests, {
@@ -110,6 +115,7 @@ showEditModal = function(requests, xblockElement, model, mockHtml, options) {
 };
 
 verifyXBlockRequest = function(requests, expectedJson) {
+    // eslint-disable-next-line no-var
     var request = AjaxHelpers.currentRequest(requests),
         actualJson = JSON.parse(request.requestBody);
     expect(request.url).toEqual('/xblock/');
@@ -117,7 +123,7 @@ verifyXBlockRequest = function(requests, expectedJson) {
     expect(actualJson).toEqual(expectedJson);
 };
 
-// eslint-disable-next-line import/no-mutable-exports
+/* eslint-disable-next-line import/no-mutable-exports, no-var */
 var editHelpers = $.extend(modal_helpers, {
     installMockXBlock: installMockXBlock,
     uninstallMockXBlock: uninstallMockXBlock,

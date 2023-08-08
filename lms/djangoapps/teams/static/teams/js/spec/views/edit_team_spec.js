@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery',
     'underscore',
@@ -10,6 +11,7 @@ define([
 ], function($, _, Backbone, AjaxHelpers, PageHelpers, TeamEditView, TeamModel, TeamSpecHelpers) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var assertFormRendersCorrectly,
         assertTeamCreateUpdateInfo,
         assertValidationMessagesWhenFieldsEmpty,
@@ -19,6 +21,7 @@ define([
         requestMethod;
 
     describe('CreateEditTeam', function() {
+        // eslint-disable-next-line no-var
         var teamsUrl = '/api/team/v0/teams/',
             createTeamData = {
                 id: null,
@@ -39,7 +42,9 @@ define([
                 language: 'en'
             },
             verifyValidation = function(requests, teamEditView, fieldsData) {
+                // eslint-disable-next-line no-var
                 var message = teamEditView.$('.wrapper-msg');
+                // eslint-disable-next-line no-var
                 var actionMessage = (
                     // eslint-disable-next-line no-use-before-define
                     teamAction === 'create' ? 'Your team could not be created.' : 'Your team could not be updated.'
@@ -69,7 +74,9 @@ define([
             editTeamID = 'av',
             teamAction;
 
+        // eslint-disable-next-line no-var
         var createEditTeamView = function() {
+            // eslint-disable-next-line no-var
             var testTeam = {};
             if (teamAction === 'edit') {
                 testTeam = new TeamModel(
@@ -101,10 +108,12 @@ define([
         beforeEach(function() {
             setFixtures('<div class="teams-content"></div>');
             PageHelpers.preventBackboneChangingUrl();
+            // eslint-disable-next-line no-undef
             spyOn(Backbone.history, 'navigate');
         });
 
         assertFormRendersCorrectly = function() {
+            // eslint-disable-next-line no-var
             var fieldClasses = [
                     '.u-field-name',
                     '.u-field-description',
@@ -134,6 +143,7 @@ define([
         };
 
         assertTeamCreateUpdateInfo = function(that, teamsData, teamsUrlLink, expectedUrl) {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(that),
                 teamEditView = createEditTeamView();
 
@@ -152,6 +162,7 @@ define([
         };
 
         assertValidationMessagesWhenFieldsEmpty = function(that) {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(that),
                 teamEditView = createEditTeamView();
 
@@ -173,6 +184,7 @@ define([
         };
 
         assertValidationMessagesWhenInvalidData = function(that) {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(that),
                 teamEditView = createEditTeamView(),
                 teamName = new Array(500 + 1).join('$'),
@@ -195,6 +207,7 @@ define([
         };
 
         assertShowMessageOnError = function(that, teamsData, teamsUrlLink, errorCode) {
+            // eslint-disable-next-line no-var
             var teamEditView = createEditTeamView(),
                 requests = AjaxHelpers.requests(that);
 
@@ -223,6 +236,7 @@ define([
         };
 
         assertRedirectsToCorrectUrlOnCancel = function(expectedUrl) {
+            // eslint-disable-next-line no-var
             var teamEditView = createEditTeamView();
             teamEditView.$('.create-team.form-actions .action-cancel').click();
             expect(Backbone.history.navigate.calls.mostRecent().args[0]).toBe(expectedUrl);
@@ -274,6 +288,7 @@ define([
             });
 
             it('can edit a team', function() {
+                // eslint-disable-next-line no-var
                 var copyTeamsData = _.clone(editTeamData);
                 copyTeamsData.country = 'CA';
                 copyTeamsData.language = 'fr';

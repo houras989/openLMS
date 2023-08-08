@@ -7,6 +7,7 @@
  *
  */
 
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
 (function($, _, Backbone, gettext) {
@@ -32,6 +33,7 @@ var edx = edx || {};
         },
 
         initializeStepViews: function(stepInfo) {
+            // eslint-disable-next-line no-var
             var verificationModel, stepViewConstructors, nextStepTitles;
 
             // We need to initialize this here, because
@@ -58,6 +60,7 @@ var edx = edx || {};
             verificationModel = new edx.verify_student.VerificationModel();
 
             _.each(this.stepOrder, function(name, index) {
+                // eslint-disable-next-line no-var
                 var stepView = new stepViewConstructors[name]({
                     errorModel: this.errorModel,
                     nextStepTitle: nextStepTitles[index],
@@ -78,6 +81,7 @@ var edx = edx || {};
         },
 
         renderCurrentStep: function() {
+            // eslint-disable-next-line no-var
             var stepView, $stepEl;
 
             // Get or create the step container
@@ -105,6 +109,7 @@ var edx = edx || {};
         },
 
         goToStep: function(stepName) {
+            // eslint-disable-next-line no-var
             var stepIndex = _.indexOf(this.stepOrder, stepName);
 
             if (stepIndex >= 0) {
@@ -114,4 +119,5 @@ var edx = edx || {};
             this.render();
         }
     });
+// eslint-disable-next-line no-undef
 }(jQuery, _, Backbone, gettext));

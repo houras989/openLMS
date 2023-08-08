@@ -2,7 +2,9 @@
     'use strict';
 
     define(['underscore', 'backbone', 'gettext'],
+        // eslint-disable-next-line no-unused-vars
         function(_, Backbone, gettext) {
+            // eslint-disable-next-line no-var
             var PagingView = Backbone.View.extend({
                 // takes a Backbone Paginator as a model
 
@@ -14,6 +16,7 @@
 
                 initialize: function() {
                     Backbone.View.prototype.initialize.call(this);
+                    // eslint-disable-next-line no-var
                     var collection = this.collection;
                     collection.bind('add', _.bind(this.onPageRefresh, this));
                     collection.bind('remove', _.bind(this.onPageRefresh, this));
@@ -23,6 +26,7 @@
                 },
 
                 onPageRefresh: function() {
+                    // eslint-disable-next-line no-var
                     var sortColumn = this.collection.sortColumn;
                     this.renderPageItems();
                     this.$('.column-sort-link').removeClass('current-sort');
@@ -53,20 +57,24 @@
                 },
 
                 filterableColumnInfo: function(filterColumn) {
+                    // eslint-disable-next-line no-var
                     var filterInfo = this.filterableColumns[filterColumn];
                     if (!filterInfo) {
+                        // eslint-disable-next-line no-throw-literal
                         throw "Unregistered filter column '" + filterInfo + '"';
                     }
                     return filterInfo;
                 },
 
                 filterDisplayName: function() {
+                    // eslint-disable-next-line no-var
                     var filterColumn = this.filterColumn,
                         filterInfo = this.filterableColumnInfo(filterColumn);
                     return filterInfo.displayName;
                 },
 
                 setInitialFilterColumn: function(filterColumn) {
+                    // eslint-disable-next-line no-var
                     var collection = this.collection,
                         filterInfo = this.filterableColumns[filterColumn];
                     collection.filterField = filterInfo.fieldName;
@@ -89,20 +97,24 @@
                 },
 
                 sortableColumnInfo: function(sortColumn) {
+                    // eslint-disable-next-line no-var
                     var sortInfo = this.sortableColumns[sortColumn];
                     if (!sortInfo) {
+                        // eslint-disable-next-line no-throw-literal
                         throw "Unregistered sort column '" + sortColumn + '"';
                     }
                     return sortInfo;
                 },
 
                 sortDisplayName: function() {
+                    // eslint-disable-next-line no-var
                     var sortColumn = this.sortColumn,
                         sortInfo = this.sortableColumnInfo(sortColumn);
                     return sortInfo.displayName;
                 },
 
                 setInitialSortColumn: function(sortColumn) {
+                    // eslint-disable-next-line no-var
                     var collection = this.collection,
                         sortInfo = this.sortableColumns[sortColumn];
                     collection.sortField = sortInfo.fieldName;
@@ -111,6 +123,7 @@
                 },
 
                 toggleSortOrder: function(sortColumn) {
+                    // eslint-disable-next-line no-var
                     var collection = this.collection,
                         sortInfo = this.sortableColumnInfo(sortColumn),
                         sortField = sortInfo.fieldName,
@@ -129,6 +142,7 @@
                 },
 
                 selectFilter: function(filterColumn) {
+                    // eslint-disable-next-line no-var
                     var collection = this.collection,
                         filterInfo = this.filterableColumnInfo(filterColumn),
                         filterField = filterInfo.fieldName;
@@ -142,4 +156,5 @@
             });
             return PagingView;
         }); // end define();
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

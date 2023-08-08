@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow-restricted-names
+/* eslint-disable-next-line no-shadow-restricted-names, no-unused-vars */
 (function(define, undefined) {
     'use strict';
 
@@ -33,12 +33,14 @@
             },
 
             onNotesLoaded: function(notes) {
+                // eslint-disable-next-line no-var
                 var hash = this.getIdFromLocationHash();
                 this.annotator.logger.log('Scroller', {
                     'notes:': notes,
                     hash: hash
                 });
                 _.each(notes, function(note) {
+                    // eslint-disable-next-line no-var
                     var $highlight, offset;
                     if (note.id === hash && note.highlights.length) {
                     // Clear the page URL hash, it won't be needed once we've
@@ -66,4 +68,5 @@
             }
         });
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

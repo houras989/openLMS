@@ -1,12 +1,14 @@
 /**
  * This is a simple component that renders add buttons for all available XBlock template types.
  */
+// eslint-disable-next-line no-undef
 define(['jquery', 'underscore', 'gettext', 'js/views/baseview', 'common/js/components/utils/view_utils',
     'js/views/components/add_xblock_button', 'js/views/components/add_xblock_menu',
     'edx-ui-toolkit/js/utils/html-utils'],
 function($, _, gettext, BaseView, ViewUtils, AddXBlockButton, AddXBlockMenu, HtmlUtils) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var AddXBlockComponent = BaseView.extend({
         events: {
             'click .new-component .new-component-type .multiple-templates': 'showComponentTemplates',
@@ -22,12 +24,14 @@ function($, _, gettext, BaseView, ViewUtils, AddXBlockButton, AddXBlockMenu, Htm
         },
 
         render: function() {
+            // eslint-disable-next-line no-var
             var that;
             if (!this.$el.html()) {
                 that = this;
                 this.$el.html(HtmlUtils.HTML(this.template({})).toString());
                 this.collection.each(
                     function(componentModel) {
+                        // eslint-disable-next-line no-var
                         var view, menu;
 
                         view = new AddXBlockButton({model: componentModel});
@@ -41,6 +45,7 @@ function($, _, gettext, BaseView, ViewUtils, AddXBlockButton, AddXBlockMenu, Htm
         },
 
         showComponentTemplates: function(event) {
+            // eslint-disable-next-line no-var
             var type;
             event.preventDefault();
             event.stopPropagation();
@@ -51,6 +56,7 @@ function($, _, gettext, BaseView, ViewUtils, AddXBlockButton, AddXBlockMenu, Htm
         },
 
         closeNewComponent: function(event) {
+            // eslint-disable-next-line no-var
             var type;
             event.preventDefault();
             event.stopPropagation();
@@ -61,6 +67,7 @@ function($, _, gettext, BaseView, ViewUtils, AddXBlockButton, AddXBlockMenu, Htm
         },
 
         createNewComponent: function(event) {
+            // eslint-disable-next-line no-var
             var self = this,
                 $element = $(event.currentTarget),
                 saveData = $element.data(),

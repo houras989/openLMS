@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 /* globals Discussion, DiscussionCourseSettings, DiscussionUser, DiscussionUtil */
 (function(define) {
     'use strict';
@@ -13,8 +14,10 @@
         ],
         function(_, $, constants, Discussion, DiscussionSpecHelper, DiscussionBoardView) {
             describe('DiscussionBoardView', function() {
+                // eslint-disable-next-line no-var
                 var createDiscussionBoardView;
                 createDiscussionBoardView = function() {
+                    // eslint-disable-next-line no-var
                     var discussionBoardView,
                         discussion = DiscussionSpecHelper.createTestDiscussion({}),
                         courseSettings = DiscussionSpecHelper.createTestCourseSettings();
@@ -37,7 +40,9 @@
 
                 describe('goHome view', function() {
                     it('Ensure no ajax request when digests are unavailable', function() {
+                        // eslint-disable-next-line no-var
                         var discussionBoardView = createDiscussionBoardView();
+                        // eslint-disable-next-line no-undef
                         spyOn(DiscussionUtil, 'safeAjax').and.callThrough();
                         window.ENABLE_FORUM_DAILY_DIGEST = false;
 
@@ -45,8 +50,10 @@
                         expect(DiscussionUtil.safeAjax).not.toHaveBeenCalled();
                     });
                     it('Verify the ajax request when digests are available', function() {
+                        // eslint-disable-next-line no-var
                         var discussionBoardView = createDiscussionBoardView();
                         discussionBoardView.render();
+                        // eslint-disable-next-line no-undef
                         spyOn(DiscussionUtil, 'safeAjax').and.callThrough();
 
                         discussionBoardView.goHome();
@@ -56,6 +63,7 @@
 
                 describe('Thread List View', function() {
                     it('should ensure the mode is all', function() {
+                        // eslint-disable-next-line no-var
                         var discussionBoardView = createDiscussionBoardView().render(),
                             threadListView = discussionBoardView.discussionThreadListView;
                         expect(threadListView.mode).toBe('all');
@@ -64,10 +72,12 @@
 
                 describe('Search events', function() {
                     it('perform search when enter pressed inside search textfield', function() {
+                        // eslint-disable-next-line no-var
                         var discussionBoardView = createDiscussionBoardView(),
                             threadListView;
                         discussionBoardView.render();
                         threadListView = discussionBoardView.discussionThreadListView;
+                        // eslint-disable-next-line no-undef
                         spyOn(threadListView, 'performSearch');
                         discussionBoardView.$('.search-input').trigger($.Event('keydown', {
                             which: constants.keyCodes.enter
@@ -76,10 +86,12 @@
                     });
 
                     it('perform search when search icon is clicked', function() {
+                        // eslint-disable-next-line no-var
                         var discussionBoardView = createDiscussionBoardView(),
                             threadListView;
                         discussionBoardView.render();
                         threadListView = discussionBoardView.discussionThreadListView;
+                        // eslint-disable-next-line no-undef
                         spyOn(threadListView, 'performSearch');
                         discussionBoardView.$el.find('.search-button').click();
                         expect(threadListView.performSearch).toHaveBeenCalled();
@@ -87,4 +99,5 @@
                 });
             });
         });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

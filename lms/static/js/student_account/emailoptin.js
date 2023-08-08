@@ -2,6 +2,7 @@
     'use strict';
 
     define(['jquery', 'jquery.cookie'], function($) {
+        // eslint-disable-next-line no-var
         var EmailOptInInterface = {
 
             urls: {
@@ -30,4 +31,5 @@
 
         return EmailOptInInterface;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

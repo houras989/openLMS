@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define([
     'jquery', 'underscore', 'annotator_1.2.9', 'js/edxnotes/views/notes_factory',
     'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'js/edxnotes/utils/notes_collector', 'js/spec/edxnotes/helpers'
@@ -17,6 +18,7 @@ define([
         });
 
         it('can initialize annotator correctly', function(done) {
+            // eslint-disable-next-line no-var
             var requests = AjaxHelpers.requests(this),
                 token = Helpers.makeToken(),
                 options = {
@@ -26,6 +28,7 @@ define([
                 };
 
             _.each($('.edx-notes-wrapper'), function(wrapper) {
+                // eslint-disable-next-line no-var
                 var annotator = NotesFactory.factory(wrapper, {
                     endpoint: '/test_endpoint',
                     user: 'a user',
@@ -40,6 +43,7 @@ define([
                 expect(annotator.options.store.annotationData).toEqual(options);
                 expect(annotator.options.store.loadFromSearch).toEqual(options);
             });
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return requests.length === 1;
             }).done(function() {

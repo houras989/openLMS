@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import ViewUtils from 'common/js/components/utils/view_utils';
+// eslint-disable-next-line camelcase
 import edit_helpers from 'js/spec_helpers/edit_helpers';
 import ModuleEdit from 'js/views/module_edit';
 import ModuleModel from 'js/models/module_info';
@@ -32,11 +33,14 @@ describe('ModuleEdit', function() {
                     + '  </section>\n'
                     + '</li>\n'
                     + '</ul>');
+        // eslint-disable-next-line camelcase
         edit_helpers.installEditTemplates(true);
+        // eslint-disable-next-line no-undef
         spyOn($, 'ajax').and.returnValue(this.moduleData);
         this.moduleEdit = new ModuleEdit({
             el: $('.component'),
             model: this.stubModule,
+            // eslint-disable-next-line no-undef
             onDelete: jasmine.createSpy()
         });
         return this.moduleEdit;
@@ -52,10 +56,12 @@ describe('ModuleEdit', function() {
     describe('methods', function() {
         describe('initialize', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 spyOn(ModuleEdit.prototype, 'render');
                 this.moduleEdit = new ModuleEdit({
                     el: $('.component'),
                     model: this.stubModule,
+                    // eslint-disable-next-line no-undef
                     onDelete: jasmine.createSpy()
                 });
                 return this.moduleEdit;
@@ -66,10 +72,15 @@ describe('ModuleEdit', function() {
         });
         describe('render', function() {
             beforeEach(function() {
+                // eslint-disable-next-line camelcase
                 edit_helpers.installEditTemplates(true);
+                // eslint-disable-next-line no-undef
                 spyOn(this.moduleEdit, 'loadDisplay');
+                // eslint-disable-next-line no-undef
                 spyOn(this.moduleEdit, 'delegateEvents');
+                // eslint-disable-next-line no-undef
                 spyOn($.fn, 'append');
+                // eslint-disable-next-line no-undef
                 spyOn(ViewUtils, 'loadJavaScript').and.returnValue($.Deferred().resolve().promise());
                 window.MockXBlock = function() {
                     return {};
@@ -132,6 +143,7 @@ describe('ModuleEdit', function() {
                     headers: {
                         Accept: 'application/json'
                     },
+                    // eslint-disable-next-line no-undef
                     success: jasmine.any(Function)
                 });
                 expect($.ajax).not.toHaveBeenCalledWith({
@@ -140,12 +152,14 @@ describe('ModuleEdit', function() {
                     headers: {
                         Accept: 'application/json'
                     },
+                    // eslint-disable-next-line no-undef
                     success: jasmine.any(Function)
                 });
                 expect(this.moduleEdit.loadDisplay).toHaveBeenCalled();
                 return expect(this.moduleEdit.delegateEvents).toHaveBeenCalled();
             });
             it('loads the editing view via ajax on demand', function() {
+                // eslint-disable-next-line no-var
                 var mockXBlockEditorHtml;
                 expect($.ajax).not.toHaveBeenCalledWith({
                     url: '/xblock/' + this.moduleEdit.model.id + '/studio_view',
@@ -154,9 +168,11 @@ describe('ModuleEdit', function() {
                     headers: {
                         Accept: 'application/json'
                     },
+                    // eslint-disable-next-line no-undef
                     success: jasmine.any(Function)
                 });
                 this.moduleEdit.clickEditButton({
+                    // eslint-disable-next-line no-undef
                     preventDefault: jasmine.createSpy('event.preventDefault')
                 });
                 mockXBlockEditorHtml = readFixtures('templates/mock/mock-xblock-editor.underscore');
@@ -209,15 +225,18 @@ describe('ModuleEdit', function() {
                     headers: {
                         Accept: 'application/json'
                     },
+                    // eslint-disable-next-line no-undef
                     success: jasmine.any(Function)
                 });
                 return expect(this.moduleEdit.delegateEvents).toHaveBeenCalled();
             });
             it('loads inline css from fragments', function() {
+                // eslint-disable-next-line no-var
                 var args = '<style type="text/css">inline-css</style>';
                 return expect($('head').append).toHaveBeenCalledWith(args);
             });
             it('loads css urls from fragments', function() {
+                // eslint-disable-next-line no-var
                 var args = '<link rel="stylesheet" href="css-url" type="text/css">';
                 return expect($('head').append).toHaveBeenCalledWith(args);
             });
@@ -234,6 +253,7 @@ describe('ModuleEdit', function() {
                 return expect($.fn.append).not.toHaveBeenCalledWith('not-head-html');
             });
             it("doesn't reload resources", function() {
+                // eslint-disable-next-line no-var
                 var count;
                 count = $('head').append.calls.count();
                 $.ajax.calls.mostRecent().args[0].success({
@@ -253,11 +273,13 @@ describe('ModuleEdit', function() {
         });
         describe('loadDisplay', function() {
             beforeEach(function() {
+                // eslint-disable-next-line no-undef
                 spyOn(XBlock, 'initializeBlock');
                 return this.moduleEdit.loadDisplay();
             });
             it('loads the .xmodule-display inside the module editor', function() {
                 expect(XBlock.initializeBlock).toHaveBeenCalled();
+                // eslint-disable-next-line no-var
                 var sel = '.xblock-student_view';
                 return expect(XBlock.initializeBlock.calls.mostRecent().args[0].get(0)).toBe($(sel).get(0));
             });

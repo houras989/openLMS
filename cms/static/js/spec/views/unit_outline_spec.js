@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 define(['jquery', 'edx-ui-toolkit/js/utils/spec-helpers/ajax-helpers', 'common/js/spec_helpers/template_helpers',
     'common/js/spec_helpers/view_helpers', 'common/js/components/utils/view_utils', 'js/models/course',
     'js/views/unit_outline', 'js/models/xblock_info'],
@@ -6,6 +7,7 @@ function($, AjaxHelpers, TemplateHelpers, ViewHelpers, ViewUtils,
     'use strict';
 
     describe('UnitOutlineView', function() {
+        // eslint-disable-next-line no-var
         var createUnitOutlineView, createMockXBlockInfo,
             requests, model, unitOutlineView;
 
@@ -102,6 +104,7 @@ function($, AjaxHelpers, TemplateHelpers, ViewHelpers, ViewUtils,
 
         it('highlights the current unit', function() {
             createUnitOutlineView(this, createMockXBlockInfo('Mock Unit'));
+            // eslint-disable-next-line no-unused-vars
             $('.outline-unit').each(function(i) {
                 if ($(this).data('locator') === model.get('id')) {
                     expect($(this)).toHaveClass('is-current');
@@ -112,8 +115,10 @@ function($, AjaxHelpers, TemplateHelpers, ViewHelpers, ViewUtils,
         });
 
         it('can add a unit', function() {
+            // eslint-disable-next-line no-var
             var redirectSpy;
             createUnitOutlineView(this, createMockXBlockInfo('Mock Unit'));
+            // eslint-disable-next-line no-undef
             redirectSpy = spyOn(ViewUtils, 'redirect');
             unitOutlineView.$('.outline-subsection > .outline-content  > .add-unit .button-new').click();
             AjaxHelpers.expectJsonRequest(requests, 'POST', '/xblock/', {
@@ -129,6 +134,7 @@ function($, AjaxHelpers, TemplateHelpers, ViewHelpers, ViewUtils,
         });
 
         it('refreshes when the XBlockInfo model syncs', function() {
+            // eslint-disable-next-line no-var
             var updatedDisplayName = 'Mock Unit Updated';
             createUnitOutlineView(this, createMockXBlockInfo('Mock Unit'));
             unitOutlineView.refresh();

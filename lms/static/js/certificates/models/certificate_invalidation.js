@@ -1,4 +1,5 @@
 // Backbone.js Application Model: CertificateInvalidation
+// eslint-disable-next-line no-redeclare
 /* global define, RequireJS */
 
 (function(define) {
@@ -22,6 +23,7 @@
                     this.url = options.url;
                 },
 
+                // eslint-disable-next-line consistent-return
                 validate: function(attrs) {
                     if (!str.trim(attrs.user)) {
                         // A username or email must be provided for certificate invalidation

@@ -4,6 +4,7 @@
     define(['jquery', 'underscore', 'backbone', 'gettext', 'edx-ui-toolkit/js/utils/html-utils',
         'js/models/notification', 'js/views/notification'],
     function($, _, Backbone, gettext, HtmlUtils) {
+        // eslint-disable-next-line no-var
         var CohortFormView = Backbone.View.extend({
             events: {
                 'change .cohort-management-details-association-course input': 'onRadioButtonChange'
@@ -16,8 +17,10 @@
             },
 
             showNotification: function(options, beforeElement) {
+                /* eslint-disable-next-line no-undef, no-var */
                 var model = new NotificationModel(options);
                 this.removeNotification();
+                // eslint-disable-next-line no-undef
                 this.notification = new NotificationView({
                     model: model
                 });
@@ -43,15 +46,18 @@
             },
 
             isDefault: function(name) {
+                // eslint-disable-next-line no-var
                 var cohorts = this.model.collection;
                 if (_.isUndefined(cohorts)) {
                     return false;
                 }
+                // eslint-disable-next-line no-var
                 var randomModels = cohorts.where({assignment_type: 'random'});
                 return (randomModels.length === 1) && (randomModels[0].get('name') === name);
             },
 
             onRadioButtonChange: function(event) {
+                // eslint-disable-next-line no-var
                 var $target = $(event.currentTarget),
                     groupsEnabled = $target.val() === 'yes';
                 if (!groupsEnabled) {
@@ -68,13 +74,16 @@
             },
 
             getSelectedContentGroup: function() {
+                // eslint-disable-next-line no-var
                 var selectValue = this.$('.input-cohort-group-association').val(),
                     ids, groupId, userPartitionId, i, contentGroup;
                 if (!this.hasAssociatedContentGroup() || _.isNull(selectValue)) {
                     return null;
                 }
                 ids = selectValue.split(':');
+                // eslint-disable-next-line radix
                 groupId = parseInt(ids[0]);
+                // eslint-disable-next-line radix
                 userPartitionId = parseInt(ids[1]);
                 for (i = 0; i < this.contentGroups.length; i++) {
                     contentGroup = this.contentGroups[i];
@@ -86,6 +95,7 @@
             },
 
             getUpdatedCohortName: function() {
+                // eslint-disable-next-line no-var
                 var cohortName = this.$('.cohort-name').val();
                 return cohortName ? cohortName.trim() : '';
             },
@@ -102,6 +112,7 @@
             },
 
             validate: function(fieldData) {
+                // eslint-disable-next-line no-var
                 var errorMessages;
                 errorMessages = [];
                 if (!fieldData.name) {
@@ -119,6 +130,7 @@
             },
 
             saveForm: function() {
+                // eslint-disable-next-line no-var
                 var self = this,
                     cohort = this.model,
                     saveOperation = $.Deferred(),
@@ -152,8 +164,10 @@
                         self.render(); // re-render to remove any now invalid error messages
                         saveOperation.resolve();
                     }).fail(function(result) {
+                        // eslint-disable-next-line no-var
                         var errorMessage = null;
                         try {
+                            // eslint-disable-next-line no-var
                             var jsonResponse = JSON.parse(result.responseText);
                             errorMessage = jsonResponse.error;
                         } catch (e) {
@@ -171,4 +185,5 @@
         });
         return CohortFormView;
     });
+// eslint-disable-next-line no-undef
 }).call(this, define || RequireJS.define);

@@ -1,9 +1,11 @@
 (function($, JSON) {
     'use strict';
 
+    // eslint-disable-next-line no-var
     var XBlock;
 
     function initializeBlockLikes(blockClass, initializer, element, requestToken) {
+        // eslint-disable-next-line no-var
         var selector;
         requestToken = requestToken || $(element).data('request-token');
         if (requestToken) {
@@ -20,6 +22,7 @@
     }
 
     function elementRuntime(element) {
+        // eslint-disable-next-line no-var
         var $element = $(element),
             runtime = $element.data('runtime-class'),
             version = $element.data('runtime-version'),
@@ -29,6 +32,7 @@
             return new window[runtime]['v' + version]();
         } else {
             if (runtime || version || initFnName) {
+                // eslint-disable-next-line no-console
                 console.log(
                     'Block ' + $element.outerHTML + ' is missing data-runtime, data-runtime-version or data-init, '
                     + 'and can\'t be initialized'
@@ -39,6 +43,7 @@
     }
 
     function initArgs(element) {
+        // eslint-disable-next-line no-var
         var initargs = $(element).children('.xblock-json-init-args').remove().text();
         return initargs ? JSON.parse(initargs) : {};
     }
@@ -50,8 +55,11 @@
      * and then all of 'block_args'.
      */
     function constructBlock(element, blockArgs) {
+        // eslint-disable-next-line no-var
         var block;
+        // eslint-disable-next-line no-var
         var $element = $(element);
+        // eslint-disable-next-line no-var
         var runtime = elementRuntime(element);
 
         blockArgs.unshift(element);
@@ -59,6 +67,7 @@
 
         if (runtime) {
             block = (function() {
+                // eslint-disable-next-line no-var
                 var initFn = window[$element.data('init')];
 
                 // This create a new constructor that can then apply() the block_args
@@ -93,6 +102,7 @@
          * the children themselves.
          */
         initializeBlock: function(element, requestToken) {
+            // eslint-disable-next-line no-var
             var $element = $(element),
                 children, asides;
 
@@ -113,7 +123,9 @@
          * the request-tokens specified on the children themselves.
          */
         initializeAside: function(element) {
+            // eslint-disable-next-line no-var
             var blockUsageId = $(element).data('block-id');
+            // eslint-disable-next-line no-var
             var blockElement = $(element).siblings('[data-usage-id="' + blockUsageId + '"]')[0];
 
             return constructBlock(element, [blockElement, initArgs(element)]);
@@ -143,7 +155,9 @@
          * If neither is available, then use the request tokens of the immediateDescendent xblocks.
          */
         initializeBlocks: function(element, requestToken) {
+            // eslint-disable-next-line no-var
             var asides = XBlock.initializeXBlockAsides(element, requestToken);
+            // eslint-disable-next-line no-var
             var xblocks = XBlock.initializeXBlocks(element, requestToken);
             if (asides) {
                 xblocks = xblocks.concat(asides);

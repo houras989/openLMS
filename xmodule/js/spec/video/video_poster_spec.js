@@ -1,13 +1,17 @@
+// eslint-disable-next-line no-unused-vars
 (function(WAIT_TIMEOUT) {
     'use strict';
 
     describe('VideoPoster', function() {
+        // eslint-disable-next-line no-var
         var state, oldOTBD;
 
         beforeEach(function() {
             oldOTBD = window.onTouchBasedDevice;
+            // eslint-disable-next-line no-undef
             window.onTouchBasedDevice = jasmine
                 .createSpy('onTouchBasedDevice').and.returnValue(null);
+            // eslint-disable-next-line no-undef
             state = jasmine.initializePlayer('video_with_bumper.html');
         });
 
@@ -30,6 +34,7 @@
 
         it('can start playing the video on click', function(done) {
             $('.btn-play').click();
+            // eslint-disable-next-line no-undef
             jasmine.waitUntil(function() {
                 return state.el.hasClass('is-playing');
             }).done(done);

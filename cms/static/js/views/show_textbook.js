@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-undef
 define(['js/views/baseview', 'underscore', 'gettext', 'common/js/components/views/feedback_notification',
     'common/js/components/views/feedback_prompt'],
 function(BaseView, _, gettext, NotificationView, PromptView) {
+    // eslint-disable-next-line no-var
     var ShowTextbook = BaseView.extend({
         initialize: function() {
             this.template = _.template($('#show-textbook-tpl').text());
@@ -16,6 +18,7 @@ function(BaseView, _, gettext, NotificationView, PromptView) {
             'click .hide-chapters': 'hideChapters'
         },
         render: function() {
+            // eslint-disable-next-line no-var
             var attrs = $.extend({}, this.model.attributes);
             attrs.bookindex = this.model.collection.indexOf(this.model);
             attrs.course = window.course.attributes;
@@ -28,6 +31,7 @@ function(BaseView, _, gettext, NotificationView, PromptView) {
         },
         confirmDelete: function(e) {
             if (e && e.preventDefault) { e.preventDefault(); }
+            // eslint-disable-next-line no-var
             var textbook = this.model;
             new PromptView.Warning({
                 title: _.template(gettext('Delete “<%- name %>”?'))(
@@ -39,6 +43,7 @@ function(BaseView, _, gettext, NotificationView, PromptView) {
                         text: gettext('Delete'),
                         click: function(view) {
                             view.hide();
+                            // eslint-disable-next-line no-var
                             var delmsg = new NotificationView.Mini({
                                 title: gettext('Deleting')
                             }).show();

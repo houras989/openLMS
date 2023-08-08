@@ -4,6 +4,7 @@
  * This view is responsible for rendering the page
  * template, including any subviews (for photo capture).
  */
+/* eslint-disable-next-line no-use-before-define, no-var */
 var edx = edx || {};
 
 (function($, _, _s, Backbone, gettext, HtmlUtils) {
@@ -79,6 +80,7 @@ var edx = edx || {};
         },
 
         handleSubmissionError: function(xhr) {
+            // eslint-disable-next-line no-var
             var errorMsg = gettext('An error has occurred. Please try again later.');
 
             // Re-enable the submit button to allow the user to retry
@@ -101,4 +103,5 @@ var edx = edx || {};
                 .attr('aria-disabled', !isEnabled);
         }
     });
+// eslint-disable-next-line no-undef
 }(jQuery, _, _.str, Backbone, gettext, edx.HtmlUtils));

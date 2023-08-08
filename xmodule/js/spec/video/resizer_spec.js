@@ -5,6 +5,7 @@
         ['video/00_resizer.js', 'underscore'],
         function(Resizer, _) {
             describe('Resizer', function() {
+                // eslint-disable-next-line no-var
                 var html = [
                         '<div '
                     + 'class="rszr-wrapper" '
@@ -30,6 +31,7 @@
                         element: $element
                     };
 
+                    // eslint-disable-next-line no-undef
                     spyOn(console, 'log');
                 });
 
@@ -37,11 +39,13 @@
                     function() {
                         // eslint-disable-next-line no-new
                         new Resizer({ });
+                        // eslint-disable-next-line no-console
                         expect(console.log).toHaveBeenCalled();
                     }
                 );
 
                 it('`alignByWidthOnly` works correctly', function() {
+                    /* eslint-disable-next-line no-unused-vars, no-var */
                     var resizer = new Resizer(config).alignByWidthOnly(),
                         expectedWidth = $container.width(),
                         realWidth = $element.width();
@@ -50,6 +54,7 @@
                 });
 
                 it('`alignByHeightOnly` works correctly', function() {
+                    /* eslint-disable-next-line no-unused-vars, no-var */
                     var resizer = new Resizer(config).alignByHeightOnly(),
                         expectedHeight = $container.height(),
                         realHeight = $element.height();
@@ -58,6 +63,7 @@
                 });
 
                 it('`align` works correctly', function() {
+                    // eslint-disable-next-line no-var
                     var resizer = new Resizer(config).align(),
                         expectedHeight = $container.height(),
                         realHeight = $element.height(),
@@ -76,6 +82,7 @@
                 });
 
                 it('`setMode` works correctly', function() {
+                    // eslint-disable-next-line no-var
                     var resizer = new Resizer(config).setMode('height'),
                         expectedHeight = $container.height(),
                         realHeight = $element.height(),
@@ -94,6 +101,7 @@
                 });
 
                 it('`setElement` works correctly', function() {
+                    // eslint-disable-next-line no-var
                     var $newElement,
                         expectedHeight;
 
@@ -110,13 +118,16 @@
                 });
 
                 describe('Callbacks', function() {
+                    // eslint-disable-next-line no-var
                     var resizer,
                         spiesList = [];
 
                     beforeEach(function() {
+                        // eslint-disable-next-line no-var
                         var spiesCount = _.range(3);
 
                         spiesList = $.map(spiesCount, function() {
+                            // eslint-disable-next-line no-undef
                             return jasmine.createSpy();
                         });
 
@@ -172,22 +183,27 @@
                     it(
                         'Error message is shown when wrong argument type is passed',
                         function() {
+                            // eslint-disable-next-line no-var
                             var methods = ['add', 'once'],
                                 errorMessage = '[Video info]: TypeError: Argument is not a function.',
                                 arg = {};
 
+                            // eslint-disable-next-line no-undef
                             spyOn(console, 'error');
 
                             $.each(methods, function(index, methodName) {
                                 resizer.callbacks[methodName](arg);
+                                // eslint-disable-next-line no-console
                                 expect(console.error).toHaveBeenCalledWith(errorMessage);
                                 // reset spy
+                                // eslint-disable-next-line no-console
                                 console.log.calls.reset();
                             });
                         });
                 });
 
                 describe('Delta', function() {
+                    // eslint-disable-next-line no-var
                     var resizer;
 
                     beforeEach(function() {
@@ -195,6 +211,7 @@
                     });
 
                     it('adding delta align correctly by height', function() {
+                        // eslint-disable-next-line no-var
                         var delta = 100,
                             expectedHeight = $container.height() + delta,
                             realHeight;
@@ -209,6 +226,7 @@
                     });
 
                     it('adding delta align correctly by width', function() {
+                        // eslint-disable-next-line no-var
                         var delta = 100,
                             expectedWidth = $container.width() + delta,
                             realWidth;
@@ -223,6 +241,7 @@
                     });
 
                     it('substract delta align correctly by height', function() {
+                        // eslint-disable-next-line no-var
                         var delta = 100,
                             expectedHeight = $container.height() - delta,
                             realHeight;
@@ -237,6 +256,7 @@
                     });
 
                     it('substract delta align correctly by width', function() {
+                        // eslint-disable-next-line no-var
                         var delta = 100,
                             expectedWidth = $container.width() - delta,
                             realWidth;
@@ -251,6 +271,7 @@
                     });
 
                     it('reset delta', function() {
+                        // eslint-disable-next-line no-var
                         var delta = 100,
                             expectedWidth = $container.width(),
                             realWidth;

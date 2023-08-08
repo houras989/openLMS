@@ -1,4 +1,5 @@
 // Backbone.js Application Model: CertificateAllowlist
+// eslint-disable-next-line no-redeclare
 /* global define, RequireJS */
 
 (function(define) {
@@ -26,6 +27,7 @@
             initialize: function(attributes, options) {
                 this.url = options.url;
             },
+            // eslint-disable-next-line consistent-return
             validate: function(attrs) {
                 if (!str.trim(attrs.user_name) && !str.trim(attrs.user_email)) {
                     return gettext('Student username/email field is required and can not be empty. '

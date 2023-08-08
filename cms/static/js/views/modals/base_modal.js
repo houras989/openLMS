@@ -22,8 +22,10 @@
  *   primaryActionButtonTitle: A string to be used as title for primary action button.
  *   showEditorModeButtons: Whether to show editor mode button in the modal header.
  */
+// eslint-disable-next-line no-undef
 define(['jquery', 'underscore', 'gettext', 'js/views/baseview'],
     function($, _, gettext, BaseView) {
+        // eslint-disable-next-line no-var
         var BaseModal = BaseView.extend({
             events: {
                 'click .action-cancel': 'cancel'
@@ -47,6 +49,7 @@ define(['jquery', 'underscore', 'gettext', 'js/views/baseview'],
             }),
 
             initialize: function() {
+                // eslint-disable-next-line no-var
                 var parent = this.options.parent,
                     parentElement = this.options.parentElement;
                 this.modalTemplate = this.loadTemplate('basic-modal');
@@ -83,6 +86,7 @@ define(['jquery', 'underscore', 'gettext', 'js/views/baseview'],
             },
 
             renderContents: function() {
+                // eslint-disable-next-line no-var
                 var contentHtml = this.getContentHtml();
                 // xss-lint: disable=javascript-jquery-html
                 this.$('.modal-content').html(contentHtml);
@@ -96,6 +100,7 @@ define(['jquery', 'underscore', 'gettext', 'js/views/baseview'],
             },
 
             show: function(focusModal) {
+                // eslint-disable-next-line no-var
                 var focusModalWindow = focusModal === undefined;
                 this.render();
                 this.resize();
@@ -143,6 +148,7 @@ define(['jquery', 'underscore', 'gettext', 'js/views/baseview'],
              * @param isPrimary True if this button is the primary one.
              */
             addActionButton: function(type, name, isPrimary) {
+                // eslint-disable-next-line no-var
                 var html = this.buttonTemplate({
                     type: type,
                     name: name,
@@ -175,6 +181,7 @@ define(['jquery', 'underscore', 'gettext', 'js/views/baseview'],
             },
 
             resize: function() {
+                // eslint-disable-next-line no-var
                 var top, left, modalWindow, modalWidth, modalHeight,
                     availableWidth, availableHeight, maxWidth, maxHeight;
 
