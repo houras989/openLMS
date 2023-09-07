@@ -5,7 +5,10 @@ from abc import ABC
 from typing import List, Dict
 from django.conf import settings
 
-from openedx.core.djangoapps.course_live.config.waffle import ENABLE_BIG_BLUE_BUTTON
+from openedx.core.djangoapps.course_live.config.waffle import (
+    ENABLE_BIG_BLUE_BUTTON,
+    ENABLE_ZOOM,
+)
 
 
 class LiveProvider(ABC):
@@ -81,7 +84,7 @@ class HasGlobalCredentials(ABC):
         raise NotImplementedError()
 
 
-class Zoom(LiveProvider):
+class Zoom(LiveProvider, HasGlobalCredentials):
     """
     Zoom LTI PRO live provider
     """
@@ -92,8 +95,37 @@ class Zoom(LiveProvider):
     ]
 
     @property
-    def is_enabled(self):
+    def has_free_tier(self) -> bool:
+        """
+        Check if free tier is enabled by checking for valid keys
+        """
         return True
+
+    @property
+    def is_enabled(self):
+        return ENABLE_ZOOM.is_enabled()
+
+    @staticmethod
+    def get_global_keys() -> Dict:
+        """
+        Get keys from settings
+        """
+        try:
+            return settings.COURSE_LIVE_GLOBAL_CREDENTIALS.get("ZOOM", {})
+        except AttributeError:
+            return {}
+
+    def has_valid_global_keys(self) -> bool:
+        """
+        Check if keys are valid and not None
+        """
+        credentials = self.get_global_keys()
+        if credentials:
+            self.key = credentials.get("KEY")
+            self.secret = credentials.get("SECRET")
+            self.url = credentials.get("URL")
+            return bool(self.key and self.secret and self.url)
+        return False
 
 
 class BigBlueButton(LiveProvider, HasGlobalCredentials):

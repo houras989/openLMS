@@ -663,4 +663,11 @@ COURSE_LIVE_GLOBAL_CREDENTIALS["BIG_BLUE_BUTTON"] = {
     "URL": ENV_TOKENS.get('BIG_BLUE_BUTTON_GLOBAL_URL', None),
 }
 
+# keys for zoom live provider
+COURSE_LIVE_GLOBAL_CREDENTIALS["ZOOM"] = {
+    "KEY": ENV_TOKENS.get('ZOOM_GLOBAL_KEY', None),
+    "SECRET": ENV_TOKENS.get('ZOOM_GLOBAL_SECRET', None),
+    "URL": ENV_TOKENS.get('ZOOM_GLOBAL_URL', None),
+}
+
 INACTIVE_USER_URL = f'http{"s" if HTTPS == "on" else ""}://{CMS_BASE}'

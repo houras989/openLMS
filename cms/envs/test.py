@@ -366,3 +366,9 @@ COURSE_LIVE_GLOBAL_CREDENTIALS["BIG_BLUE_BUTTON"] = {
     "SECRET": "***",
     "URL": "***",
 }
+
+COURSE_LIVE_GLOBAL_CREDENTIALS["ZOOM"] = {
+    "KEY": "***",
+    "SECRET": "***",
+    "URL": "***",
+}
