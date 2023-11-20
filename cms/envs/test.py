@@ -26,8 +26,7 @@ from xmodule.modulestore.modulestore_settings import update_module_store_setting
 from .common import *
 
 # import settings from LMS for consistent behavior with CMS
-from lms.envs.test import (  # pylint: disable=wrong-import-order, disable=unused-import
-    ACCOUNT_MICROFRONTEND_URL,
+from lms.envs.test import (  # pylint: disable=wrong-import-order
     BLOCKSTORE_USE_BLOCKSTORE_APP_API,
     BLOCKSTORE_API_URL,
     COMPREHENSIVE_THEME_DIRS,  # unimport:skip
@@ -38,10 +37,8 @@ from lms.envs.test import (  # pylint: disable=wrong-import-order, disable=unuse
     LOGIN_ISSUE_SUPPORT_LINK,
     MEDIA_ROOT,
     MEDIA_URL,
-    ORDER_HISTORY_MICROFRONTEND_URL,
     PLATFORM_DESCRIPTION,
     PLATFORM_NAME,
-    PROFILE_MICROFRONTEND_URL,
     REGISTRATION_EXTRA_FIELDS,
     GRADES_DOWNLOAD,
     SITE_NAME,
@@ -98,8 +95,6 @@ STATICFILES_DIRS += [
 STATICFILES_STORAGE = 'pipeline.storage.NonPackagingPipelineStorage'
 STATIC_URL = "/static/"
 
-BLOCK_STRUCTURES_SETTINGS['PRUNING_ACTIVE'] = True
-
 # Update module store settings per defaults for tests
 update_module_store_settings(
     MODULESTORE,
@@ -147,8 +142,7 @@ COURSE_AUTHORING_MICROFRONTEND_URL = "http://course-authoring-mfe"
 DISCUSSIONS_MICROFRONTEND_URL = "http://discussions-mfe"
 
 CACHES = {
-    # This is the cache used for most things. Askbot will not work without a
-    # functioning cache -- it relies on caching to load its settings in places.
+    # This is the cache used for most things.
     # In staging/prod envs, the sessions also live here.
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -308,9 +302,9 @@ VIDEO_IMAGE_SETTINGS = dict(
     VIDEO_IMAGE_MIN_BYTES=2 * 1024,       # 2 KB
     STORAGE_KWARGS=dict(
         location=MEDIA_ROOT,
-        base_url=MEDIA_URL,
     ),
     DIRECTORY_PREFIX='video-images/',
+    BASE_URL=MEDIA_URL,
 )
 VIDEO_IMAGE_DEFAULT_FILENAME = 'default_video_image.png'
 

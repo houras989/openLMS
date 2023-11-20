@@ -4,7 +4,6 @@
 from datetime import date
 import json
 from unittest.mock import MagicMock, patch
-from urllib.parse import urljoin
 from django.conf import settings
 from django.http import HttpResponse
 from django.test import RequestFactory, TestCase
@@ -58,8 +57,8 @@ class CookieTests(TestCase):
     def _get_expected_header_urls(self):
         expected_header_urls = {
             'logout': reverse('logout'),
-            'account_settings': settings.ACCOUNT_MICROFRONTEND_URL,
-            'learner_profile': urljoin(settings.PROFILE_MICROFRONTEND_URL, f'/u/{self.user.username}'),
+            'account_settings': reverse('account_settings'),
+            'learner_profile': reverse('learner_profile', kwargs={'username': self.user.username}),
         }
         block_url = retrieve_last_sitewide_block_completed(self.user)
         if block_url:
@@ -86,7 +85,7 @@ class CookieTests(TestCase):
         If can_recreate is False, verifies that a JWT cannot be recreated.
         """
         self._copy_cookies_to_request(response, self.request)
-        JwtAuthCookieMiddleware().process_view(self.request, None, None, None)
+        JwtAuthCookieMiddleware(get_response=lambda request: None).process_view(self.request, None, None, None)
         assert (cookies_api.jwt_cookies.jwt_cookie_name() in self.request.COOKIES) == can_recreate
         if can_recreate:
             jwt_string = self.request.COOKIES[cookies_api.jwt_cookies.jwt_cookie_name()]

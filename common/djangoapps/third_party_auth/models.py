@@ -366,13 +366,12 @@ class OAuth2ProviderConfig(ProviderConfig):
 
     .. no_pii:
     """
-    # We are keying the provider config by backend_name here as suggested in the python social
-    # auth documentation. In order to reuse a backend for a second provider, a subclass can be
-    # created with seperate name.
+    # We are keying the provider config by backend_name and site_id to support configuration per site.
+    # In order to reuse a backend for a second provider, a subclass can be created with seperate name.
     # example:
     # class SecondOpenIDProvider(OpenIDAuth):
     #   name = "second-openId-provider"
-    KEY_FIELDS = ('backend_name',)
+    KEY_FIELDS = ('site_id', 'backend_name')
     prefix = 'oa2'
     backend_name = models.CharField(
         max_length=50, blank=False, db_index=True,
@@ -400,6 +399,29 @@ class OAuth2ProviderConfig(ProviderConfig):
         app_label = "third_party_auth"
         verbose_name = "Provider Configuration (OAuth)"
         verbose_name_plural = verbose_name
+
+    @classmethod
+    def current(cls, *args):
+        """
+        Get the current config model for the provider according to the given backend and the current
+        site.
+        """
+        site_id = Site.objects.get_current(get_current_request()).id
+        return super(OAuth2ProviderConfig, cls).current(site_id, *args)
+
+    @property
+    def provider_id(self):
+        """
+        Unique string key identifying this provider. Must be URL and css class friendly.
+        Ignoring site_id as the config is filtered using current method which fetches the configuration for the current
+        site_id.
+        """
+        assert self.prefix is not None
+        return "-".join((self.prefix, ) + tuple(
+            str(getattr(self, field))
+            for field in self.KEY_FIELDS
+            if field != 'site_id'
+        ))
 
     def clean(self):
         """ Standardize and validate fields """
@@ -991,4 +1013,22 @@ class LTIProviderConfig(ProviderConfig):
     class Meta:
         app_label = "third_party_auth"
         verbose_name = "Provider Configuration (LTI)"
+        verbose_name_plural = verbose_name
+
+
+class AppleMigrationUserIdInfo(models.Model):
+    """
+    Model to store users' Apple Unique Identifier during migration
+    process of Apple team from edx Inc. to edx LLC.
+    """
+    old_apple_id = models.CharField(max_length=255)
+    transfer_id = models.CharField(max_length=255, null=True, blank=True)
+    new_apple_id = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return self.old_apple_id
+
+    class Meta:
+        app_label = "third_party_auth"
+        verbose_name = "Apple User Id Migration Info"
         verbose_name_plural = verbose_name

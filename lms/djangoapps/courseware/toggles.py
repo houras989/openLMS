@@ -55,6 +55,19 @@ COURSEWARE_MICROFRONTEND_PROGRESS_MILESTONES_STREAK_CELEBRATION = CourseWaffleFl
     f'{WAFFLE_FLAG_NAMESPACE}.mfe_progress_milestones_streak_celebration', __name__
 )
 
+# .. toggle_name: courseware.mfe_courseware_search
+# .. toggle_implementation: WaffleFlag
+# .. toggle_default: False
+# .. toggle_description: Enables Courseware Search on Learning MFE
+# .. toggle_use_cases: temporary
+# .. toggle_creation_date: 2023-09-28
+# .. toggle_target_removal_date: None
+# .. toggle_tickets: KBK-20
+# .. toggle_warning: None.
+COURSEWARE_MICROFRONTEND_SEARCH_ENABLED = CourseWaffleFlag(
+    f'{WAFFLE_FLAG_NAMESPACE}.mfe_courseware_search', __name__
+)
+
 # .. toggle_name: courseware.mfe_progress_milestones_streak_discount_enabled
 # .. toggle_implementation: CourseWaffleFlag
 # .. toggle_default: False
@@ -96,17 +109,18 @@ COURSEWARE_OPTIMIZED_RENDER_XBLOCK = CourseWaffleFlag(
 # .. toggle_status: unsupported
 COURSES_INVITE_ONLY = SettingToggle('COURSES_INVITE_ONLY', default=False)
 
-# .. toggle_name: courseware.public_video_share
+# .. toggle_name: courseware.learning_assistant
 # .. toggle_implementation: CourseWaffleFlag
 # .. toggle_default: False
-# .. toggle_description: Gates access to public videos. This flag must be enabled, and individual
-#                        videos must be marked as "public_access"
+# .. toggle_description: This flag enables an the visibility of an LTI-based learning assistant
 # .. toggle_use_cases: temporary
-# .. toggle_creation_date: 2023-02-02
+# .. toggle_creation_date: 2023-07-05
 # .. toggle_target_removal_date: None
-PUBLIC_VIDEO_SHARE = CourseWaffleFlag(
-    f'{WAFFLE_FLAG_NAMESPACE}.public_video_share', __name__
+# .. toggle_tickets: MST-1977
+COURSEWARE_LEARNING_ASSISTANT = CourseWaffleFlag(
+    f'{WAFFLE_FLAG_NAMESPACE}.learning_assistant', __name__
 )
+
 
 ENABLE_OPTIMIZELY_IN_COURSEWARE = WaffleSwitch(  # lint-amnesty, pylint: disable=toggle-missing-annotation
     'RET.enable_optimizely_in_courseware', __name__
@@ -148,3 +162,14 @@ def course_is_invitation_only(courselike) -> bool:
     """Returns whether the course is invitation only or not."""
     # We also mark Old Mongo courses (deprecated keys) as invitation only to cut off enrollment
     return COURSES_INVITE_ONLY.is_enabled() or courselike.invitation_only or courselike.id.deprecated
+
+
+def learning_assistant_is_active(course_key):
+    return COURSEWARE_LEARNING_ASSISTANT.is_enabled(course_key)
+
+
+def courseware_mfe_search_is_enabled(course_key=None):
+    """
+    Return whether the courseware.mfe_courseware_search flag is on.
+    """
+    return COURSEWARE_MICROFRONTEND_SEARCH_ENABLED.is_enabled(course_key)

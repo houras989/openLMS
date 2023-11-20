@@ -21,6 +21,7 @@ class TestCreateJWTs(AccessTokenMixin, TestCase):
         super().setUp()
         self.user = UserFactory()
         self.default_scopes = ['email', 'profile']
+        self.default_scopes_password_grant_type = ['email', 'profile', 'user_id']
 
     def _create_client(self, oauth_adapter, client_restricted, grant_type=None):
         """
@@ -71,6 +72,11 @@ class TestCreateJWTs(AccessTokenMixin, TestCase):
 
     def test_dot_create_jwt_for_token_with_asymmetric(self):
         jwt_token = self._create_jwt_for_token(DOTAdapter(), use_asymmetric_key=True)
+        self._assert_jwt_is_valid(jwt_token, should_be_asymmetric_key=True)
+
+    @override_settings(JWT_AUTH_FORCE_CREATE_ASYMMETRIC=True)
+    def test_dot_create_jwt_for_token_forced_asymmetric(self):
+        jwt_token = self._create_jwt_for_token(DOTAdapter(), use_asymmetric_key=False)
         self._assert_jwt_is_valid(jwt_token, should_be_asymmetric_key=True)
 
     def test_create_jwt_for_token_default_expire_seconds(self):
@@ -171,7 +177,7 @@ class TestCreateJWTs(AccessTokenMixin, TestCase):
         jwt_token_dict = jwt_api.create_jwt_token_dict(token_dict, oauth_adapter, use_asymmetric_key=False)
 
         self.assert_valid_jwt_access_token(
-            jwt_token_dict["access_token"], self.user, self.default_scopes,
+            jwt_token_dict["access_token"], self.user, self.default_scopes_password_grant_type,
             grant_type='password',
         )
 

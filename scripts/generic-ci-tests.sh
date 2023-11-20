@@ -20,11 +20,10 @@ set -e
 #       - "pavelib-unit": Run Python unit tests from the pavelib/lib directory
 #       - "pavelib-js-unit": Run the JavaScript tests and the Python unit
 #           tests from the pavelib/lib directory
-#       - "bok-choy": Run acceptance tests that use the bok-choy framework
 #
 #   `SHARD` is a number indicating which subset of the tests to build.
 #
-#       For "bok-choy" and "lms-unit", the tests are put into shard groups
+#       For "lms-unit", the tests are put into shard groups
 #       using the 'attr' decorator (e.g. "@attr(shard=1)"). Anything with
 #       the 'shard=n' attribute will run in the nth shard. If there isn't a
 #       shard explicitly assigned, the test will run in the last shard.
@@ -55,7 +54,7 @@ git clean -qxfd
 
 function emptyxunit {
 
-    cat > reports/$1.xml <<END
+    cat > "reports/$1.xml" <<END
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="$1" tests="1" errors="0" failures="0" skip="0">
 <testcase classname="pavelib.quality" name="$1" time="0.604"></testcase>
@@ -82,19 +81,18 @@ else
 fi
 
 PAVER_ARGS="-v"
-PARALLEL="--processes=-1"
 export SUBSET_JOB=$JOB_NAME
 
 function run_paver_quality {
     QUALITY_TASK=$1
     shift
     mkdir -p test_root/log/
-    LOG_PREFIX=test_root/log/$QUALITY_TASK
-    $TOX paver $QUALITY_TASK $* 2> $LOG_PREFIX.err.log > $LOG_PREFIX.out.log || {
+    LOG_PREFIX="test_root/log/$QUALITY_TASK"
+    $TOX paver "$QUALITY_TASK" "$@" 2> "$LOG_PREFIX.err.log" > "$LOG_PREFIX.out.log" || {
         echo "STDOUT (last 100 lines of $LOG_PREFIX.out.log):";
-        tail -n 100 $LOG_PREFIX.out.log;
+        tail -n 100 "$LOG_PREFIX.out.log"
         echo "STDERR (last 100 lines of $LOG_PREFIX.err.log):";
-        tail -n 100 $LOG_PREFIX.err.log;
+        tail -n 100 "$LOG_PREFIX.err.log"
         return 1;
     }
     return 0;
@@ -103,6 +101,7 @@ function run_paver_quality {
 case "$TEST_SUITE" in
 
     "quality")
+        EXIT=0
 
         mkdir -p reports
 
@@ -128,11 +127,11 @@ case "$TEST_SUITE" in
                 echo "Finding pycodestyle violations and storing report..."
                 run_paver_quality run_pep8 || { EXIT=1; }
                 echo "Finding ESLint violations and storing report..."
-                run_paver_quality run_eslint -l $ESLINT_THRESHOLD || { EXIT=1; }
+                run_paver_quality run_eslint -l "$ESLINT_THRESHOLD" || { EXIT=1; }
                 echo "Finding Stylelint violations and storing report..."
                 run_paver_quality run_stylelint || { EXIT=1; }
                 echo "Running xss linter report."
-                run_paver_quality run_xsslint -t $XSSLINT_THRESHOLDS || { EXIT=1; }
+                run_paver_quality run_xsslint -t "$XSSLINT_THRESHOLDS" || { EXIT=1; }
                 echo "Running PII checker on all Django models..."
                 run_paver_quality run_pii_check || { EXIT=1; }
                 echo "Running reserved keyword checker on all Django models..."
@@ -144,7 +143,7 @@ case "$TEST_SUITE" in
         # Need to create an empty test result so the post-build
         # action doesn't fail the build.
         emptyxunit "stub"
-        exit $EXIT
+        exit "$EXIT"
         ;;
 
     "js-unit")
@@ -153,6 +152,7 @@ case "$TEST_SUITE" in
         ;;
 
     "pavelib-js-unit")
+        EXIT=0
         $TOX paver test_js --coverage --skip-clean || { EXIT=1; }
         paver test_lib --skip-clean $PAVER_ARGS || { EXIT=1; }
 
@@ -167,6 +167,6 @@ case "$TEST_SUITE" in
         # Note that by default the value of this variable EXIT is not set, so if
         # neither command fails then the exit command resolves to simply exit
         # which is considered successful.
-        exit $EXIT
+        exit "$EXIT"
         ;;
 esac

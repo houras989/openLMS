@@ -2,6 +2,7 @@
 Tests courseware views.py
 """
 
+from contextlib import contextmanager
 import html
 import itertools
 import json
@@ -29,6 +30,7 @@ from opaque_keys.edx.keys import CourseKey, UsageKey
 from pytz import UTC
 from openedx.core.djangoapps.waffle_utils.models import WaffleFlagCourseOverrideModel
 from rest_framework import status
+from rest_framework.test import APIClient
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
 from xblock.fields import Scope, String
@@ -75,8 +77,16 @@ from lms.djangoapps.courseware.block_render import get_block, handle_xblock_call
 from lms.djangoapps.courseware.tests.factories import StudentModuleFactory
 from lms.djangoapps.courseware.tests.helpers import MasqueradeMixin, get_expiration_banner_text, set_preview_mode
 from lms.djangoapps.courseware.testutils import RenderXBlockTestMixin
-from lms.djangoapps.courseware.toggles import COURSEWARE_OPTIMIZED_RENDER_XBLOCK, PUBLIC_VIDEO_SHARE
+from lms.djangoapps.courseware.toggles import (
+    COURSEWARE_MICROFRONTEND_SEARCH_ENABLED,
+    COURSEWARE_OPTIMIZED_RENDER_XBLOCK,
+)
 from lms.djangoapps.courseware.user_state_client import DjangoXBlockUserStateClient
+from lms.djangoapps.courseware.views.views import (
+    BasePublicVideoXBlockView,
+    PublicVideoXBlockView,
+    PublicVideoXBlockEmbedView,
+)
 from lms.djangoapps.instructor.access import allow_access
 from lms.djangoapps.verify_student.services import IDVerificationService
 from openedx.core.djangoapps.catalog.tests.factories import CourseFactory as CatalogCourseFactory
@@ -87,6 +97,7 @@ from openedx.core.djangoapps.credit.api import set_credit_requirements
 from openedx.core.djangoapps.credit.models import CreditCourse, CreditProvider
 from openedx.core.djangoapps.waffle_utils.testutils import WAFFLE_TABLES
 from openedx.core.djangolib.testing.utils import get_mock_request
+from openedx.core.djangoapps.video_config.toggles import PUBLIC_VIDEO_SHARE
 from openedx.core.lib.url_utils import quote_slashes
 from openedx.features.content_type_gating.models import ContentTypeGatingConfig
 from openedx.features.course_duration_limits.models import CourseDurationLimitConfig
@@ -347,7 +358,7 @@ class IndexQueryTestCase(ModuleStoreTestCase):
         self.client.login(username=self.user.username, password=self.user_password)
         CourseEnrollment.enroll(self.user, course.id)
 
-        with self.assertNumQueries(202, table_ignorelist=QUERY_COUNT_TABLE_IGNORELIST):
+        with self.assertNumQueries(177, table_ignorelist=QUERY_COUNT_TABLE_IGNORELIST):
             with check_mongo_calls(3):
                 url = reverse(
                     'courseware_section',
@@ -705,7 +716,7 @@ class ViewsTestCase(BaseViewsTestCase):
         # log into a staff account
         admin = AdminFactory()
 
-        assert self.client.login(username=admin.username, password='test')
+        assert self.client.login(username=admin.username, password=TEST_PASSWORD)
 
         url = reverse('submission_history', kwargs={
             'course_id': str(self.course_key),
@@ -720,7 +731,7 @@ class ViewsTestCase(BaseViewsTestCase):
         # log into a staff account
         admin = AdminFactory()
 
-        assert self.client.login(username=admin.username, password='test')
+        assert self.client.login(username=admin.username, password=TEST_PASSWORD)
 
         # try it with an existing user and a malicious location
         url = reverse('submission_history', kwargs={
@@ -744,7 +755,7 @@ class ViewsTestCase(BaseViewsTestCase):
         # log into a staff account
         admin = AdminFactory.create()
 
-        assert self.client.login(username=admin.username, password='test')
+        assert self.client.login(username=admin.username, password=TEST_PASSWORD)
 
         usage_key = self.course_key.make_usage_key('problem', 'test-history')
         state_client = DjangoXBlockUserStateClient(admin)
@@ -807,7 +818,7 @@ class ViewsTestCase(BaseViewsTestCase):
                 course_key = course.id
                 client = Client()
                 admin = AdminFactory.create()
-                assert client.login(username=admin.username, password='test')
+                assert client.login(username=admin.username, password=TEST_PASSWORD)
                 state_client = DjangoXBlockUserStateClient(admin)
                 usage_key = course_key.make_usage_key('problem', 'test-history')
                 state_client.set(
@@ -1246,7 +1257,7 @@ class ProgressPageBaseTests(ModuleStoreTestCase):
     def setUp(self):
         super().setUp()
         self.user = UserFactory.create()
-        assert self.client.login(username=self.user.username, password='test')
+        assert self.client.login(username=self.user.username, password=TEST_PASSWORD)
 
         self.setup_course()
 
@@ -1345,7 +1356,7 @@ class ProgressPageTests(ProgressPageBaseTests):
         # Create a new course, a user which will not be enrolled in course, admin user for staff access
         course = CourseFactory.create(default_store=ModuleStoreEnum.Type.split)
         admin = AdminFactory.create()
-        assert self.client.login(username=admin.username, password='test')
+        assert self.client.login(username=admin.username, password=TEST_PASSWORD)
 
         # Create and enable Credit course
         CreditCourse.objects.create(course_key=course.id, enabled=True)
@@ -1480,8 +1491,8 @@ class ProgressPageTests(ProgressPageBaseTests):
             self.assertContains(resp, "earned a certificate for this course.")
 
     @ddt.data(
-        (True, 52),
-        (False, 52),
+        (True, 53),
+        (False, 53),
     )
     @ddt.unpack
     def test_progress_queries_paced_courses(self, self_paced, query_count):
@@ -1496,13 +1507,13 @@ class ProgressPageTests(ProgressPageBaseTests):
         ContentTypeGatingConfig.objects.create(enabled=True, enabled_as_of=datetime(2018, 1, 1))
         self.setup_course()
         with self.assertNumQueries(
-            52, table_ignorelist=QUERY_COUNT_TABLE_IGNORELIST
+            53, table_ignorelist=QUERY_COUNT_TABLE_IGNORELIST
         ), check_mongo_calls(2):
             self._get_progress_page()
 
         for _ in range(2):
             with self.assertNumQueries(
-                36, table_ignorelist=QUERY_COUNT_TABLE_IGNORELIST
+                37, table_ignorelist=QUERY_COUNT_TABLE_IGNORELIST
             ), check_mongo_calls(2):
                 self._get_progress_page()
 
@@ -1639,7 +1650,7 @@ class ProgressPageTests(ProgressPageBaseTests):
         """
         CourseDurationLimitConfig.objects.create(enabled=True, enabled_as_of=datetime(2018, 1, 1))
         user = UserFactory.create()
-        assert self.client.login(username=user.username, password='test')
+        assert self.client.login(username=user.username, password=TEST_PASSWORD)
         add_course_mode(self.course, mode_slug=CourseMode.AUDIT)
         add_course_mode(self.course)
         CourseEnrollmentFactory(user=user, course_id=self.course.id, mode=course_mode)
@@ -1672,7 +1683,7 @@ class ProgressPageTests(ProgressPageBaseTests):
         """
         CourseDurationLimitConfig.objects.create(enabled=False)
         user = UserFactory.create()
-        assert self.client.login(username=user.username, password='test')
+        assert self.client.login(username=user.username, password=TEST_PASSWORD)
         CourseModeFactory.create(
             course_id=self.course.id,
             mode_slug=course_mode
@@ -1691,7 +1702,7 @@ class ProgressPageTests(ProgressPageBaseTests):
          in an ineligible mode.
         """
         user = UserFactory.create()
-        assert self.client.login(username=user.username, password='test')
+        assert self.client.login(username=user.username, password=TEST_PASSWORD)
         CourseEnrollmentFactory(user=user, course_id=self.course.id, mode=course_mode)
 
         with patch('lms.djangoapps.grades.course_grade_factory.CourseGradeFactory.read') as mock_create:
@@ -1929,7 +1940,7 @@ class ProgressPageShowCorrectnessTests(ProgressPageBaseTests):
         Submit the given score to the problem on behalf of the user
         """
         # Get the block for the problem, as viewed by the user
-        field_data_cache = FieldDataCache.cache_for_descriptor_descendents(
+        field_data_cache = FieldDataCache.cache_for_block_descendents(
             self.course.id,
             self.user,
             self.course,
@@ -2074,7 +2085,7 @@ class ProgressPageShowCorrectnessTests(ProgressPageBaseTests):
         self.setup_course(show_correctness=show_correctness, due_date=due_date, graded=graded)
         self.add_problem()
 
-        self.client.login(username=self.user.username, password='test')
+        self.client.login(username=self.user.username, password=TEST_PASSWORD)
         resp = self._get_progress_page()
 
         # Ensure that expected text is present
@@ -2126,7 +2137,7 @@ class ProgressPageShowCorrectnessTests(ProgressPageBaseTests):
         self.add_problem()
 
         # Login as a course staff user to view the student progress page.
-        self.client.login(username=self.staff_user.username, password='test')
+        self.client.login(username=self.staff_user.username, password=TEST_PASSWORD)
 
         resp = self._get_student_progress_page()
 
@@ -2998,19 +3009,19 @@ class TestRenderXBlock(RenderXBlockTestMixin, ModuleStoreTestCase, CompletionWaf
         assert response.status_code == expected_response
 
 
-@ddt.ddt
-class TestRenderPublicVideoXBlock(ModuleStoreTestCase):
+class TestBasePublicVideoXBlock(ModuleStoreTestCase):
     """
-    Tests for the courseware.render_public_video_xblock endpoint.
+    Tests for public video xblock.
     """
-
     def setup_course(self, enable_waffle=True):
         """
         Helper method to create the course.
         """
+        # pylint:disable=attribute-defined-outside-init
+
         with self.store.default_store(self.store.default_modulestore.get_modulestore_type()):
-            course = CourseFactory.create(**{'start': datetime.now() - timedelta(days=1)})
-            chapter = BlockFactory.create(parent=course, category='chapter')
+            self.course = CourseFactory.create(**{'start': datetime.now() - timedelta(days=1)})
+            chapter = BlockFactory.create(parent=self.course, category='chapter')
             vertical_block = BlockFactory.create(
                 parent_location=chapter.location,
                 category='vertical',
@@ -3034,11 +3045,17 @@ class TestRenderPublicVideoXBlock(ModuleStoreTestCase):
             )
         WaffleFlagCourseOverrideModel.objects.create(
             waffle_flag=PUBLIC_VIDEO_SHARE.name,
-            course_id=course.id,
+            course_id=self.course.id,
             enabled=enable_waffle,
         )
-        CourseOverview.load_from_module_store(course.id)
+        CourseOverview.load_from_module_store(self.course.id)
 
+
+@ddt.ddt
+class TestRenderPublicVideoXBlock(TestBasePublicVideoXBlock):
+    """
+    Tests for the courseware.render_public_video_xblock endpoint.
+    """
     def get_response(self, usage_key, is_embed):
         """
         Overridable method to get the response from the endpoint that is being tested.
@@ -3185,7 +3202,7 @@ class EnterpriseConsentTestCase(EnterpriseTestConsentRequired, ModuleStoreTestCa
     def setUp(self):
         super().setUp()
         self.user = UserFactory.create()
-        assert self.client.login(username=self.user.username, password='test')
+        assert self.client.login(username=self.user.username, password=TEST_PASSWORD)
         self.course = CourseFactory.create()
         CourseOverview.load_from_module_store(self.course.id)
         CourseEnrollmentFactory(user=self.user, course_id=self.course.id)
@@ -3285,7 +3302,7 @@ class PreviewTests(BaseViewsTestCase):
             # Previews will not redirect to the mfe
             course_staff = UserFactory.create(is_staff=False)
             CourseStaffRole(self.course_key).add_users(course_staff)
-            self.client.login(username=course_staff.username, password='test')
+            self.client.login(username=course_staff.username, password=TEST_PASSWORD)
             assert self.client.get(preview_url).status_code == 200
 
 
@@ -3422,7 +3439,7 @@ class TestCourseWideResources(ModuleStoreTestCase):
         CourseEnrollmentFactory(user=user, course_id=course.id)
         if is_instructor:
             allow_access(course, user, 'instructor')
-        assert self.client.login(username=user.username, password='test')
+        assert self.client.login(username=user.username, password=TEST_PASSWORD)
 
         kwargs = None
         if param == 'course_id':
@@ -3448,3 +3465,263 @@ class TestCourseWideResources(ModuleStoreTestCase):
         else:
             assert js_match == [None, None, None]
             assert css_match == [None, None, None]
+
+
+@ddt.ddt
+class TestBasePublicVideoXBlockView(TestBasePublicVideoXBlock):
+    """Test Base Public Video XBlock View tests"""
+    base_block = BasePublicVideoXBlockView(request=MagicMock())
+
+    @ddt.data(
+        (True, True),
+        (True, False),
+        (False, True),
+        (False, False),
+    )
+    @ddt.unpack
+    @patch('lms.djangoapps.courseware.views.views.get_block_by_usage_id')
+    def test_get_course_and_video_block(self, is_waffle_enabled, is_public_video, mock_get_block_by_usage_id):
+        """
+        Test that get_course_and_video_block returns course and video block.
+        """
+
+        self.setup_course(enable_waffle=is_waffle_enabled)
+        target_video = self.video_block_public if is_public_video else self.video_block_not_public
+
+        mock_get_block_by_usage_id.return_value = (target_video, None)
+
+        # get 404 unless waffle is enabled and video is public
+        if is_public_video and is_waffle_enabled:
+            course, video_block = self.base_block.get_course_and_video_block(str(target_video.location))
+            assert course.id == self.course.id
+            assert video_block.location == target_video.location
+        else:
+            with self.assertRaisesRegex(Http404, "Video not found"):
+                course, video_block = self.base_block.get_course_and_video_block(str(target_video.location))
+
+
+@ddt.ddt
+class TestPublicVideoXBlockView(TestBasePublicVideoXBlock):
+    """Test Public Video XBlock View"""
+    request = RequestFactory().get('/?utm_source=edx.org&utm_medium=referral&utm_campaign=video')
+    request.user = AnonymousUser()
+    base_block = PublicVideoXBlockView(request=request)
+    default_utm_params = {'utm_source': 'edx.org', 'utm_medium': 'referral', 'utm_campaign': 'video'}
+
+    @contextmanager
+    def mock_get_learn_more_url(self, **kwargs):
+        """ Helper for mocking get_learn_more_button_url """
+        with patch.object(
+            PublicVideoXBlockView,
+            'get_learn_more_button_url',
+            **kwargs
+        ) as mock_get_url:
+            yield mock_get_url
+
+    @contextmanager
+    def mock_get_catalog_course_data(self, **kwargs):
+        """ Helper for mocking get_catalog_course_data """
+        with patch.object(
+            PublicVideoXBlockView,
+            'get_catalog_course_data',
+            **kwargs
+        ) as mock_get_data:
+            yield mock_get_data
+
+    def test_get_template_and_context(self):
+        """
+        Get template and context.
+        """
+        self.setup_course(enable_waffle=True)
+        fragment = MagicMock()
+        with patch.object(self.video_block_public, "render", return_value=fragment):
+            with self.mock_get_learn_more_url():
+                with self.mock_get_catalog_course_data():
+                    template, context = self.base_block.get_template_and_context(self.course, self.video_block_public)
+        assert template == 'public_video.html'
+        assert context['fragment'] == fragment
+        assert context['course'] == self.course
+
+    @ddt.unpack
+    @ddt.data(
+        (None, None, {}),
+        ('uuid', None, {}),
+        ('uuid', {}, {'org_logo': None, 'marketing_url': None}),
+    )
+    def test_get_catalog_course_data(self, mock_get_uuid, mock_get_data, expected_response):
+        self.setup_course()
+        with patch('lms.djangoapps.courseware.views.views.get_course_uuid_for_course', return_value=mock_get_uuid):
+            with patch('lms.djangoapps.courseware.views.views.get_course_data', return_value=mock_get_data):
+                assert self.base_block.get_catalog_course_data(self.course) == expected_response
+
+    @ddt.unpack
+    @ddt.data(
+        ({}, None),
+        ({'marketing_url': 'www.somesite.com/this'}, 'www.somesite.com/this'),
+        ({'marketing_url': 'www.somesite.com/this?utm_source=jansen'}, 'www.somesite.com/this'),
+    )
+    def test_get_catalog_course_marketing_url(self, input_data, expected_url):
+        url = self.base_block._get_catalog_course_marketing_url(input_data)
+        assert url == expected_url
+
+    @ddt.unpack
+    @ddt.data(
+        ({}, None),
+        ({'owners': []}, None),
+        ({'owners': [{}]}, None),
+        ({'owners': [{'logo_image_url': 'somesite.org/image'}]}, 'somesite.org/image'),
+        ({'owners': [{'logo_image_url': 'firsturl'}, {'logo_image_url': 'secondurl'}]}, 'firsturl'),
+    )
+    def test_get_catalog_course_owner_logo(self, input_data, expected_url):
+        url = self.base_block._get_catalog_course_owner_logo(input_data)
+        assert url == expected_url
+
+    @ddt.data("poster", None)
+    def test_get_social_sharing_metadata(self, poster_url):
+        """
+        Test that get_social_sharing_metadata returns correct metadata.
+        """
+        self.setup_course(enable_waffle=True)
+        # can't mock something that doesn't exist
+        self.video_block_public._post = MagicMock(return_value=poster_url)
+
+        metadata = self.base_block.get_social_sharing_metadata(self.course, self.video_block_public)
+        assert metadata["video_title"] == self.video_block_public.display_name_with_default
+        assert metadata["video_description"] == f"Watch a video from the course {self.course.display_name} on edX.org"
+        assert metadata["video_thumbnail"] == "" if poster_url is None else poster_url
+
+    def test_get_utm_params(self):
+        """
+        Test that get_utm_params returns correct utm params.
+        """
+        utm_params = self.base_block.get_utm_params()
+        assert utm_params == {
+            'utm_source': 'edx.org',
+            'utm_medium': 'referral',
+            'utm_campaign': 'video',
+        }
+
+    def test_build_url(self):
+        """
+        Test that build_url returns correct url.
+        """
+        base_url = 'http://test.server'
+        params = {
+            'param1': 'value1',
+            'param2': 'value2',
+        }
+        utm_params = {
+            "utm_source": "edx.org",
+        }
+        url = self.base_block.build_url(base_url, params, utm_params)
+        assert url == 'http://test.server?param1=value1&param2=value2&utm_source=edx.org'
+
+    def assert_url_with_params(self, url, base_url, params):
+        if params:
+            assert url == base_url + '?' + urlencode(params)
+        else:
+            assert url == base_url
+
+    @ddt.data({}, {'marketing_url': 'some_url'})
+    def test_get_learn_more_button_url(self, catalog_course_info):
+        """
+        If we have a marketing url from the catalog service, use that. Otherwise
+        use the courseware about_course
+        """
+        self.setup_course()
+        url = self.base_block.get_learn_more_button_url(self.course, catalog_course_info, self.default_utm_params)
+        if 'marketing_url' in catalog_course_info:
+            expected_url = catalog_course_info['marketing_url']
+        else:
+            expected_url = reverse('about_course', kwargs={'course_id': str(self.course.id)})
+        self.assert_url_with_params(url, expected_url, self.default_utm_params)
+
+    def test_get_public_video_cta_button_urls(self):
+        """
+        Test that get_public_video_cta_button_urls returns correct urls.
+        """
+        catalog_course_info = {'marketing_url': 'some_url'}
+        self.setup_course()
+        learn_more_url, enroll_url, go_to_course_url = \
+            self.base_block.get_public_video_cta_button_urls(self.course, catalog_course_info)
+        assert go_to_course_url == \
+            get_learning_mfe_home_url(course_key=self.course.id, url_fragment='home')
+
+        assert learn_more_url == \
+            self.base_block.get_learn_more_button_url(self.course, catalog_course_info,
+                                                      self.default_utm_params)
+        assert enroll_url == self.base_block.build_url(
+            reverse('register_user'),
+            {
+                'course_id': str(self.course.id),
+                'enrollment_action': 'enroll',
+                'email_opt_in': False,
+            },
+            self.default_utm_params,
+        )
+
+    @ddt.data(True, False)
+    def test_get_is_enrolled_in_course(self, mock_registered_for_course):
+        """
+        Test that is_enrolled_in_course returns correct value.
+        """
+        with patch('lms.djangoapps.courseware.views.views.registered_for_course',
+                   return_value=mock_registered_for_course):
+            self.setup_course()
+            assert views.registered_for_course(self.course, self.user) == mock_registered_for_course
+            assert self.base_block.get_is_enrolled_in_course(self.course) == mock_registered_for_course
+
+
+class TestPublicVideoXBlockEmbedView(TestBasePublicVideoXBlock):
+    """Test Public Video XBlock Embed View"""
+    base_block = PublicVideoXBlockEmbedView()
+
+    def test_get_template_and_context(self):
+        """
+        Get template and context.
+        """
+        self.setup_course(enable_waffle=True)
+        fragment = MagicMock()
+        with patch.object(self.video_block_public, "render", return_value=fragment):
+            template, context = self.base_block.get_template_and_context(self.course, self.video_block_public)
+            assert template == 'public_video_share_embed.html'
+            assert context['fragment'] == fragment
+            assert context['course'] == self.course
+
+
+class TestCoursewareMFESearchAPI(SharedModuleStoreTestCase):
+    """
+    Tests the endpoint to fetch the Courseware Search waffle flag enabled status.
+    """
+
+    def setUp(self):
+        super().setUp()
+
+        self.course = CourseFactory.create()
+
+        self.client = APIClient()
+        self.apiUrl = reverse('courseware_search_enabled_view', kwargs={'course_id': str(self.course.id)})
+
+    @override_waffle_flag(COURSEWARE_MICROFRONTEND_SEARCH_ENABLED, active=True)
+    def test_courseware_mfe_search_enabled(self):
+        """
+        Getter to check if user is allowed to use Courseware Search.
+        """
+
+        response = self.client.get(self.apiUrl, content_type='application/json')
+        body = json.loads(response.content.decode('utf-8'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(body, {'enabled': True})
+
+    @override_waffle_flag(COURSEWARE_MICROFRONTEND_SEARCH_ENABLED, active=False)
+    def test_is_mfe_search_disabled(self):
+        """
+        Getter to check if user is allowed to use Courseware Search.
+        """
+
+        response = self.client.get(self.apiUrl, content_type='application/json')
+        body = json.loads(response.content.decode('utf-8'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(body, {'enabled': False})

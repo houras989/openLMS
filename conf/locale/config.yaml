@@ -98,8 +98,6 @@ dummy_locales:
 
 # Directories we don't search for strings.
 ignore_dirs:
-    - common/static/xmodule/modules
-    - common/static/xmodule/descriptors
     # Directories with no user-facing code.
     - '*/migrations'
     - '*/envs'
@@ -159,6 +157,10 @@ segment:
     djangojs-partial.po:
         djangojs-studio.po:
             - cms/*
+        djangojs-account-settings-view.po:
+            - lms/static/js/student_account/views/account_settings_view.js
+        # Segregating student account settings view strings, so that beta language message
+        # can be translated for wide set of partially supported languages.
     mako.po:
         mako-studio.po:
             - cms/*

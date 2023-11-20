@@ -3,7 +3,6 @@ Unit tests for enabling self-generated certificates for self-paced courses
 and disabling for instructor-paced courses.
 """
 
-
 from unittest import mock
 
 import ddt
