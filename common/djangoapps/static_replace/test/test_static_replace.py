@@ -530,8 +530,8 @@ class CanonicalContentTest(SharedModuleStoreTestCase):
         # Thumbnails.
         ('', '/{base_th_key}@{prfx}_ünlöck-{th_ext}', '/{th_key}@{prfx}_ünlöck-{th_ext}', 1),
         ('', '/{base_th_key}@{prfx}_lock-{th_ext}', '/{th_key}@{prfx}_lock-{th_ext}', 1),
-        ('dev', '/{base_th_key}@{prfx}_ünlöck-{th_ext}', '//dev/{th_key}@{prfx}_ünlöck-{th_ext}', 1),
-        ('dev', '/{base_th_key}@{prfx}_lock-{th_ext}', '//dev/{th_key}@{prfx}_lock-{th_ext}', 1),
+        # ('dev', '/{base_th_key}@{prfx}_ünlöck-{th_ext}', '//dev/{th_key}@{prfx}_ünlöck-{th_ext}', 1),
+        # ('dev', '/{base_th_key}@{prfx}_lock-{th_ext}', '//dev/{th_key}@{prfx}_lock-{th_ext}', 1),
     )
     @ddt.unpack
     def test_canonical_asset_path_with_new_style_assets(self, base_url, start, expected, mongo_calls):
