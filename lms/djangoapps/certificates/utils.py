@@ -10,7 +10,7 @@ from eventtracking import tracker
 from opaque_keys.edx.keys import CourseKey
 from pytz import utc
 
-from common.djangoapps.student import models_api as student_api
+import common.djangoapps.student.api
 from lms.djangoapps.certificates.data import CertificateStatuses
 from lms.djangoapps.certificates.models import GeneratedCertificate
 from openedx.core.djangoapps.content.course_overviews.api import get_course_overview_or_none
@@ -238,7 +238,7 @@ def get_preferred_certificate_name(user):
     verified name for certificates, return their verified name. Else, return the user's profile
     name, or an empty string if it doesn't exist.
     """
-    name_to_use = student_api.get_name(user.id)
+    name_to_use = common.djangoapps.student.api.get_name(user.id)
     name_affirmation_service = get_name_affirmation_service()
 
     if name_affirmation_service and name_affirmation_service.should_use_verified_name_for_certs(user):

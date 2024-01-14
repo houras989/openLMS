@@ -42,7 +42,7 @@ from xmodule.modulestore.tests.django_utils import SharedModuleStoreTestCase  # 
 from xmodule.modulestore.tests.factories import CourseFactory  # lint-amnesty, pylint: disable=wrong-import-order
 
 ENROLLMENT_METHOD = 'common.djangoapps.student.models.course_enrollment.CourseEnrollment.enrollment_mode_for_user'
-PROFILE_METHOD = 'common.djangoapps.student.models_api.get_name'
+PROFILE_METHOD = 'common.djangoapps.student.api.get_name'
 
 FEATURES_INVALID_FILE_PATH = settings.FEATURES.copy()
 FEATURES_INVALID_FILE_PATH['CERTS_HTML_VIEW_CONFIG_PATH'] = 'invalid/path/to/config.json'
