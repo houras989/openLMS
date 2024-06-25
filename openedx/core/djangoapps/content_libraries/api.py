@@ -212,6 +212,7 @@ class LibraryXBlockMetadata:
     usage_key = attr.ib(type=LibraryUsageLocatorV2)
     created = attr.ib(type=datetime)
     modified = attr.ib(type=datetime)
+    version_num = attr.ib(type=int)
     display_name = attr.ib("")
     last_published = attr.ib(default=None, type=datetime)
     last_draft_created = attr.ib(default=None, type=datetime)
@@ -249,6 +250,7 @@ class LibraryXBlockMetadata:
             last_draft_created=last_draft_created,
             last_draft_created_by=last_draft_created_by,
             has_unpublished_changes=component.versioning.has_unpublished_changes,
+            version_num=component.versioning.draft.version_num,
         )
 
 
