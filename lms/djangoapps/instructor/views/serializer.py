@@ -79,6 +79,13 @@ class ShowStudentExtensionSerializer(serializers.Serializer):
         return user
 
 
+class UnitBlockSerializer(serializers.Serializer):
+    """
+    URL path of the unit block
+    """
+    url = serializers.CharField()
+
+    
 class StudentAttemptsSerializer(serializers.Serializer):
     """
     Serializer for resetting a students attempts counter or starts a task to reset all students
