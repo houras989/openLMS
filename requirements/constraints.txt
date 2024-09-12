@@ -98,12 +98,6 @@ openedx-learning==0.11.4
 # Open AI version 1.0.0 dropped support for openai.ChatCompletion which is currently in use in enterprise.
 openai<=0.28.1
 
-# optimizely-sdk 5.0.0 is breaking following test with segmentation fault
-# common/djangoapps/third_party_auth/tests/test_views.py::SAMLMetadataTest::test_secure_key_configuration
-# needs to be fixed in the follow up issue
-# https://github.com/openedx/edx-platform/issues/34103
-optimizely-sdk<5.0
-
 # lxml>=5.0 introduced breaking changes related to system dependencies
 # lxml==5.2.1 introduced new extra so we'll nee to rename lxml --> lxml[html-clean]
 # This constraint can be removed once we upgrade to Python 3.11
