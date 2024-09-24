@@ -10,7 +10,7 @@ from xblock.fields import ScopeIds
 from openedx.core.lib.safe_lxml import etree
 from xmodule.poll_block import PollBlock
 from . import get_test_system
-from .test_import import DummySystem
+from .test_import import DummyModuleStoreRuntime
 
 
 class PollBlockTest(unittest.TestCase):
@@ -60,7 +60,7 @@ class PollBlockTest(unittest.TestCase):
         Make sure that poll_block will export fine if its xml contains
         unescaped characters.
         """
-        module_system = DummySystem(load_error_blocks=True)
+        module_system = DummyModuleStoreRuntime(load_error_blocks=True)
         module_system.id_generator.target_course_id = self.xblock.course_id
         sample_poll_xml = '''
         <poll_question display_name="Poll Question">

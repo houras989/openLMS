@@ -14,10 +14,10 @@ from xmodule.x_module import AsideKeyGenerator, OpaqueKeyReader
 class SplitMongoIdManager(OpaqueKeyReader, AsideKeyGenerator):  # pylint: disable=abstract-method
     """
     An IdManager that knows how to retrieve the DefinitionLocator, given
-    a usage_id and a :class:`.CachingDescriptorSystem`.
+    a usage_id and a :class:`.SplitModuleStoreRuntime`.
     """
     def __init__(self, caching_descriptor_system):
-        self._cds = caching_descriptor_system
+        self._cds = caching_descriptor_system  # n.b. CDS is the old name for SplitModuleStoreRuntime
 
     def get_definition_id(self, usage_id):
         if isinstance(usage_id.block_id, LocalId):

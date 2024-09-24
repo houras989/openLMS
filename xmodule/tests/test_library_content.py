@@ -27,7 +27,7 @@ from xmodule.x_module import AUTHOR_VIEW
 from xmodule.capa_block import ProblemBlock
 from common.djangoapps.student.tests.factories import UserFactory
 
-from .test_course_block import DummySystem as TestImportSystem
+from .test_course_block import DummyModuleStoreRuntime
 
 dummy_render = lambda block, _: Fragment(block.data)  # pylint: disable=invalid-name
 
@@ -158,7 +158,7 @@ class TestLibraryContentExportImport(LibraryContentTest):
         self.lc_block.runtime.export_fs = self.export_fs  # pylint: disable=protected-access
 
         # Prepare runtime for the import.
-        self.runtime = TestImportSystem(load_error_blocks=True, course_id=self.lc_block.location.course_key)
+        self.runtime = DummyModuleStoreRuntime(load_error_blocks=True, course_id=self.lc_block.location.course_key)
         self.runtime.resources_fs = self.export_fs
         self.id_generator = Mock()
 
@@ -528,10 +528,10 @@ class TestLibraryContentBlockWithSearchIndex(LibraryContentBlockTestMixin, Libra
 
 
 @patch(
-    'xmodule.modulestore.split_mongo.caching_descriptor_system.CachingDescriptorSystem.render', VanillaRuntime.render
+    'xmodule.modulestore.split_mongo.runtime.SplitModuleStoreRuntime.render', VanillaRuntime.render
 )
 @patch('xmodule.html_block.HtmlBlock.author_view', dummy_render, create=True)
-@patch('xmodule.x_module.DescriptorSystem.applicable_aside_types', lambda self, block: [])
+@patch('xmodule.x_module.ModuleStoreRuntime.applicable_aside_types', lambda self, block: [])
 class TestLibraryContentRender(LibraryContentTest):
     """
     Rendering unit tests for LibraryContentBlock

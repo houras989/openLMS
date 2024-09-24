@@ -3322,7 +3322,7 @@ class TestPublishOverExportImport(CommonMixedModuleStoreSetup):
 
     @ddt.data(ModuleStoreEnum.Type.split)
     @XBlockAside.register_temp_plugin(AsideTestType, 'test_aside')
-    @patch('xmodule.modulestore.split_mongo.caching_descriptor_system.CachingDescriptorSystem.applicable_aside_types',
+    @patch('xmodule.modulestore.split_mongo.runtime.SplitModuleStoreRuntime.applicable_aside_types',
            lambda self, block: ['test_aside'])
     def test_aside_crud(self, default_store):
         """
@@ -3396,7 +3396,7 @@ class TestPublishOverExportImport(CommonMixedModuleStoreSetup):
 
     @ddt.data(ModuleStoreEnum.Type.split)
     @XBlockAside.register_temp_plugin(AsideTestType, 'test_aside')
-    @patch('xmodule.modulestore.split_mongo.caching_descriptor_system.CachingDescriptorSystem.applicable_aside_types',
+    @patch('xmodule.modulestore.split_mongo.runtime.SplitModuleStoreRuntime.applicable_aside_types',
            lambda self, block: ['test_aside'])
     def test_export_course_with_asides(self, default_store):
         if default_store == ModuleStoreEnum.Type.mongo:
@@ -3483,7 +3483,7 @@ class TestPublishOverExportImport(CommonMixedModuleStoreSetup):
 
     @ddt.data(ModuleStoreEnum.Type.split)
     @XBlockAside.register_temp_plugin(AsideTestType, 'test_aside')
-    @patch('xmodule.modulestore.split_mongo.caching_descriptor_system.CachingDescriptorSystem.applicable_aside_types',
+    @patch('xmodule.modulestore.split_mongo.runtime.SplitModuleStoreRuntime.applicable_aside_types',
            lambda self, block: ['test_aside'])
     def test_export_course_after_creating_new_items_with_asides(self, default_store):  # pylint: disable=too-many-statements
         if default_store == ModuleStoreEnum.Type.mongo:
@@ -3618,7 +3618,7 @@ class TestAsidesWithMixedModuleStore(CommonMixedModuleStoreSetup):
     @ddt.data(ModuleStoreEnum.Type.split)
     @XBlockAside.register_temp_plugin(AsideFoo, 'test_aside1')
     @XBlockAside.register_temp_plugin(AsideBar, 'test_aside2')
-    @patch('xmodule.modulestore.split_mongo.caching_descriptor_system.CachingDescriptorSystem.applicable_aside_types',
+    @patch('xmodule.modulestore.split_mongo.runtime.SplitModuleStoreRuntime.applicable_aside_types',
            lambda self, block: ['test_aside1', 'test_aside2'])
     def test_get_and_update_asides(self, default_store):
         """
@@ -3682,7 +3682,7 @@ class TestAsidesWithMixedModuleStore(CommonMixedModuleStoreSetup):
 
     @ddt.data(ModuleStoreEnum.Type.split)
     @XBlockAside.register_temp_plugin(AsideFoo, 'test_aside1')
-    @patch('xmodule.modulestore.split_mongo.caching_descriptor_system.CachingDescriptorSystem.applicable_aside_types',
+    @patch('xmodule.modulestore.split_mongo.runtime.SplitModuleStoreRuntime.applicable_aside_types',
            lambda self, block: ['test_aside1'])
     def test_clone_course_with_asides(self, default_store):
         """
@@ -3730,7 +3730,7 @@ class TestAsidesWithMixedModuleStore(CommonMixedModuleStoreSetup):
 
     @ddt.data(ModuleStoreEnum.Type.split)
     @XBlockAside.register_temp_plugin(AsideFoo, 'test_aside1')
-    @patch('xmodule.modulestore.split_mongo.caching_descriptor_system.CachingDescriptorSystem.applicable_aside_types',
+    @patch('xmodule.modulestore.split_mongo.runtime.SplitModuleStoreRuntime.applicable_aside_types',
            lambda self, block: ['test_aside1'])
     def test_delete_item_with_asides(self, default_store):
         """
@@ -3779,7 +3779,7 @@ class TestAsidesWithMixedModuleStore(CommonMixedModuleStoreSetup):
 
     @ddt.data((ModuleStoreEnum.Type.split, 1, 0))
     @XBlockAside.register_temp_plugin(AsideFoo, 'test_aside1')
-    @patch('xmodule.modulestore.split_mongo.caching_descriptor_system.CachingDescriptorSystem.applicable_aside_types',
+    @patch('xmodule.modulestore.split_mongo.runtime.SplitModuleStoreRuntime.applicable_aside_types',
            lambda self, block: ['test_aside1'])
     @ddt.unpack
     def test_published_and_unpublish_item_with_asides(self, default_store, max_find, max_send):
