@@ -74,15 +74,6 @@ class AddSassToFragmentTests(TestCase):
 class AddCssToFragmentTests(TestCase):
     """
     Tests for add_css_to_fragment.
-    TODO: Update the comments, remove all sass usage
-    We would have liked to also test two additional cases:
-    * When a theme is enabled, and add_css_to_fragment is called with a
-      theme-overriden Sass file, then a URL to themed CSS is added.
-    * When a theme is enabled, but add_css_to_fragment is called with a Sass
-      file that the theme doesn't override, then a URL to the original (unthemed)
-      CSS is added.
-    Unfortunately, under edx-platform tests, settings.STATICFILES_STORAGE does not
-    include the ThemeStorage class, so themed URL generation doesn't work.
     """
 
     def test_absolute_path_raises_value_error(self):
