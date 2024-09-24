@@ -3,6 +3,7 @@ Test the Learning-Core-based XBlock runtime and content libraries together.
 """
 import json
 from gettext import GNUTranslations
+from django.test import TestCase
 
 from completion.test_utils import CompletionWaffleTestMixin
 from django.db import connections, transaction
@@ -59,7 +60,7 @@ class ContentLibraryContentTestMixin:
             )
 
 
-class ContentLibraryRuntimeTests(ContentLibraryContentTestMixin):
+class ContentLibraryRuntimeTests(ContentLibraryContentTestMixin, TestCase):
     """
     Basic tests of the Learning-Core-based XBlock runtime using XBlocks in a
     content library.
@@ -176,7 +177,7 @@ class ContentLibraryRuntimeTests(ContentLibraryContentTestMixin):
 # We can remove the line below to enable this in Studio once we implement a session-backed
 # field data store which we can use for both studio users and anonymous users
 @skip_unless_lms
-class ContentLibraryXBlockUserStateTest(ContentLibraryContentTestMixin):
+class ContentLibraryXBlockUserStateTest(ContentLibraryContentTestMixin, TestCase):
     """
     Test that the Blockstore-based XBlock runtime can store and retrieve student
     state for XBlocks when learners access blocks directly in a library context,
@@ -479,7 +480,7 @@ class ContentLibraryXBlockUserStateTest(ContentLibraryContentTestMixin):
 
 
 @skip_unless_lms  # No completion tracking in Studio
-class ContentLibraryXBlockCompletionTest(ContentLibraryContentTestMixin, CompletionWaffleTestMixin):
+class ContentLibraryXBlockCompletionTest(ContentLibraryContentTestMixin, CompletionWaffleTestMixin, TestCase):
     """
     Test that the Blockstore-based XBlocks can track their completion status
     using the completion library.
