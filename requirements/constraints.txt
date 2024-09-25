@@ -28,6 +28,9 @@ celery>=5.2.2,<6.0.0
 # for them.
 edx-enterprise==4.25.13
 
+# The edx-enterprise is currently using edx-rest-api-client==5.7.1, which needs to be updated first.
+edx-rest-api-client==5.7.1
+
 # Stay on LTS version, remove once this is added to common constraint
 Django<5.0
 
@@ -68,12 +71,6 @@ markdown<3.4.0
 pycodestyle<2.9.0
 
 pylint<2.16.0 # greater version failing quality test. Fix them in seperate ticket.
-
-# urllib3>=2.0.0 conflicts with elastic search && snowflake-connector-python packages
-# which require urllib3<2 for now.
-# Issue for unpinning: https://github.com/openedx/edx-platform/issues/32222
-urllib3<2.0.0
-
 
 # Adding pin to avoid any major upgrade
 djangorestframework<3.15.0
