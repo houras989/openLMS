@@ -1,6 +1,9 @@
 """
 Tests for methods defined in builtin_assets.py
 """
+from pathlib import PosixPath
+
+from django.conf import settings
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -66,3 +69,46 @@ class AddSassToFragmentTests(TestCase):
             mimetype='text/css',
             placement='head',
         )
+
+
+class AddCssToFragmentTests(TestCase):
+    """
+    Tests for add_css_to_fragment.
+    """
+
+    def test_absolute_path_raises_value_error(self):
+        fragment = Fragment()
+        with self.assertRaises(ValueError):
+            builtin_assets.add_css_to_fragment(
+                fragment,
+                "/openedx/edx-platform/xmodule/assets/VideoBlockEditor.css",
+            )
+
+    def test_not_css_raises_value_error(self):
+        fragment = Fragment()
+        with self.assertRaises(ValueError):
+            builtin_assets.add_css_to_fragment(
+                fragment,
+                "vertical/public/js/vertical_student_view.js"
+            )
+
+    def test_misspelled_path_raises_not_found(self):
+        fragment = Fragment()
+        with self.assertRaises(FileNotFoundError):
+            builtin_assets.add_css_to_fragment(
+                fragment,
+                "VideoBlockEditorrrrr.css",
+            )
+
+    def test_happy_path(self):
+        fragment = Fragment()
+        builtin_assets.add_css_to_fragment(fragment, "VideoBlockEditor.css")
+        fr = FragmentResource(
+            # kind='url',
+            # data=f'{settings.REPO_ROOT}/xmodule/assets/VideoBlockEditor.css',
+            kind='text',
+            data=PosixPath(f"{settings.REPO_ROOT}/xmodule/assets/VideoBlockEditor.css").read_text(encoding="utf-8"),
+            mimetype='text/css',
+            placement='head',
+        )
+        assert fragment.resources[0] == fr
