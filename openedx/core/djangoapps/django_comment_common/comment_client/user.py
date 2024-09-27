@@ -3,6 +3,8 @@
 
 
 from . import models, settings, utils
+from forum import api as forum_api
+from lms.djangoapps.discussion.toggles import is_forum_v2_enabled
 
 
 class User(models.Model):
@@ -141,26 +143,17 @@ class User(models.Model):
         )
 
     def _retrieve(self, *args, **kwargs):
-        url = self.url(action='get', params=self.attributes)
         retrieve_params = self.default_retrieve_params.copy()
         retrieve_params.update(kwargs)
         if self.attributes.get('course_id'):
-            retrieve_params['course_id'] = str(self.course_id)
+            retrieve_params['course_id'] = str(self.attributes["course_id"])
         if self.attributes.get('group_id'):
-            retrieve_params['group_id'] = self.group_id
-        try:
-            response = utils.perform_request(
-                'get',
-                url,
-                retrieve_params,
-                metric_action='model.retrieve',
-                metric_tags=self._metric_tags,
-            )
-        except utils.CommentClientRequestError as e:
-            if e.status_code == 404:
-                # attempt to gracefully recover from a previous failure
-                # to sync this user to the comments service.
-                self.save()
+            retrieve_params['group_id'] = self.attributes["group_id"]
+        if is_forum_v2_enabled(self.attributes.get("course_id")):
+            response = forum_api.get_user(self.attributes["id"], retrieve_params)
+        else:
+            url = self.url(action='get', params=self.attributes)
+            try:
                 response = utils.perform_request(
                     'get',
                     url,
@@ -168,8 +161,20 @@ class User(models.Model):
                     metric_action='model.retrieve',
                     metric_tags=self._metric_tags,
                 )
-            else:
-                raise
+            except utils.CommentClientRequestError as e:
+                if e.status_code == 404:
+                    # attempt to gracefully recover from a previous failure
+                    # to sync this user to the comments service.
+                    self.save()
+                    response = utils.perform_request(
+                        'get',
+                        url,
+                        retrieve_params,
+                        metric_action='model.retrieve',
+                        metric_tags=self._metric_tags,
+                    )
+                else:
+                    raise
         self._update_from_response(response)
 
     def retire(self, retired_username):
